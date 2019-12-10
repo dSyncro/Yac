@@ -12,10 +12,8 @@ namespace Yac {
 
 		public:
 
-			UnaryOperation(Operator operation, Expression* operand)
-				: Expression(ExpressionType::UnaryOperation), _operation(operation), _operand(operand) {}
-
-			~UnaryOperation() { Expression::Dispose(_operand); }
+			UnaryOperation(Operator operation, Expression* operand);
+			~UnaryOperation();
 
 			inline Operator operation() const noexcept { return _operation; }
 			inline Expression* operand() const noexcept { return _operand; }

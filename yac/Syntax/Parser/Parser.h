@@ -1,14 +1,14 @@
 #pragma once
 
 #include <string>
-#include <vector>
 
 #include <yac/Syntax/Tokens/Token.h>
-#include <yac/Syntax/Lexer/Keyword.h>
+#include <yac/Syntax/Tokens/Keyword.h>
 #include <yac/Syntax/Expressions/Expression.h>
 #include <yac/Syntax/Expressions/Numeric/NumericBase.h>
 #include <yac/Syntax/Tokens/OptionalToken.h>
 #include <yac/Syntax/Statements/Statement.h>
+#include <yac/Errors/ErrorReporter.h>
 
 namespace Yac {
 	namespace Syntax {
@@ -18,9 +18,10 @@ namespace Yac {
 		public:
 
 			Parser(std::string source);
-			// ~Parser();
 
 			Statement* Parse();
+
+			Yac::Errors::ErrorList& errors() const noexcept { return _reporter.GetList(); }
 
 		private:
 
@@ -35,7 +36,7 @@ namespace Yac {
 			bool MatchNext(TokenType type) const noexcept;
 
 			const Token& MatchAndConsume(TokenType type) noexcept;
-			const OptionalToken& ConsumeOptional(TokenType type) noexcept;
+			const OptionalToken ConsumeOptional(TokenType type) noexcept;
 
 			Statement* ParseStatement() noexcept;
 			Statement* ParseKeyword() noexcept;
@@ -55,6 +56,7 @@ namespace Yac {
 			unsigned int _position = 0;
 			std::string _source;
 			std::vector<Token> _tokens;
+			Yac::Errors::ErrorReporter _reporter;
 		};
 
 	}

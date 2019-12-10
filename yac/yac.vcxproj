@@ -20,17 +20,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entrypoint.cpp" />
+    <ClCompile Include="Errors\ErrorList.cpp" />
+    <ClCompile Include="Errors\ErrorReporter.cpp" />
     <ClCompile Include="Syntax\Executor\Executor.cpp" />
     <ClCompile Include="Syntax\Expressions\Expression.cpp" />
+    <ClCompile Include="Syntax\Expressions\Numeric\NumericLiteral.cpp" />
     <ClCompile Include="Syntax\Expressions\Operations\BinaryOperation.cpp" />
+    <ClCompile Include="Syntax\Expressions\Operations\UnaryOperation.cpp" />
     <ClCompile Include="Syntax\Lexer\Lexer.cpp" />
+    <ClCompile Include="Syntax\Statements\ExpressionStatement.cpp" />
     <ClCompile Include="Syntax\Statements\Statement.cpp" />
+    <ClCompile Include="Syntax\Statements\VariableDeclaration.cpp" />
     <ClCompile Include="Syntax\SyntaxRules.cpp" />
     <ClCompile Include="Syntax\Parser\Parser.cpp" />
     <ClCompile Include="Syntax\SyntaxTree\SyntaxTree.cpp" />
+    <ClCompile Include="Syntax\Tokens\Token.cpp" />
     <ClCompile Include="Text\SourceText.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Errors\Error.h" />
+    <ClInclude Include="Errors\ErrorList.h" />
+    <ClInclude Include="Errors\ErrorReporter.h" />
     <ClInclude Include="Syntax\Executor\Executor.h" />
     <ClInclude Include="Syntax\Expressions\ExpressionType.h" />
     <ClInclude Include="Syntax\Expressions\IdentifierExpression.h" />
@@ -45,7 +55,7 @@
     <ClInclude Include="Syntax\Statements\VariableDeclaration.h" />
     <ClInclude Include="Syntax\SyntaxRules.h" />
     <ClInclude Include="Syntax\Expressions\Expression.h" />
-    <ClInclude Include="Syntax\Lexer\Keyword.h" />
+    <ClInclude Include="Syntax\Tokens\Keyword.h" />
     <ClInclude Include="Syntax\Lexer\Lexer.h" />
     <ClInclude Include="Syntax\Expressions\Operations\BinaryOperation.h" />
     <ClInclude Include="Syntax\Parser\Parser.h" />

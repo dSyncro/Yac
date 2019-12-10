@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Statement.h"
-
 #include <string>
 
-#include <yac/Syntax/Lexer/Keyword.h>
+#include "Statement.h"
+
+#include <yac/Syntax/Tokens/Keyword.h>
 #include <yac/Syntax/Expressions/Expression.h>
 
 namespace Yac {
@@ -14,10 +14,8 @@ namespace Yac {
 
 		public:
 
-			VariableDeclaration(Keyword keyword, std::string name, Expression* initializer) : 
-				Statement(StatementType::VariableDeclaration), _keyword(keyword), _name(name), _init(initializer) { }
-
-			~VariableDeclaration() { Expression::Dispose(_init); }
+			VariableDeclaration(Keyword keyword, std::string name, Expression* initializer);
+			~VariableDeclaration();
 
 			inline Keyword keyword() const noexcept { return _keyword; }
 			inline std::string name() const noexcept { return _name; }

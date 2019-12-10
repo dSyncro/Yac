@@ -11,17 +11,14 @@ namespace Yac {
 
 		public:
 
-			ExpressionStatement(Expression* expression) :
-				Statement(StatementType::Expression), _expr(expression) { }
-
-			~ExpressionStatement() { Expression::Dispose(_expr); }
+			ExpressionStatement(Expression* expression);
+			~ExpressionStatement();
 
 			inline Expression* expression() const noexcept { return _expr; }
 
 		private:
 
 			Expression* _expr;
-
 		};
 
 	}

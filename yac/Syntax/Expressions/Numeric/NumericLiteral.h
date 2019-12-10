@@ -12,8 +12,7 @@ namespace Yac {
 
 		public:
 
-			NumericLiteral(std::string text, NumericType type, NumericBase base = NumericBase::Decimal) 
-				: Expression(ExpressionType::NumericLiteral), _text(text), _base(base), _numericType(type) { }
+			NumericLiteral(std::string text, NumericType type, NumericBase base = NumericBase::Decimal);
 
 			inline NumericType numeric_type() const noexcept { return _numericType; }
 			inline NumericBase base() const noexcept { return _base; }

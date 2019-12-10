@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
-#include <vector>
 
 #include <yac/Syntax/Tokens/Token.h>
+#include <yac/Errors/ErrorReporter.h>
 
 namespace Yac {
 	namespace Syntax {
@@ -13,7 +13,6 @@ namespace Yac {
 		public:
 
 			Lexer(std::string source);
-			//~Lexer();
 
 			Token Lex();
 
@@ -34,6 +33,8 @@ namespace Yac {
 			unsigned int _position = 0, _start = 0;
 
 			std::string _source, _text;
+
+			Yac::Errors::ErrorReporter _reporter;
 		};
 
 	}

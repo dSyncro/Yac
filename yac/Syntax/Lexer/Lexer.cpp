@@ -4,15 +4,18 @@
 
 using namespace Yac::Text;
 using namespace Yac::Syntax;
+using namespace Yac::Errors;
 
-Lexer::Lexer(std::string source) : _source(source) {}
+Lexer::Lexer(std::string source) : _source(source), _reporter(ErrorReporter()) {}
 
 Token Lexer::Lex()
 {
 	_start = _position;
 	_type = TokenType::Unknown;
 
-	switch (Current())
+	char c = Current();
+
+	switch (c)
 	{
 		case '0':
 			switch (Next())
@@ -85,6 +88,11 @@ Token Lexer::Lex()
 
 		default:
 			if (std::isalpha(Current())) ReadWord();
+			else
+			{
+				_reporter.ReportUnknownToken(c, TextSpan(_start, 1));
+				_position++;
+			}
 			break;
 	}
 
@@ -113,13 +121,15 @@ void Lexer::ReadWord()
 
 	while (true)
 	{
-		if (!std::isalpha(Current()))
+		char c = Current();
+
+		if (!std::isalpha(c))
 		{
-			if (!std::isdigit(Current())) break;
+			if (!std::isdigit(c)) break;
 			isSurelyIdentifier = true;
 		}
 
-		if (std::isupper(Current())) isSurelyIdentifier = true;
+		if (std::isupper(c)) isSurelyIdentifier = true;
 
 		_position++;
 	}
@@ -140,6 +150,7 @@ void Lexer::ReadNumber(TokenType startingType)
 		_position++;
 
 		char current = Current();
+
 		bool isValid = std::isdigit(current) && 
 			_type != TokenType::Float &&
 			_type != TokenType::UInt;
@@ -169,7 +180,7 @@ void Lexer::ReadNumber(TokenType startingType)
 			}
 
 			case TokenType::Double: {
-				switch (Current())
+				switch (current)
 				{
 					case 'f': case 'F':
 						_type = TokenType::Float;
@@ -210,7 +221,7 @@ void Lexer::ReadBinaryNumber()
 		switch (_type)
 		{
 			case TokenType::BinaryUInt: {
-				switch (Current())
+				switch (current)
 				{
 					case '.':
 						_type = TokenType::BinaryDouble;
@@ -227,7 +238,7 @@ void Lexer::ReadBinaryNumber()
 			}
 
 			case TokenType::BinaryDouble: {
-				switch (Current())
+				switch (current)
 				{
 					case 'f': case 'F':
 						_type = TokenType::BinaryFloat;
@@ -267,7 +278,7 @@ void Lexer::ReadHexNumber()
 		switch (_type)
 		{
 			case TokenType::HexUInt: {
-				switch (Current())
+				switch (current)
 				{
 					case '.':
 						_type = TokenType::HexDouble;
@@ -281,7 +292,7 @@ void Lexer::ReadHexNumber()
 			}
 
 			case TokenType::BinaryDouble: {
-				switch (Current())
+				switch (current)
 				{
 					case 'f': case 'F':
 						_type = TokenType::HexFloat;

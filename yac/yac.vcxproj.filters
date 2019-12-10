@@ -45,6 +45,27 @@
     <ClCompile Include="Syntax\Expressions\Operations\BinaryOperation.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="Syntax\Tokens\Token.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Syntax\Statements\VariableDeclaration.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Syntax\Statements\ExpressionStatement.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Syntax\Expressions\Operations\UnaryOperation.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Syntax\Expressions\Numeric\NumericLiteral.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Errors\ErrorList.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Errors\ErrorReporter.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Text\TextSpan.h">
@@ -54,9 +75,6 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="Syntax\Lexer\Lexer.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
-    <ClInclude Include="Syntax\Lexer\Keyword.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="Syntax\Parser\Parser.h">
@@ -120,6 +138,18 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="Syntax\Expressions\IdentifierExpression.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Syntax\Tokens\Keyword.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Errors\Error.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Errors\ErrorList.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Errors\ErrorReporter.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>

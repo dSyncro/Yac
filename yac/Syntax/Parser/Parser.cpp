@@ -3,11 +3,14 @@
 #include <yac/Syntax/Lexer/Lexer.h>
 #include <yac/Syntax/SyntaxRules.h>
 #include <yac/Syntax/Expressions/Expression.h>
+#include <yac/Syntax/Expressions/Numeric/NumericLiteral.h>
+#include <yac/Syntax/Expressions/Operations/Operations.h>
 #include <yac/Syntax/Statements/VariableDeclaration.h>
 #include <yac/Syntax/Statements/ExpressionStatement.h>
 #include <yac/Syntax/Expressions/IdentifierExpression.h>
 
 using namespace Yac::Syntax;
+using namespace Yac::Errors;
 
 Parser::Parser(std::string source)
 {
@@ -31,32 +34,24 @@ const Token& Parser::ConsumeNext() noexcept
 const Token& Parser::Peek(unsigned int offset) const noexcept
 {
 	unsigned int index = _position + offset;
-	if (index >= _tokens.size()) return Token::Empty();
+	if (index >= _tokens.size()) return Token();
 	return _tokens[index];
 }
 
-bool Parser::Match(unsigned int offset, TokenType type) const noexcept
-{
-	return Peek(offset).type() == type;
-}
-
-bool Parser::MatchNext(TokenType type) const noexcept
-{
-	return Next().type() == type;
-}
+bool Parser::Match(unsigned int offset, TokenType type) const noexcept { return Peek(offset).type() == type; }
+bool Parser::MatchNext(TokenType type) const noexcept { return Next().type() == type; }
 
 const Token& Parser::MatchAndConsume(TokenType type) noexcept
 {
-	if (!MatchNext(type))
-	{
-		
-	}
-	return ConsumeNext();
+	const Token& t = ConsumeNext();
+	if (t.type() != type)
+		_reporter.ReportUnexpectedToken(type, t.type(), t.span());
+	return t;
 }
 
-const OptionalToken& Parser::ConsumeOptional(TokenType type) noexcept
+const OptionalToken Parser::ConsumeOptional(TokenType type) noexcept
 {
-	return MatchNext(type) ? OptionalToken(ConsumeNext(), true) : OptionalToken(Token::Empty(), false);
+	return MatchNext(type) ? OptionalToken(ConsumeNext(), true) : OptionalToken();
 }
 
 Statement* Parser::Parse()
