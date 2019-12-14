@@ -61,6 +61,11 @@ Token Lexer::Lex()
 			_type = TokenType::SlashSymbol;
 			return Token(_type, TextSpan(_start, 1), "/");
 
+		case '^':
+			_position++;
+			_type = TokenType::CircumflexSymbol;
+			return Token(_type, TextSpan(_start, 1), "^");
+
 		case '.':
 			if (std::isdigit(Next()))
 			{
@@ -75,6 +80,81 @@ Token Lexer::Lex()
 			_position++;
 			_type = TokenType::EqualSymbol;
 			return Token(_type, TextSpan(_start, 1), "=");
+
+		case '&':
+			_position++;
+			_type = TokenType::AndSymbol;
+			return Token(_type, TextSpan(_start, 1), "&");
+
+		case '|':
+			_position++;
+			_type = TokenType::PipeSymbol;
+			return Token(_type, TextSpan(_start, 1), "|");
+
+		case '!':
+			_position++;
+			_type = TokenType::ExclamationMark;
+			return Token(_type, TextSpan(_start, 1), "!");
+
+		case '?':
+			_position++;
+			_type = TokenType::QuestionMark;
+			return Token(_type, TextSpan(_start, 1), "?");
+
+		case '<':
+			_position++;
+			_type = TokenType::LessSymbol;
+			return Token(_type, TextSpan(_start, 1), "<");
+
+		case '>':
+			_position++;
+			_type = TokenType::GreaterSymbol;
+			return Token(_type, TextSpan(_start, 1), ">");
+
+		case ':':
+			_position++;
+			_type = TokenType::Colon;
+			return Token(_type, TextSpan(_start, 1), ":");
+
+		case ';':
+			_position++;
+			_type = TokenType::Semicolon;
+			return Token(_type, TextSpan(_start, 1), ";");
+
+		case ',':
+			_position++;
+			_type = TokenType::Comma;
+			return Token(_type, TextSpan(_start, 1), ",");
+
+		case '(':
+			_position++;
+			_type = TokenType::OpenParenthesis;
+			return Token(_type, TextSpan(_start, 1), "(");
+
+		case ')':
+			_position++;
+			_type = TokenType::CloseParenthesis;
+			return Token(_type, TextSpan(_start, 1), ")");
+
+		case '[':
+			_position++;
+			_type = TokenType::OpenSquared;
+			return Token(_type, TextSpan(_start, 1), "[");
+
+		case ']':
+			_position++;
+			_type = TokenType::CloseParenthesis;
+			return Token(_type, TextSpan(_start, 1), "]");
+
+		case '{':
+			_position++;
+			_type = TokenType::OpenBrackets;
+			return Token(_type, TextSpan(_start, 1), "{");
+
+		case '}':
+			_position++;
+			_type = TokenType::CloseBrackets;
+			return Token(_type, TextSpan(_start, 1), "}");
 
 		case '\n':
 			_position++;

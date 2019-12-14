@@ -9,6 +9,9 @@ namespace Yac {
 
 		public:
 
+			Statement() : _type(StatementType::None) {}
+			~Statement() { Statement::Dispose(this); }
+
 			inline StatementType type() const noexcept { return _type; }
 			static Statement* Null() noexcept;
 
@@ -17,7 +20,7 @@ namespace Yac {
 		protected:
 
 			Statement(StatementType type) : _type(type) {}
-			StatementType _type = StatementType::None;
+			StatementType _type;
 
 		};
 

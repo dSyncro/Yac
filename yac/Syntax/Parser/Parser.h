@@ -32,14 +32,18 @@ namespace Yac {
 
 			const Token& Peek(unsigned int offset) const noexcept;
 
-			bool Match(unsigned int offset, TokenType type) const noexcept;
+			bool Match(TokenType type, unsigned int offset = 0) const noexcept;
 			bool MatchNext(TokenType type) const noexcept;
 
 			const Token& MatchAndConsume(TokenType type) noexcept;
 			const OptionalToken ConsumeOptional(TokenType type) noexcept;
 
 			Statement* ParseStatement() noexcept;
+			Statement* ParseBlockStatement() noexcept;
 			Statement* ParseKeyword() noexcept;
+			Statement* ParseIfStatement() noexcept;
+			//Statement* ParseForStatement() noexcept;
+			Statement* ParseWhileStatement() noexcept;
 			Statement* ParseExpressionStatement() noexcept;
 			Statement* ParseVariableDeclaration(Keyword keyword = Keyword::Let) noexcept;
 
@@ -48,9 +52,14 @@ namespace Yac {
 			Expression* ParseFloat(NumericBase base = NumericBase::Decimal) noexcept;
 			Expression* ParseDouble(NumericBase base = NumericBase::Decimal) noexcept;
 
-			Expression* ParseIdentifier() noexcept;
+			Expression* ParseBoolean() noexcept;
 
+			Expression* ParseIdentifier() noexcept;
+			Expression* ParseParentheses() noexcept;
+
+			Expression* ParseExpression() noexcept;
 			Expression* ParsePrimaryExpression() noexcept;
+			Expression* ParseAssignmentExpression() noexcept;
 			Expression* ParseMathExpression(unsigned int parentPrecedence = 0) noexcept;
 
 			unsigned int _position = 0;

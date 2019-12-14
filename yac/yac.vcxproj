@@ -38,10 +38,19 @@
     <ClCompile Include="Text\SourceText.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DataTypes\Double.h" />
+    <ClInclude Include="DataTypes\Float.h" />
+    <ClInclude Include="DataTypes\Int.h" />
+    <ClInclude Include="DataTypes\Object.h" />
+    <ClInclude Include="DataTypes\TypesTable.h" />
+    <ClInclude Include="DataTypes\UInt.h" />
     <ClInclude Include="Errors\Error.h" />
     <ClInclude Include="Errors\ErrorList.h" />
     <ClInclude Include="Errors\ErrorReporter.h" />
     <ClInclude Include="Syntax\Executor\Executor.h" />
+    <ClInclude Include="Syntax\Expressions\AssignmentExpression.h" />
+    <ClInclude Include="Syntax\Expressions\BooleanLiteral.h" />
+    <ClInclude Include="Syntax\Expressions\Expressions.h" />
     <ClInclude Include="Syntax\Expressions\ExpressionType.h" />
     <ClInclude Include="Syntax\Expressions\IdentifierExpression.h" />
     <ClInclude Include="Syntax\Expressions\Numeric\NumericBase.h" />
@@ -50,9 +59,14 @@
     <ClInclude Include="Syntax\Expressions\Operations\Operations.h" />
     <ClInclude Include="Syntax\Expressions\Operations\Operator.h" />
     <ClInclude Include="Syntax\Expressions\Operations\UnaryOperation.h" />
+    <ClInclude Include="Syntax\Expressions\ParenthesesExpression.h" />
+    <ClInclude Include="Syntax\Statements\BlockStatement.h" />
     <ClInclude Include="Syntax\Statements\ExpressionStatement.h" />
+    <ClInclude Include="Syntax\Statements\IfStatement.h" />
     <ClInclude Include="Syntax\Statements\Statement.h" />
+    <ClInclude Include="Syntax\Statements\Statements.h" />
     <ClInclude Include="Syntax\Statements\VariableDeclaration.h" />
+    <ClInclude Include="Syntax\Statements\WhileStatement.h" />
     <ClInclude Include="Syntax\SyntaxRules.h" />
     <ClInclude Include="Syntax\Expressions\Expression.h" />
     <ClInclude Include="Syntax\Tokens\Keyword.h" />

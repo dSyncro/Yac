@@ -5,12 +5,36 @@ namespace Yac {
 
 		enum class TokenType {
 			None,
+
+			// Symbols
 			PlusSymbol,
 			MinusSymbol,
 			StarSymbol,
 			SlashSymbol,
+			CircumflexSymbol,
 			DotSymbol,
 			EqualSymbol,
+			AndSymbol,
+			PipeSymbol,
+			ExclamationMark,
+			QuestionMark,
+			LessSymbol,
+			GreaterSymbol,
+			Colon,
+			Semicolon,
+			Comma,
+
+			// Delimiters
+			OpenParenthesis,
+			CloseParenthesis,
+			OpenSquared,
+			CloseSquared,
+			OpenBrackets,
+			CloseBrackets,
+			Quote,
+			Apostrophe,
+
+			// Numbers
 			Int,
 			UInt,
 			BinaryUInt,
@@ -21,9 +45,13 @@ namespace Yac {
 			Double,
 			BinaryDouble,
 			HexDouble,
+
+			// Strings
 			Word,
 			Identifier,
 			Keyword,
+
+			// Misc
 			Whitespace,
 			Newline,
 			EndOfFile,

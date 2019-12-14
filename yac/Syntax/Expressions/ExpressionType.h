@@ -6,7 +6,10 @@ namespace Yac {
 		enum class ExpressionType {
 			None,
 			IdentifierExpression,
+			AssignmentExpression,
+			ParenthesesExpression,
 			NumericLiteral,
+			BooleanLiteral,
 			UnaryOperation,
 			BinaryOperation,
 		};

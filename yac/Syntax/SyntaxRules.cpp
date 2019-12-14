@@ -26,11 +26,14 @@ Operator Yac::Syntax::ToBinaryOperator(TokenType type)
 
 Keyword Yac::Syntax::ToKeyword(std::string text)
 {
-	if (text == "let") return Keyword::Let;
-	if (text == "if") return Keyword::If;
-	if (text == "for") return Keyword::For;
-	if (text == "while") return Keyword::While;
-	return Keyword::Unknown;
+    if (text == "true") return Keyword::True;
+    else if (text == "false") return Keyword::False;
+    else if (text == "let") return Keyword::Let;
+    else if (text == "if") return Keyword::If;
+    else if (text == "else") return Keyword::Else;
+	else if (text == "for") return Keyword::For;
+	else if (text == "while") return Keyword::While;
+	else return Keyword::Unknown;
 }
 
 std::string Yac::Syntax::ToString(TokenType type)

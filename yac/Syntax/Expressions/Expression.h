@@ -9,6 +9,8 @@ namespace Yac {
 
 		public:
 
+			~Expression() { Expression::Dispose(this); }
+
 			inline ExpressionType type() const noexcept { return _type; }
 			static Expression* Null() noexcept;
 

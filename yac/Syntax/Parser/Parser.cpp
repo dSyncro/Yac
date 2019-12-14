@@ -2,12 +2,11 @@
 
 #include <yac/Syntax/Lexer/Lexer.h>
 #include <yac/Syntax/SyntaxRules.h>
-#include <yac/Syntax/Expressions/Expression.h>
-#include <yac/Syntax/Expressions/Numeric/NumericLiteral.h>
-#include <yac/Syntax/Expressions/Operations/Operations.h>
 #include <yac/Syntax/Statements/VariableDeclaration.h>
 #include <yac/Syntax/Statements/ExpressionStatement.h>
-#include <yac/Syntax/Expressions/IdentifierExpression.h>
+
+#include <yac/Syntax/Expressions/Expressions.h>
+#include <yac/Syntax/Statements/Statements.h>
 
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
@@ -38,7 +37,7 @@ const Token& Parser::Peek(unsigned int offset) const noexcept
 	return _tokens[index];
 }
 
-bool Parser::Match(unsigned int offset, TokenType type) const noexcept { return Peek(offset).type() == type; }
+bool Parser::Match(TokenType type, unsigned int offset) const noexcept { return Peek(offset).type() == type; }
 bool Parser::MatchNext(TokenType type) const noexcept { return Next().type() == type; }
 
 const Token& Parser::MatchAndConsume(TokenType type) noexcept
@@ -64,9 +63,26 @@ Statement* Parser::ParseStatement() noexcept
 {
 	switch (Current().type())
 	{
+		case TokenType::OpenBrackets: return ParseBlockStatement();
 		case TokenType::Keyword: return ParseKeyword();
 		default: return ParseExpressionStatement();
 	}
+}
+
+Statement* Parser::ParseBlockStatement() noexcept
+{
+	_position++;
+
+	std::vector<Statement*> _statements;
+	while (Current().type() != TokenType::CloseBrackets && Current().type() != TokenType::EndOfFile)
+	{
+		Statement* statement = ParseStatement();
+		_statements.push_back(statement);
+	}
+
+	_position++;
+
+	return new BlockStatement(_statements);
 }
 
 Statement* Parser::ParseKeyword() noexcept
@@ -75,13 +91,43 @@ Statement* Parser::ParseKeyword() noexcept
 	switch (keyword)
 	{
 		case Keyword::Let: return ParseVariableDeclaration(keyword);
+		case Keyword::If: return ParseIfStatement();
+		case Keyword::While: return ParseWhileStatement();
+		//case Keyword::For: return ParseForStatement();
 		default: return ParseExpressionStatement();
 	}
 }
 
+Statement* Parser::ParseIfStatement() noexcept
+{
+	// If
+	_position++;
+	Expression* condition = ParseExpression();
+	Statement* statement = ParseStatement();
+
+	// Else
+	const Token& next = Next();
+	Statement* elseStatement = Statement::Null();
+	if (next.type() == TokenType::Keyword && ToKeyword(next.text()) == Keyword::Else)
+	{
+		_position++;
+		elseStatement = ParseStatement();
+	}
+
+	return new IfStatement(condition, statement, elseStatement);
+}
+
+Statement* Parser::ParseWhileStatement() noexcept
+{
+	_position++;
+	Expression* condition = ParseExpression();
+	Statement* statement = ParseStatement();
+	return new WhileStatement(condition, statement);
+}
+
 Statement* Parser::ParseExpressionStatement() noexcept
 {
-	Expression* expression = ParseMathExpression();
+	Expression* expression = ParseExpression();
 	return new ExpressionStatement(expression);
 }
 
@@ -89,11 +135,11 @@ Statement* Parser::ParseVariableDeclaration(Keyword keyword) noexcept
 {
 	_position++;
 	const Token& name = MatchAndConsume(TokenType::Identifier);
-	bool assign = MatchNext(TokenType::EqualSymbol);
+	bool assign = Match(TokenType::EqualSymbol);
 	Expression* value = Expression::Null();
 	if (assign)
 	{
-		_position += 2;
+		_position++;
 		value = ParseMathExpression();
 	}
 	return new VariableDeclaration(keyword, name.text(), value);
@@ -123,10 +169,32 @@ Expression* Parser::ParseDouble(NumericBase base) noexcept
 	return new NumericLiteral(t.text(), NumericType::Double, base);
 }
 
+Expression* Parser::ParseBoolean() noexcept
+{
+	const Token& t = ConsumeNext();
+	Keyword keyword = ToKeyword(t.text());
+	return new BooleanLiteral((bool)keyword);
+}
+
 Expression* Parser::ParseIdentifier() noexcept
 {
 	const Token& id = MatchAndConsume(TokenType::Identifier);
 	return new IdentifierExpression(id.text());
+}
+
+Expression* Parser::ParseParentheses() noexcept
+{
+	_position++;
+	Expression* expression = ParseExpression();
+	MatchAndConsume(TokenType::CloseParenthesis);
+	return new ParenthesesExpression(expression);
+}
+
+Expression* Parser::ParseExpression() noexcept
+{
+	return Match(TokenType::Identifier) && MatchNext(TokenType::EqualSymbol) ?
+		ParseAssignmentExpression() :
+		ParseMathExpression();
 }
 
 Expression* Parser::ParsePrimaryExpression() noexcept
@@ -146,9 +214,20 @@ Expression* Parser::ParsePrimaryExpression() noexcept
 		case TokenType::HexFloat: return ParseFloat(NumericBase::Hex);
 		case TokenType::HexDouble: return ParseDouble(NumericBase::Hex);
 
+		case TokenType::OpenParenthesis: return ParseParentheses();
+		case TokenType::Keyword: return ParseBoolean();
+
 		case TokenType::Identifier:
 		default: return ParseIdentifier();
 	}
+}
+
+Expression* Parser::ParseAssignmentExpression() noexcept
+{
+	const Token& id = ConsumeNext();
+	_position++;
+	Expression* expression = ParseExpression();
+	return new AssignmentExpression(id.text(), expression);
 }
 
 Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
@@ -160,7 +239,7 @@ Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 
 	if (precedence && precedence >= parentPrecedence)
 	{
-		ConsumeNext();
+		_position++;
 		Expression* operand = ParseMathExpression(precedence);
 		left = new UnaryOperation(op, operand);
 	}
@@ -173,7 +252,7 @@ Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 
 		if (!precedence || precedence <= parentPrecedence) break;
 
-		ConsumeNext();
+		_position++;
 		Expression* right = ParseMathExpression(precedence);
 		left = new BinaryOperation(left, op, right);
 	}
