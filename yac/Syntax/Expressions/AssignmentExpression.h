@@ -17,7 +17,7 @@ namespace Yac {
 			~AssignmentExpression() { delete _expr; }
 
 			inline std::string identifier() const noexcept { return _id; }
-			inline Expression* expression() const noexcept { return _expr; }
+			inline const Expression* expression() const noexcept { return _expr; }
 
 		private:
 

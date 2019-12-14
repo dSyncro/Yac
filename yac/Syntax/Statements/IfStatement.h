@@ -15,9 +15,9 @@ namespace Yac {
 
 			~IfStatement() { Expression::Dispose(_condition); Statement::Dispose(_statement); Statement::Dispose(_else); }
 
-			inline Expression* condition() const noexcept { return _condition; }
-			inline Statement* statement() const noexcept { return _statement; }
-			inline Statement* elseStatement() const noexcept { return _else; }
+			inline const Expression* condition() const noexcept { return _condition; }
+			inline const Statement* statement() const noexcept { return _statement; }
+			inline const Statement* elseStatement() const noexcept { return _else; }
 
 		private:
 

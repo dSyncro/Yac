@@ -4,8 +4,8 @@
 
 #include "Statement.h"
 
-#include <yac/Syntax/Tokens/Keyword.h>
 #include <yac/Syntax/Expressions/Expression.h>
+#include <yac/Syntax/Tokens/Keyword.h>
 
 namespace Yac {
 	namespace Syntax {
@@ -19,7 +19,7 @@ namespace Yac {
 
 			inline Keyword keyword() const noexcept { return _keyword; }
 			inline std::string name() const noexcept { return _name; }
-			inline Expression* initializer() const noexcept { return _init; }
+			inline const Expression* initializer() const noexcept { return _init; }
 
 		private:
 

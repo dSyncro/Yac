@@ -25,6 +25,8 @@ namespace Yac {
 
 		private:
 
+			inline void Step(unsigned int offset = 1) noexcept { _position += offset; }
+
 			const Token& ConsumeNext() noexcept;
 
 			inline const Token& Current() const noexcept { return Peek(0); }
@@ -40,9 +42,9 @@ namespace Yac {
 
 			Statement* ParseStatement() noexcept;
 			Statement* ParseBlockStatement() noexcept;
-			Statement* ParseKeyword() noexcept;
+			Statement* ParseStatementKeyword() noexcept;
 			Statement* ParseIfStatement() noexcept;
-			//Statement* ParseForStatement() noexcept;
+			Statement* ParseForStatement() noexcept;
 			Statement* ParseWhileStatement() noexcept;
 			Statement* ParseExpressionStatement() noexcept;
 			Statement* ParseVariableDeclaration(Keyword keyword = Keyword::Let) noexcept;

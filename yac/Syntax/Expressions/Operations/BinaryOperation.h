@@ -17,9 +17,9 @@ namespace Yac {
 
 			~BinaryOperation() { Expression::Dispose(_left); Expression::Dispose(_right); }
 
-			inline Expression* left() const noexcept { return _left; }
+			inline const Expression* left() const noexcept { return _left; }
 			inline Operator operation() const noexcept { return _operation; }
-			inline Expression* right() const noexcept { return _right; }
+			inline const Expression* right() const noexcept { return _right; }
 
 		private:
 

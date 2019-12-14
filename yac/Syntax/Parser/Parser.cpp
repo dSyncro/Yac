@@ -2,8 +2,6 @@
 
 #include <yac/Syntax/Lexer/Lexer.h>
 #include <yac/Syntax/SyntaxRules.h>
-#include <yac/Syntax/Statements/VariableDeclaration.h>
-#include <yac/Syntax/Statements/ExpressionStatement.h>
 
 #include <yac/Syntax/Expressions/Expressions.h>
 #include <yac/Syntax/Statements/Statements.h>
@@ -26,7 +24,7 @@ Parser::Parser(std::string source)
 const Token& Parser::ConsumeNext() noexcept
 {
 	Token& t = _tokens[_position];
-	_position++;
+	Step();
 	return t;
 }
 
@@ -64,14 +62,14 @@ Statement* Parser::ParseStatement() noexcept
 	switch (Current().type())
 	{
 		case TokenType::OpenBrackets: return ParseBlockStatement();
-		case TokenType::Keyword: return ParseKeyword();
+		case TokenType::Keyword: return ParseStatementKeyword();
 		default: return ParseExpressionStatement();
 	}
 }
 
 Statement* Parser::ParseBlockStatement() noexcept
 {
-	_position++;
+	Step();
 
 	std::vector<Statement*> _statements;
 	while (Current().type() != TokenType::CloseBrackets && Current().type() != TokenType::EndOfFile)
@@ -80,17 +78,17 @@ Statement* Parser::ParseBlockStatement() noexcept
 		_statements.push_back(statement);
 	}
 
-	_position++;
+	Step();
 
 	return new BlockStatement(_statements);
 }
 
-Statement* Parser::ParseKeyword() noexcept
+Statement* Parser::ParseStatementKeyword() noexcept
 {
 	Keyword keyword = ToKeyword(Current().text());
 	switch (keyword)
 	{
-		case Keyword::Let: return ParseVariableDeclaration(keyword);
+		case Keyword::Let: return ParseVariableDeclaration();
 		case Keyword::If: return ParseIfStatement();
 		case Keyword::While: return ParseWhileStatement();
 		//case Keyword::For: return ParseForStatement();
@@ -101,7 +99,7 @@ Statement* Parser::ParseKeyword() noexcept
 Statement* Parser::ParseIfStatement() noexcept
 {
 	// If
-	_position++;
+	Step();
 	Expression* condition = ParseExpression();
 	Statement* statement = ParseStatement();
 
@@ -110,16 +108,47 @@ Statement* Parser::ParseIfStatement() noexcept
 	Statement* elseStatement = Statement::Null();
 	if (next.type() == TokenType::Keyword && ToKeyword(next.text()) == Keyword::Else)
 	{
-		_position++;
+		Step();
 		elseStatement = ParseStatement();
 	}
 
 	return new IfStatement(condition, statement, elseStatement);
 }
 
+Statement* Parser::ParseForStatement() noexcept
+{
+	Step();
+
+	MatchAndConsume(TokenType::OpenParentheses);
+
+	Expression* assignment = nullptr;
+	if (!MatchNext(TokenType::Semicolon))
+	{
+		assignment = ParseExpression();
+		MatchAndConsume(TokenType::Semicolon);
+	}
+	else Step();
+	
+	Expression* condition = nullptr;
+	if (!MatchNext(TokenType::Semicolon))
+	{
+		condition = ParseExpression();
+		MatchAndConsume(TokenType::Semicolon);
+	}
+	else Step();
+
+	Expression* update = ParseExpression();
+
+	MatchAndConsume(TokenType::CloseParentheses);
+
+	Statement* statement = ParseStatement();
+
+	return new ForStatement(assignment, condition, update, statement);
+}
+
 Statement* Parser::ParseWhileStatement() noexcept
 {
-	_position++;
+	Step();
 	Expression* condition = ParseExpression();
 	Statement* statement = ParseStatement();
 	return new WhileStatement(condition, statement);
@@ -133,13 +162,13 @@ Statement* Parser::ParseExpressionStatement() noexcept
 
 Statement* Parser::ParseVariableDeclaration(Keyword keyword) noexcept
 {
-	_position++;
+	Step();
 	const Token& name = MatchAndConsume(TokenType::Identifier);
 	bool assign = Match(TokenType::EqualSymbol);
 	Expression* value = Expression::Null();
 	if (assign)
 	{
-		_position++;
+		Step();
 		value = ParseMathExpression();
 	}
 	return new VariableDeclaration(keyword, name.text(), value);
@@ -184,9 +213,9 @@ Expression* Parser::ParseIdentifier() noexcept
 
 Expression* Parser::ParseParentheses() noexcept
 {
-	_position++;
+	Step();
 	Expression* expression = ParseExpression();
-	MatchAndConsume(TokenType::CloseParenthesis);
+	MatchAndConsume(TokenType::CloseParentheses);
 	return new ParenthesesExpression(expression);
 }
 
@@ -214,7 +243,7 @@ Expression* Parser::ParsePrimaryExpression() noexcept
 		case TokenType::HexFloat: return ParseFloat(NumericBase::Hex);
 		case TokenType::HexDouble: return ParseDouble(NumericBase::Hex);
 
-		case TokenType::OpenParenthesis: return ParseParentheses();
+		case TokenType::OpenParentheses: return ParseParentheses();
 		case TokenType::Keyword: return ParseBoolean();
 
 		case TokenType::Identifier:
@@ -225,7 +254,7 @@ Expression* Parser::ParsePrimaryExpression() noexcept
 Expression* Parser::ParseAssignmentExpression() noexcept
 {
 	const Token& id = ConsumeNext();
-	_position++;
+	MatchAndConsume(TokenType::EqualSymbol);
 	Expression* expression = ParseExpression();
 	return new AssignmentExpression(id.text(), expression);
 }
@@ -239,7 +268,7 @@ Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 
 	if (precedence && precedence >= parentPrecedence)
 	{
-		_position++;
+		Step();
 		Expression* operand = ParseMathExpression(precedence);
 		left = new UnaryOperation(op, operand);
 	}
@@ -252,7 +281,7 @@ Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 
 		if (!precedence || precedence <= parentPrecedence) break;
 
-		_position++;
+		Step();
 		Expression* right = ParseMathExpression(precedence);
 		left = new BinaryOperation(left, op, right);
 	}

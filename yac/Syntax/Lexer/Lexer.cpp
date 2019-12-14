@@ -128,12 +128,12 @@ Token Lexer::Lex()
 
 		case '(':
 			_position++;
-			_type = TokenType::OpenParenthesis;
+			_type = TokenType::OpenParentheses;
 			return Token(_type, TextSpan(_start, 1), "(");
 
 		case ')':
 			_position++;
-			_type = TokenType::CloseParenthesis;
+			_type = TokenType::CloseParentheses;
 			return Token(_type, TextSpan(_start, 1), ")");
 
 		case '[':
@@ -143,7 +143,7 @@ Token Lexer::Lex()
 
 		case ']':
 			_position++;
-			_type = TokenType::CloseParenthesis;
+			_type = TokenType::CloseParentheses;
 			return Token(_type, TextSpan(_start, 1), "]");
 
 		case '{':

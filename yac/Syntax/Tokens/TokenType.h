@@ -25,8 +25,8 @@ namespace Yac {
 			Comma,
 
 			// Delimiters
-			OpenParenthesis,
-			CloseParenthesis,
+			OpenParentheses,
+			CloseParentheses,
 			OpenSquared,
 			CloseSquared,
 			OpenBrackets,

@@ -16,7 +16,7 @@ namespace Yac {
 			~UnaryOperation();
 
 			inline Operator operation() const noexcept { return _operation; }
-			inline Expression* operand() const noexcept { return _operand; }
+			inline const Expression* operand() const noexcept { return _operand; }
 
 		private:
 

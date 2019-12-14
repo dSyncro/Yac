@@ -14,7 +14,7 @@ namespace Yac {
 
 			~ParenthesesExpression() { delete _expr; }
 
-			inline Expression* expression() const noexcept { return _expr; }
+			inline const Expression* expression() const noexcept { return _expr; }
 
 		private:
 

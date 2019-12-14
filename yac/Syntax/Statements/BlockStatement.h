@@ -13,7 +13,7 @@ namespace Yac {
 
 			BlockStatement(std::vector<Statement*> statements) : _statements(statements) {}
 
-			const std::vector<Statement*>& statements() const { return _statements; }
+			inline const std::vector<Statement*>& statements() const { return _statements; }
 
 		private:
 
