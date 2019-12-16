@@ -14,15 +14,16 @@ namespace Yac {
 
 			Lexer(std::string source);
 
-			Token Lex();
+			Token Lex() noexcept;
 
 		private:
 
-			void ReadWhitespace();
-			void ReadWord();
-			void ReadNumber(TokenType startingType = TokenType::Int);
-			void ReadBinaryNumber();
-			void ReadHexNumber();
+			void ReadWhitespace() noexcept;
+			void ReadWord() noexcept;
+			void ReadNumber(TokenType startingType = TokenType::Int) noexcept;
+			void ReadBinaryNumber() noexcept;
+			void ReadHexNumber() noexcept;
+			Token ReadSymbol(TokenType type, const char* text, unsigned int length = 1) noexcept;
 
 			inline char Current() const noexcept { return Peek(0); }
 			inline char Next() const noexcept { return Peek(1); }

@@ -23,6 +23,8 @@ namespace Yac {
 
 			void ReportUnknownToken(char c, const Yac::Text::TextSpan& span);
 
+			void ReportNotABooleanLiteral(const std::string& text, const Yac::Text::TextSpan& span);
+				
 			void Clear() { _list->Clear(); }
 
 		private:

@@ -122,9 +122,6 @@
     <ClInclude Include="Syntax\Executor\Executor.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Tokens\OptionalToken.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
     <ClInclude Include="Syntax\Statements\StatementType.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>

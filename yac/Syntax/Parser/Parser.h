@@ -6,7 +6,6 @@
 #include <yac/Syntax/Tokens/Keyword.h>
 #include <yac/Syntax/Expressions/Expression.h>
 #include <yac/Syntax/Expressions/Numeric/NumericBase.h>
-#include <yac/Syntax/Tokens/OptionalToken.h>
 #include <yac/Syntax/Statements/Statement.h>
 #include <yac/Errors/ErrorReporter.h>
 
@@ -38,7 +37,6 @@ namespace Yac {
 			bool MatchNext(TokenType type) const noexcept;
 
 			const Token& MatchAndConsume(TokenType type) noexcept;
-			const OptionalToken ConsumeOptional(TokenType type) noexcept;
 
 			Statement* ParseStatement() noexcept;
 			Statement* ParseBlockStatement() noexcept;
@@ -46,8 +44,9 @@ namespace Yac {
 			Statement* ParseIfStatement() noexcept;
 			Statement* ParseForStatement() noexcept;
 			Statement* ParseWhileStatement() noexcept;
-			Statement* ParseExpressionStatement() noexcept;
+			Statement* ParseInstructionStatement() noexcept;
 			Statement* ParseVariableDeclaration(Keyword keyword = Keyword::Let) noexcept;
+			Statement* ParseConditionalStatement() noexcept;
 
 			Expression* ParseInt(NumericBase base = NumericBase::Decimal) noexcept;
 			Expression* ParseUInt(NumericBase base = NumericBase::Decimal) noexcept;
@@ -60,6 +59,7 @@ namespace Yac {
 			Expression* ParseParentheses() noexcept;
 
 			Expression* ParseExpression() noexcept;
+			Expression* ParseInstruction() noexcept;
 			Expression* ParsePrimaryExpression() noexcept;
 			Expression* ParseAssignmentExpression() noexcept;
 			Expression* ParseMathExpression(unsigned int parentPrecedence = 0) noexcept;

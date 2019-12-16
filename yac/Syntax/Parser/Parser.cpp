@@ -46,11 +46,6 @@ const Token& Parser::MatchAndConsume(TokenType type) noexcept
 	return t;
 }
 
-const OptionalToken Parser::ConsumeOptional(TokenType type) noexcept
-{
-	return MatchNext(type) ? OptionalToken(ConsumeNext(), true) : OptionalToken();
-}
-
 Statement* Parser::Parse()
 {
 	Statement* statement = ParseStatement();
@@ -63,7 +58,7 @@ Statement* Parser::ParseStatement() noexcept
 	{
 		case TokenType::OpenBrackets: return ParseBlockStatement();
 		case TokenType::Keyword: return ParseStatementKeyword();
-		default: return ParseExpressionStatement();
+		default: return ParseInstructionStatement();
 	}
 }
 
@@ -92,7 +87,7 @@ Statement* Parser::ParseStatementKeyword() noexcept
 		case Keyword::If: return ParseIfStatement();
 		case Keyword::While: return ParseWhileStatement();
 		case Keyword::For: return ParseForStatement();
-		default: return ParseExpressionStatement();
+		default: return ParseInstructionStatement();
 	}
 }
 
@@ -100,7 +95,10 @@ Statement* Parser::ParseIfStatement() noexcept
 {
 	// If
 	Step();
+
+	MatchAndConsume(TokenType::OpenParentheses);
 	Expression* condition = ParseExpression();
+	MatchAndConsume(TokenType::CloseParentheses);
 	Statement* statement = ParseStatement();
 
 	// Else
@@ -149,14 +147,18 @@ Statement* Parser::ParseForStatement() noexcept
 Statement* Parser::ParseWhileStatement() noexcept
 {
 	Step();
+
+	MatchAndConsume(TokenType::OpenParentheses);
 	Expression* condition = ParseExpression();
+	MatchAndConsume(TokenType::CloseParentheses);
+
 	Statement* statement = ParseStatement();
 	return new WhileStatement(condition, statement);
 }
 
-Statement* Parser::ParseExpressionStatement() noexcept
+Statement* Parser::ParseInstructionStatement() noexcept
 {
-	Expression* expression = ParseExpression();
+	Expression* expression = ParseInstruction();
 	return new ExpressionStatement(expression);
 }
 
@@ -171,7 +173,17 @@ Statement* Parser::ParseVariableDeclaration(Keyword keyword) noexcept
 		Step();
 		value = ParseExpression();
 	}
+	MatchAndConsume(TokenType::Semicolon);
 	return new VariableDeclaration(keyword, name.text(), value);
+}
+
+Statement* Parser::ParseConditionalStatement() noexcept
+{
+	Statement* statement = ParseStatement();
+	StatementType type = statement->type();
+	if (type != StatementType::Expression && type != StatementType::VariableDeclaration)
+		;
+	return statement;
 }
 
 Expression* Parser::ParseInt(NumericBase base) noexcept
@@ -201,7 +213,12 @@ Expression* Parser::ParseDouble(NumericBase base) noexcept
 Expression* Parser::ParseBoolean() noexcept
 {
 	const Token& t = ConsumeNext();
-	Keyword keyword = ToKeyword(t.text());
+	Keyword keyword = Keyword::Unknown;
+
+	if (t.text() == "true") keyword = Keyword::True;
+	else if (t.text() == "false") keyword = Keyword::False;
+	else _reporter.ReportNotABooleanLiteral(t.text(), t.span());
+
 	return new BooleanLiteral((bool)keyword);
 }
 
@@ -224,6 +241,12 @@ Expression* Parser::ParseExpression() noexcept
 	return Match(TokenType::Identifier) && MatchNext(TokenType::EqualSymbol) ?
 		ParseAssignmentExpression() :
 		ParseMathExpression();
+}
+
+Expression* Parser::ParseInstruction() noexcept
+{
+	Expression* expression = ParseExpression();
+	MatchAndConsume(TokenType::Semicolon);
 }
 
 Expression* Parser::ParsePrimaryExpression() noexcept
@@ -261,7 +284,7 @@ Expression* Parser::ParseAssignmentExpression() noexcept
 
 Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 {
-	Expression* left;
+	Expression* left = nullptr;
 
 	Operator op = ToUnaryOperator(Current().type());
 	unsigned int precedence = (unsigned int)op;

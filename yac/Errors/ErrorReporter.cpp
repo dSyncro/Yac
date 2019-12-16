@@ -23,3 +23,11 @@ void ErrorReporter::ReportUnknownToken(char c, const TextSpan& span)
 	msg.append("'");
 	_list->Add(Error(msg, span));
 }
+
+void ErrorReporter::ReportNotABooleanLiteral(const std::string& text, const TextSpan& span)
+{
+	std::string msg = "'";
+	msg.append(text);
+	msg.append("' is not a valid Boolean literal");
+	_list->Add(Error(msg, span));
+}

@@ -76,7 +76,6 @@
     <ClInclude Include="Syntax\Parser\Parser.h" />
     <ClInclude Include="Syntax\Statements\StatementType.h" />
     <ClInclude Include="Syntax\SyntaxTree\SyntaxTree.h" />
-    <ClInclude Include="Syntax\Tokens\OptionalToken.h" />
     <ClInclude Include="Syntax\Tokens\TokenType.h" />
     <ClInclude Include="Text\SourceText.h" />
     <ClInclude Include="Syntax\Tokens\Token.h" />

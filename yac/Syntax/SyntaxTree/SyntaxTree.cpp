@@ -110,7 +110,8 @@ void SyntaxTree::Print(const Statement* ptr, unsigned int indent) const noexcept
 			indent++;
 			Print(If->condition(), indent);
 			Print(If->statement(), indent);
-			Print(If->elseStatement(), indent);
+			const Statement* elseStatement = If->elseStatement();
+			if (elseStatement) Print(elseStatement, indent);
 			return;
 		}
 		case StatementType::VariableDeclaration: {

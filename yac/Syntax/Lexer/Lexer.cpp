@@ -8,7 +8,7 @@ using namespace Yac::Errors;
 
 Lexer::Lexer(std::string source) : _source(source), _reporter(ErrorReporter()) {}
 
-Token Lexer::Lex()
+Token Lexer::Lex() noexcept
 {
 	_start = _position;
 	_type = TokenType::Unknown;
@@ -41,30 +41,11 @@ Token Lexer::Lex()
 			ReadWhitespace();
 			break;
 
-		case '+':
-			_position++;
-			_type = TokenType::PlusSymbol;
-			return Token(_type, TextSpan(_start, 1), "+");
-
-		case '-':
-			_position++;
-			_type = TokenType::MinusSymbol;
-			return Token(_type, TextSpan(_start, 1), "-");
-
-		case '*':
-			_position++;
-			_type = TokenType::StarSymbol;
-			return Token(_type, TextSpan(_start, 1), "*");
-
-		case '/':
-			_position++;
-			_type = TokenType::SlashSymbol;
-			return Token(_type, TextSpan(_start, 1), "/");
-
-		case '^':
-			_position++;
-			_type = TokenType::CircumflexSymbol;
-			return Token(_type, TextSpan(_start, 1), "^");
+		case '+': return ReadSymbol(TokenType::PlusSymbol, "+");
+		case '-': return ReadSymbol(TokenType::MinusSymbol, "-");
+		case '*': return ReadSymbol(TokenType::StarSymbol, "*");
+		case '/': return ReadSymbol(TokenType::SlashSymbol, "/");
+		case '^': return ReadSymbol(TokenType::CircumflexSymbol, "^");
 
 		case '.':
 			if (std::isdigit(Next()))
@@ -72,99 +53,45 @@ Token Lexer::Lex()
 				ReadNumber(TokenType::Double);
 				break;
 			}
-			_position++;
-			_type = TokenType::DotSymbol;
-			return Token(_type, TextSpan(_start, 1), ".");
+			return ReadSymbol(TokenType::DotSymbol, ".");
 
-		case '=':
-			_position++;
-			_type = TokenType::EqualSymbol;
-			return Token(_type, TextSpan(_start, 1), "=");
+		case '=': 
+			return Next() == '='  ? 
+				ReadSymbol(TokenType::EqualSymbol, "==", 2) : ReadSymbol(TokenType::EqualSymbol, "=");
 
 		case '&':
-			_position++;
-			_type = TokenType::AndSymbol;
-			return Token(_type, TextSpan(_start, 1), "&");
+			return Next() == '&' ?
+				ReadSymbol(TokenType::AndSymbol, "&&", 2) : ReadSymbol(TokenType::AndSymbol, "&");
 
 		case '|':
-			_position++;
-			_type = TokenType::PipeSymbol;
-			return Token(_type, TextSpan(_start, 1), "|");
+			return Next() == '|' ?
+				ReadSymbol(TokenType::PipeSymbol, "||", 2) : ReadSymbol(TokenType::PipeSymbol, "|");
 
 		case '!':
-			_position++;
-			_type = TokenType::ExclamationMark;
-			return Token(_type, TextSpan(_start, 1), "!");
+			return Next() == '=' ?
+				ReadSymbol(TokenType::ExclamationMark, "!=", 2) : ReadSymbol(TokenType::ExclamationMark, "!");
 
-		case '?':
-			_position++;
-			_type = TokenType::QuestionMark;
-			return Token(_type, TextSpan(_start, 1), "?");
+		case '?': return ReadSymbol(TokenType::QuestionMark, "?");
 
 		case '<':
-			_position++;
-			_type = TokenType::LessSymbol;
-			return Token(_type, TextSpan(_start, 1), "<");
+			return Next() == '<' ?
+				ReadSymbol(TokenType::LessSymbol, "<<", 2) : ReadSymbol(TokenType::LessSymbol, "<");
 
 		case '>':
-			_position++;
-			_type = TokenType::GreaterSymbol;
-			return Token(_type, TextSpan(_start, 1), ">");
+			return Next() == '>' ?
+				ReadSymbol(TokenType::EqualSymbol, ">>", 2) : ReadSymbol(TokenType::GreaterSymbol, ">");
 
-		case ':':
-			_position++;
-			_type = TokenType::Colon;
-			return Token(_type, TextSpan(_start, 1), ":");
-
-		case ';':
-			_position++;
-			_type = TokenType::Semicolon;
-			return Token(_type, TextSpan(_start, 1), ";");
-
-		case ',':
-			_position++;
-			_type = TokenType::Comma;
-			return Token(_type, TextSpan(_start, 1), ",");
-
-		case '(':
-			_position++;
-			_type = TokenType::OpenParentheses;
-			return Token(_type, TextSpan(_start, 1), "(");
-
-		case ')':
-			_position++;
-			_type = TokenType::CloseParentheses;
-			return Token(_type, TextSpan(_start, 1), ")");
-
-		case '[':
-			_position++;
-			_type = TokenType::OpenSquared;
-			return Token(_type, TextSpan(_start, 1), "[");
-
-		case ']':
-			_position++;
-			_type = TokenType::CloseParentheses;
-			return Token(_type, TextSpan(_start, 1), "]");
-
-		case '{':
-			_position++;
-			_type = TokenType::OpenBrackets;
-			return Token(_type, TextSpan(_start, 1), "{");
-
-		case '}':
-			_position++;
-			_type = TokenType::CloseBrackets;
-			return Token(_type, TextSpan(_start, 1), "}");
-
-		case '\n':
-			_position++;
-			_type = TokenType::Newline;
-			return Token(_type, TextSpan(_start, 1), "\n");
-
-		case '\0':
-			_position++;
-			_type = TokenType::EndOfFile;
-			return Token(_type, TextSpan(_start, 1), "\0");
+		case ':': return ReadSymbol(TokenType::Colon, ":");
+		case ';': return ReadSymbol(TokenType::Semicolon, ";");
+		case ',': return ReadSymbol(TokenType::Comma, ",");
+		case '(': return ReadSymbol(TokenType::OpenParentheses, "(");
+		case ')': return ReadSymbol(TokenType::CloseParentheses, ")");
+		case '[': return ReadSymbol(TokenType::OpenSquared, "[");
+		case ']': return ReadSymbol(TokenType::CloseSquared, "]");
+		case '{': return ReadSymbol(TokenType::OpenBrackets, "{");
+		case '}': return ReadSymbol(TokenType::CloseBrackets, "}");
+		case '\n': return ReadSymbol(TokenType::Newline, "\n");
+		case '\0': return ReadSymbol(TokenType::EndOfFile, "\0");
 
 		default:
 			if (std::isalpha(Current())) ReadWord();
@@ -186,7 +113,7 @@ Token Lexer::Lex()
 	return Token(_type, span, text);
 }
 
-void Lexer::ReadWhitespace()
+void Lexer::ReadWhitespace() noexcept
 {
 	_start = _position++;
 	while (std::isspace(Current())) _position++;
@@ -194,7 +121,7 @@ void Lexer::ReadWhitespace()
 	_type = TokenType::Whitespace;
 }
 
-void Lexer::ReadWord()
+void Lexer::ReadWord() noexcept
 {
 	_start = _position++;
 	bool isSurelyIdentifier = false;
@@ -217,7 +144,7 @@ void Lexer::ReadWord()
 	_type = isSurelyIdentifier ? TokenType::Identifier : TokenType::Word;
 }
 
-void Lexer::ReadNumber(TokenType startingType)
+void Lexer::ReadNumber(TokenType startingType) noexcept
 {
 	_start = _position;
 	_type = startingType;
@@ -278,7 +205,7 @@ void Lexer::ReadNumber(TokenType startingType)
 	}
 }
 
-void Lexer::ReadBinaryNumber()
+void Lexer::ReadBinaryNumber() noexcept
 {
 	_start = _position++;
 	_type = TokenType::BinaryUInt;
@@ -336,7 +263,7 @@ void Lexer::ReadBinaryNumber()
 	}
 }
 
-void Lexer::ReadHexNumber()
+void Lexer::ReadHexNumber() noexcept
 {
 	_start = _position++;
 	_type = TokenType::HexUInt;
@@ -388,6 +315,13 @@ void Lexer::ReadHexNumber()
 			default: return;
 		}
 	}
+}
+
+Token Lexer::ReadSymbol(TokenType type, const char* text, unsigned int length) noexcept
+{
+	_position += length;
+	_type = type;
+	return Token(_type, TextSpan(_start, length), text);
 }
 
 char Lexer::Peek(unsigned int offset) const noexcept
