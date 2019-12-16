@@ -12,7 +12,7 @@ namespace Yac {
 		public:
 
 			ExpressionStatement(Expression* expression);
-			~ExpressionStatement();
+			~ExpressionStatement() { delete _expr; }
 
 			inline const Expression* expression() const noexcept { return _expr; }
 

@@ -11,9 +11,14 @@ namespace Yac {
 		public:
 
 			IfStatement(Expression* condition, Statement* statement, Statement* elseStatement) 
-				: _condition(condition), _statement(statement), _else(elseStatement) {}
+				: Statement(StatementType::If), _condition(condition), _statement(statement), _else(elseStatement) {}
 
-			~IfStatement() { Expression::Dispose(_condition); Statement::Dispose(_statement); Statement::Dispose(_else); }
+			~IfStatement()
+			{
+				delete _condition;
+				delete _statement;
+				delete _else;
+			}
 
 			inline const Expression* condition() const noexcept { return _condition; }
 			inline const Statement* statement() const noexcept { return _statement; }

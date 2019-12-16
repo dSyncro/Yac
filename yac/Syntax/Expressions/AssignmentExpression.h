@@ -13,7 +13,6 @@ namespace Yac {
 
 			AssignmentExpression(std::string id, Expression* expression)
 				: Expression(ExpressionType::AssignmentExpression), _id(id), _expr(expression) {}
-
 			~AssignmentExpression() { delete _expr; }
 
 			inline std::string identifier() const noexcept { return _id; }

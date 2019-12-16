@@ -10,16 +10,16 @@ namespace Yac {
 
 		public:
 
-			WhileStatement(Expression* condition, Statement* body) : _condition(condition), _body(body) {}
-			~WhileStatement() { Expression::Dispose(_condition); Statement::Dispose(_body); }
+			WhileStatement(Expression* condition, Statement* statement) : Statement(StatementType::While), _condition(condition), _statement(statement) {}
+			~WhileStatement() { delete _condition; delete _statement; }
 
 			inline const Expression* condition() const noexcept { return _condition; }
-			inline const Statement* body() const noexcept { return _body; }
+			inline const Statement* statement() const noexcept { return _statement; }
 
 		private:
 
 			Expression* _condition;
-			Statement* _body;
+			Statement* _statement;
 		};
 
 	}

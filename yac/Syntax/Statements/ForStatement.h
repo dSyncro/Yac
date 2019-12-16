@@ -11,14 +11,14 @@ namespace Yac {
 		public:
 
 			ForStatement(Expression* assignment, Expression* condition, Expression* update, Statement* statement)
-				: _assignment(assignment), _condition(condition), _update(update), _statement(statement) {}
-
-			~ForStatement() 
-			{ 
-				Expression::Dispose(_assignment);
-				Expression::Dispose(_condition);
-				Expression::Dispose(_update);
-				Statement::Dispose(_statement); 
+				: Statement(StatementType::For), _assignment(assignment), _condition(condition), _update(update), _statement(statement) {}
+			
+			~ForStatement()
+			{
+				delete _assignment;
+				delete _condition;
+				delete _update;
+				delete _statement;
 			}
 
 			inline const Expression* assignment() const noexcept { return _assignment; }

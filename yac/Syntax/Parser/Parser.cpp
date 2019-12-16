@@ -91,7 +91,7 @@ Statement* Parser::ParseStatementKeyword() noexcept
 		case Keyword::Let: return ParseVariableDeclaration();
 		case Keyword::If: return ParseIfStatement();
 		case Keyword::While: return ParseWhileStatement();
-		//case Keyword::For: return ParseForStatement();
+		case Keyword::For: return ParseForStatement();
 		default: return ParseExpressionStatement();
 	}
 }
@@ -104,9 +104,9 @@ Statement* Parser::ParseIfStatement() noexcept
 	Statement* statement = ParseStatement();
 
 	// Else
-	const Token& next = Next();
+	const Token& current = Current();
 	Statement* elseStatement = Statement::Null();
-	if (next.type() == TokenType::Keyword && ToKeyword(next.text()) == Keyword::Else)
+	if (current.type() == TokenType::Keyword && ToKeyword(current.text()) == Keyword::Else)
 	{
 		Step();
 		elseStatement = ParseStatement();
@@ -122,7 +122,7 @@ Statement* Parser::ParseForStatement() noexcept
 	MatchAndConsume(TokenType::OpenParentheses);
 
 	Expression* assignment = nullptr;
-	if (!MatchNext(TokenType::Semicolon))
+	if (!Match(TokenType::Semicolon))
 	{
 		assignment = ParseExpression();
 		MatchAndConsume(TokenType::Semicolon);
@@ -130,7 +130,7 @@ Statement* Parser::ParseForStatement() noexcept
 	else Step();
 	
 	Expression* condition = nullptr;
-	if (!MatchNext(TokenType::Semicolon))
+	if (!Match(TokenType::Semicolon))
 	{
 		condition = ParseExpression();
 		MatchAndConsume(TokenType::Semicolon);
@@ -169,7 +169,7 @@ Statement* Parser::ParseVariableDeclaration(Keyword keyword) noexcept
 	if (assign)
 	{
 		Step();
-		value = ParseMathExpression();
+		value = ParseExpression();
 	}
 	return new VariableDeclaration(keyword, name.text(), value);
 }

@@ -18,10 +18,7 @@ int main(int argc, char** argv)
 		std::string line;
 		std::getline(std::cin, line);
 
-		SyntaxTree tree = SyntaxTree(line);
-		VariableDeclaration& v = *(VariableDeclaration*)tree.root();
-		BinaryOperation& b = *(BinaryOperation*)v.initializer();
-		NumericLiteral& left = *(NumericLiteral*)b.left();
-		NumericLiteral& right = *(NumericLiteral*)b.right();
+		for (int i = 0; i < 100000; i++)
+			SyntaxTree tree = SyntaxTree(line);
 	}
 }

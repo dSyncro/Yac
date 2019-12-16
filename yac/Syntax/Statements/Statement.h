@@ -10,12 +10,10 @@ namespace Yac {
 		public:
 
 			Statement() : _type(StatementType::None) {}
-			~Statement() { Statement::Dispose(this); }
+			virtual ~Statement() {}
 
 			inline StatementType type() const noexcept { return _type; }
 			static Statement* Null() noexcept;
-
-			static void Dispose(Statement* expression);
 
 		protected:
 

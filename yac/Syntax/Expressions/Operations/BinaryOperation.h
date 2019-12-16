@@ -12,10 +12,8 @@ namespace Yac {
 
 		public:
 
-			BinaryOperation(Expression* left, Operator operation, Expression* right)
-				: Expression(ExpressionType::BinaryOperation), _left(left), _operation(operation), _right(right) { }
-
-			~BinaryOperation() { Expression::Dispose(_left); Expression::Dispose(_right); }
+			BinaryOperation(Expression* left, Operator operation, Expression* right);
+			~BinaryOperation();
 
 			inline const Expression* left() const noexcept { return _left; }
 			inline Operator operation() const noexcept { return _operation; }

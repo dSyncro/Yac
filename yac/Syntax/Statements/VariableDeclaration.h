@@ -15,7 +15,7 @@ namespace Yac {
 		public:
 
 			VariableDeclaration(Keyword keyword, std::string name, Expression* initializer);
-			~VariableDeclaration();
+			~VariableDeclaration() { delete _init; }
 
 			inline Keyword keyword() const noexcept { return _keyword; }
 			inline std::string name() const noexcept { return _name; }
