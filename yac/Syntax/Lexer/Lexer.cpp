@@ -41,11 +41,31 @@ Token Lexer::Lex() noexcept
 			ReadWhitespace();
 			break;
 
-		case '+': return ReadSymbol(TokenType::PlusSymbol, "+");
-		case '-': return ReadSymbol(TokenType::MinusSymbol, "-");
-		case '*': return ReadSymbol(TokenType::StarSymbol, "*");
-		case '/': return ReadSymbol(TokenType::SlashSymbol, "/");
-		case '^': return ReadSymbol(TokenType::CircumflexSymbol, "^");
+		case '+':
+			return
+				Next() == '+' ? ReadSymbol(TokenType::DoublePlusSymbol, "++", 2) :
+				Next() == '=' ? ReadSymbol(TokenType::PlusEqualSymbol, "+=", 2) : ReadSymbol(TokenType::PlusSymbol, "+");
+
+		case '-': 
+			return
+				Next() == '-' ? ReadSymbol(TokenType::DoubleMinusSymbol, "--", 2) :
+				Next() == '=' ? ReadSymbol(TokenType::MinusEqualSymbol, "-=", 2) : ReadSymbol(TokenType::MinusSymbol, "-");
+
+		case '*': 
+			return Next() == '=' ? 
+				ReadSymbol(TokenType::StarEqualSymbol, "*=", 2) : ReadSymbol(TokenType::StarSymbol, "*");
+
+		case '/': 
+			return Next() == '=' ?
+				ReadSymbol(TokenType::SlashEqualSymbol, "/=", 2) : ReadSymbol(TokenType::SlashSymbol, "/");
+
+		case '%':
+			return Next() == '=' ?
+				ReadSymbol(TokenType::PercentEqualSymbol, "%=", 2) : ReadSymbol(TokenType::PercentSymbol, "%");
+
+		case '^': 
+			return Next() == '=' ?
+				ReadSymbol(TokenType::CircumflexEqualSymbol, "^=", 2) : ReadSymbol(TokenType::CircumflexSymbol, "^");
 
 		case '.':
 			if (std::isdigit(Next()))
@@ -60,26 +80,33 @@ Token Lexer::Lex() noexcept
 				ReadSymbol(TokenType::EqualSymbol, "==", 2) : ReadSymbol(TokenType::EqualSymbol, "=");
 
 		case '&':
-			return Next() == '&' ?
-				ReadSymbol(TokenType::AndSymbol, "&&", 2) : ReadSymbol(TokenType::AndSymbol, "&");
+			return
+				Next() == '&' ? ReadSymbol(TokenType::DoubleAndSymbol, "&&", 2) :
+				Next() == '=' ? ReadSymbol(TokenType::AndEqualSymbol, "&=", 2) : ReadSymbol(TokenType::AndSymbol, "&");
 
 		case '|':
-			return Next() == '|' ?
-				ReadSymbol(TokenType::PipeSymbol, "||", 2) : ReadSymbol(TokenType::PipeSymbol, "|");
+			return
+				Next() == '|' ? ReadSymbol(TokenType::DoublePipeSymbol, "||", 2) :
+				Next() == '=' ? ReadSymbol(TokenType::PipeEqualSymbol, "|=", 2) : ReadSymbol(TokenType::PipeSymbol, "|");
 
 		case '!':
 			return Next() == '=' ?
 				ReadSymbol(TokenType::ExclamationMark, "!=", 2) : ReadSymbol(TokenType::ExclamationMark, "!");
 
+		case '~': return ReadSymbol(TokenType::TildeSymbol, "~");
 		case '?': return ReadSymbol(TokenType::QuestionMark, "?");
 
 		case '<':
-			return Next() == '<' ?
-				ReadSymbol(TokenType::LessSymbol, "<<", 2) : ReadSymbol(TokenType::LessSymbol, "<");
+			return
+				Next() == '<' ?
+				Peek(2) == '=' ? ReadSymbol(TokenType::SLEqualSymbol, "<<=", 3) : ReadSymbol(TokenType::ShiftLeftSymbol, "<<", 2) :
+				Next() == '=' ? ReadSymbol(TokenType::LessEqualSymbol, "<=", 2) : ReadSymbol(TokenType::LessSymbol, "<");
 
 		case '>':
-			return Next() == '>' ?
-				ReadSymbol(TokenType::EqualSymbol, ">>", 2) : ReadSymbol(TokenType::GreaterSymbol, ">");
+			return
+				Next() == '>' ?
+				Peek(2) == '=' ? ReadSymbol(TokenType::SREqualSymbol, ">>=", 3) : ReadSymbol(TokenType::ShiftRightSymbol, ">>", 2) :
+				Next() == '=' ? ReadSymbol(TokenType::GreaterEqualSymbol, ">=", 2) : ReadSymbol(TokenType::GreaterSymbol, ">");
 
 		case ':': return ReadSymbol(TokenType::Colon, ":");
 		case ';': return ReadSymbol(TokenType::Semicolon, ";");

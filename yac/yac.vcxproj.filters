@@ -66,6 +66,9 @@
     <ClCompile Include="Syntax\Statements\VariableDeclaration.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="Syntax\SyntaxTree\AstPrinter.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Text\TextSpan.h">
@@ -192,6 +195,12 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="Syntax\Statements\ForStatement.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Syntax\Expressions\ConditionalDeclaration.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Syntax\SyntaxTree\AstPrinter.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>

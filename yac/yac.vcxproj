@@ -33,6 +33,7 @@
     <ClCompile Include="Syntax\Statements\VariableDeclaration.cpp" />
     <ClCompile Include="Syntax\SyntaxRules.cpp" />
     <ClCompile Include="Syntax\Parser\Parser.cpp" />
+    <ClCompile Include="Syntax\SyntaxTree\AstPrinter.cpp" />
     <ClCompile Include="Syntax\SyntaxTree\SyntaxTree.cpp" />
     <ClCompile Include="Syntax\Tokens\Token.cpp" />
     <ClCompile Include="Text\SourceText.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="Syntax\Executor\Executor.h" />
     <ClInclude Include="Syntax\Expressions\AssignmentExpression.h" />
     <ClInclude Include="Syntax\Expressions\BooleanLiteral.h" />
+    <ClInclude Include="Syntax\Expressions\ConditionalDeclaration.h" />
     <ClInclude Include="Syntax\Expressions\Expressions.h" />
     <ClInclude Include="Syntax\Expressions\ExpressionType.h" />
     <ClInclude Include="Syntax\Expressions\IdentifierExpression.h" />
@@ -70,6 +72,7 @@
     <ClInclude Include="Syntax\Statements\WhileStatement.h" />
     <ClInclude Include="Syntax\SyntaxRules.h" />
     <ClInclude Include="Syntax\Expressions\Expression.h" />
+    <ClInclude Include="Syntax\SyntaxTree\AstPrinter.h" />
     <ClInclude Include="Syntax\Tokens\Keyword.h" />
     <ClInclude Include="Syntax\Lexer\Lexer.h" />
     <ClInclude Include="Syntax\Expressions\Operations\BinaryOperation.h" />

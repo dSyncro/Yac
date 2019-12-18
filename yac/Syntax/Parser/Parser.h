@@ -46,7 +46,6 @@ namespace Yac {
 			Statement* ParseWhileStatement() noexcept;
 			Statement* ParseInstructionStatement() noexcept;
 			Statement* ParseVariableDeclaration(Keyword keyword = Keyword::Let) noexcept;
-			Statement* ParseConditionalStatement() noexcept;
 
 			Expression* ParseInt(NumericBase base = NumericBase::Decimal) noexcept;
 			Expression* ParseUInt(NumericBase base = NumericBase::Decimal) noexcept;
@@ -56,10 +55,12 @@ namespace Yac {
 			Expression* ParseBoolean() noexcept;
 
 			Expression* ParseIdentifier() noexcept;
+			Expression* ParsePrefix() noexcept;
 			Expression* ParseParentheses() noexcept;
 
 			Expression* ParseExpression() noexcept;
 			Expression* ParseInstruction() noexcept;
+			Expression* ParseConditional() noexcept;
 			Expression* ParsePrimaryExpression() noexcept;
 			Expression* ParseAssignmentExpression() noexcept;
 			Expression* ParseMathExpression(unsigned int parentPrecedence = 0) noexcept;

@@ -96,8 +96,10 @@ Statement* Parser::ParseIfStatement() noexcept
 	// If
 	Step();
 
+	
+
 	MatchAndConsume(TokenType::OpenParentheses);
-	Expression* condition = ParseExpression();
+	Expression* condition = ParseConditional();
 	MatchAndConsume(TokenType::CloseParentheses);
 	Statement* statement = ParseStatement();
 
@@ -122,7 +124,7 @@ Statement* Parser::ParseForStatement() noexcept
 	Expression* assignment = nullptr;
 	if (!Match(TokenType::Semicolon))
 	{
-		assignment = ParseExpression();
+		assignment = ParseConditional();
 		MatchAndConsume(TokenType::Semicolon);
 	}
 	else Step();
@@ -149,7 +151,7 @@ Statement* Parser::ParseWhileStatement() noexcept
 	Step();
 
 	MatchAndConsume(TokenType::OpenParentheses);
-	Expression* condition = ParseExpression();
+	Expression* condition = ParseConditional();
 	MatchAndConsume(TokenType::CloseParentheses);
 
 	Statement* statement = ParseStatement();
@@ -175,15 +177,6 @@ Statement* Parser::ParseVariableDeclaration(Keyword keyword) noexcept
 	}
 	MatchAndConsume(TokenType::Semicolon);
 	return new VariableDeclaration(keyword, name.text(), value);
-}
-
-Statement* Parser::ParseConditionalStatement() noexcept
-{
-	Statement* statement = ParseStatement();
-	StatementType type = statement->type();
-	if (type != StatementType::Expression && type != StatementType::VariableDeclaration)
-		;
-	return statement;
 }
 
 Expression* Parser::ParseInt(NumericBase base) noexcept
@@ -225,7 +218,25 @@ Expression* Parser::ParseBoolean() noexcept
 Expression* Parser::ParseIdentifier() noexcept
 {
 	const Token& id = MatchAndConsume(TokenType::Identifier);
-	return new IdentifierExpression(id.text());
+	TokenType next = Current().type();
+	Expression* expr = new IdentifierExpression(id.text());
+	switch (next)
+	{
+		case TokenType::DoublePlusSymbol: Step(); return new UnaryOperation(Operator::PostIncrement, expr);
+		case TokenType::DoubleMinusSymbol: Step(); return new UnaryOperation(Operator::PostDecrement, expr);
+		default: return expr;
+	}
+}
+
+Expression* Parser::ParsePrefix() noexcept
+{
+	TokenType type = ConsumeNext().type();
+	switch (type)
+	{
+		case TokenType::DoublePlusSymbol: return new UnaryOperation(Operator::PreIncrement, ParseIdentifier());
+		case TokenType::DoubleMinusSymbol: return new UnaryOperation(Operator::PreDecrement, ParseIdentifier());
+		default: return ParseIdentifier();
+	}
 }
 
 Expression* Parser::ParseParentheses() noexcept
@@ -243,10 +254,23 @@ Expression* Parser::ParseExpression() noexcept
 		ParseMathExpression();
 }
 
+Expression* Parser::ParseConditional() noexcept
+{
+	if (Current().text() != "let") return ParseExpression();
+	
+	Step();
+	const Token& name = MatchAndConsume(TokenType::Identifier);
+	MatchAndConsume(TokenType::EqualSymbol);
+	Expression* init = ParseExpression();
+
+	return new ConditionalDeclaration(name.text(), init);
+}
+
 Expression* Parser::ParseInstruction() noexcept
 {
 	Expression* expression = ParseExpression();
 	MatchAndConsume(TokenType::Semicolon);
+	return expression;
 }
 
 Expression* Parser::ParsePrimaryExpression() noexcept
@@ -269,8 +293,8 @@ Expression* Parser::ParsePrimaryExpression() noexcept
 		case TokenType::OpenParentheses: return ParseParentheses();
 		case TokenType::Keyword: return ParseBoolean();
 
-		case TokenType::Identifier:
-		default: return ParseIdentifier();
+		case TokenType::Identifier: return ParseIdentifier();
+		default: return ParsePrefix();
 	}
 }
 
@@ -284,6 +308,8 @@ Expression* Parser::ParseAssignmentExpression() noexcept
 
 Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 {
+	if (Current().type() == TokenType::Semicolon) return nullptr;
+
 	Expression* left = nullptr;
 
 	Operator op = ToUnaryOperator(Current().type());

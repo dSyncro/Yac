@@ -12,6 +12,7 @@ namespace Yac {
 			BooleanLiteral,
 			UnaryOperation,
 			BinaryOperation,
+			ConditionalDeclaration,
 		};
 
 	}

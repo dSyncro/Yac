@@ -17,9 +17,6 @@ namespace Yac {
 
 			inline const Statement* root() const { return _root; }
 
-			void Print(const Expression* ptr = nullptr, unsigned int indent = 0) const noexcept;
-			void Print(const Statement* ptr = nullptr, unsigned int indent = 0) const noexcept;
-
 		private:
 
 			Statement* _root;
