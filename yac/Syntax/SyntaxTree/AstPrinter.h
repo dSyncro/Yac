@@ -6,22 +6,10 @@
 
 namespace Yac {
 	namespace Syntax {
-
-		class AstPrinter
+		namespace AstPrinter
 		{
-
-		public:
-
-			static void Print(const SyntaxTree& tree) noexcept;
-			static void Print(const SyntaxTree* tree) noexcept;
-
-		private:
-
-			AstPrinter() {}
-
-			static void Print(const Yac::Syntax::Expression* ptr, unsigned int indent = 0) noexcept;
-			static void Print(const Yac::Syntax::Statement* ptr, unsigned int indent = 0) noexcept;
+			void Print(const SyntaxTree& tree) noexcept;
+			void Print(const SyntaxTree* tree) noexcept;
 		};
-
 	}
 }

@@ -170,9 +170,6 @@
     <ClInclude Include="Syntax\Expressions\ParenthesesExpression.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\AssignmentExpression.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
     <ClInclude Include="Syntax\Expressions\Expressions.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
@@ -201,6 +198,12 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="Syntax\SyntaxTree\AstPrinter.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Syntax\Expressions\Assignment\AssignmentExpression.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Syntax\Expressions\Assignment\AssignmentOperator.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>

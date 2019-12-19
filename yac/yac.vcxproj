@@ -49,7 +49,8 @@
     <ClInclude Include="Errors\ErrorList.h" />
     <ClInclude Include="Errors\ErrorReporter.h" />
     <ClInclude Include="Syntax\Executor\Executor.h" />
-    <ClInclude Include="Syntax\Expressions\AssignmentExpression.h" />
+    <ClInclude Include="Syntax\Expressions\Assignment\AssignmentExpression.h" />
+    <ClInclude Include="Syntax\Expressions\Assignment\AssignmentOperator.h" />
     <ClInclude Include="Syntax\Expressions\BooleanLiteral.h" />
     <ClInclude Include="Syntax\Expressions\ConditionalDeclaration.h" />
     <ClInclude Include="Syntax\Expressions\Expressions.h" />

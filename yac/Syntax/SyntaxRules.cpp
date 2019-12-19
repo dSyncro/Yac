@@ -40,6 +40,25 @@ Operator Yac::Syntax::ToBinaryOperator(TokenType type)
 	}
 }
 
+AssignmentOperator Yac::Syntax::ToAssignmentOperator(TokenType type)
+{
+    switch (type)
+    {
+        case TokenType::EqualSymbol: return AssignmentOperator::Assign;
+        case TokenType::PlusEqualSymbol: return AssignmentOperator::Add;
+        case TokenType::MinusEqualSymbol: return AssignmentOperator::Subtract;
+        case TokenType::StarEqualSymbol: return AssignmentOperator::Multiply;
+        case TokenType::SlashEqualSymbol: return AssignmentOperator::Divide;
+        case TokenType::PercentEqualSymbol: return AssignmentOperator::Modulo;
+        case TokenType::PipeEqualSymbol: return AssignmentOperator::Or;
+        case TokenType::AndEqualSymbol: return AssignmentOperator::And;
+        case TokenType::CircumflexEqualSymbol: return AssignmentOperator::Xor;
+        case TokenType::ShiftLeftSymbol: return AssignmentOperator::LeftShift;
+        case TokenType::ShiftRightSymbol: return AssignmentOperator::RightShift;
+        default: return AssignmentOperator::Unknown;
+    }
+}
+
 Keyword Yac::Syntax::ToKeyword(std::string text)
 {
     if (text == "true") return Keyword::True;
