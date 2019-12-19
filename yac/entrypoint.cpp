@@ -17,7 +17,6 @@ int main(int argc, char** argv)
 	{
 		std::string line;
 		std::getline(std::cin, line);
-
 		//for (int i = 0; i < 1000; i++)
 			SyntaxTree tree = SyntaxTree(line);
 	}

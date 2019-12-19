@@ -6,7 +6,7 @@ using namespace Yac::Text;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
 
-Lexer::Lexer(std::string source) : _source(source), _reporter(ErrorReporter()) {}
+Lexer::Lexer(SourceText source) : _source(source), _reporter(ErrorReporter()) {}
 
 Token Lexer::Lex() noexcept
 {
@@ -117,7 +117,11 @@ Token Lexer::Lex() noexcept
 		case ']': return ReadSymbol(TokenType::CloseSquared, "]");
 		case '{': return ReadSymbol(TokenType::OpenBrackets, "{");
 		case '}': return ReadSymbol(TokenType::CloseBrackets, "}");
-		case '\n': return ReadSymbol(TokenType::Newline, "\n");
+
+		case '\n': 
+			StepLine(); 
+			return ReadSymbol(TokenType::Newline, "\n");
+
 		case '\0': return ReadSymbol(TokenType::EndOfFile, "\0");
 
 		default:
@@ -132,18 +136,18 @@ Token Lexer::Lex() noexcept
 
 	unsigned int length = _position - _start;
 	TextSpan span = TextSpan(_start, length);
-	std::string text = _source.substr(span.start(), span.length());
+	std::string text = CurrentLine().substr(span.start(), span.length());
 
 	if (_type == TokenType::Word)
 		_type = ToKeyword(text) == Keyword::Unknown ? TokenType::Identifier : TokenType::Keyword;
 	
-	return Token(_type, span, text);
+	return Token(_type, span, text, _line);
 }
 
 void Lexer::ReadWhitespace() noexcept
 {
 	_start = _position++;
-	while (std::isspace(Current())) _position++;
+	while (Current() == ' ' || Current() == '\t') _position++;
 
 	_type = TokenType::Whitespace;
 }
@@ -348,12 +352,18 @@ Token Lexer::ReadSymbol(TokenType type, const char* text, unsigned int length) n
 {
 	_position += length;
 	_type = type;
-	return Token(_type, TextSpan(_start, length), text);
+	return Token(_type, TextSpan(_start, length), text, _line);
 }
 
 char Lexer::Peek(unsigned int offset) const noexcept
 {
 	unsigned int index = _position + offset;
-	if (index > _source.length()) return '\0';
-	return _source[index];
+	if (index > CurrentLine().length()) return '\0';
+	return CurrentLine()[index];
+}
+
+const Line& Lexer::CurrentLine() const noexcept
+{
+	if (_line >= _source.lineCount()) return _source.GetLines().back();
+	return _source[_line];
 }

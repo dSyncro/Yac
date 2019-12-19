@@ -206,5 +206,8 @@
     <ClInclude Include="Syntax\Expressions\Assignment\AssignmentOperator.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Text\Line.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

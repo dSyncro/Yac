@@ -4,6 +4,7 @@
 
 #include <yac/Syntax/Tokens/Token.h>
 #include <yac/Errors/ErrorReporter.h>
+#include <yac/Text/SourceText.h>
 
 namespace Yac {
 	namespace Syntax {
@@ -12,11 +13,17 @@ namespace Yac {
 		{
 		public:
 
-			Lexer(std::string source);
+			Lexer(Yac::Text::SourceText text);
 
 			Token Lex() noexcept;
 
 		private:
+
+			void StepLine() noexcept
+			{
+				_line++;
+				_position = 0;
+			}
 
 			void ReadWhitespace() noexcept;
 			void ReadWord() noexcept;
@@ -30,10 +37,13 @@ namespace Yac {
 
 			char Peek(unsigned int offset) const noexcept;
 
-			TokenType _type = TokenType::None;
-			unsigned int _position = 0, _start = 0;
+			const Yac::Text::Line& CurrentLine() const noexcept;
 
-			std::string _source, _text;
+			TokenType _type = TokenType::None;
+			unsigned int _position = 0, _start = 0, _line = 0;
+
+			std::string _text;
+			Yac::Text::SourceText _source;
 
 			Yac::Errors::ErrorReporter _reporter;
 		};

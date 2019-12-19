@@ -9,6 +9,7 @@
 #include <yac/Syntax/Expressions/Assignment/AssignmentOperator.h>
 #include <yac/Syntax/Statements/Statement.h>
 #include <yac/Errors/ErrorReporter.h>
+#include <yac/Text/SourceText.h>
 
 namespace Yac {
 	namespace Syntax {
@@ -17,7 +18,7 @@ namespace Yac {
 
 		public:
 
-			Parser(std::string source);
+			Parser(Yac::Text::SourceText source);
 
 			Statement* Parse();
 
@@ -68,7 +69,6 @@ namespace Yac {
 			Expression* ParseMathExpression(unsigned int parentPrecedence = 0) noexcept;
 
 			unsigned int _position = 0;
-			std::string _source;
 			std::vector<Token> _tokens;
 			Yac::Errors::ErrorReporter _reporter;
 		};

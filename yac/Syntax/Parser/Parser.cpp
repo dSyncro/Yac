@@ -6,17 +6,18 @@
 #include <yac/Syntax/Expressions/Expressions.h>
 #include <yac/Syntax/Statements/Statements.h>
 
+using namespace Yac::Text;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
 
-Parser::Parser(std::string source)
+Parser::Parser(SourceText source)
 {
 	Lexer lexer = Lexer(source);
 	Token t;
 	do
 	{
 		t = lexer.Lex();
-		if (t.type() != TokenType::Whitespace && t.type() != TokenType::Newline)
+		if (t.type() != TokenType::Whitespace && t.type() != TokenType::Newline) 
 			_tokens.push_back(t);
 	} while (t.type() != TokenType::EndOfFile);
 }

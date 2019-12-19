@@ -1,24 +1,10 @@
 #pragma once
 
+#include <fstream>
 #include <string>
 #include <vector>
 
-struct Line {
-
-public:
-
-	Line(std::string string, unsigned int start, unsigned int end) 
-		: _string(string), _start(start), _end(end) {}
-
-	inline const std::string& text() const noexcept { return _string; }
-	inline unsigned int start() const noexcept { return _start; }
-	inline unsigned int end() const noexcept { return _end; }
-
-private:
-
-	std::string _string;
-	unsigned int _start, _end;
-};
+#include "Line.h"
 
 namespace Yac {
 	namespace Text {
@@ -27,10 +13,13 @@ namespace Yac {
 		{
 		public:
 
-			SourceText(const char* text);
+			SourceText(std::string text);
+			SourceText(std::ifstream& stream);
 			~SourceText();
 
-			std::vector<Line> GetLines() const noexcept { return _lines; }
+			unsigned int lineCount() const noexcept { return _lines.size(); }
+			const Line& operator [](unsigned int index) const { return _lines[index]; }
+			const std::vector<Line>& GetLines() const noexcept { return _lines; }
 
 		private:
 
