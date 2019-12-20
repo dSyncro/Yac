@@ -25,7 +25,8 @@ namespace Yac {
 			inline unsigned int length() const noexcept { return _span.length(); }
 			inline unsigned int end() const noexcept { return _span.end(); }
 
-			std::string substr(unsigned int start = 0, unsigned int length = 0xFFFFFFFF) const noexcept { return _string.substr(start, length); }
+			std::string substr(unsigned int start = 0, unsigned int length = 0xFFFFFFFF) 
+				const noexcept { return _string.substr(start, length); }
 
 		private:
 

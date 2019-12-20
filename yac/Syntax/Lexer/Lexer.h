@@ -19,11 +19,7 @@ namespace Yac {
 
 		private:
 
-			void StepLine() noexcept
-			{
-				_line++;
-				_position = 0;
-			}
+			void StepLine() noexcept;
 
 			void ReadWhitespace() noexcept;
 			void ReadWord() noexcept;

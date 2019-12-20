@@ -14,17 +14,12 @@ namespace Yac {
 
 		public:
 
-			void Add(const Error& e) noexcept { _errors.push_back(e); }
-
-			bool Any() const noexcept { return _errors.size() > 0; }
-
-			void Clear() noexcept { _errors.clear(); }
-
-			unsigned int Count() const noexcept { return _errors.size(); }
-
+			void Add(const Error& e) noexcept;
+			bool Any() const noexcept;
+			void Clear() noexcept;
+			unsigned int Count() const noexcept;
 			const Error& Get(unsigned int index) const;
-
-			const Error& operator [](unsigned int index) const { return Get(index); }
+			const Error& operator [](unsigned int index) const;
 
 		private:
 

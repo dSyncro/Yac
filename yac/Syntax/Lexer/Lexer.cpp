@@ -77,7 +77,7 @@ Token Lexer::Lex() noexcept
 
 		case '=': 
 			return Next() == '='  ? 
-				ReadSymbol(TokenType::EqualSymbol, "==", 2) : ReadSymbol(TokenType::EqualSymbol, "=");
+				ReadSymbol(TokenType::DoubleEqualSymbol, "==", 2) : ReadSymbol(TokenType::EqualSymbol, "=");
 
 		case '&':
 			return
@@ -142,6 +142,12 @@ Token Lexer::Lex() noexcept
 		_type = ToKeyword(text) == Keyword::Unknown ? TokenType::Identifier : TokenType::Keyword;
 	
 	return Token(_type, span, text, _line);
+}
+
+void Lexer::StepLine() noexcept
+{
+	_line++;
+	_position = 0;
 }
 
 void Lexer::ReadWhitespace() noexcept

@@ -38,7 +38,6 @@ namespace Yac {
 			bool Match(TokenType type, unsigned int offset = 0) const noexcept;
 			bool MatchNext(TokenType type) const noexcept;
 
-			const Token& EndOfFile() const noexcept;
 			const Token& MatchAndConsume(TokenType type) noexcept;
 
 			Statement* ParseStatement() noexcept;

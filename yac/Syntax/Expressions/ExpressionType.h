@@ -13,6 +13,7 @@ namespace Yac {
 			UnaryOperation,
 			BinaryOperation,
 			ConditionalDeclaration,
+			InlineIfElse,
 		};
 
 	}

@@ -19,13 +19,13 @@ namespace Yac {
 				Yac::Syntax::TokenType expected,
 				Yac::Syntax::TokenType found,
 				const Yac::Text::TextSpan& span
-			);
+			) const noexcept;
 
-			void ReportUnknownToken(char c, const Yac::Text::TextSpan& span);
+			void ReportUnknownToken(char c, const Yac::Text::TextSpan& span) const noexcept;
 
-			void ReportNotABooleanLiteral(const std::string& text, const Yac::Text::TextSpan& span);
+			void ReportNotABooleanLiteral(const std::string& text, const Yac::Text::TextSpan& span) const noexcept;
 				
-			void Clear() { _list->Clear(); }
+			void Clear() const noexcept { _list->Clear(); }
 
 		private:
 

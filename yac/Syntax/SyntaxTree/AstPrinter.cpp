@@ -103,6 +103,16 @@ namespace Yac {
 							Print(decl->initializer(), indent);
 						}
 
+						case ExpressionType::InlineIfElse:
+						{
+							InlineIfElse* iie = (InlineIfElse*)expression;
+							std::cout << std::string(indent, '\t') << "InlineIfElse:" << std::endl;
+							indent++;
+							Print(iie->condition(), indent);
+							Print(iie->True(), indent);
+							Print(iie->False(), indent);
+						}
+
 						default: return;
 					}
 				}

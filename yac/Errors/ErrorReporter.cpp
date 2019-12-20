@@ -6,7 +6,7 @@ using namespace Yac::Syntax;
 using namespace Yac::Errors;
 using namespace Yac::Text;
 
-void ErrorReporter::ReportUnexpectedToken(TokenType expected, TokenType found, const TextSpan& span)
+void ErrorReporter::ReportUnexpectedToken(TokenType expected, TokenType found, const TextSpan& span) const noexcept
 {
 	std::string msg = "Expected <";
 	msg.append(ToString(expected));
@@ -16,7 +16,7 @@ void ErrorReporter::ReportUnexpectedToken(TokenType expected, TokenType found, c
 	_list->Add(Error(msg, span));
 }
 
-void ErrorReporter::ReportUnknownToken(char c, const TextSpan& span)
+void ErrorReporter::ReportUnknownToken(char c, const TextSpan& span) const noexcept
 {
 	std::string msg = "Found unknown token '";
 	msg.append(std::string(1, c));
@@ -24,7 +24,7 @@ void ErrorReporter::ReportUnknownToken(char c, const TextSpan& span)
 	_list->Add(Error(msg, span));
 }
 
-void ErrorReporter::ReportNotABooleanLiteral(const std::string& text, const TextSpan& span)
+void ErrorReporter::ReportNotABooleanLiteral(const std::string& text, const TextSpan& span) const noexcept
 {
 	std::string msg = "'";
 	msg.append(text);

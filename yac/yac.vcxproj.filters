@@ -209,5 +209,8 @@
     <ClInclude Include="Text\Line.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Syntax\Expressions\InlineIfElse.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

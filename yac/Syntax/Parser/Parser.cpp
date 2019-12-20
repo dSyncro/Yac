@@ -26,7 +26,7 @@ const Token& Parser::ConsumeNext() noexcept
 {
 	if (_position >= _tokens.size()) 
 	{ 
-		const Token& t = EndOfFile();
+		const Token& t = _tokens.back();
 		_reporter.ReportUnexpectedToken(TokenType::Semicolon, TokenType::EndOfFile, t.span());
 		return t;
 	}
@@ -38,14 +38,13 @@ const Token& Parser::ConsumeNext() noexcept
 const Token& Parser::Peek(unsigned int offset) const noexcept
 {
 	unsigned int index = _position + offset;
-	if (index >= _tokens.size()) return EndOfFile();
+	if (index >= _tokens.size()) return _tokens.back();
 	return _tokens[index];
 }
 
 bool Parser::Match(TokenType type, unsigned int offset) const noexcept { return Peek(offset).type() == type; }
 bool Parser::MatchNext(TokenType type) const noexcept { return Next().type() == type; }
 
-const Token& Parser::EndOfFile() const noexcept { return _tokens[_tokens.size() - 1]; }
 const Token& Parser::MatchAndConsume(TokenType type) noexcept
 {
 	const Token& t = ConsumeNext();
@@ -258,9 +257,19 @@ Expression* Parser::ParseParentheses() noexcept
 Expression* Parser::ParseExpression() noexcept
 {
 	AssignmentOperator op = ToAssignmentOperator(Next().type());
-	return Match(TokenType::Identifier) && op != AssignmentOperator::Unknown ?
-		ParseAssignmentExpression(op) :
-		ParseMathExpression();
+
+	if (Match(TokenType::Identifier) && op != AssignmentOperator::Unknown) return ParseAssignmentExpression(op);
+
+	Expression* expression = ParseMathExpression();
+
+	if (!Match(TokenType::QuestionMark)) return expression;
+
+	Step();
+	Expression* trueExpression = ParseMathExpression();
+	MatchAndConsume(TokenType::Colon);
+	Expression* falseExpression = ParseMathExpression();
+
+	return new InlineIfElse(expression, trueExpression, falseExpression);
 }
 
 Expression* Parser::ParseConditional() noexcept
