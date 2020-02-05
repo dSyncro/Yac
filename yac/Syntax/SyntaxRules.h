@@ -10,6 +10,7 @@
 namespace Yac {
 	namespace Syntax {
 
+		unsigned int GetOperatorPrecedence(Operator op);
 		Operator ToUnaryOperator(TokenType type);
 		Operator ToBinaryOperator(TokenType type);
 		AssignmentOperator ToAssignmentOperator(TokenType type);

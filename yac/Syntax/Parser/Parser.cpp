@@ -22,22 +22,28 @@ Parser::Parser(SourceText source)
 	} while (t.type() != TokenType::EndOfFile);
 }
 
-const Token& Parser::ConsumeNext() noexcept
+const Token& Parser::Consume() noexcept
 {
+	// Error check: trying to consume unexisting token
 	if (_position >= _tokens.size()) 
-	{ 
-		const Token& t = _tokens.back();
+	{
+		const Token& t = _tokens.back(); // Get EoF
 		_reporter.ReportUnexpectedToken(TokenType::Semicolon, TokenType::EndOfFile, t.span());
-		return t;
+		return t; // return EoF
 	}
+
+	// Consume
 	Token& t = _tokens[_position];
 	Step();
-	return t;
+	return t; // return consumed token
 }
 
 const Token& Parser::Peek(unsigned int offset) const noexcept
 {
 	unsigned int index = _position + offset;
+	
+	// If trying to access a token that do not exists
+	// return EoF
 	if (index >= _tokens.size()) return _tokens.back();
 	return _tokens[index];
 }
@@ -47,7 +53,7 @@ bool Parser::MatchNext(TokenType type) const noexcept { return Next().type() == 
 
 const Token& Parser::MatchAndConsume(TokenType type) noexcept
 {
-	const Token& t = ConsumeNext();
+	const Token& t = Consume();
 	if (t.type() != type)
 		_reporter.ReportUnexpectedToken(type, t.type(), t.span());
 	return t;
@@ -71,16 +77,23 @@ Statement* Parser::ParseStatement() noexcept
 
 Statement* Parser::ParseBlockStatement() noexcept
 {
-	Step();
+	Step(); // First token is Open Brackets
 
 	std::vector<Statement*> _statements;
-	while (Current().type() != TokenType::CloseBrackets && Current().type() != TokenType::EndOfFile)
+	while (Current().type() != TokenType::CloseBrackets)
 	{
+		// Error check: finding EoF when the block is not closed yet
+		if (Current().type() == TokenType::EndOfFile)
+		{
+			_reporter.ReportUnexpectedToken(TokenType::CloseBrackets, TokenType::EndOfFile, Current().span());
+			return nullptr;
+		}
+
 		Statement* statement = ParseStatement();
 		_statements.push_back(statement);
 	}
 
-	Step();
+	Step(); // Last token is Closed Brackets
 
 	return new BlockStatement(_statements);
 }
@@ -100,22 +113,18 @@ Statement* Parser::ParseStatementKeyword() noexcept
 
 Statement* Parser::ParseIfStatement() noexcept
 {
-	// If
-	Step();
-
-	
+	Step(); // First token is 'if'
 
 	MatchAndConsume(TokenType::OpenParentheses);
 	Expression* condition = ParseConditional();
 	MatchAndConsume(TokenType::CloseParentheses);
 	Statement* statement = ParseStatement();
 
-	// Else
 	const Token& current = Current();
 	Statement* elseStatement = Statement::Null();
 	if (current.type() == TokenType::Keyword && ToKeyword(current.text()) == Keyword::Else)
 	{
-		Step();
+		Step(); // Current token is 'else'
 		elseStatement = ParseStatement();
 	}
 
@@ -124,28 +133,24 @@ Statement* Parser::ParseIfStatement() noexcept
 
 Statement* Parser::ParseForStatement() noexcept
 {
-	Step();
+	Step(); // First token is 'for'
 
 	MatchAndConsume(TokenType::OpenParentheses);
 
+	// Initial assignment is optional
 	Expression* assignment = nullptr;
 	if (!Match(TokenType::Semicolon))
-	{
 		assignment = ParseConditional();
-		MatchAndConsume(TokenType::Semicolon);
-	}
-	else Step();
+	MatchAndConsume(TokenType::Semicolon);
 	
+	// Condition is optional
 	Expression* condition = nullptr;
 	if (!Match(TokenType::Semicolon))
-	{
 		condition = ParseExpression();
-		MatchAndConsume(TokenType::Semicolon);
-	}
-	else Step();
+	MatchAndConsume(TokenType::Semicolon);
 
+	// Update is optional
 	Expression* update = ParseExpression();
-
 	MatchAndConsume(TokenType::CloseParentheses);
 
 	Statement* statement = ParseStatement();
@@ -155,7 +160,7 @@ Statement* Parser::ParseForStatement() noexcept
 
 Statement* Parser::ParseWhileStatement() noexcept
 {
-	Step();
+	Step(); // First token is 'while'
 
 	MatchAndConsume(TokenType::OpenParentheses);
 	Expression* condition = ParseConditional();
@@ -173,13 +178,15 @@ Statement* Parser::ParseInstructionStatement() noexcept
 
 Statement* Parser::ParseVariableDeclaration(Keyword keyword) noexcept
 {
-	Step();
+	Step(); // First token is the var decl keyword
 	const Token& name = MatchAndConsume(TokenType::Identifier);
+
+	// Assignment is optional
 	bool assign = Match(TokenType::EqualSymbol);
 	Expression* value = Expression::Null();
 	if (assign)
 	{
-		Step();
+		Step(); // Current token is 'equal'
 		value = ParseExpression();
 	}
 	MatchAndConsume(TokenType::Semicolon);
@@ -188,31 +195,31 @@ Statement* Parser::ParseVariableDeclaration(Keyword keyword) noexcept
 
 Expression* Parser::ParseInt(NumericBase base) noexcept
 {
-	const Token& t = ConsumeNext();
+	const Token& t = Consume();
 	return new NumericLiteral(t.text(), NumericType::Int, base);
 }
 
 Expression* Parser::ParseUInt(NumericBase base) noexcept
 {
-	const Token& t = ConsumeNext();
+	const Token& t = Consume();
 	return new NumericLiteral(t.text(), NumericType::UInt, base);
 }
 
 Expression* Parser::ParseFloat(NumericBase base) noexcept
 {
-	const Token& t = ConsumeNext();
+	const Token& t = Consume();
 	return new NumericLiteral(t.text(), NumericType::Float, base);
 }
 
 Expression* Parser::ParseDouble(NumericBase base) noexcept
 {
-	const Token& t = ConsumeNext();
+	const Token& t = Consume();
 	return new NumericLiteral(t.text(), NumericType::Double, base);
 }
 
 Expression* Parser::ParseBoolean() noexcept
 {
-	const Token& t = ConsumeNext();
+	const Token& t = Consume();
 	Keyword keyword = Keyword::Unknown;
 
 	if (t.text() == "true") keyword = Keyword::True;
@@ -237,7 +244,7 @@ Expression* Parser::ParseIdentifier() noexcept
 
 Expression* Parser::ParsePrefix() noexcept
 {
-	TokenType type = ConsumeNext().type();
+	TokenType type = Consume().type();
 	switch (type)
 	{
 		case TokenType::DoublePlusSymbol: return new UnaryOperation(Operator::PreIncrement, ParseIdentifier());
@@ -248,7 +255,7 @@ Expression* Parser::ParsePrefix() noexcept
 
 Expression* Parser::ParseParentheses() noexcept
 {
-	Step();
+	Step(); // Current token is 'Open Parenthesis'
 	Expression* expression = ParseExpression();
 	MatchAndConsume(TokenType::CloseParentheses);
 	return new ParenthesesExpression(expression);
@@ -256,16 +263,25 @@ Expression* Parser::ParseParentheses() noexcept
 
 Expression* Parser::ParseExpression() noexcept
 {
+	// Resolve assignments first
 	AssignmentOperator op = ToAssignmentOperator(Next().type());
 
+	// If this token is an identifier and the next is an Assignment Operator
+	// We are parsing an assignment expression
 	if (Match(TokenType::Identifier) && op != AssignmentOperator::Unknown) return ParseAssignmentExpression(op);
 
+	// Elsewise we are parsing a math expression
 	Expression* expression = ParseMathExpression();
 
 	if (!Match(TokenType::QuestionMark)) return expression;
 
-	Step();
+	// If the next token is a Question Mark
+	// We are probably trying to check an
+	// inline if-else
+
+	Step(); // Current token is the Question Mark
 	Expression* trueExpression = ParseMathExpression();
+	// We expect an alternative return value
 	MatchAndConsume(TokenType::Colon);
 	Expression* falseExpression = ParseMathExpression();
 
@@ -276,7 +292,7 @@ Expression* Parser::ParseConditional() noexcept
 {
 	if (Current().text() != "let") return ParseExpression();
 	
-	Step();
+	Step(); // Current is token is 'let'
 	const Token& name = MatchAndConsume(TokenType::Identifier);
 	MatchAndConsume(TokenType::EqualSymbol);
 	Expression* init = ParseExpression();
@@ -318,24 +334,33 @@ Expression* Parser::ParsePrimaryExpression() noexcept
 
 Expression* Parser::ParseAssignmentExpression(AssignmentOperator op) noexcept
 {
-	const Token& id = ConsumeNext();
-	Step();
+	const Token& id = Consume(); // Current token is the name of the variable
+	Step(); // Current token is the Assignment Operator
 	Expression* expression = ParseExpression();
 	return new AssignmentExpression(id.text(), op, expression);
 }
 
 Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 {
-	if (Current().type() == TokenType::Semicolon) return nullptr;
+	// If the first token found is an Enclosing Token
+	// There is no expression, instruction ends here
+	switch (Current().type())
+	{
+		case TokenType::Semicolon:
+		case TokenType::CloseParentheses:
+		case TokenType::CloseSquared:
+			return nullptr;
+		default: break;
+	}
 
 	Expression* left = nullptr;
 
 	Operator op = ToUnaryOperator(Current().type());
-	unsigned int precedence = (unsigned int)op;
+	unsigned int precedence = GetOperatorPrecedence(op);
 
 	if (precedence && precedence >= parentPrecedence)
 	{
-		Step();
+		Step(); // Current token is the operator
 		Expression* operand = ParseMathExpression(precedence);
 		left = new UnaryOperation(op, operand);
 	}
@@ -344,11 +369,11 @@ Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 	while (true)
 	{
 		op = ToBinaryOperator(Current().type());
-		precedence = (unsigned int)op;
+		precedence = GetOperatorPrecedence(op);
 
 		if (!precedence || precedence <= parentPrecedence) break;
 
-		Step();
+		Step(); // Current token is the left expression
 		Expression* right = ParseMathExpression(precedence);
 		left = new BinaryOperation(left, op, right);
 	}

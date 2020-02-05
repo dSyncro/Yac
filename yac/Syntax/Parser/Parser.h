@@ -28,7 +28,7 @@ namespace Yac {
 
 			inline void Step(unsigned int offset = 1) noexcept { _position += offset; }
 
-			const Token& ConsumeNext() noexcept;
+			const Token& Consume() noexcept;
 
 			inline const Token& Current() const noexcept { return Peek(0); }
 			inline const Token& Next() const noexcept { return Peek(1); }

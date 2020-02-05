@@ -2,6 +2,46 @@
 
 using namespace Yac::Syntax;
 
+unsigned int Yac::Syntax::GetOperatorPrecedence(Operator op)
+{
+    switch (op)
+    {
+        // Helper
+        case Operator::Unknown: return 0;
+
+        // Binary
+        case Operator::Comma: return 0x1;
+        case Operator::LogicalOr: return 0x2;
+        case Operator::LogicalAnd: return 0x3;
+        case Operator::BitwiseOr: return 0x4;
+        case Operator::Xor: return 0x5;
+        case Operator::BitwiseAnd: return 0x6;
+        case Operator::EqualTo: return 0x7;
+        case Operator::NotEqualTo: return 0x7;
+        case Operator::LessThan: return 0x8;
+        case Operator::LessEqualThan: return 0x8;
+        case Operator::GreaterThan: return 0x8;
+        case Operator::GreaterEqualThan: return 0x8;
+        case Operator::LeftShift: return 0x9;
+        case Operator::RightShift: return 0x9;
+        case Operator::Addition: return 0xA;
+        case Operator::Subtraction: return 0xA;
+        case Operator::Multiplication: return 0xB;
+        case Operator::Division: return 0xB;
+        case Operator::Modulo: return 0xB;
+
+        // Unary
+        case Operator::Identity: return 0xC;
+        case Operator::Negation: return 0xC;
+        case Operator::PreIncrement: return 0xC;
+        case Operator::PreDecrement: return 0xC;
+        case Operator::LogicalNot: return 0xC;
+        case Operator::OneComplementary: return 0xC;
+        case Operator::PostIncrement: return 0xD;
+        case Operator::PostDecrement: return 0xD;
+    }
+}
+
 Operator Yac::Syntax::ToUnaryOperator(TokenType type)
 {
 	switch (type)

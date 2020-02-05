@@ -8,6 +8,7 @@
 #include <yac\Syntax\Expressions\Operations\BinaryOperation.h>
 #include <yac\Syntax\Expressions\Numeric\NumericLiteral.h>
 #include <yac/Syntax/Statements/Statements.h>
+#include <yac\Text\SourceText.h>
 
 using namespace Yac::Syntax;
 
@@ -17,7 +18,6 @@ int main(int argc, char** argv)
 	{
 		std::string line;
 		std::getline(std::cin, line);
-		//for (int i = 0; i < 1000; i++)
-			SyntaxTree tree = SyntaxTree(line);
+		SyntaxTree tree = SyntaxTree(line);
 	}
 }
