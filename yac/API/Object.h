@@ -1,9 +1,11 @@
 #pragma once
 
 namespace Yac {
-	namespace DataTypes {
+	namespace Api {
 
 		struct Object {
+
+			virtual ~Object() {}
 
 		};
 

@@ -22,6 +22,7 @@
     <ClCompile Include="entrypoint.cpp" />
     <ClCompile Include="Errors\ErrorList.cpp" />
     <ClCompile Include="Errors\ErrorReporter.cpp" />
+    <ClCompile Include="Libraries\AnsiStyle\AnsiStyle.cpp" />
     <ClCompile Include="Syntax\Executor\Executor.cpp" />
     <ClCompile Include="Syntax\Expressions\Expression.cpp" />
     <ClCompile Include="Syntax\Expressions\Numeric\NumericLiteral.cpp" />
@@ -39,15 +40,18 @@
     <ClCompile Include="Text\SourceText.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataTypes\Double.h" />
-    <ClInclude Include="DataTypes\Float.h" />
-    <ClInclude Include="DataTypes\Int.h" />
-    <ClInclude Include="DataTypes\Object.h" />
+    <ClInclude Include="API\Double.h" />
+    <ClInclude Include="API\Float.h" />
+    <ClInclude Include="API\Int.h" />
+    <ClInclude Include="API\Object.h" />
+    <ClInclude Include="DataTypes\Primitives.h" />
     <ClInclude Include="DataTypes\TypesTable.h" />
-    <ClInclude Include="DataTypes\UInt.h" />
+    <ClInclude Include="DataTypes\TypeSymbol.h" />
+    <ClInclude Include="API\UInt.h" />
     <ClInclude Include="Errors\Error.h" />
     <ClInclude Include="Errors\ErrorList.h" />
     <ClInclude Include="Errors\ErrorReporter.h" />
+    <ClInclude Include="Libraries\AnsiStyle\AnsiStyle.h" />
     <ClInclude Include="Syntax\Executor\Executor.h" />
     <ClInclude Include="Syntax\Expressions\Assignment\AssignmentExpression.h" />
     <ClInclude Include="Syntax\Expressions\Assignment\AssignmentOperator.h" />

@@ -2,9 +2,6 @@
 
 #include <yac/Syntax/SyntaxRules.h>
 #include <yac/Syntax/SyntaxTree/SyntaxTree.h>
-#include <yac\DataTypes\UInt.h>
-#include <yac\DataTypes\Float.h>
-#include <yac\DataTypes\Double.h>
 #include <yac\Syntax\Expressions\Operations\BinaryOperation.h>
 #include <yac\Syntax\Expressions\Numeric\NumericLiteral.h>
 #include <yac/Syntax/Statements/Statements.h>

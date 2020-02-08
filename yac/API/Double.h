@@ -3,7 +3,7 @@
 #include "Object.h"
 
 namespace Yac {
-	namespace DataTypes {
+	namespace Api {
 
 		struct Double : Object {
 

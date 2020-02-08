@@ -14,11 +14,12 @@ Token Lexer::Lex() noexcept
 	_type = TokenType::Unknown;
 
 	char c = Current();
+	char next = Next();
 
 	switch (c)
 	{
 		case '0':
-			switch (Next())
+			switch (next)
 			{
 				case 'b': 
 					ReadBinaryNumber();
@@ -43,32 +44,32 @@ Token Lexer::Lex() noexcept
 
 		case '+':
 			return
-				Next() == '+' ? ReadSymbol(TokenType::DoublePlusSymbol, "++", 2) :
-				Next() == '=' ? ReadSymbol(TokenType::PlusEqualSymbol, "+=", 2) : ReadSymbol(TokenType::PlusSymbol, "+");
+				next == '+' ? ReadSymbol(TokenType::DoublePlusSymbol, "++", 2) :
+				next == '=' ? ReadSymbol(TokenType::PlusEqualSymbol, "+=", 2) : ReadSymbol(TokenType::PlusSymbol, "+");
 
 		case '-': 
 			return
-				Next() == '-' ? ReadSymbol(TokenType::DoubleMinusSymbol, "--", 2) :
-				Next() == '=' ? ReadSymbol(TokenType::MinusEqualSymbol, "-=", 2) : ReadSymbol(TokenType::MinusSymbol, "-");
+				next == '-' ? ReadSymbol(TokenType::DoubleMinusSymbol, "--", 2) :
+				next == '=' ? ReadSymbol(TokenType::MinusEqualSymbol, "-=", 2) : ReadSymbol(TokenType::MinusSymbol, "-");
 
 		case '*': 
-			return Next() == '=' ? 
+			return next == '=' ? 
 				ReadSymbol(TokenType::StarEqualSymbol, "*=", 2) : ReadSymbol(TokenType::StarSymbol, "*");
 
 		case '/': 
-			return Next() == '=' ?
+			return next == '=' ?
 				ReadSymbol(TokenType::SlashEqualSymbol, "/=", 2) : ReadSymbol(TokenType::SlashSymbol, "/");
 
 		case '%':
-			return Next() == '=' ?
+			return next == '=' ?
 				ReadSymbol(TokenType::PercentEqualSymbol, "%=", 2) : ReadSymbol(TokenType::PercentSymbol, "%");
 
 		case '^': 
-			return Next() == '=' ?
+			return next == '=' ?
 				ReadSymbol(TokenType::CircumflexEqualSymbol, "^=", 2) : ReadSymbol(TokenType::CircumflexSymbol, "^");
 
 		case '.':
-			if (std::isdigit(Next()))
+			if (std::isdigit(next))
 			{
 				ReadNumber(TokenType::Double);
 				break;
@@ -76,21 +77,21 @@ Token Lexer::Lex() noexcept
 			return ReadSymbol(TokenType::DotSymbol, ".");
 
 		case '=': 
-			return Next() == '='  ? 
+			return next == '='  ? 
 				ReadSymbol(TokenType::DoubleEqualSymbol, "==", 2) : ReadSymbol(TokenType::EqualSymbol, "=");
 
 		case '&':
 			return
-				Next() == '&' ? ReadSymbol(TokenType::DoubleAndSymbol, "&&", 2) :
-				Next() == '=' ? ReadSymbol(TokenType::AndEqualSymbol, "&=", 2) : ReadSymbol(TokenType::AndSymbol, "&");
+				next == '&' ? ReadSymbol(TokenType::DoubleAndSymbol, "&&", 2) :
+				next == '=' ? ReadSymbol(TokenType::AndEqualSymbol, "&=", 2) : ReadSymbol(TokenType::AndSymbol, "&");
 
 		case '|':
 			return
-				Next() == '|' ? ReadSymbol(TokenType::DoublePipeSymbol, "||", 2) :
-				Next() == '=' ? ReadSymbol(TokenType::PipeEqualSymbol, "|=", 2) : ReadSymbol(TokenType::PipeSymbol, "|");
+				next == '|' ? ReadSymbol(TokenType::DoublePipeSymbol, "||", 2) :
+				next == '=' ? ReadSymbol(TokenType::PipeEqualSymbol, "|=", 2) : ReadSymbol(TokenType::PipeSymbol, "|");
 
 		case '!':
-			return Next() == '=' ?
+			return next == '=' ?
 				ReadSymbol(TokenType::ExclamationMark, "!=", 2) : ReadSymbol(TokenType::ExclamationMark, "!");
 
 		case '~': return ReadSymbol(TokenType::TildeSymbol, "~");
@@ -98,15 +99,15 @@ Token Lexer::Lex() noexcept
 
 		case '<':
 			return
-				Next() == '<' ?
+				next == '<' ?
 				Peek(2) == '=' ? ReadSymbol(TokenType::SLEqualSymbol, "<<=", 3) : ReadSymbol(TokenType::ShiftLeftSymbol, "<<", 2) :
-				Next() == '=' ? ReadSymbol(TokenType::LessEqualSymbol, "<=", 2) : ReadSymbol(TokenType::LessSymbol, "<");
+				next == '=' ? ReadSymbol(TokenType::LessEqualSymbol, "<=", 2) : ReadSymbol(TokenType::LessSymbol, "<");
 
 		case '>':
 			return
-				Next() == '>' ?
+				next == '>' ?
 				Peek(2) == '=' ? ReadSymbol(TokenType::SREqualSymbol, ">>=", 3) : ReadSymbol(TokenType::ShiftRightSymbol, ">>", 2) :
-				Next() == '=' ? ReadSymbol(TokenType::GreaterEqualSymbol, ">=", 2) : ReadSymbol(TokenType::GreaterSymbol, ">");
+				next == '=' ? ReadSymbol(TokenType::GreaterEqualSymbol, ">=", 2) : ReadSymbol(TokenType::GreaterSymbol, ">");
 
 		case ':': return ReadSymbol(TokenType::Colon, ":");
 		case ';': return ReadSymbol(TokenType::Semicolon, ";");
@@ -125,7 +126,7 @@ Token Lexer::Lex() noexcept
 		case '\0': return ReadSymbol(TokenType::EndOfFile, "\0");
 
 		default:
-			if (std::isalpha(Current())) ReadWord();
+			if (std::isalpha(c)) ReadWord();
 			else
 			{
 				_reporter.ReportUnknownToken(c, TextSpan(_start, 1));
