@@ -1,8 +1,6 @@
 #include "AnsiStyle.h"
 #include <sstream>
 
-using namespace AnsiStyle;
-
 std::string AnsiStyle::CursorNavigation::Move(AnsiStyle::CursorNavigation::Direction direction, unsigned int step) noexcept
 {
 	std::ostringstream ss;
@@ -10,35 +8,22 @@ std::string AnsiStyle::CursorNavigation::Move(AnsiStyle::CursorNavigation::Direc
 	return ss.str();
 }
 
-namespace Console {
+void AnsiStyle::Console::NewLine() noexcept
+{
+	std::cout << '\n';
+}
 
-	void NewLine() noexcept
-	{
-		std::cout << '\n';
-	}
+void AnsiStyle::Console::SetForegroundColor(Forecolors color) noexcept
+{
+	std::cout << color;
+}
 
-	void Write(const std::string& text) noexcept
-	{
-		std::cout << text;
-	}
+void AnsiStyle::Console::SetBackgroundColor(Backcolors color) noexcept
+{
+	std::cout << color;
+}
 
-	void WriteLine(const std::string& text, char lineSeparator) noexcept
-	{
-		std::cout << text << lineSeparator;
-	}
-
-	void SetForegroundColor(Forecolors color) noexcept
-	{
-		std::cout << color;
-	}
-
-	void SetBackgroundColor(Backcolors color) noexcept
-	{
-		std::cout << color;
-	}
-
-	void Reset() noexcept
-	{
-		std::cout << Reset;
-	}
+void AnsiStyle::Console::Reset() noexcept
+{
+	std::cout << AnsiStyle::Reset;
 }

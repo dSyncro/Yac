@@ -1,11 +1,6 @@
 #include <iostream>
 
-#include <yac/Syntax/SyntaxRules.h>
 #include <yac/Syntax/SyntaxTree/SyntaxTree.h>
-#include <yac\Syntax\Expressions\Operations\BinaryOperation.h>
-#include <yac\Syntax\Expressions\Numeric\NumericLiteral.h>
-#include <yac/Syntax/Statements/Statements.h>
-#include <yac\Text\SourceText.h>
 
 using namespace Yac::Syntax;
 

@@ -6,7 +6,7 @@
 namespace AnsiStyle
 {
 
-	std::string Reset = "\033[0m";
+	const std::string Reset = "\033[0m";
 
 	enum class Backcolors
 	{
@@ -95,11 +95,22 @@ namespace AnsiStyle
 	}
 
 	namespace Console {
-		void NewLine() noexcept;
-		void Write(const std::string& text) noexcept;
-		void WriteLine(const std::string& text, char lineSeparator = '\n') noexcept;
-		void SetForegroundColor(Forecolors color) noexcept;
-		void SetBackgroundColor(Backcolors color) noexcept;
-		void Reset() noexcept;
+
+		inline extern void NewLine() noexcept;
+		inline extern void SetForegroundColor(Forecolors color) noexcept;
+		inline extern void SetBackgroundColor(Backcolors color) noexcept;
+		inline extern void Reset() noexcept;
+
+		template <class... Args>
+		void Write(Args... args)
+		{
+			(std::cout << ... << args);
+		}
+
+		template <class... Args>
+		void WriteLine(Args... args) noexcept
+		{
+			(std::cout << ... << args) << '\n';
+		}
 	}
 }

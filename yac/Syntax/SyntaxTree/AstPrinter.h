@@ -13,26 +13,27 @@ namespace Yac {
 			void Print(const SyntaxTree& tree) noexcept;
 			void Print(const SyntaxTree* tree) noexcept;
 
-			// Expressions
+			void Print(const Statement* statement, std::string indentation, bool isLast) noexcept;
+			void Print(const Expression* expression, std::string indentation, bool isLast) noexcept;
+			void PrintExpression(const Expression* expression, const std::string& indentation) noexcept;
+			void PrintStatement(const Statement* statement, const std::string& indentation) noexcept;
 			void PrintNullExpression() noexcept;
-			void PrintAssignmentExpression(AssignmentExpression* expression, unsigned int indent = 0) noexcept;
-			void PrintBinaryOperation(BinaryOperation* expression, unsigned int indent = 0) noexcept;
-			void PrintBooleanLiteral(BooleanLiteral* expression, unsigned int indent = 0) noexcept;
-			void PrintNumericLiteral(NumericLiteral* expression, unsigned int indent = 0) noexcept;
-			void PrintParenthesesExpression(ParenthesesExpression* expression, unsigned int indent = 0) noexcept;
-			void PrintIdentifierExpression(IdentifierExpression* expression, unsigned int indent = 0) noexcept;
-			void PrintUnaryOperation(UnaryOperation* expression, unsigned int indent = 0) noexcept;
-			void PrintConditionalDeclaration(ConditionalDeclaration* expression, unsigned int indent = 0) noexcept;
-			void PrintInlineIfElse(InlineIfElse* expression, unsigned int indent = 0) noexcept;
-
-			// Statements
+			void PrintAssignmentExpression(AssignmentExpression* expression, const std::string& indentation) noexcept;
+			void PrintBinaryOperation(BinaryOperation* expression, const std::string& indentation) noexcept;
+			void PrintBooleanLiteral(BooleanLiteral* expression, const std::string& indentation) noexcept;
+			void PrintNumericLiteral(NumericLiteral* expression, const std::string& indentation) noexcept;
+			void PrintParenthesesExpression(ParenthesesExpression* expression, const std::string& indentation) noexcept;
+			void PrintIdentifierExpression(IdentifierExpression* expression, const std::string& indentation) noexcept;
+			void PrintUnaryOperation(UnaryOperation* expression, const std::string& indentation) noexcept;
+			void PrintConditionalDeclaration(ConditionalDeclaration* expression, const std::string& indentation) noexcept;
+			void PrintInlineIfElse(InlineIfElse* expression, const std::string& indentation) noexcept;
 			void PrintNullStatement() noexcept;
-			void PrintIfStatement(IfStatement* statement, unsigned int indent = 0) noexcept;
-			void PrintVariableDeclaration(VariableDeclaration* decl, unsigned int indent = 0) noexcept;
-			void PrintWhileStatement(WhileStatement* statement, unsigned int indent = 0) noexcept;
-			void PrintForStatement(ForStatement* statement, unsigned int indent = 0) noexcept;
-			void PrintBlockStatement(BlockStatement* statement, unsigned int indent = 0) noexcept;
-			void PrintExpressionStatement(ExpressionStatement* statement, unsigned int indent = 0) noexcept;
+			void PrintIfStatement(IfStatement* statement, const std::string& indentation) noexcept;
+			void PrintVariableDeclaration(VariableDeclaration* decl, const std::string& indentation) noexcept;
+			void PrintWhileStatement(WhileStatement* statement, const std::string& indentation) noexcept;
+			void PrintForStatement(ForStatement* statement, const std::string& indentation) noexcept;
+			void PrintBlockStatement(BlockStatement* statement, const std::string& indentation) noexcept;
+			void PrintExpressionStatement(ExpressionStatement* statement, const std::string& indentation) noexcept;
 		};
 	}
 }

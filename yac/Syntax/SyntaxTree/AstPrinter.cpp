@@ -11,35 +11,32 @@ namespace Yac {
 	namespace Syntax {
 		namespace AstPrinter {
 
+			void Print(const SyntaxTree& tree) noexcept { Print(tree.root(), "", true); }
+			void Print(const SyntaxTree* tree) noexcept { Print(tree->root(), "", true); }
 
-			/*
-
-			void PrintTree(const Statement* statement, std::string indent = "", bool isLast = true)
+			void Print(const Statement* statement, std::string indentation, bool isLast) noexcept
 			{
-				const char* marker = isLast ? "└──" : "├──";
+				Console::Write(indentation, isLast ? "`---" : "|---");
 
-				Console::Write(indent);
-				if (indent != "") Console::Write(marker);
+				indentation.append(isLast ? "\t" : "|   ");
 
-				Print(statement, indent)
-
-				// Write Node
 				Console::SetForegroundColor(Forecolors::Blue);
-				//string text = GetText(node);
-				//writer.Write(text);
+				PrintStatement(statement, indentation);
 				Console::Reset();
-
-				Console::NewLine();
-				indent += isLast ? "   " : "│   ";
 			}
 
-			*/
-			
+			void Print(const Expression* expression, std::string indentation, bool isLast) noexcept
+			{
+				Console::Write(indentation, isLast ? "`---" : "|---");
 
-			void Print(const SyntaxTree& tree) noexcept { Print(tree.root(), 0); }
-			void Print(const SyntaxTree* tree) noexcept { Print(tree->root(), 0); }
+				indentation.append(isLast ? "\t" : "|   ");
 
-			void Print(const Expression* expression, unsigned int indent) noexcept
+				Console::SetForegroundColor(Forecolors::Red);
+				PrintExpression(expression, indentation);
+				Console::Reset();
+			}
+
+			void PrintExpression(const Expression* expression, const std::string& indentation) noexcept
 			{
 				if (!expression) return;
 
@@ -47,21 +44,21 @@ namespace Yac {
 				{
 
 					case ExpressionType::None: return PrintNullExpression();
-					case ExpressionType::AssignmentExpression: return PrintAssignmentExpression((AssignmentExpression*)expression, indent);
-					case ExpressionType::BinaryOperation: return PrintBinaryOperation((BinaryOperation*)expression, indent);
-					case ExpressionType::BooleanLiteral: return PrintBooleanLiteral((BooleanLiteral*)expression, indent);
-					case ExpressionType::IdentifierExpression: return PrintIdentifierExpression((IdentifierExpression*)expression, indent);
-					case ExpressionType::NumericLiteral: return PrintNumericLiteral((NumericLiteral*)expression, indent);
-					case ExpressionType::ParenthesesExpression: return PrintParenthesesExpression((ParenthesesExpression*)expression, indent);
-					case ExpressionType::UnaryOperation: return PrintUnaryOperation((UnaryOperation*)expression, indent);
-					case ExpressionType::ConditionalDeclaration: return PrintConditionalDeclaration((ConditionalDeclaration*)expression, indent);
-					case ExpressionType::InlineIfElse: return PrintInlineIfElse((InlineIfElse*)expression, indent);
+					case ExpressionType::AssignmentExpression: return PrintAssignmentExpression((AssignmentExpression*)expression, indentation);
+					case ExpressionType::BinaryOperation: return PrintBinaryOperation((BinaryOperation*)expression, indentation);
+					case ExpressionType::BooleanLiteral: return PrintBooleanLiteral((BooleanLiteral*)expression, indentation);
+					case ExpressionType::IdentifierExpression: return PrintIdentifierExpression((IdentifierExpression*)expression, indentation);
+					case ExpressionType::NumericLiteral: return PrintNumericLiteral((NumericLiteral*)expression, indentation);
+					case ExpressionType::ParenthesesExpression: return PrintParenthesesExpression((ParenthesesExpression*)expression, indentation);
+					case ExpressionType::UnaryOperation: return PrintUnaryOperation((UnaryOperation*)expression, indentation);
+					case ExpressionType::ConditionalDeclaration: return PrintConditionalDeclaration((ConditionalDeclaration*)expression, indentation);
+					case ExpressionType::InlineIfElse: return PrintInlineIfElse((InlineIfElse*)expression, indentation);
 
 					default: return;
 				}
 			}
 
-			void Print(const Statement* statement, unsigned int indent) noexcept
+			void PrintStatement(const Statement* statement, const std::string& indentation) noexcept
 			{
 				if (!statement) return;
 
@@ -69,12 +66,12 @@ namespace Yac {
 				{
 
 					case StatementType::None: return PrintNullStatement();
-					case StatementType::If: return PrintIfStatement((IfStatement*)statement, indent);
-					case StatementType::VariableDeclaration: return PrintVariableDeclaration((VariableDeclaration*)statement, indent);
-					case StatementType::While: return PrintWhileStatement((WhileStatement*)statement, indent);
-					case StatementType::For: return PrintForStatement((ForStatement*)statement, indent);
-					case StatementType::Block: return PrintBlockStatement((BlockStatement*)statement, indent);
-					case StatementType::Expression: return PrintExpressionStatement((ExpressionStatement*)statement, indent);
+					case StatementType::If: return PrintIfStatement((IfStatement*)statement, indentation);
+					case StatementType::VariableDeclaration: return PrintVariableDeclaration((VariableDeclaration*)statement, indentation);
+					case StatementType::While: return PrintWhileStatement((WhileStatement*)statement, indentation);
+					case StatementType::For: return PrintForStatement((ForStatement*)statement, indentation);
+					case StatementType::Block: return PrintBlockStatement((BlockStatement*)statement, indentation);
+					case StatementType::Expression: return PrintExpressionStatement((ExpressionStatement*)statement, indentation);
 
 					default: return;
 				}
@@ -84,139 +81,127 @@ namespace Yac {
 
 			void PrintNullExpression() noexcept
 			{
-				std::cout << "No Expression" << std::endl;
+				Console::WriteLine("No Expression");
 			}
 
-			void PrintAssignmentExpression(AssignmentExpression* expression, unsigned int indent) noexcept
+			void PrintAssignmentExpression(AssignmentExpression* expression, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "AssignmentExpression:" << std::endl;
-				indent++;
-				std::cout << std::string(indent, '\t') << "id = " << expression->identifier() << std::endl;
-				std::cout << std::string(indent, '\t') << "operatorID = " << (unsigned int)expression->assignmentOperator() << std::endl;
-				Print(expression->expression(), indent);
+				Console::WriteLine("AssignmentExpression: ");
+				Console::WriteLine(indentation, "|---", "id = '", expression->identifier(), '\'');
+				Console::WriteLine(indentation, "|---", "operatorID = ", (unsigned int)expression->assignmentOperator());
+				Print(expression->expression(), indentation, true);
 			}
 
-			void PrintBinaryOperation(BinaryOperation* expression, unsigned int indent) noexcept
+			void PrintBinaryOperation(BinaryOperation* expression, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "BinaryOperation:" << std::endl;
-				indent++;
-				Print(expression->left(), indent);
-				std::cout << std::string(indent, '\t') << (unsigned int)expression->operation() << std::endl;
-				Print(expression->right(), indent);
+				Console::WriteLine("BinaryOperation: ");
+				Print(expression->left(), indentation, false);
+				Console::WriteLine(indentation, "|---", (unsigned int)expression->operation());
+				Print(expression->right(), indentation, true);
 			}
 
-			void PrintBooleanLiteral(BooleanLiteral* expression, unsigned int indent) noexcept
+			void PrintBooleanLiteral(BooleanLiteral* expression, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "BoolLiteral:" << std::endl;
-				indent++;
-				std::cout << std::string(indent, '\t') << expression->value() << std::endl;
+				Console::WriteLine("BooleanLiteral: ");
+				Console::WriteLine(indentation, "`---", expression->value());
 			}
 
-			void PrintNumericLiteral(NumericLiteral* expression, unsigned int indent) noexcept
+			void PrintNumericLiteral(NumericLiteral* expression, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "NumLiteral:" << std::endl;
-				indent++;
-				std::cout << std::string(indent, '\t') << (unsigned int)expression->base() << std::endl;
-				std::cout << std::string(indent, '\t') << (unsigned int)expression->numeric_type() << std::endl;
-				std::cout << std::string(indent, '\t') << expression->text() << std::endl;
+				Console::WriteLine("NumericLiteral: ");
+				Console::WriteLine(indentation, "|---", (unsigned int)expression->base());
+				Console::WriteLine(indentation, "|---", (unsigned int)expression->numeric_type());
+				Console::WriteLine(indentation, "`---", expression->text());
 			}
 
-			void PrintParenthesesExpression(ParenthesesExpression* expression, unsigned int indent) noexcept
+			void PrintParenthesesExpression(ParenthesesExpression* expression, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "ParenthesesExpression:" << std::endl;
-				indent++;
-				Print(expression->expression(), indent);
+				Console::WriteLine("ParenthesesExpression: ");
+				Print(expression->expression(), indentation, true);
 			}
 
-			void PrintIdentifierExpression(IdentifierExpression* expression, unsigned int indent) noexcept
+			void PrintIdentifierExpression(IdentifierExpression* expression, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "IdExpression:" << std::endl;
-				indent++;
-				std::cout << std::string(indent, '\t') << expression->identifier() << std::endl;
+				Console::WriteLine("IdentifierExpression: ");
+				Console::WriteLine(indentation, "`---", expression->identifier());
 			}
 
-			void PrintUnaryOperation(UnaryOperation* expression, unsigned int indent) noexcept
+			void PrintUnaryOperation(UnaryOperation* expression, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "UnaryOperation:" << std::endl;
-				indent++;
-				std::cout << std::string(indent, '\t') << (unsigned int)expression->operation() << std::endl;
-				Print(expression->operand(), indent);
+				Console::WriteLine("UnaryOperation: ");
+				Console::WriteLine(indentation, "|---", (unsigned int)expression->operation());
+				Print(expression->operand(), indentation, true);
 			}
 
-			void PrintConditionalDeclaration(ConditionalDeclaration* expression, unsigned int indent) noexcept
+			void PrintConditionalDeclaration(ConditionalDeclaration* expression, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "ConditionalDeclaration:" << std::endl;
-				indent++;
-				std::cout << std::string(indent, '\t') << expression->name() << std::endl;
-				Print(expression->initializer(), indent);
+				Console::WriteLine("ConditionalDeclaration: ");
+				Console::WriteLine(indentation, "|---", expression->name());
+				Print(expression->initializer(), indentation, true);
 			}
 
-			void PrintInlineIfElse(InlineIfElse* expression, unsigned int indent) noexcept
+			void PrintInlineIfElse(InlineIfElse* expression, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "InlineIfElse:" << std::endl;
-				indent++;
-				Print(expression->condition(), indent);
-				Print(expression->True(), indent);
-				Print(expression->False(), indent);
+				Console::WriteLine("InlineIfElse: ");
+				Print(expression->condition(), indentation, false);
+				Print(expression->True(), indentation, false);
+				Print(expression->False(), indentation, false);
 			}
 
 			// Statements
 
 			void PrintNullStatement() noexcept
 			{
-				std::cout << "No Statement" << std::endl;
+				Console::WriteLine("No Statement");
 			}
 
-			void PrintIfStatement(IfStatement* statement, unsigned int indent) noexcept
+			void PrintIfStatement(IfStatement* statement, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "IfStatement: " << std::endl;
-				indent++;
-				Print(statement->condition(), indent);
-				Print(statement->statement(), indent);
+				Console::WriteLine("IfStatement: ");
+				Print(statement->condition(), indentation, false);
 				const Statement* elseStatement = statement->elseStatement();
-				if (elseStatement) Print(elseStatement, indent);
+				Print(statement->statement(), indentation, elseStatement ? false : true);
+				if (elseStatement) Print(elseStatement, indentation, true);
+				
 			}
 
-			void PrintVariableDeclaration(VariableDeclaration* decl, unsigned int indent) noexcept
+			void PrintVariableDeclaration(VariableDeclaration* decl, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "VarDecl: " << std::endl;
-				indent++;
-				std::cout << std::string(indent, '\t') << "name = " << decl->name() << std::endl;
-				Print(decl->initializer(), indent);
+				Console::WriteLine("VariableDeclaration: ");
+				Console::WriteLine(indentation, "name = ", decl->name());
+				Print(decl->initializer(), indentation, true);
 			}
 
-			void PrintWhileStatement(WhileStatement* statement, unsigned int indent) noexcept
+			void PrintWhileStatement(WhileStatement* statement, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "WhileStatement: " << std::endl;
-				indent++;
-				Print(statement->condition(), indent);
-				Print(statement->statement(), indent);
+				Console::WriteLine("WhileStatement: ");
+				Print(statement->condition(), indentation, false);
+				Print(statement->statement(), indentation, true);
 			}
 
-			void PrintForStatement(ForStatement* statement, unsigned int indent) noexcept
+			void PrintForStatement(ForStatement* statement, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "ForStatement: " << std::endl;
-				indent++;
-				Print(statement->assignment(), indent);
-				Print(statement->condition(), indent);
-				Print(statement->update(), indent);
-				Print(statement->statement(), indent);
+				Console::WriteLine("ForStatement: ");
+				Print(statement->assignment(), indentation, false);
+				Print(statement->condition(), indentation, false);
+				Print(statement->update(), indentation, false);
+				Print(statement->statement(), indentation, true);
 			}
 
-			void PrintBlockStatement(BlockStatement* statement, unsigned int indent) noexcept
+			void PrintBlockStatement(BlockStatement* statement, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "BlockStatement: " << std::endl;
-				indent++;
+				Console::WriteLine("BlockStatement: ");
 
-				for (const Statement* s : statement->statements())
-					Print(s, indent);
+				const std::vector<Statement*>& statements = statement->statements();
+				for (unsigned int i = 0; i < statements.size() - 1; i++)
+					Print(statements[i], indentation, false);
+				Print(statements[statements.size() - 1], indentation, true);
 			}
 
-			void PrintExpressionStatement(ExpressionStatement* statement, unsigned int indent) noexcept
+			void PrintExpressionStatement(ExpressionStatement* statement, const std::string& indentation) noexcept
 			{
-				std::cout << std::string(indent, '\t') << "ExpressionStatement: " << std::endl;
-				indent++;
-				Print(statement->expression(), indent);
+				Console::WriteLine("ExpressionStatement: ");
+				Print(statement->expression(), indentation, true);
 			}
 		}
 	}
