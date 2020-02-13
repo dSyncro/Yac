@@ -23,6 +23,7 @@
     <ClCompile Include="Errors\ErrorList.cpp" />
     <ClCompile Include="Errors\ErrorReporter.cpp" />
     <ClCompile Include="Libraries\AnsiStyle\AnsiStyle.cpp" />
+    <ClCompile Include="Libraries\Console\Console.cpp" />
     <ClCompile Include="Syntax\Executor\Executor.cpp" />
     <ClCompile Include="Syntax\Expressions\Expression.cpp" />
     <ClCompile Include="Syntax\Expressions\Numeric\NumericLiteral.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="Errors\ErrorList.h" />
     <ClInclude Include="Errors\ErrorReporter.h" />
     <ClInclude Include="Libraries\AnsiStyle\AnsiStyle.h" />
+    <ClInclude Include="Libraries\Console\Console.h" />
     <ClInclude Include="Syntax\Executor\Executor.h" />
     <ClInclude Include="Syntax\Expressions\Assignment\AssignmentExpression.h" />
     <ClInclude Include="Syntax\Expressions\Assignment\AssignmentOperator.h" />

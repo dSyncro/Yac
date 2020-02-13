@@ -93,24 +93,4 @@ namespace AnsiStyle
 
 		std::string Move(Direction direction, unsigned int step) noexcept;
 	}
-
-	namespace Console {
-
-		inline extern void NewLine() noexcept;
-		inline extern void SetForegroundColor(Forecolors color) noexcept;
-		inline extern void SetBackgroundColor(Backcolors color) noexcept;
-		inline extern void Reset() noexcept;
-
-		template <class... Args>
-		void Write(Args... args)
-		{
-			(std::cout << ... << args);
-		}
-
-		template <class... Args>
-		void WriteLine(Args... args) noexcept
-		{
-			(std::cout << ... << args) << '\n';
-		}
-	}
 }

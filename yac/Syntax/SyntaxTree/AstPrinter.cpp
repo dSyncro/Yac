@@ -2,7 +2,7 @@
 
 #include "AstPrinter.h"
 
-#include <yac/Libraries/AnsiStyle/AnsiStyle.h>
+#include <yac/Libraries/Console/Console.h>
 
 using namespace Yac::Syntax;
 using namespace AnsiStyle;
@@ -11,34 +11,55 @@ namespace Yac {
 	namespace Syntax {
 		namespace AstPrinter {
 
+			struct FormattingOptions {
+				AnsiStyle::Forecolors DecoratorsColor = AnsiStyle::Forecolors::White;
+				AnsiStyle::Forecolors StatementColor = AnsiStyle::Forecolors::Cyan;
+				AnsiStyle::Forecolors ExpressionColor = AnsiStyle::Forecolors::Yellow;
+				AnsiStyle::Forecolors DataColor = AnsiStyle::Forecolors::Dark_Green;
+			};
+
+			FormattingOptions formattingOptions = FormattingOptions();
+
+			void PrintData(const std::string& label, const std::string& value)
+			{
+				Console::WriteColoredLine(formattingOptions.DataColor, label, ": ", value);
+			}
+
+			void PrintDecoration(const std::string& decoration)
+			{
+				Console::WriteColored(formattingOptions.DecoratorsColor, decoration);
+			}
+
 			void Print(const SyntaxTree& tree) noexcept { Print(tree.root(), "", true); }
 			void Print(const SyntaxTree* tree) noexcept { Print(tree->root(), "", true); }
 
 			void Print(const Statement* statement, std::string indentation, bool isLast) noexcept
 			{
+				Console::SetForegroundColor(formattingOptions.DecoratorsColor);
 				Console::Write(indentation, isLast ? "`---" : "|---");
-
 				indentation.append(isLast ? "\t" : "|   ");
+				Console::Reset();
 
-				Console::SetForegroundColor(Forecolors::Blue);
+				Console::SetForegroundColor(formattingOptions.StatementColor);
 				PrintStatement(statement, indentation);
 				Console::Reset();
 			}
 
 			void Print(const Expression* expression, std::string indentation, bool isLast) noexcept
 			{
+				Console::SetForegroundColor(formattingOptions.DecoratorsColor);
 				Console::Write(indentation, isLast ? "`---" : "|---");
-
 				indentation.append(isLast ? "\t" : "|   ");
+				Console::Reset();
 
-				Console::SetForegroundColor(Forecolors::Red);
+				Console::SetForegroundColor(formattingOptions.ExpressionColor);
 				PrintExpression(expression, indentation);
 				Console::Reset();
 			}
 
 			void PrintExpression(const Expression* expression, const std::string& indentation) noexcept
 			{
-				if (!expression) return;
+				if (!expression) return PrintNullExpression();
 
 				switch (expression->type())
 				{
@@ -86,63 +107,103 @@ namespace Yac {
 
 			void PrintAssignmentExpression(AssignmentExpression* expression, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("AssignmentExpression: ");
-				Console::WriteLine(indentation, "|---", "id = '", expression->identifier(), '\'');
-				Console::WriteLine(indentation, "|---", "operatorID = ", (unsigned int)expression->assignmentOperator());
+				Console::WriteLine("AssignmentExpression");
+
+				// Identifier
+				PrintDecoration(indentation + "|---");
+				PrintData("Identifier", expression->identifier());
+
+				// Operator
+				PrintDecoration(indentation + "|---");
+				PrintData("Operator", std::to_string((unsigned int)expression->assignmentOperator()));
+
+				// Expression
 				Print(expression->expression(), indentation, true);
 			}
 
 			void PrintBinaryOperation(BinaryOperation* expression, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("BinaryOperation: ");
+				Console::WriteLine("BinaryOperation");
+
+				// Left expression
 				Print(expression->left(), indentation, false);
-				Console::WriteLine(indentation, "|---", (unsigned int)expression->operation());
+
+				// Operation
+				PrintDecoration(indentation + "|---");
+				PrintData("Operation", std::to_string((unsigned int)expression->operation()));
+
+				// Right expression
 				Print(expression->right(), indentation, true);
 			}
 
 			void PrintBooleanLiteral(BooleanLiteral* expression, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("BooleanLiteral: ");
-				Console::WriteLine(indentation, "`---", expression->value());
+				Console::WriteLine("BooleanLiteral");
+
+				// Value
+				PrintDecoration(indentation + "`---");
+				PrintData("Value", std::to_string(expression->value()));
 			}
 
 			void PrintNumericLiteral(NumericLiteral* expression, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("NumericLiteral: ");
-				Console::WriteLine(indentation, "|---", (unsigned int)expression->base());
-				Console::WriteLine(indentation, "|---", (unsigned int)expression->numeric_type());
-				Console::WriteLine(indentation, "`---", expression->text());
+				Console::WriteLine("NumericLiteral");
+
+				// Base
+				PrintDecoration(indentation + "|---");
+				PrintData("Numeric Base", std::to_string((unsigned int)expression->base()));
+
+				// Type
+				PrintDecoration(indentation + "|---");
+				PrintData("Numeric Type", std::to_string((unsigned int)expression->numeric_type()));
+
+				// Value
+				PrintDecoration(indentation + "`---");
+				PrintData("Value", expression->text());
 			}
 
 			void PrintParenthesesExpression(ParenthesesExpression* expression, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("ParenthesesExpression: ");
+				Console::WriteLine("ParenthesesExpression");
 				Print(expression->expression(), indentation, true);
 			}
 
 			void PrintIdentifierExpression(IdentifierExpression* expression, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("IdentifierExpression: ");
-				Console::WriteLine(indentation, "`---", expression->identifier());
+				Console::WriteLine("IdentifierExpression");
+
+				// Identifier
+				PrintDecoration(indentation + "`---");
+				PrintData("Identifier", expression->identifier());
 			}
 
 			void PrintUnaryOperation(UnaryOperation* expression, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("UnaryOperation: ");
-				Console::WriteLine(indentation, "|---", (unsigned int)expression->operation());
+				Console::WriteLine("UnaryOperation");
+
+				// Operation
+				PrintDecoration(indentation + "|---");
+				PrintData("Operation", std::to_string((unsigned int)expression->operation()));
+
+				// Operand
 				Print(expression->operand(), indentation, true);
 			}
 
 			void PrintConditionalDeclaration(ConditionalDeclaration* expression, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("ConditionalDeclaration: ");
-				Console::WriteLine(indentation, "|---", expression->name());
+				Console::WriteLine("ConditionalDeclaration");
+
+				// Name
+				PrintDecoration(indentation + "|---");
+				PrintData("Name", expression->name());
+
+				// Initializer
 				Print(expression->initializer(), indentation, true);
 			}
 
 			void PrintInlineIfElse(InlineIfElse* expression, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("InlineIfElse: ");
+				Console::WriteLine("InlineIfElse");
 				Print(expression->condition(), indentation, false);
 				Print(expression->True(), indentation, false);
 				Print(expression->False(), indentation, false);
@@ -157,41 +218,51 @@ namespace Yac {
 
 			void PrintIfStatement(IfStatement* statement, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("IfStatement: ");
+				Console::WriteLine("IfStatement");
+
+				// Condition
 				Print(statement->condition(), indentation, false);
+
+				// Statement - [Else Statement]
 				const Statement* elseStatement = statement->elseStatement();
 				Print(statement->statement(), indentation, elseStatement ? false : true);
 				if (elseStatement) Print(elseStatement, indentation, true);
 				
 			}
 
-			void PrintVariableDeclaration(VariableDeclaration* decl, const std::string& indentation) noexcept
+			void PrintVariableDeclaration(VariableDeclaration* statement, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("VariableDeclaration: ");
-				Console::WriteLine(indentation, "name = ", decl->name());
-				Print(decl->initializer(), indentation, true);
+				Console::WriteLine("VariableDeclaration");
+
+				// Name
+				PrintDecoration(indentation + "|---");
+				PrintData("Name", statement->name());
+
+				// Initializer
+				Print(statement->initializer(), indentation, true);
 			}
 
 			void PrintWhileStatement(WhileStatement* statement, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("WhileStatement: ");
-				Print(statement->condition(), indentation, false);
-				Print(statement->statement(), indentation, true);
+				Console::WriteLine("WhileStatement");
+				Print(statement->condition(), indentation, false); // Condition
+				Print(statement->statement(), indentation, true); // Statement
 			}
 
 			void PrintForStatement(ForStatement* statement, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("ForStatement: ");
-				Print(statement->assignment(), indentation, false);
-				Print(statement->condition(), indentation, false);
-				Print(statement->update(), indentation, false);
-				Print(statement->statement(), indentation, true);
+				Console::WriteLine("ForStatement");
+				Print(statement->assignment(), indentation, false); // Assignment
+				Print(statement->condition(), indentation, false); // Condition
+				Print(statement->update(), indentation, false); // Update
+				Print(statement->statement(), indentation, true); // Statement
 			}
 
 			void PrintBlockStatement(BlockStatement* statement, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("BlockStatement: ");
+				Console::WriteLine("BlockStatement");
 
+				// Statements
 				const std::vector<Statement*>& statements = statement->statements();
 				for (unsigned int i = 0; i < statements.size() - 1; i++)
 					Print(statements[i], indentation, false);
@@ -200,8 +271,8 @@ namespace Yac {
 
 			void PrintExpressionStatement(ExpressionStatement* statement, const std::string& indentation) noexcept
 			{
-				Console::WriteLine("ExpressionStatement: ");
-				Print(statement->expression(), indentation, true);
+				Console::WriteLine("ExpressionStatement");
+				Print(statement->expression(), indentation, true); // Expression
 			}
 		}
 	}

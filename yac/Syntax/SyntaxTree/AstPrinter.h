@@ -10,6 +10,8 @@ namespace Yac {
 	namespace Syntax {
 		namespace AstPrinter
 		{
+			struct FormattingOptions;
+
 			void Print(const SyntaxTree& tree) noexcept;
 			void Print(const SyntaxTree* tree) noexcept;
 
