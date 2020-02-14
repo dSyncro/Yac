@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace Yac {
 	namespace Syntax {
 
@@ -38,5 +40,47 @@ namespace Yac {
 			PostIncrement,
 			PostDecrement,
 		};
+
+		// Private Members
+		namespace {
+
+			const char* OperatorString[] = {
+				"Unknown",
+				"Comma",
+				"LogicalOr",
+				"LogicalAnd",
+				"BitwiseOr",
+				"Xor",
+				"BitwiseAnd",
+				"EqualTo",
+				"NotEqualTo",
+				"LessThan",
+				"LessEqualThan",
+				"GreatherThan",
+				"GreatherEqualThan",
+				"LeftShift",
+				"RightShift",
+				"Addition",
+				"Subtraction",
+				"Multiplication",
+				"Division",
+				"Modulo",
+				"Identity",
+				"Negation",
+				"PreIncrement",
+				"PreDecrement",
+				"LogicalNot",
+				"OneComplementary",
+				"PostIncrement",
+				"PostDecrement",
+			};
+
+		}
+
+		inline std::string ToString(Operator op)
+		{
+			return OperatorString[(unsigned int)op];
+		}
+
 	}
 }

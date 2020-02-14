@@ -10,5 +10,22 @@ namespace Yac {
 			Double
 		};
 
+		// Private Members
+		namespace {
+
+			const char* NumericTypeString[] = {
+				"Int",
+				"UInt",
+				"Float",
+				"Double",
+			};
+
+		}
+
+		inline std::string ToString(NumericType type)
+		{
+			return NumericTypeString[(unsigned int)type];
+		}
+
 	}
 }

@@ -10,6 +10,22 @@ namespace Console {
 	inline extern void Reset() noexcept;
 
 	template <class... Args>
+	void Alert(Args... args) noexcept
+	{
+		SetForegroundColor(AnsiStyle::Forecolors::Yellow);
+		(std::cout << ... << args) << '\n';
+		Reset();
+	}
+
+	template <class... Args>
+	void Error(Args... args) noexcept
+	{
+		SetForegroundColor(AnsiStyle::Forecolors::Red);
+		(std::cerr << ... << args) << '\n';
+		Reset();
+	}
+
+	template <class... Args>
 	void Write(Args... args)
 	{
 		(std::cout << ... << args);

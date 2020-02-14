@@ -6,6 +6,7 @@
 #include <yac/Syntax/Parser/Parser.h>
 #include <yac/Errors/ErrorList.h>
 #include <yac/Syntax/Statements/Statements.h>
+#include <yac/Libraries/Console/Console.h>
 
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
@@ -18,7 +19,7 @@ SyntaxTree::SyntaxTree(std::string& source)
 	if (parser.errors().Any())
 	{
 		for (unsigned int i = 0; i < e.Count(); i++)
-			std::cout << e[i].message() << std::endl;
+			Console::Error(e[i].message());
 	}
 	else AstPrinter::Print(this);
 	e.Clear();

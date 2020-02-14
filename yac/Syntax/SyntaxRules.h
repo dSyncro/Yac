@@ -14,8 +14,7 @@ namespace Yac {
 		Operator ToUnaryOperator(TokenType type);
 		Operator ToBinaryOperator(TokenType type);
 		AssignmentOperator ToAssignmentOperator(TokenType type);
-		Keyword ToKeyword(std::string text);
-		std::string ToString(TokenType type);
+		Keyword ToKeyword(const std::string& text);
 
 	}
 }
