@@ -12,7 +12,7 @@ SourceText::SourceText(std::string text)
 	{
 		if (text[i] != '\n') continue;
 
-		length = i - start + 1;
+		length = i - start;
 		line = text.substr(start, length);
 		_lines.push_back({ line, TextSpan(start, length) });
 		start = i + 1;

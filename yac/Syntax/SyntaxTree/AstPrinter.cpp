@@ -191,7 +191,7 @@ namespace Yac {
 
 					// Operation
 					PrintDecoration(indentation + "|---");
-					PrintData("Operation", std::to_string((unsigned int)expression->operation()));
+					PrintData("Operation", ToString(expression->operation()));
 
 					// Operand
 					Print(expression->operand(), indentation, true);

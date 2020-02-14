@@ -1,6 +1,6 @@
 #pragma once
 
-using Byte = unsigned char;
+using byte = unsigned char;
 
 using ushort = unsigned short;
 using uint = unsigned int;

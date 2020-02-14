@@ -17,9 +17,9 @@ namespace Yac {
 			SourceText(std::ifstream& stream);
 			~SourceText();
 
-			unsigned int lineCount() const noexcept { return _lines.size(); }
-			const Line& operator [](unsigned int index) const { return _lines[index]; }
-			const std::vector<Line>& GetLines() const noexcept { return _lines; }
+			inline unsigned int lineCount() const noexcept { return _lines.size(); }
+			inline const Line& operator [](unsigned int index) const { return _lines[index]; }
+			inline const std::vector<Line>& GetLines() const noexcept { return _lines; }
 
 		private:
 

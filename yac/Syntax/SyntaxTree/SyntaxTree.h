@@ -5,6 +5,8 @@
 #include <yac/Syntax/Expressions/Expressions.h>
 #include <yac/Syntax/Statements/Statement.h>
 
+#include <yac/Text/SourceText.h>
+
 namespace Yac {
 	namespace Syntax {
 
@@ -12,7 +14,7 @@ namespace Yac {
 
 		public:
 
-			SyntaxTree(std::string& source);
+			SyntaxTree(Yac::Text::SourceText source);
 			~SyntaxTree();
 
 			inline const Statement* root() const { return _root; }

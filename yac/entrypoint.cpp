@@ -3,7 +3,6 @@
 #include <yac/Syntax/SyntaxTree/SyntaxTree.h>
 #include <yac/Libraries/Console/Console.h>
 
-
 using namespace Yac::Syntax;
 
 int main(int argc, char** argv)

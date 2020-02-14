@@ -92,7 +92,7 @@ Token Lexer::Lex() noexcept
 
 		case '!':
 			return next == '=' ?
-				ReadSymbol(TokenType::ExclamationMark, "!=", 2) : ReadSymbol(TokenType::ExclamationMark, "!");
+				ReadSymbol(TokenType::NotEqualSymbol, "!=", 2) : ReadSymbol(TokenType::ExclamationMark, "!");
 
 		case '~': return ReadSymbol(TokenType::TildeSymbol, "~");
 		case '?': return ReadSymbol(TokenType::QuestionMark, "?");
@@ -119,11 +119,14 @@ Token Lexer::Lex() noexcept
 		case '{': return ReadSymbol(TokenType::OpenBrackets, "{");
 		case '}': return ReadSymbol(TokenType::CloseBrackets, "}");
 
-		case '\n': 
-			StepLine(); 
-			return ReadSymbol(TokenType::Newline, "\n");
-
-		case '\0': return ReadSymbol(TokenType::EndOfFile, "\0");
+		case '\0': 
+			if (_line < _source.lineCount())
+			{
+				Token t = ReadSymbol(TokenType::Newline, "\n");
+				StepLine();
+				return t;
+			}
+			else return ReadSymbol(TokenType::EndOfFile, "\0");
 
 		default:
 			if (std::isalpha(c)) ReadWord();
