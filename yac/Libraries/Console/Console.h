@@ -8,6 +8,7 @@ namespace Console {
 	inline extern void SetForegroundColor(AnsiStyle::Forecolors color) noexcept;
 	inline extern void SetBackgroundColor(AnsiStyle::Backcolors color) noexcept;
 	inline extern void Reset() noexcept;
+	inline extern void Clear() noexcept;
 
 	template <class... Args>
 	void Alert(Args... args) noexcept

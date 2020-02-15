@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DataTypes\Converter.cpp" />
+    <ClCompile Include="DataTypes\Data.cpp" />
+    <ClCompile Include="DataTypes\Variable.cpp" />
     <ClCompile Include="entrypoint.cpp" />
     <ClCompile Include="Errors\ErrorList.cpp" />
     <ClCompile Include="Errors\ErrorReporter.cpp" />
@@ -45,10 +48,13 @@
     <ClInclude Include="API\Float.h" />
     <ClInclude Include="API\Int.h" />
     <ClInclude Include="API\Object.h" />
+    <ClInclude Include="DataTypes\Converter.h" />
+    <ClInclude Include="DataTypes\Data.h" />
     <ClInclude Include="DataTypes\Primitives.h" />
-    <ClInclude Include="DataTypes\TypesTable.h" />
+    <ClInclude Include="DataTypes\TypeTable.h" />
     <ClInclude Include="DataTypes\TypeSymbol.h" />
     <ClInclude Include="API\UInt.h" />
+    <ClInclude Include="DataTypes\Variable.h" />
     <ClInclude Include="Errors\Error.h" />
     <ClInclude Include="Errors\ErrorList.h" />
     <ClInclude Include="Errors\ErrorReporter.h" />

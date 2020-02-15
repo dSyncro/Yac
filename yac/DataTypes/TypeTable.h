@@ -32,6 +32,7 @@ namespace Yac {
 				TypeSymbol("uint"),
 				TypeSymbol("float"),
 				TypeSymbol("double"),
+				TypeSymbol("bool"),
 			};
 
 		};

@@ -21,3 +21,8 @@ void Console::Reset() noexcept
 {
 	std::cout << AnsiStyle::Reset;
 }
+
+void Console::Clear() noexcept
+{
+	std::cout << AnsiStyle::Clear;
+}

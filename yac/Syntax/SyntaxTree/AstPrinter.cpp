@@ -214,7 +214,7 @@ namespace Yac {
 					Console::WriteLine("InlineIfElse");
 					Print(expression->condition(), indentation, false);
 					Print(expression->True(), indentation, false);
-					Print(expression->False(), indentation, false);
+					Print(expression->False(), indentation, true);
 				}
 
 				// Statements

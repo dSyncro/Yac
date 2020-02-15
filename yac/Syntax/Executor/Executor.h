@@ -1,6 +1,6 @@
 #pragma once
 
-#include <yac/Syntax/Expressions/Expression.h>
+#include <yac/Syntax/SyntaxTree/SyntaxTree.h>
 
 namespace Yac {
 	namespace Syntax {
@@ -9,11 +9,15 @@ namespace Yac {
 
 		public:
 
-			Executor(Expression* root);
+			Executor(const SyntaxTree& tree);
+
+			int Execute();
 
 		private:
 
-			Expression* _root;
+			int EvaluateExpressionStatement();
+
+			const Statement* _root;
 
 		};
 

@@ -75,6 +75,15 @@
     <ClCompile Include="Libraries\Console\Console.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="DataTypes\Converter.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTypes\Data.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTypes\Variable.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Text\TextSpan.h">
@@ -155,9 +164,6 @@
     <ClInclude Include="Errors\ErrorReporter.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="DataTypes\TypesTable.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
     <ClInclude Include="Syntax\Expressions\ParenthesesExpression.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
@@ -228,6 +234,18 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\Console\Console.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes\TypeTable.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes\Variable.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes\Data.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes\Converter.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>
