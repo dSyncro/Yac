@@ -84,6 +84,9 @@
     <ClCompile Include="DataTypes\Variable.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="Repl\Repl.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Text\TextSpan.h">
@@ -246,6 +249,9 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="DataTypes\Converter.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Repl\Repl.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>

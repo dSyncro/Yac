@@ -7,7 +7,8 @@ namespace AnsiStyle
 {
 
 	const std::string Reset = "\033[0m";
-	const std::string Clear = "\033c";
+	const std::string Clear = "\033[2J";
+	const std::string HomeCursor = "\033[H";
 
 	enum class Backcolors
 	{

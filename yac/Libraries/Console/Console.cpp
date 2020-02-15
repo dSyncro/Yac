@@ -24,5 +24,5 @@ void Console::Reset() noexcept
 
 void Console::Clear() noexcept
 {
-	std::cout << AnsiStyle::Clear;
+	std::cout << AnsiStyle::Clear << AnsiStyle::HomeCursor;
 }
