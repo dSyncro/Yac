@@ -21,11 +21,11 @@ namespace Yac {
 			inline const std::string& text() const noexcept { return _string; }
 
 			inline const TextSpan& span() const noexcept { return _span; }
-			inline unsigned int start() const noexcept { return _span.start(); }
-			inline unsigned int length() const noexcept { return _span.length(); }
-			inline unsigned int end() const noexcept { return _span.end(); }
+			inline std::size_t start() const noexcept { return _span.start(); }
+			inline std::size_t length() const noexcept { return _span.length(); }
+			inline std::size_t end() const noexcept { return _span.end(); }
 
-			std::string substr(unsigned int start = 0, unsigned int length = 0xFFFFFFFF) 
+			std::string substr(std::size_t start = 0, std::size_t length = 0xFFFFFFFF) 
 				const noexcept { return _string.substr(start, length); }
 
 		private:

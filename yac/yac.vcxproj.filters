@@ -84,7 +84,19 @@
     <ClCompile Include="DataTypes\Variable.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="Repl\Repl.cpp">
+    <ClCompile Include="Core\Repl\Commands\Command.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Repl\Commands\CommandHandler.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Repl\Commands\CommandTable.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Repl\Repl.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Repl\Commands\ReplCommands.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -251,7 +263,19 @@
     <ClInclude Include="DataTypes\Converter.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="Repl\Repl.h">
+    <ClInclude Include="Core\Repl\Commands\Command.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Repl\Commands\CommandHandler.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Repl\Commands\CommandTable.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Repl\Repl.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Repl\Commands\ReplCommands.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>

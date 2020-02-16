@@ -7,17 +7,17 @@ namespace Yac {
 
 		public:
 
-			TextSpan(unsigned int start, unsigned int length) : _start(start), _length(length) {}
+			TextSpan(std::size_t start, std::size_t length) : _start(start), _length(length) {}
 
-			inline unsigned int start() const noexcept { return _start; }
-			inline unsigned int length() const noexcept { return _length; }
-			inline unsigned int end() const noexcept { return _start + _length; }
+			inline std::size_t start() const noexcept { return _start; }
+			inline std::size_t length() const noexcept { return _length; }
+			inline std::size_t end() const noexcept { return _start + _length; }
 
 			inline std::string ToString() const noexcept { return "{" + std::to_string(_start) + ", " + std::to_string(_length) + "}"; }
 
 		private:
 
-			unsigned int _start = 0, _length = 0;
+			std::size_t _start = 0, _length = 0;
 		};
 
 	}

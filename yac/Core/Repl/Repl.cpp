@@ -4,7 +4,7 @@
 #include <yac/Syntax/Executor/Executor.h>
 #include <yac/Syntax/SyntaxTree/SyntaxTree.h>
 
-using namespace Yac;
+using namespace Yac::Core;
 using namespace Yac::Syntax;
 
 void Repl::Run()
@@ -19,7 +19,7 @@ void Repl::Stop()
 	_isRunning = false;
 }
 
-void Repl::Loop()
+void Repl::Loop() const
 {
 	while (_isRunning)
 	{
@@ -31,7 +31,8 @@ void Repl::Loop()
 
 		if (line[0] == '#')
 		{
-			ExecuteCommand(line);
+			Command command = Command::Parse(line);
+			ExecuteCommand(command);
 			continue;
 		}
 
@@ -41,7 +42,7 @@ void Repl::Loop()
 	}
 }
 
-void Repl::ExecuteCommand(const std::string& command)
+void Repl::ExecuteCommand(const Command& command) const noexcept
 {
-	if (command == "#clear") Console::Clear();
+	_commands.InvokeAll(command);
 }

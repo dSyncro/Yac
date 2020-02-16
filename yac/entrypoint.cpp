@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "Repl/Repl.h"
+#include "Core/Repl/Repl.h"
 
-using namespace Yac;
+using namespace Yac::Core;
 
 int main(int argc, char** argv)
 {
