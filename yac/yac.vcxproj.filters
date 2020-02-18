@@ -278,5 +278,14 @@
     <ClInclude Include="Core\Repl\Commands\ReplCommands.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Repl\VariableTable.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Errors\Exceptions\ObjectConversionException.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="API\Bool.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,16 +4,16 @@ using namespace Yac::Core;
 
 CommandTable::CommandTable(std::vector<CommandHandler> handlers) : _handlers(handlers) {}
 
-void CommandTable::Invoke(const Command& command) const noexcept
+void CommandTable::Invoke(const Command& command, VariableTable& variables) const noexcept
 {
 	for (const CommandHandler& handler : _handlers)
-		if (handler.Cast(command)) return;
+		if (handler.Cast(command, variables)) return;
 }
 
-void CommandTable::InvokeAll(const Command& command) const noexcept
+void CommandTable::InvokeAll(const Command& command, VariableTable& variables) const noexcept
 {
 	for (const CommandHandler& handler : _handlers)
-		handler.Cast(command);
+		handler.Cast(command, variables);
 }
 
 void CommandTable::Register(const CommandHandler& handler) noexcept

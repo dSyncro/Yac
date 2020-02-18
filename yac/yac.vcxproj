@@ -49,11 +49,13 @@
     <ClCompile Include="Text\SourceText.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="API\Bool.h" />
     <ClInclude Include="API\Double.h" />
     <ClInclude Include="API\Float.h" />
     <ClInclude Include="API\Int.h" />
     <ClInclude Include="API\Object.h" />
     <ClInclude Include="Core\Repl\Commands\ReplCommands.h" />
+    <ClInclude Include="Core\Repl\VariableTable.h" />
     <ClInclude Include="DataTypes\Converter.h" />
     <ClInclude Include="DataTypes\Data.h" />
     <ClInclude Include="DataTypes\Primitives.h" />
@@ -64,6 +66,7 @@
     <ClInclude Include="Errors\Error.h" />
     <ClInclude Include="Errors\ErrorList.h" />
     <ClInclude Include="Errors\ErrorReporter.h" />
+    <ClInclude Include="Errors\Exceptions\ObjectConversionException.h" />
     <ClInclude Include="Libraries\AnsiStyle\AnsiStyle.h" />
     <ClInclude Include="Libraries\Console\Console.h" />
     <ClInclude Include="Core\Repl\Commands\Command.h" />

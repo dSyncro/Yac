@@ -1,9 +1,13 @@
 #include "Repl.h"
 
+#include <yac/API/Bool.h>
+
 #include <yac/Libraries/Console/Console.h>
 #include <yac/Syntax/Executor/Executor.h>
 #include <yac/Syntax/SyntaxTree/SyntaxTree.h>
+#include <yac/Syntax/SyntaxTree/AstPrinter.h>
 
+using namespace Yac::Api;
 using namespace Yac::Core;
 using namespace Yac::Syntax;
 
@@ -19,7 +23,7 @@ void Repl::Stop()
 	_isRunning = false;
 }
 
-void Repl::Loop() const
+void Repl::Loop()
 {
 	while (_isRunning)
 	{
@@ -37,12 +41,16 @@ void Repl::Loop() const
 		}
 
 		SyntaxTree tree = SyntaxTree(line);
-		Executor e = Executor(tree);
-		Console::Alert(e.Execute());
+		Bool showsDebug = _variables.Get<Bool>("showdebuginfo");
+		if (showsDebug) 
+			AstPrinter::Print(tree);
+
+		//Executor e = Executor(tree);
+		//Console::Alert(e.Execute());
 	}
 }
 
-void Repl::ExecuteCommand(const Command& command) const noexcept
+void Repl::ExecuteCommand(const Command& command) noexcept
 {
-	_commands.InvokeAll(command);
+	_commands.InvokeAll(command, _variables);
 }

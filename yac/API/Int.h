@@ -13,6 +13,8 @@ namespace Yac {
 
 			operator int() const { return _n; }
 
+			virtual std::string ToString() const override { return std::to_string(_n); }
+
 		private:
 
 			int _n;

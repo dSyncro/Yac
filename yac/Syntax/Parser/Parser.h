@@ -2,13 +2,13 @@
 
 #include <string>
 
-#include <yac/Syntax/Tokens/Token.h>
-#include <yac/Syntax/Tokens/Keyword.h>
-#include <yac/Syntax/Expressions/Expression.h>
-#include <yac/Syntax/Expressions/Numeric/NumericBase.h>
-#include <yac/Syntax/Expressions/Assignment/AssignmentOperator.h>
-#include <yac/Syntax/Statements/Statement.h>
 #include <yac/Errors/ErrorReporter.h>
+#include <yac/Syntax/Expressions/Expression.h>
+#include <yac/Syntax/Expressions/Assignment/AssignmentOperator.h>
+#include <yac/Syntax/Expressions/Numeric/NumericBase.h>
+#include <yac/Syntax/Statements/Statement.h>
+#include <yac/Syntax/Tokens/Keyword.h>
+#include <yac/Syntax/Tokens/Token.h>
 #include <yac/Text/SourceText.h>
 
 namespace Yac {
@@ -26,16 +26,16 @@ namespace Yac {
 
 		private:
 
-			inline void Step(unsigned int offset = 1) noexcept { _position += offset; }
+			inline void Step(std::size_t offset = 1) noexcept { _position += offset; }
 
 			const Token& Consume() noexcept;
 
 			inline const Token& Current() const noexcept { return Peek(0); }
 			inline const Token& Next() const noexcept { return Peek(1); }
 
-			const Token& Peek(unsigned int offset) const noexcept;
+			const Token& Peek(std::size_t offset) const noexcept;
 
-			bool Match(TokenType type, unsigned int offset = 0) const noexcept;
+			bool Match(TokenType type, std::size_t offset = 0) const noexcept;
 			bool MatchNext(TokenType type) const noexcept;
 
 			const Token& MatchAndConsume(TokenType type) noexcept;
@@ -67,7 +67,7 @@ namespace Yac {
 			Expression* ParseAssignmentExpression(AssignmentOperator op) noexcept;
 			Expression* ParseMathExpression(unsigned int parentPrecedence = 0) noexcept;
 
-			unsigned int _position = 0;
+			std::size_t _position = 0;
 			std::vector<Token> _tokens;
 			Yac::Errors::ErrorReporter _reporter;
 		};

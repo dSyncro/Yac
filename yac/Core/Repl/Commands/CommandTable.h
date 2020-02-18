@@ -2,6 +2,8 @@
 
 #include "CommandHandler.h"
 
+#include <yac/Core/Repl/VariableTable.h>
+
 namespace Yac {
 	namespace Core {
 
@@ -12,9 +14,9 @@ namespace Yac {
 			CommandTable() {}
 			CommandTable(std::vector<CommandHandler> handlers);
 
-			void Invoke(const Command& command) const noexcept;
+			void Invoke(const Command& command, VariableTable& variables) const noexcept;
 
-			void InvokeAll(const Command& command) const noexcept;
+			void InvokeAll(const Command& command, VariableTable& variables) const noexcept;
 
 			inline void Add(const CommandHandler& handler) noexcept { _handlers.push_back(handler); }
 

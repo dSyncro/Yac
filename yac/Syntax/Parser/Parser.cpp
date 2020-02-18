@@ -38,9 +38,9 @@ const Token& Parser::Consume() noexcept
 	return t; // return consumed token
 }
 
-const Token& Parser::Peek(unsigned int offset) const noexcept
+const Token& Parser::Peek(std::size_t offset) const noexcept
 {
-	unsigned int index = _position + offset;
+	std::size_t index = _position + offset;
 	
 	// If trying to access a token that do not exists
 	// return EoF
@@ -48,7 +48,7 @@ const Token& Parser::Peek(unsigned int offset) const noexcept
 	return _tokens[index];
 }
 
-bool Parser::Match(TokenType type, unsigned int offset) const noexcept { return Peek(offset).type() == type; }
+bool Parser::Match(TokenType type, std::size_t offset) const noexcept { return Peek(offset).type() == type; }
 bool Parser::MatchNext(TokenType type) const noexcept { return Next().type() == type; }
 
 const Token& Parser::MatchAndConsume(TokenType type) noexcept

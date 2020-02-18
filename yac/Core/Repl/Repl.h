@@ -4,6 +4,7 @@
 
 #include "Commands/CommandTable.h"
 #include "Commands/ReplCommands.h"
+#include "VariableTable.h"
 
 namespace Yac {
 	namespace Core {
@@ -17,12 +18,13 @@ namespace Yac {
 
 		private:
 
-			void Loop() const;
-			void ExecuteCommand(const Command& command) const noexcept;
+			void Loop();
+			void ExecuteCommand(const Command& command) noexcept;
 
 			bool _isRunning = false;
 
 			CommandTable _commands = ReplCommandTable;
+			VariableTable _variables = VariableTable();
 		};
 
 	}

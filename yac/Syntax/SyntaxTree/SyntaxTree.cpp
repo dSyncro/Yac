@@ -22,7 +22,6 @@ SyntaxTree::SyntaxTree(SourceText source)
 		for (unsigned int i = 0; i < e.Count(); i++)
 			Console::Error(e[i].message());
 	}
-	else AstPrinter::Print(this);
 	e.Clear();
 }
 
