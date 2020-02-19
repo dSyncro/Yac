@@ -4,22 +4,21 @@
 
 #include "Expression.h"
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		struct IdentifierExpression : Expression {
+	struct IdentifierExpression final : Expression {
 
-		public:
+	public:
 
-			IdentifierExpression(std::string id)
-				: Expression(ExpressionType::IdentifierExpression), _id(id) {}
+		IdentifierExpression(std::string id)
+			: Expression(ExpressionType::IdentifierExpression), _id(id)
+		{
+		}
 
-			inline std::string identifier() const noexcept { return _id; }
+		inline std::string identifier() const noexcept { return _id; }
 
-		private:
+	private:
 
-			std::string _id;
-		};
-
-	}
+		std::string _id;
+	};
 }

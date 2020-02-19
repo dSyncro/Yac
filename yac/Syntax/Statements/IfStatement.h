@@ -3,33 +3,33 @@
 #include "Statement.h"
 #include <yac/Syntax/Expressions/Expression.h>
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		struct IfStatement : Statement {
+	struct IfStatement final : Statement {
 
-		public:
+	public:
 
-			IfStatement(Expression* condition, Statement* statement, Statement* elseStatement) 
-				: Statement(StatementType::If), _condition(condition), _statement(statement), _else(elseStatement) {}
+		IfStatement(Expression* condition, Statement* statement, Statement* elseStatement)
+			: Statement(StatementType::If), _condition(condition), _statement(statement), _else(elseStatement)
+		{
+		}
 
-			~IfStatement()
-			{
-				delete _condition;
-				delete _statement;
-				delete _else;
-			}
+		~IfStatement()
+		{
+			delete _condition;
+			delete _statement;
+			delete _else;
+		}
 
-			inline const Expression* condition() const noexcept { return _condition; }
-			inline const Statement* statement() const noexcept { return _statement; }
-			inline const Statement* elseStatement() const noexcept { return _else; }
+		inline const Expression* condition() const noexcept { return _condition; }
+		inline const Statement* statement() const noexcept { return _statement; }
+		inline const Statement* elseStatement() const noexcept { return _else; }
 
-		private:
+	private:
 
-			Expression* _condition;
-			Statement* _statement;
-			Statement* _else;
-		};
+		Expression* _condition;
+		Statement* _statement;
+		Statement* _else;
+	};
 
-	}
 }

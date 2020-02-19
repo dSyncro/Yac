@@ -2,23 +2,21 @@
 
 #include "Data.h"
 
-namespace Yac {
-	namespace DataTypes {
+namespace Yac::DataTypes {
 
-		class Converter {
+	class Converter final {
 
-		public:
+	public:
 
-			Converter(const TypeSymbol& from, const TypeSymbol& to, Data(*callback)(const Yac::Api::Object*));
+		Converter(const TypeSymbol& from, const TypeSymbol& to, Data(*callback)(const Yac::Api::Object*));
 
-			Data Convert(const Data& data) const;
+		Data Convert(const Data& data) const;
 
-		private:
+	private:
 
-			const TypeSymbol& _from;
-			const TypeSymbol& _to;
-			Data(*_callback)(const Yac::Api::Object*);
-		};
+		const TypeSymbol& _from;
+		const TypeSymbol& _to;
+		Data(*_callback)(const Yac::Api::Object*);
+	};
 
-	}
 }

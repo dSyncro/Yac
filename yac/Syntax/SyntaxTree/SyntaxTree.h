@@ -7,22 +7,19 @@
 
 #include <yac/Text/SourceText.h>
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		class SyntaxTree {
+	class SyntaxTree final {
 
-		public:
+	public:
 
-			SyntaxTree(Yac::Text::SourceText source);
-			~SyntaxTree();
+		SyntaxTree(Yac::Text::SourceText source);
+		~SyntaxTree();
 
-			inline const Statement* root() const { return _root; }
+		inline const Statement* root() const { return _root; }
 
-		private:
+	private:
 
-			Statement* _root;
-		};
-
-	}
+		Statement* _root;
+	};
 }

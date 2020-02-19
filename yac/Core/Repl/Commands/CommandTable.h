@@ -4,32 +4,30 @@
 
 #include <yac/Core/Repl/VariableTable.h>
 
-namespace Yac {
-	namespace Core {
+namespace Yac::Core {
 
-		class CommandTable {
+	class CommandTable final {
 
-		public:
+	public:
 
-			CommandTable() {}
-			CommandTable(std::vector<CommandHandler> handlers);
+		CommandTable() {}
+		CommandTable(std::vector<CommandHandler> handlers);
 
-			void Invoke(const Command& command, VariableTable& variables) const noexcept;
+		void Invoke(const Command& command, VariableTable& variables) const noexcept;
 
-			void InvokeAll(const Command& command, VariableTable& variables) const noexcept;
+		void InvokeAll(const Command& command, VariableTable& variables) const noexcept;
 
-			inline void Add(const CommandHandler& handler) noexcept { _handlers.push_back(handler); }
+		inline void Add(const CommandHandler& handler) noexcept { _handlers.push_back(handler); }
 
-			void Register(const CommandHandler& handler) noexcept;
+		void Register(const CommandHandler& handler) noexcept;
 
-			bool ContainsHandlerFor(const std::string& command) const noexcept;
+		bool ContainsHandlerFor(const std::string& command) const noexcept;
 
-			inline void Clear() noexcept { _handlers.clear(); }
+		inline void Clear() noexcept { _handlers.clear(); }
 
-		private:
+	private:
 
-			std::vector<CommandHandler> _handlers;
-		};
+		std::vector<CommandHandler> _handlers;
+	};
 
-	}
 }

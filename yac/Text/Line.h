@@ -4,35 +4,35 @@
 
 #include <string>
 
-namespace Yac {
-	namespace Text {
+namespace Yac::Text {
 
-		struct Line {
+	struct Line final {
 
-		public:
+	public:
 
-			Line(std::string string, TextSpan span)
-				: _string(string), _span(span)
-			{
-			}
+		Line(std::string string, TextSpan span)
+			: _string(string), _span(span)
+		{
+		}
 
-			char operator [](unsigned int index) const { return _string[index]; }
+		char operator [](unsigned int index) const { return _string[index]; }
 
-			inline const std::string& text() const noexcept { return _string; }
+		inline const std::string& text() const noexcept { return _string; }
 
-			inline const TextSpan& span() const noexcept { return _span; }
-			inline std::size_t start() const noexcept { return _span.start(); }
-			inline std::size_t length() const noexcept { return _span.length(); }
-			inline std::size_t end() const noexcept { return _span.end(); }
+		inline const TextSpan& span() const noexcept { return _span; }
+		inline std::size_t start() const noexcept { return _span.start(); }
+		inline std::size_t length() const noexcept { return _span.length(); }
+		inline std::size_t end() const noexcept { return _span.end(); }
 
-			std::string substr(std::size_t start = 0, std::size_t length = 0xFFFFFFFF) 
-				const noexcept { return _string.substr(start, length); }
+		std::string substr(std::size_t start = 0, std::size_t length = 0xFFFFFFFF)
+			const noexcept
+		{
+			return _string.substr(start, length);
+		}
 
-		private:
+	private:
 
-			std::string _string;
-			TextSpan _span;
-		};
-
-	}
+		std::string _string;
+		TextSpan _span;
+	};
 }

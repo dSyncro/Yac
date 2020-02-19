@@ -3,27 +3,25 @@
 #include <string>
 #include <vector>
 
-namespace Yac {
-	namespace Core {
+namespace Yac::Core {
 
-		using ParamList = const std::vector<std::string>&;
+	using ParamList = const std::vector<std::string>&;
 
-		struct Command {
+	struct Command final {
 
-		public:
+	public:
 
-			static Command Parse(std::string line) noexcept;
+		static Command Parse(std::string line) noexcept;
 
-			inline std::string Name() const noexcept { return _cmd; }
-			inline ParamList Parameters() const noexcept { return _params; }
+		inline std::string Name() const noexcept { return _cmd; }
+		inline ParamList Parameters() const noexcept { return _params; }
 
-		private:
+	private:
 
-			Command(std::string command, const std::vector<std::string> parameters);
+		Command(std::string command, const std::vector<std::string> parameters);
 
-			std::string _cmd;
-			const std::vector<std::string> _params;
-		};
+		std::string _cmd;
+		const std::vector<std::string> _params;
+	};
 
-	}
 }

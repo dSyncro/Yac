@@ -6,26 +6,24 @@
 #include "Commands/ReplCommands.h"
 #include "VariableTable.h"
 
-namespace Yac {
-	namespace Core {
+namespace Yac::Core {
 
-		class Repl {
+	class Repl final {
 
-		public:
+	public:
 
-			void Run();
-			void Stop();
+		void Run();
+		void Stop();
 
-		private:
+	private:
 
-			void Loop();
-			void ExecuteCommand(const Command& command) noexcept;
+		void Loop();
+		void ExecuteCommand(const Command& command) noexcept;
 
-			bool _isRunning = false;
+		bool _isRunning = false;
 
-			CommandTable _commands = ReplCommandTable;
-			VariableTable _variables = VariableTable();
-		};
+		CommandTable _commands = ReplCommandTable;
+		VariableTable _variables = VariableTable();
+	};
 
-	}
 }

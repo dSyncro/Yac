@@ -4,29 +4,26 @@
 
 #include <yac/Core/Repl/VariableTable.h>
 
-using CommandCallback = void(*)(const std::vector<std::string>&, Yac::Core::VariableTable&);
+namespace Yac::Core {
 
-namespace Yac {
-	namespace Core {
+	using CommandCallback = void(*)(const std::vector<std::string>&, Yac::Core::VariableTable&);
 
-		struct CommandHandler {
+	struct CommandHandler final {
 
-		public:
+	public:
 
-			CommandHandler(std::string command, CommandCallback callback);
+		CommandHandler(std::string command, CommandCallback callback);
 
-			bool Cast(const Command& command, VariableTable& variables) const noexcept;
+		bool Cast(const Command& command, VariableTable& variables) const noexcept;
 
-			inline void Invoke(ParamList parameters, VariableTable& variables) const noexcept { _callback(parameters, variables); }
+		inline void Invoke(ParamList parameters, VariableTable& variables) const noexcept { _callback(parameters, variables); }
 
-			inline const std::string& CommandName() const noexcept { return _cmd; }
+		inline const std::string& CommandName() const noexcept { return _cmd; }
 
-		private:
+	private:
 
-			std::string _cmd;
-			CommandCallback _callback;
+		std::string _cmd;
+		CommandCallback _callback;
 
-		};
-
-	}
+	};
 }

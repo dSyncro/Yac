@@ -6,26 +6,22 @@
 
 #include "Line.h"
 
-namespace Yac {
-	namespace Text {
+namespace Yac::Text {
 
-		class SourceText
-		{
-		public:
+	class SourceText final
+	{
+	public:
 
-			SourceText(std::string text);
-			SourceText(std::ifstream& stream);
-			~SourceText();
+		SourceText(std::string text);
+		SourceText(std::ifstream& stream);
+		~SourceText();
 
-			inline std::size_t lineCount() const noexcept { return _lines.size(); }
-			inline const Line& operator [](unsigned int index) const { return _lines[index]; }
-			inline const std::vector<Line>& GetLines() const noexcept { return _lines; }
+		inline std::size_t lineCount() const noexcept { return _lines.size(); }
+		inline const Line& operator [](unsigned int index) const { return _lines[index]; }
+		inline const std::vector<Line>& GetLines() const noexcept { return _lines; }
 
-		private:
+	private:
 
-			std::vector<Line> _lines;
-		};
-
-
-	}
+		std::vector<Line> _lines;
+	};
 }

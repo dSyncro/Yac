@@ -5,36 +5,34 @@
 
 #include "TypeSymbol.h"
 
-namespace Yac {
-	namespace DataTypes {
+namespace Yac::DataTypes {
 
-		class TypeTable {
+	class TypeTable final {
 
-		public:
+	public:
 
-			void Register(const TypeSymbol& symbol) noexcept
-			{
-				if (!Contains(symbol))
-					_table.push_back(symbol);
-			}
+		void Register(const TypeSymbol& symbol) noexcept
+		{
+			if (!Contains(symbol))
+				_table.push_back(symbol);
+		}
 
-			bool Contains(const TypeSymbol& symbol) const noexcept
-			{
-				for (const TypeSymbol& s : _table)
-					if (s == symbol) return true;
-				return false;
-			}
+		bool Contains(const TypeSymbol& symbol) const noexcept
+		{
+			for (const TypeSymbol& s : _table)
+				if (s == symbol) return true;
+			return false;
+		}
 
-		private:
+	private:
 
-			std::vector<TypeSymbol> _table = {
-				TypeSymbol("int"),
-				TypeSymbol("uint"),
-				TypeSymbol("float"),
-				TypeSymbol("double"),
-				TypeSymbol("bool"),
-			};
-
+		std::vector<TypeSymbol> _table = {
+			TypeSymbol("int"),
+			TypeSymbol("uint"),
+			TypeSymbol("float"),
+			TypeSymbol("double"),
+			TypeSymbol("bool"),
 		};
-	}
+
+	};
 }

@@ -4,26 +4,24 @@
 
 #include <yac/API/Object.h>
 
-namespace Yac {
-	namespace DataTypes {
+namespace Yac::DataTypes {
 
-		struct Data {
+	struct Data final {
 
-		public:
+	public:
 
-			Data(const TypeSymbol& type, Yac::Api::Object* value);
-			~Data();
+		Data(const TypeSymbol& type, Yac::Api::Object* value);
+		~Data();
 
-			inline const TypeSymbol& type() const noexcept { return *_type; }
-			inline const Yac::Api::Object* value() const noexcept { return _value; }
+		inline const TypeSymbol& type() const noexcept { return *_type; }
+		inline const Yac::Api::Object* value() const noexcept { return _value; }
 
-			inline void Dispose() noexcept { delete _value; }
+		inline void Dispose() noexcept { delete _value; }
 
-		private:
+	private:
 
-			const TypeSymbol* _type;
-			Yac::Api::Object* _value;
-		};
+		const TypeSymbol* _type;
+		Yac::Api::Object* _value;
+	};
 
-	}
 }

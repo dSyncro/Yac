@@ -7,8 +7,7 @@
 #include <yac/Syntax/Expressions/Operations/Operator.h>
 #include <yac/Syntax/Expressions/Assignment/AssignmentOperator.h>
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
 		unsigned int GetOperatorPrecedence(Operator op);
 		Operator ToUnaryOperator(TokenType type);
@@ -16,5 +15,4 @@ namespace Yac {
 		AssignmentOperator ToAssignmentOperator(TokenType type);
 		Keyword ToKeyword(const std::string& text);
 
-	}
 }

@@ -2,23 +2,20 @@
 
 #include "Object.h"
 
-namespace Yac {
-	namespace Api {
+namespace Yac::Api {
 
-		struct Int : Object {
+	struct Int final : Object {
 
-		public:
+	public:
 
-			Int(int n = 0) : _n(n) {}
+		Int(int n = 0) : _n(n) {}
 
-			operator int() const { return _n; }
+		operator int() const { return _n; }
 
-			virtual std::string ToString() const override { return std::to_string(_n); }
+		virtual std::string ToString() const override { return std::to_string(_n); }
 
-		private:
+	private:
 
-			int _n;
-		};
-
-	}
+		int _n;
+	};
 }

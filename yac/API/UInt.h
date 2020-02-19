@@ -2,23 +2,21 @@
 
 #include "Object.h"
 
-namespace Yac {
-	namespace Api {
+namespace Yac::Api {
 
-		struct UInt : Object {
+	struct UInt final : Object {
 
-		public:
+	public:
 
-			UInt(unsigned int n = 0) : _n(n) {}
+		UInt(unsigned int n = 0) : _n(n) {}
 
-			operator unsigned int() const { return _n; }
+		operator unsigned int() const { return _n; }
 
-			virtual std::string ToString() const override { return std::to_string(_n); }
+		virtual std::string ToString() const override { return std::to_string(_n); }
 
-		private:
+	private:
 
-			unsigned int _n;
-		};
+		unsigned int _n;
+	};
 
-	}
 }

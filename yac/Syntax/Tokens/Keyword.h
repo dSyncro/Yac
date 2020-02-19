@@ -1,18 +1,15 @@
 #pragma once
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		enum class Keyword {
-			False,
-			True,
-			Let,
-			If,
-			Else,
-			For,
-			While,
-			Unknown
-		};
-
-	}
+	enum class Keyword {
+		False,
+		True,
+		Let,
+		If,
+		Else,
+		For,
+		While,
+		Unknown
+	};
 }

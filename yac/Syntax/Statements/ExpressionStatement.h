@@ -4,22 +4,19 @@
 
 #include <yac/Syntax/Expressions/Expression.h>
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		struct ExpressionStatement : Statement {
+	struct ExpressionStatement final : Statement {
 
-		public:
+	public:
 
-			ExpressionStatement(Expression* expression);
-			~ExpressionStatement() { delete _expr; }
+		ExpressionStatement(Expression* expression);
+		~ExpressionStatement() { delete _expr; }
 
-			inline const Expression* expression() const noexcept { return _expr; }
+		inline const Expression* expression() const noexcept { return _expr; }
 
-		private:
+	private:
 
-			Expression* _expr;
-		};
-
-	}
+		Expression* _expr;
+	};
 }

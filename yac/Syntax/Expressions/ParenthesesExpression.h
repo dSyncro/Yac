@@ -2,23 +2,22 @@
 
 #include "Expression.h"
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		struct ParenthesesExpression : Expression {
+	struct ParenthesesExpression final : Expression {
 
-		public:
+	public:
 
-			ParenthesesExpression(Expression* expression)
-				: Expression(ExpressionType::ParenthesesExpression), _expr(expression) {}
-			~ParenthesesExpression() { delete _expr; }
+		ParenthesesExpression(Expression* expression)
+			: Expression(ExpressionType::ParenthesesExpression), _expr(expression)
+		{
+		}
+		~ParenthesesExpression() { delete _expr; }
 
-			inline const Expression* expression() const noexcept { return _expr; }
+		inline const Expression* expression() const noexcept { return _expr; }
 
-		private:
+	private:
 
-			Expression* _expr;
-		};
-
-	}
+		Expression* _expr;
+	};
 }

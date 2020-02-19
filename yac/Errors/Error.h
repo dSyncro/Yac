@@ -4,25 +4,22 @@
 
 #include <yac/Text/TextSpan.h>
 
-namespace Yac {
-	namespace Errors {
+namespace Yac::Errors {
 
-		struct Error {
+	struct Error {
 
-		public:
+	public:
 
-			Error(std::string message, Yac::Text::TextSpan span) : _msg(message), _span(span) {}
+		Error(std::string message, Yac::Text::TextSpan span) : _msg(message), _span(span) {}
 
-			inline Yac::Text::TextSpan span() const noexcept { return _span; }
-			inline std::string message() const noexcept { return _msg; }
+		inline Yac::Text::TextSpan span() const noexcept { return _span; }
+		inline std::string message() const noexcept { return _msg; }
 
-			std::string ToString() const noexcept { return _span.ToString() + ": " + _msg; }
+		std::string ToString() const noexcept { return _span.ToString() + ": " + _msg; }
 
-		private:
+	private:
 
-			Yac::Text::TextSpan _span;
-			std::string _msg;
-		};
-
-	}
+		Yac::Text::TextSpan _span;
+		std::string _msg;
+	};
 }

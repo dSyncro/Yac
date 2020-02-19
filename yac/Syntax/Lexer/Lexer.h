@@ -6,43 +6,40 @@
 #include <yac/Errors/ErrorReporter.h>
 #include <yac/Text/SourceText.h>
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		class Lexer
-		{
-		public:
+	class Lexer final
+	{
+	public:
 
-			Lexer(Yac::Text::SourceText text);
+		Lexer(Yac::Text::SourceText text);
 
-			Token Lex() noexcept;
+		Token Lex() noexcept;
 
-		private:
+	private:
 
-			void StepLine() noexcept;
+		void StepLine() noexcept;
 
-			void ReadWhitespace() noexcept;
-			void ReadWord() noexcept;
-			void ReadNumber(TokenType startingType = TokenType::Int) noexcept;
-			void ReadBinaryNumber() noexcept;
-			void ReadHexNumber() noexcept;
-			Token ReadSymbol(TokenType type, const char* text, unsigned int length = 1) noexcept;
+		void ReadWhitespace() noexcept;
+		void ReadWord() noexcept;
+		void ReadNumber(TokenType startingType = TokenType::Int) noexcept;
+		void ReadBinaryNumber() noexcept;
+		void ReadHexNumber() noexcept;
+		Token ReadSymbol(TokenType type, const char* text, unsigned int length = 1) noexcept;
 
-			inline char Current() const noexcept { return Peek(0); }
-			inline char Next() const noexcept { return Peek(1); }
+		inline char Current() const noexcept { return Peek(0); }
+		inline char Next() const noexcept { return Peek(1); }
 
-			char Peek(unsigned int offset) const noexcept;
+		char Peek(unsigned int offset) const noexcept;
 
-			const Yac::Text::Line& CurrentLine() const noexcept;
+		const Yac::Text::Line& CurrentLine() const noexcept;
 
-			TokenType _type = TokenType::None;
-			unsigned int _position = 0, _start = 0, _line = 0;
+		TokenType _type = TokenType::None;
+		unsigned int _position = 0, _start = 0, _line = 0;
 
-			std::string _text;
-			Yac::Text::SourceText _source;
+		std::string _text;
+		Yac::Text::SourceText _source;
 
-			Yac::Errors::ErrorReporter _reporter;
-		};
-
-	}
+		Yac::Errors::ErrorReporter _reporter;
+	};
 }

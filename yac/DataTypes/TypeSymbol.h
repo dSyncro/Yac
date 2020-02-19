@@ -2,22 +2,20 @@
 
 #include <string>
 
-namespace Yac {
-	namespace DataTypes {
+namespace Yac::DataTypes {
 
-		class TypeSymbol {
+	class TypeSymbol final {
 
-		public:
+	public:
 
-			TypeSymbol(std::string name) : _name(name) {}
+		TypeSymbol(std::string name) : _name(name) {}
 
-			friend bool operator ==(const TypeSymbol& a, const TypeSymbol& b) { return a._name == b._name; }
+		friend bool operator ==(const TypeSymbol& a, const TypeSymbol& b) { return a._name == b._name; }
 
-			inline std::string name() const noexcept { return _name; }
+		inline std::string name() const noexcept { return _name; }
 
-		private:
+	private:
 
-			std::string _name;
-		};
-	}
+		std::string _name;
+	};
 }

@@ -2,35 +2,32 @@
 
 #include "ErrorList.h"
 
-namespace Yac {
-	namespace Errors {
+namespace Yac::Errors {
 
-		class ErrorReporter {
+	class ErrorReporter final {
 
-		public:
+	public:
 
-			ErrorReporter() : _list(&ErrorManager) {}
-			ErrorReporter(ErrorList* list) : _list(list) {}
-			ErrorReporter(ErrorList& list) : _list(&list) {}
+		ErrorReporter() : _list(&ErrorManager) {}
+		ErrorReporter(ErrorList* list) : _list(list) {}
+		ErrorReporter(ErrorList& list) : _list(&list) {}
 
-			ErrorList& GetList() const noexcept { return *_list; }
+		ErrorList& GetList() const noexcept { return *_list; }
 
-			void ReportUnexpectedToken(
-				Yac::Syntax::TokenType expected,
-				Yac::Syntax::TokenType found,
-				const Yac::Text::TextSpan& span
-			) const noexcept;
+		void ReportUnexpectedToken(
+			Yac::Syntax::TokenType expected,
+			Yac::Syntax::TokenType found,
+			const Yac::Text::TextSpan& span
+		) const noexcept;
 
-			void ReportUnknownToken(char c, const Yac::Text::TextSpan& span) const noexcept;
+		void ReportUnknownToken(char c, const Yac::Text::TextSpan& span) const noexcept;
 
-			void ReportNotABooleanLiteral(const std::string& text, const Yac::Text::TextSpan& span) const noexcept;
-				
-			void Clear() const noexcept { _list->Clear(); }
+		void ReportNotABooleanLiteral(const std::string& text, const Yac::Text::TextSpan& span) const noexcept;
 
-		private:
+		void Clear() const noexcept { _list->Clear(); }
 
-			ErrorList* _list;
-		};
+	private:
 
-	}
+		ErrorList* _list;
+	};
 }

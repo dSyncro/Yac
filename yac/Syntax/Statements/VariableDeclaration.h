@@ -7,27 +7,24 @@
 #include <yac/Syntax/Expressions/Expression.h>
 #include <yac/Syntax/Tokens/Keyword.h>
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		struct VariableDeclaration : Statement {
+	struct VariableDeclaration final : Statement {
 
-		public:
+	public:
 
-			VariableDeclaration(Keyword keyword, std::string name, Expression* initializer);
-			~VariableDeclaration() { delete _init; }
+		VariableDeclaration(Keyword keyword, std::string name, Expression* initializer);
+		~VariableDeclaration() { delete _init; }
 
-			inline Keyword keyword() const noexcept { return _keyword; }
-			inline std::string name() const noexcept { return _name; }
-			inline const Expression* initializer() const noexcept { return _init; }
+		inline Keyword keyword() const noexcept { return _keyword; }
+		inline std::string name() const noexcept { return _name; }
+		inline const Expression* initializer() const noexcept { return _init; }
 
-		private:
+	private:
 
-			Keyword _keyword;
-			std::string _name;
-			Expression* _init;
+		Keyword _keyword;
+		std::string _name;
+		Expression* _init;
 
-		};
-
-	}
+	};
 }

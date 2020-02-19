@@ -1,17 +1,14 @@
 #pragma once
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 		
-		enum class StatementType {
-			None,
-			Block,
-			VariableDeclaration,
-			If,
-			For,
-			While,
-			Expression
-		};
-
-	}
+	enum class StatementType {
+		None,
+		Block,
+		VariableDeclaration,
+		If,
+		For,
+		While,
+		Expression
+	};
 }

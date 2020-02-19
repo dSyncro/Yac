@@ -2,23 +2,21 @@
 
 #include "Object.h"
 
-namespace Yac {
-	namespace Api {
+namespace Yac::Api {
 
-		struct Float : Object {
+	struct Float final : Object {
 
-		public:
+	public:
 
-			Float(float n = .0f) : _n(n) {}
+		Float(float n = .0f) : _n(n) {}
 
-			operator float() const { return _n; }
+		operator float() const { return _n; }
 
-			virtual std::string ToString() const override { return std::to_string(_n); }
+		virtual std::string ToString() const override { return std::to_string(_n); }
 
-		private:
+	private:
 
-			float _n;
-		};
+		float _n;
+	};
 
-	}
 }

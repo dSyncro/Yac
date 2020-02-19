@@ -2,23 +2,21 @@
 
 #include "Object.h"
 
-namespace Yac {
-	namespace Api {
+namespace Yac::Api {
 
-		struct Bool : Object {
+	struct Bool final : Object {
 
-		public:
+	public:
 
-			Bool(bool b = false) : _b(b) {}
+		Bool(bool b = false) : _b(b) {}
 
-			operator bool() const { return _b; }
+		operator bool() const { return _b; }
 
-			virtual std::string ToString() const override { return _b == 0 ? "false" : "true"; }
+		virtual std::string ToString() const override { return _b == 0 ? "false" : "true"; }
 
-		private:
+	private:
 
-			bool _b;
-		};
+		bool _b;
+	};
 
-	}
 }

@@ -2,21 +2,18 @@
 
 #include "Expression.h"
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		struct BooleanLiteral : Expression {
+	struct BooleanLiteral final : Expression {
 
-		public:
+	public:
 
-			BooleanLiteral(bool value) : Expression(ExpressionType::BooleanLiteral), _val(value) {}
+		BooleanLiteral(bool value) : Expression(ExpressionType::BooleanLiteral), _val(value) {}
 
-			inline bool value() const noexcept { return _val; }
+		inline bool value() const noexcept { return _val; }
 
-		private:
+	private:
 
-			bool _val;
-		};
-
-	}
+		bool _val;
+	};
 }

@@ -5,64 +5,44 @@
 
 #include <yac/API/Object.h>
 
-namespace Yac {
-	namespace Core {
+namespace Yac::Core {
+	
+	class VariableTable final {
 
-		template <typename T>
-		struct ScopedPtr {
+	public:
 
-			ScopedPtr() {}
-			ScopedPtr(T* ptr) : _ptr(ptr) { }
-			~ScopedPtr() { delete _ptr; }
+		template <typename T, typename = typename std::enable_if<std::is_base_of<Yac::Api::Object, T>::value>::type>
+		T Get(const std::string& key) const noexcept
+		{
+			std::unordered_map<std::string, Yac::Api::Object*>::iterator it = _map.find(key);
+			if (it == _map.end()) return T();
+			return (T&)*(it->second);
+		}
 
-			T& operator *() const { return *_ptr; }
-			T* operator ->() const { return _ptr; }
-			T* Get() const { return _ptr; }
+		template <typename T, typename = typename std::enable_if<std::is_base_of<Yac::Api::Object, T>::value>::type>
+		void Set(const std::string& key, const T& value) noexcept
+		{
+			std::unordered_map<std::string, Yac::Api::Object*>::iterator it = _map.find(key);
 
-		private:
+			// Allocate variable
+			std::size_t size = sizeof(T);
+			Yac::Api::Object* reference = (Yac::Api::Object*)std::malloc(size);
+			std::memcpy(reference, &value, size);
 
-			T* _ptr = nullptr;
-		};
-
-		class VariableTable {
-
-		public:
-
-			const Yac::Api::Object nullObj = Yac::Api::Object();
-
-			template <typename T, typename = typename std::enable_if<std::is_base_of<Yac::Api::Object, T>::value>::type>
-			inline T& Get(const std::string& key) const noexcept
+			// If variable exists
+			if (it != _map.end())
 			{
-				auto it = _map.find(key);
-				if (it == _map.end()) return (T&)nullObj;
-				return (T&)*(it->second);
+				delete it->second; // Delete old one
+				it->second = reference; // Update reference
+				return;
 			}
 
-			template <typename T, typename = typename std::enable_if<std::is_base_of<Yac::Api::Object, T>::value>::type>
-			inline void Set(const std::string& key, const T& value) noexcept 
-			{ 
-				std::unordered_map<std::string, Yac::Api::Object*>::iterator it = _map.find(key);
+			_map[key] = reference; // Elsewise create new entry
+		}
 
-				// Allocate variable
-				std::size_t size = sizeof(T);
-				Yac::Api::Object* reference = (Yac::Api::Object*)std::malloc(size);
-				std::memcpy(reference, &value, size);
+	private:
 
-				// If variable exists
-				if (it != _map.end())
-				{
-					delete it->second; // Delete old one
-					it->second = reference; // Update reference
-					return;
-				}
+		std::unordered_map<std::string, Yac::Api::Object*> _map;
+	};
 
-				_map[key] = reference; // Elsewise create new entry
-			}
-
-		private:
-
-			std::unordered_map<std::string, Yac::Api::Object*> _map;
-		};
-
-	}
 }

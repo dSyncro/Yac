@@ -2,25 +2,22 @@
 
 #include "StatementType.h"
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		class Statement {
+	class Statement {
 
-		public:
+	public:
 
-			Statement() : _type(StatementType::None) {}
-			virtual ~Statement() {}
+		Statement() : _type(StatementType::None) {}
+		virtual ~Statement() {}
 
-			inline StatementType type() const noexcept { return _type; }
-			static Statement* Null() noexcept;
+		inline StatementType type() const noexcept { return _type; }
+		static Statement* Null() noexcept;
 
-		protected:
+	protected:
 
-			Statement(StatementType type) : _type(type) {}
-			StatementType _type;
+		Statement(StatementType type) : _type(type) {}
+		StatementType _type;
 
-		};
-
-	}
+	};
 }

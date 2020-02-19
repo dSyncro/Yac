@@ -2,24 +2,21 @@
 
 #include <yac/Syntax/SyntaxTree/SyntaxTree.h>
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		class Executor {
+	class Executor {
 
-		public:
+	public:
 
-			Executor(const SyntaxTree& tree);
+		Executor(const SyntaxTree& tree);
 
-			int Execute();
+		int Execute();
 
-		private:
+	private:
 
-			int EvaluateExpressionStatement();
+		int EvaluateExpressionStatement();
 
-			const Statement* _root;
+		const Statement* _root;
 
-		};
-
-	}
+	};
 }

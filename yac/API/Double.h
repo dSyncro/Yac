@@ -2,23 +2,21 @@
 
 #include "Object.h"
 
-namespace Yac {
-	namespace Api {
+namespace Yac::Api {
 
-		struct Double : Object {
+	struct Double final : Object {
 
-		public:
+	public:
 
-			Double(double n = 0) : _n(n) {}
+		Double(double n = 0) : _n(n) {}
 
-			operator double() const { return _n; }
+		operator double() const { return _n; }
 
-			virtual std::string ToString() const override { return std::to_string(_n); }
+		virtual std::string ToString() const override { return std::to_string(_n); }
 
-		private:
+	private:
 
-			double _n;
-		};
+		double _n;
+	};
 
-	}
 }

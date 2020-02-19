@@ -2,24 +2,21 @@
 
 #include "ExpressionType.h"
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		class Expression {
+	class Expression {
 
-		public:
+	public:
 
-			virtual ~Expression() {}
+		virtual ~Expression() {}
 
-			inline ExpressionType type() const noexcept { return _type; }
-			static Expression* Null() noexcept;
+		inline ExpressionType type() const noexcept { return _type; }
+		static Expression* Null() noexcept;
 
-		protected:
+	protected:
 
-			Expression(ExpressionType type) : _type(type) {}
-			ExpressionType _type = ExpressionType::None;
+		Expression(ExpressionType type) : _type(type) {}
+		ExpressionType _type = ExpressionType::None;
 
-		};
-
-	}
+	};
 }

@@ -4,21 +4,19 @@
 
 #include "Statement.h"
 
-namespace Yac {
-	namespace Syntax {
+namespace Yac::Syntax {
 
-		struct BlockStatement : Statement {
+	struct BlockStatement final : Statement {
 
-		public:
+	public:
 
-			BlockStatement(const std::vector<Statement*>& statements) : Statement(StatementType::Block), _statements(statements) {}
+		BlockStatement(const std::vector<Statement*>& statements) : Statement(StatementType::Block), _statements(statements) {}
 
-			inline const std::vector<Statement*>& statements() const { return _statements; }
+		inline const std::vector<Statement*>& statements() const { return _statements; }
 
-		private:
+	private:
 
-			std::vector<Statement*> _statements;
-		};
+		std::vector<Statement*> _statements;
+	};
 
-	}
 }

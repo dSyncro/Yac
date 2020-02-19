@@ -7,26 +7,23 @@
 
 #include <yac/Syntax/Tokens/TokenType.h>
 
-namespace Yac {
-	namespace Errors {
+namespace Yac::Errors {
 
-		struct ErrorList {
+	struct ErrorList final {
 
-		public:
+	public:
 
-			void Add(const Error& e) noexcept;
-			bool Any() const noexcept;
-			void Clear() noexcept;
-			unsigned int Count() const noexcept;
-			const Error& Get(unsigned int index) const;
-			const Error& operator [](unsigned int index) const;
+		void Add(const Error& e) noexcept;
+		bool Any() const noexcept;
+		void Clear() noexcept;
+		unsigned int Count() const noexcept;
+		const Error& Get(unsigned int index) const;
+		const Error& operator [](unsigned int index) const;
 
-		private:
+	private:
 
-			std::vector<Error> _errors;
-		};
+		std::vector<Error> _errors;
+	};
 
-		static ErrorList ErrorManager;
-
-	}
+	static ErrorList ErrorManager;
 }
