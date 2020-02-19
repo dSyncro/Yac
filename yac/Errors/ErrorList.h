@@ -16,7 +16,7 @@ namespace Yac::Errors {
 		void Add(const Error& e) noexcept;
 		bool Any() const noexcept;
 		void Clear() noexcept;
-		unsigned int Count() const noexcept;
+		std::size_t Count() const noexcept;
 		const Error& Get(unsigned int index) const;
 		const Error& operator [](unsigned int index) const;
 

@@ -8,7 +8,7 @@ bool ErrorList::Any() const noexcept { return _errors.size() > 0; }
 
 void ErrorList::Clear() noexcept { _errors.clear(); }
 
-unsigned int ErrorList::Count() const noexcept { return _errors.size(); }
+std::size_t ErrorList::Count() const noexcept { return _errors.size(); }
 
 const Error& ErrorList::Get(unsigned int index) const
 {
