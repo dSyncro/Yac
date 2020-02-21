@@ -12,7 +12,6 @@ namespace Yac::Syntax {
 	{
 	public:
 
-		Lexer(Yac::Text::SourceText source);
 		Lexer(Yac::Text::SourceText source, Yac::Errors::ErrorList& errorList);
 
 		Token Lex() noexcept;
@@ -23,6 +22,7 @@ namespace Yac::Syntax {
 
 		void ReadWhitespace() noexcept;
 		void ReadWord() noexcept;
+		void ReadStringLiteral() noexcept;
 		void ReadNumber(TokenType startingType = TokenType::Int) noexcept;
 		void ReadBinaryNumber() noexcept;
 		void ReadHexNumber() noexcept;

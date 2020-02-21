@@ -14,7 +14,6 @@ namespace Yac::Syntax {
 
 	public:
 
-		SyntaxTree(Yac::Text::SourceText source);
 		SyntaxTree(Yac::Text::SourceText source, Yac::Errors::ErrorList& errorList);
 		~SyntaxTree();
 

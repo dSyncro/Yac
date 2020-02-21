@@ -11,8 +11,6 @@ using namespace Yac::Text;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
 
-SyntaxTree::SyntaxTree(SourceText source) : SyntaxTree(source, ErrorManager) {}
-
 SyntaxTree::SyntaxTree(SourceText source, ErrorList& errorList)
 {
 	Parser parser = Parser(source, errorList);

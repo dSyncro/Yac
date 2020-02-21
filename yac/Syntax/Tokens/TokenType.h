@@ -71,6 +71,7 @@ namespace Yac::Syntax {
 		Word,
 		Identifier,
 		Keyword,
+		StringLiteral,
 
 		// Misc
 		Whitespace,
@@ -142,6 +143,7 @@ namespace Yac::Syntax {
 			"Word",
 			"Identifier",
 			"Keyword",
+			"StringLiteral",
 			"Whitespace",
 			"NewLine",
 			"EndOfFile",

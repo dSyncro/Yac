@@ -89,6 +89,7 @@
     <ClInclude Include="Syntax\Expressions\Operations\Operator.h" />
     <ClInclude Include="Syntax\Expressions\Operations\UnaryOperation.h" />
     <ClInclude Include="Syntax\Expressions\ParenthesesExpression.h" />
+    <ClInclude Include="Syntax\Expressions\StringExpression.h" />
     <ClInclude Include="Syntax\Statements\BlockStatement.h" />
     <ClInclude Include="Syntax\Statements\ExpressionStatement.h" />
     <ClInclude Include="Syntax\Statements\ForStatement.h" />

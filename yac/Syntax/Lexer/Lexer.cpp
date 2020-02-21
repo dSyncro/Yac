@@ -6,7 +6,6 @@ using namespace Yac::Text;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
 
-Lexer::Lexer(SourceText source) : _source(source), _reporter(ErrorReporter(&ErrorManager)) {}
 Lexer::Lexer(SourceText source, ErrorList& errorList) : _source(source), _reporter(errorList) {}
 
 Token Lexer::Lex() noexcept
@@ -41,6 +40,10 @@ Token Lexer::Lex() noexcept
 
 		case ' ': case '\t':
 			ReadWhitespace();
+			break;
+
+		case '"':
+			ReadStringLiteral();
 			break;
 
 		case '+':
@@ -130,7 +133,7 @@ Token Lexer::Lex() noexcept
 			else return ReadSymbol(TokenType::EndOfFile, "\0");
 
 		default:
-			if (std::isalpha(c)) ReadWord();
+			if (std::isalpha(c) || c == '_') ReadWord();
 			else
 			{
 				_reporter.ReportUnknownToken(c, TextSpan(_start, 1));
@@ -172,7 +175,7 @@ void Lexer::ReadWord() noexcept
 	{
 		char c = Current();
 
-		if (!std::isalpha(c))
+		if (!std::isalpha(c) && c != '_')
 		{
 			if (!std::isdigit(c)) break;
 			isSurelyIdentifier = true;
@@ -184,6 +187,25 @@ void Lexer::ReadWord() noexcept
 	}
 
 	_type = isSurelyIdentifier ? TokenType::Identifier : TokenType::Word;
+}
+
+void Lexer::ReadStringLiteral() noexcept
+{
+	_start = _position++;
+	while (Current() != '"') 
+	{ 
+		if (Current() == '\0')
+		{
+			std::size_t length = _position - _start;
+			_reporter.ReportUnexpectedToken(TokenType::Quote, TokenType::EndOfFile, TextSpan(_start, length));
+			return;
+		}
+
+		_position++; 
+	}
+
+	_position++; 
+	_type = TokenType::StringLiteral;
 }
 
 void Lexer::ReadNumber(TokenType startingType) noexcept

@@ -16,9 +16,12 @@ namespace Yac {
 
 				void Print(const Statement* statement, std::string indentation, bool isLast) noexcept;
 				void Print(const Expression* expression, std::string indentation, bool isLast) noexcept;
+
 				void PrintIndentation(std::string& indentation, bool isLast) noexcept;
+
 				void PrintExpression(const Expression* expression, const std::string& indentation) noexcept;
 				void PrintStatement(const Statement* statement, const std::string& indentation) noexcept;
+
 				void PrintNullExpression() noexcept;
 				void PrintAssignmentExpression(AssignmentExpression* expression, const std::string& indentation) noexcept;
 				void PrintBinaryOperation(BinaryOperation* expression, const std::string& indentation) noexcept;
@@ -26,7 +29,9 @@ namespace Yac {
 				void PrintNumericLiteral(NumericLiteral* expression, const std::string& indentation) noexcept;
 				void PrintParenthesesExpression(ParenthesesExpression* expression, const std::string& indentation) noexcept;
 				void PrintIdentifierExpression(IdentifierExpression* expression, const std::string& indentation) noexcept;
+				void PrintStringExpression(StringExpression* expression, const std::string& indentation) noexcept;
 				void PrintUnaryOperation(UnaryOperation* expression, const std::string& indentation) noexcept;
+
 				void PrintConditionalDeclaration(ConditionalDeclaration* expression, const std::string& indentation) noexcept;
 				void PrintInlineIfElse(InlineIfElse* expression, const std::string& indentation) noexcept;
 				void PrintNullStatement() noexcept;
@@ -77,6 +82,7 @@ namespace Yac {
 						case ExpressionType::BinaryOperation: return PrintBinaryOperation((BinaryOperation*)expression, indentation);
 						case ExpressionType::BooleanLiteral: return PrintBooleanLiteral((BooleanLiteral*)expression, indentation);
 						case ExpressionType::IdentifierExpression: return PrintIdentifierExpression((IdentifierExpression*)expression, indentation);
+						case ExpressionType::StringExpression: return PrintStringExpression((StringExpression*)expression, indentation);
 						case ExpressionType::NumericLiteral: return PrintNumericLiteral((NumericLiteral*)expression, indentation);
 						case ExpressionType::ParenthesesExpression: return PrintParenthesesExpression((ParenthesesExpression*)expression, indentation);
 						case ExpressionType::UnaryOperation: return PrintUnaryOperation((UnaryOperation*)expression, indentation);
@@ -183,6 +189,15 @@ namespace Yac {
 					// Identifier
 					PrintDecoration(indentation + "`---");
 					PrintData("Identifier", expression->identifier());
+				}
+
+				void PrintStringExpression(StringExpression* expression, const std::string& indentation) noexcept
+				{
+					Console::WriteLine("StringExpression");
+
+					// Identifier
+					PrintDecoration(indentation + "`---");
+					PrintData("literal", expression->text());
 				}
 
 				void PrintUnaryOperation(UnaryOperation* expression, const std::string& indentation) noexcept

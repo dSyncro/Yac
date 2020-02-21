@@ -10,8 +10,6 @@ using namespace Yac::Text;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
 
-Parser::Parser(SourceText source) : Parser(source, ErrorManager) {}
-
 Parser::Parser(SourceText source, ErrorList& errorList) : _reporter(errorList)
 {
 	Lexer lexer = Lexer(source, errorList);
@@ -244,6 +242,13 @@ Expression* Parser::ParseIdentifier() noexcept
 	}
 }
 
+Expression* Parser::ParseStringLiteral() noexcept
+{
+	std::string s = MatchAndConsume(TokenType::StringLiteral).text();
+	s = s.substr(1, s.length() - 2);
+	return new StringExpression(s);
+}
+
 Expression* Parser::ParsePrefix() noexcept
 {
 	TokenType type = Consume().type();
@@ -330,6 +335,7 @@ Expression* Parser::ParsePrimaryExpression() noexcept
 		case TokenType::Keyword: return ParseBoolean();
 
 		case TokenType::Identifier: return ParseIdentifier();
+		case TokenType::StringLiteral: return ParseStringLiteral();
 		default: return ParsePrefix();
 	}
 }

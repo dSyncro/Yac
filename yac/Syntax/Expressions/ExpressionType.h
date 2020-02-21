@@ -5,6 +5,7 @@ namespace Yac::Syntax {
 	enum class ExpressionType {
 		None,
 		IdentifierExpression,
+		StringExpression,
 		AssignmentExpression,
 		ParenthesesExpression,
 		NumericLiteral,
