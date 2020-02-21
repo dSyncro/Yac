@@ -100,6 +100,7 @@
     <ClInclude Include="Syntax\SyntaxRules.h" />
     <ClInclude Include="Syntax\Expressions\Expression.h" />
     <ClInclude Include="Syntax\SyntaxTree\AstPrinter.h" />
+    <ClInclude Include="Syntax\SyntaxTree\CompilationUnit.h" />
     <ClInclude Include="Syntax\Tokens\Keyword.h" />
     <ClInclude Include="Syntax\Lexer\Lexer.h" />
     <ClInclude Include="Syntax\Expressions\Operations\BinaryOperation.h" />

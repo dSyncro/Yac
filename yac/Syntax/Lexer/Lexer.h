@@ -12,7 +12,8 @@ namespace Yac::Syntax {
 	{
 	public:
 
-		Lexer(Yac::Text::SourceText text);
+		Lexer(Yac::Text::SourceText source);
+		Lexer(Yac::Text::SourceText source, Yac::Errors::ErrorList& errorList);
 
 		Token Lex() noexcept;
 

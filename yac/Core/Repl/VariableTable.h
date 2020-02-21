@@ -14,7 +14,7 @@ namespace Yac::Core {
 		template <typename T, typename = typename std::enable_if<std::is_base_of<Yac::Api::Object, T>::value>::type>
 		T Get(const std::string& key) const noexcept
 		{
-			auto it = _map.find(key);
+			std::unordered_map<std::string, Yac::Api::Object*>::const_iterator it = _map.find(key);
 			if (it == _map.end()) return T();
 			return (T&)*(it->second);
 		}

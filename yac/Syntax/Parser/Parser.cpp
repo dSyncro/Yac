@@ -10,9 +10,11 @@ using namespace Yac::Text;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
 
-Parser::Parser(SourceText source)
+Parser::Parser(SourceText source) : Parser(source, ErrorManager) {}
+
+Parser::Parser(SourceText source, ErrorList& errorList) : _reporter(errorList)
 {
-	Lexer lexer = Lexer(source);
+	Lexer lexer = Lexer(source, errorList);
 	Token t;
 	do
 	{

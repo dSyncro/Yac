@@ -4,12 +4,19 @@
 
 #include <yac/Libraries/Console/Console.h>
 #include <yac/Syntax/Executor/Executor.h>
-#include <yac/Syntax/SyntaxTree/SyntaxTree.h>
+#include <Yac/Syntax/SyntaxTree/CompilationUnit.h>
 #include <yac/Syntax/SyntaxTree/AstPrinter.h>
+
+#include "Commands/ReplCommands.h"
+#include "VariableTable.h"
 
 using namespace Yac::Api;
 using namespace Yac::Core;
+using namespace Yac::Errors;
 using namespace Yac::Syntax;
+
+Repl::Repl() : _commands(ReplCommandTable), _variables(VariableTable()) {}
+Repl::Repl(CommandTable commands, VariableTable variables) : _commands(commands), _variables(variables) {}
 
 void Repl::Run()
 {
@@ -40,10 +47,20 @@ void Repl::Loop()
 			continue;
 		}
 
-		SyntaxTree tree = SyntaxTree(line);
-		Bool showsDebug = _variables.Get<Bool>("showdebuginfo");
-		if (showsDebug) 
-			AstPrinter::Print(tree);
+		CompilationUnit unit = CompilationUnit(line);
+
+		const ErrorList& e = unit.errors();
+		if (e.Any())
+		{
+			for (unsigned int i = 0; i < e.Count(); i++)
+				Console::Error(e[i].message());
+		}
+		else
+		{
+			Bool showsDebug = _variables.Get<Bool>("showdebuginfo");
+			if (showsDebug)
+				AstPrinter::Print(unit.Tree);
+		}
 
 		//Executor e = Executor(tree);
 		//Console::Alert(e.Execute());

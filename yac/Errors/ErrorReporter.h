@@ -8,11 +8,10 @@ namespace Yac::Errors {
 
 	public:
 
-		ErrorReporter() : _list(&ErrorManager) {}
 		ErrorReporter(ErrorList* list) : _list(list) {}
 		ErrorReporter(ErrorList& list) : _list(&list) {}
 
-		ErrorList& GetList() const noexcept { return *_list; }
+		inline ErrorList& GetList() const noexcept { return *_list; }
 
 		void ReportUnexpectedToken(
 			Yac::Syntax::TokenType expected,
@@ -24,7 +23,7 @@ namespace Yac::Errors {
 
 		void ReportNotABooleanLiteral(const std::string& text, const Yac::Text::TextSpan& span) const noexcept;
 
-		void Clear() const noexcept { _list->Clear(); }
+		inline void Clear() const noexcept { _list->Clear(); }
 
 	private:
 

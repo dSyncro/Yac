@@ -6,7 +6,8 @@ using namespace Yac::Text;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
 
-Lexer::Lexer(SourceText source) : _source(source), _reporter(ErrorReporter()) {}
+Lexer::Lexer(SourceText source) : _source(source), _reporter(ErrorReporter(&ErrorManager)) {}
+Lexer::Lexer(SourceText source, ErrorList& errorList) : _source(source), _reporter(errorList) {}
 
 Token Lexer::Lex() noexcept
 {

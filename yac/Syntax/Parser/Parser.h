@@ -18,6 +18,7 @@ namespace Yac::Syntax {
 	public:
 
 		Parser(Yac::Text::SourceText source);
+		Parser(Yac::Text::SourceText source, Yac::Errors::ErrorList& errorList);
 
 		Statement* Parse();
 

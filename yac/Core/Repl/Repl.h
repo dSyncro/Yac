@@ -3,14 +3,15 @@
 #include <string>
 
 #include "Commands/CommandTable.h"
-#include "Commands/ReplCommands.h"
-#include "VariableTable.h"
 
 namespace Yac::Core {
 
 	class Repl final {
 
 	public:
+		
+		Repl();
+		Repl(CommandTable commands, VariableTable variables);
 
 		void Run();
 		void Stop();
@@ -22,8 +23,8 @@ namespace Yac::Core {
 
 		bool _isRunning = false;
 
-		CommandTable _commands = ReplCommandTable;
-		VariableTable _variables = VariableTable();
+		CommandTable _commands;
+		VariableTable _variables;
 	};
 
 }
