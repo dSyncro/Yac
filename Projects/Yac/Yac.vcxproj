@@ -576,6 +576,7 @@
     <ClInclude Include="Errors\Exceptions\ObjectConversionException.h" />
     <ClInclude Include="Libraries\AnsiStyle\AnsiStyle.h" />
     <ClInclude Include="Libraries\Console\Console.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Syntax\Binding\BoundObject.h" />
     <ClInclude Include="Syntax\Executor\Executor.h" />
     <ClInclude Include="Syntax\Executor\Scope.h" />
@@ -631,7 +632,6 @@
     <ClCompile Include="Errors\ErrorList.cpp" />
     <ClCompile Include="Errors\ErrorReporter.cpp" />
     <ClCompile Include="Libraries\AnsiStyle\AnsiStyle.cpp" />
-    <ClCompile Include="Libraries\Console\Console.cpp" />
     <ClCompile Include="Syntax\Executor\Executor.cpp" />
     <ClCompile Include="Syntax\Expressions\Expression.cpp" />
     <ClCompile Include="Syntax\Expressions\Numeric\NumericLiteral.cpp" />
@@ -648,6 +648,9 @@
     <ClCompile Include="Syntax\Tokens\Token.cpp" />
     <ClCompile Include="Text\SourceText.cpp" />
     <ClCompile Include="entrypoint.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

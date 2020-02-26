@@ -279,6 +279,7 @@
     <ClInclude Include="Text\TextSpan.h">
       <Filter>Text</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Repl\Commands\Command.cpp">
@@ -313,9 +314,6 @@
     </ClCompile>
     <ClCompile Include="Libraries\AnsiStyle\AnsiStyle.cpp">
       <Filter>Libraries\AnsiStyle</Filter>
-    </ClCompile>
-    <ClCompile Include="Libraries\Console\Console.cpp">
-      <Filter>Libraries\Console</Filter>
     </ClCompile>
     <ClCompile Include="Syntax\Executor\Executor.cpp">
       <Filter>Syntax\Executor</Filter>
@@ -363,5 +361,8 @@
       <Filter>Text</Filter>
     </ClCompile>
     <ClCompile Include="entrypoint.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
 </Project>
