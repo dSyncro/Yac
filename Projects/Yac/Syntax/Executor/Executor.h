@@ -40,7 +40,10 @@ namespace Yac::Syntax {
 		BoundObject* EvaluateConditionalDeclaration(const ConditionalDeclaration* expression);
 		BoundObject* EvaluateInlineIfElse(const InlineIfElse* expression);
 
-		Scope _scope = Scope();
+		void PushScope() noexcept;
+		void PopScope() noexcept;
+
+		Scope* _scope = new Scope();
 
 	};
 }

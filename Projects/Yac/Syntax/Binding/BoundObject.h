@@ -1,7 +1,7 @@
 #pragma once
 
 #include <API/Object.h>
-#include <DataTypes/TypeSymbol.h>
+#include <DataTypes/Types/TypeSymbol.h>
 
 namespace Yac::Syntax::Binding {
 

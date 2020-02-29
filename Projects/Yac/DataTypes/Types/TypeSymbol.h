@@ -8,6 +8,7 @@ namespace Yac::DataTypes {
 
 	public:
 
+		TypeSymbol() : _name("void") {}
 		TypeSymbol(std::string name) : _name(name) {}
 
 		friend bool operator ==(const TypeSymbol& a, const TypeSymbol& b) 

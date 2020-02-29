@@ -2,11 +2,13 @@
 
 #include <string>
 
+#include "IStringable.h"
+
 #include <Errors/Exceptions/ObjectConversionException.h>
 
 namespace Yac::Api {
 
-	struct Object {
+	struct Object : IStringable {
 
 	public:
 

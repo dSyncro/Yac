@@ -1,8 +1,7 @@
 #pragma once
 
-#include "TypeSymbol.h"
-
 #include <API/Object.h>
+#include <DataTypes/Types/TypeSymbol.h>
 
 namespace Yac::DataTypes {
 

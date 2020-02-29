@@ -114,27 +114,6 @@
     <ClInclude Include="Core\Repl\VariableTable.h">
       <Filter>Core\Repl</Filter>
     </ClInclude>
-    <ClInclude Include="DataTypes\Converter.h">
-      <Filter>DataTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTypes\Data.h">
-      <Filter>DataTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTypes\Primitives.h">
-      <Filter>DataTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTypes\StaticTypeSymbols.h">
-      <Filter>DataTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTypes\TypeSymbol.h">
-      <Filter>DataTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTypes\TypeTable.h">
-      <Filter>DataTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTypes\Variable.h">
-      <Filter>DataTypes</Filter>
-    </ClInclude>
     <ClInclude Include="Errors\Error.h">
       <Filter>Errors</Filter>
     </ClInclude>
@@ -280,6 +259,29 @@
       <Filter>Text</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Errors\Exceptions\WrongConverterException.h" />
+    <ClInclude Include="API\IStringable.h" />
+    <ClInclude Include="Syntax\Executor\NameTable.h" />
+    <ClInclude Include="DataTypes\ConversionTable.h" />
+    <ClInclude Include="DataTypes\Conversion.h" />
+    <ClInclude Include="DataTypes\Variables\Data.h">
+      <Filter>DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes\Variables\Variable.h">
+      <Filter>DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes\Types\StaticTypeSymbols.h">
+      <Filter>DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes\Types\TypeSymbol.h">
+      <Filter>DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes\Types\TypeTable.h">
+      <Filter>DataTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes\Types\Primitives.h">
+      <Filter>DataTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Repl\Commands\Command.cpp">
@@ -296,15 +298,6 @@
     </ClCompile>
     <ClCompile Include="Core\Repl\Repl.cpp">
       <Filter>Core\Repl</Filter>
-    </ClCompile>
-    <ClCompile Include="DataTypes\Converter.cpp">
-      <Filter>DataTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="DataTypes\Data.cpp">
-      <Filter>DataTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="DataTypes\Variable.cpp">
-      <Filter>DataTypes</Filter>
     </ClCompile>
     <ClCompile Include="Errors\ErrorList.cpp">
       <Filter>Errors</Filter>
@@ -361,6 +354,13 @@
       <Filter>Text</Filter>
     </ClCompile>
     <ClCompile Include="entrypoint.cpp" />
+    <ClCompile Include="Syntax\Executor\NameTable.cpp" />
+    <ClCompile Include="DataTypes\Variables\Data.cpp">
+      <Filter>DataTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTypes\Variables\Variable.cpp">
+      <Filter>DataTypes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />

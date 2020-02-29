@@ -15,6 +15,8 @@ namespace Yac::Syntax {
 		Scope() : _parent(nullptr) {}
 		Scope(Scope& parent) : _parent(&parent) {}
 
+		inline Scope* Parent() const noexcept { return _parent; }
+
 		BoundObject* FindSelf(const std::string& identifier) const
 		{
 			auto it = _variables.find(identifier);

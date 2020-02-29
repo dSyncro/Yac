@@ -6,7 +6,8 @@
 
 #include <Core/Repl/VariableTable.h>
 
-#include <DataTypes/StaticTypeSymbols.h>
+#include <DataTypes/Conversion.h>
+#include <DataTypes/Types/StaticTypeSymbols.h>
 
 using namespace Yac::Api;
 using namespace Yac::Core;
@@ -110,7 +111,7 @@ void Executor::EvaluateExpressionStatement(const ExpressionStatement* statement)
 
 BoundObject* Executor::EvaluateIdentifierExpression(const IdentifierExpression* expression)
 {
-	return _scope.FindInHierarchy(expression->identifier());
+	return _scope->FindInHierarchy(expression->identifier());
 }
 
 BoundObject* Executor::EvaluateStringExpression(const StringExpression* expression)
@@ -122,7 +123,7 @@ BoundObject* Executor::EvaluateAssignmentExpression(const AssignmentExpression* 
 {
 	std::string name;
 	BoundObject* value = EvaluateExpression(expression);
-	_scope.Set(name, value);
+	_scope->Set(name, value);
 	return nullptr;
 }
 
@@ -167,4 +168,18 @@ BoundObject* Executor::EvaluateInlineIfElse(const InlineIfElse* expression)
 {
 	Bool condition = EvaluateExpression(expression->condition())->Reference();
 	return condition ? EvaluateExpression(expression->True()) : EvaluateExpression(expression->False());
+}
+
+void Executor::PushScope() noexcept
+{
+	_scope = new Scope(*_scope);
+}
+
+void Executor::PopScope() noexcept
+{
+	Scope* parent = _scope->Parent();
+
+	delete _scope;
+
+	_scope = parent ? parent : new Scope();
 }
