@@ -16,4 +16,5 @@ namespace Yac::DataTypes {
 
 	const TypeSymbol StringTypeSymbol = TypeSymbol("string");
 
+	const TypeSymbol VoidTypeSymbol = TypeSymbol("void");
 }

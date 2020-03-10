@@ -13,7 +13,6 @@ using namespace Yac::Api;
 using namespace Yac::Core;
 using namespace Yac::DataTypes;
 using namespace Yac::Syntax;
-using namespace Yac::Syntax::Binding;
 
 int Executor::Execute()
 {
@@ -36,7 +35,7 @@ void Executor::EvaluateStatement(const Statement* statement)
 	}
 }
 
-BoundObject* Executor::EvaluateExpression(const Expression* expression)
+Data Executor::EvaluateExpression(const Expression* expression)
 {
 	switch (expression->type())
 	{
@@ -72,17 +71,17 @@ void Executor::EvaluateVariableDeclaration(const VariableDeclaration* statement)
 
 void Executor::EvaluateIfStatement(const IfStatement* statement)
 {
-	bool condition = EvaluateExpression(statement->condition());
+	bool condition = EvaluateExpression(statement->condition()).value();
 	EvaluateStatement(condition ? statement->statement() : statement->elseStatement());
 }
 
 void Executor::EvaluateForStatement(const ForStatement* statement)
 {
-	BoundObject* init = EvaluateExpression(statement->assignment());
-	BoundObject* condition = EvaluateExpression(statement->condition());
-	BoundObject* update = EvaluateExpression(statement->update());
+	Data init = EvaluateExpression(statement->assignment());
+	Data condition = EvaluateExpression(statement->condition());
+	Data update = EvaluateExpression(statement->update());
 
-	while (condition)
+	while ((bool)condition.value())
 	{
 		EvaluateStatement(statement->statement());
 		EvaluateExpression(statement->update());
@@ -92,9 +91,9 @@ void Executor::EvaluateForStatement(const ForStatement* statement)
 
 void Executor::EvaluateWhileStatement(const WhileStatement* statement)
 {
-	BoundObject* condition = EvaluateExpression(statement->condition());
+	Data condition = EvaluateExpression(statement->condition());
 
-	while (condition)
+	while ((bool)condition.value())
 	{
 		EvaluateStatement(statement->statement());
 		condition = EvaluateExpression(statement->condition());
@@ -109,77 +108,85 @@ void Executor::EvaluateExpressionStatement(const ExpressionStatement* statement)
 
 // Expressions
 
-BoundObject* Executor::EvaluateIdentifierExpression(const IdentifierExpression* expression)
+Data Executor::EvaluateIdentifierExpression(const IdentifierExpression* expression)
 {
 	return _scope->FindInHierarchy(expression->identifier());
 }
 
-BoundObject* Executor::EvaluateStringExpression(const StringExpression* expression)
+Data Executor::EvaluateStringExpression(const StringExpression* expression)
 {
-	return new BoundObject(StringTypeSymbol, new String(expression->text()));
+	return Data(StringTypeSymbol, new String(expression->text()));
 }
 
-BoundObject* Executor::EvaluateAssignmentExpression(const AssignmentExpression* expression)
+Data Executor::EvaluateAssignmentExpression(const AssignmentExpression* expression)
 {
 	std::string name;
-	BoundObject* value = EvaluateExpression(expression);
+	Data value = EvaluateExpression(expression);
 	_scope->Set(name, value);
-	return nullptr;
+	return value;
 }
 
-BoundObject* Executor::EvaluateParethesesExpression(const ParenthesesExpression* expression)
+Data Executor::EvaluateParethesesExpression(const ParenthesesExpression* expression)
 {
 	return EvaluateExpression(expression->expression());
 }
 
-BoundObject* Executor::EvaluateNumericLiteral(const NumericLiteral* expression)
+Data Executor::EvaluateNumericLiteral(const NumericLiteral* expression)
 {
 	switch (expression->numeric_type())
 	{
-		case NumericType::Int: return new BoundObject(IntTypeSymbol, new Int(expression->ToInt()));
-		case NumericType::UInt: return new BoundObject(UIntTypeSymbol, new UInt(expression->ToUInt()));
-		case NumericType::Float: return new BoundObject(FloatTypeSymbol, new Float(expression->ToFloat()));
-		case NumericType::Double: return new BoundObject(DoubleTypeSymbol, new Double(expression->ToDouble()));
+		case NumericType::Int: return Data(IntTypeSymbol, new Int(expression->ToInt()));
+		case NumericType::UInt: return Data(UIntTypeSymbol, new UInt(expression->ToUInt()));
+		case NumericType::Float: return Data(FloatTypeSymbol, new Float(expression->ToFloat()));
+		case NumericType::Double: return Data(DoubleTypeSymbol, new Double(expression->ToDouble()));
 		default: return nullptr;
 	}
 }
 
-BoundObject* Executor::EvaluateBooleanLiteral(const BooleanLiteral* expression)
+Data Executor::EvaluateBooleanLiteral(const BooleanLiteral* expression)
 {
-	return new BoundObject(BoolTypeSymbol, new Bool(expression->value()));
+	return Data(BoolTypeSymbol, new Bool(expression->value()));
 }
 
-BoundObject* Executor::EvaluateUnaryOperation(const UnaryOperation* expression)
+Data Executor::EvaluateUnaryOperation(const UnaryOperation* expression)
+{
+	Data object = EvaluateExpression(expression->operand());
+	switch (expression->operation())
+	{
+		case Operator::Identity:
+			//UnaryOperatorOverload overload = UnaryOperatorOverload(Operator::Identity, object.type(), object.type());
+			//_operators.Call(overload, object.value(), *data);
+			return object;
+		case Operator::Negation:
+			return object;
+		case Operator::PreIncrement:
+			return object;
+		case Operator::PreDecrement:
+			return object;
+		case Operator::LogicalNot:
+			return object;
+		case Operator::OneComplementary:
+			return object;
+		case Operator::PostIncrement:
+			return object;
+		case Operator::PostDecrement:
+			return object;
+		default: return object;
+	}
+}
+
+Data Executor::EvaluateBinaryOperation(const BinaryOperation* expression)
 {
 	return nullptr;
 }
 
-BoundObject* Executor::EvaluateBinaryOperation(const BinaryOperation* expression)
+Data Executor::EvaluateConditionalDeclaration(const ConditionalDeclaration* expression)
 {
 	return nullptr;
 }
 
-BoundObject* Executor::EvaluateConditionalDeclaration(const ConditionalDeclaration* expression)
+Data Executor::EvaluateInlineIfElse(const InlineIfElse* expression)
 {
-	return nullptr;
-}
-
-BoundObject* Executor::EvaluateInlineIfElse(const InlineIfElse* expression)
-{
-	Bool condition = EvaluateExpression(expression->condition())->Reference();
+	Bool condition = EvaluateExpression(expression->condition()).value();
 	return condition ? EvaluateExpression(expression->True()) : EvaluateExpression(expression->False());
-}
-
-void Executor::PushScope() noexcept
-{
-	_scope = new Scope(*_scope);
-}
-
-void Executor::PopScope() noexcept
-{
-	Scope* parent = _scope->Parent();
-
-	delete _scope;
-
-	_scope = parent ? parent : new Scope();
 }

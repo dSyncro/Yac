@@ -132,13 +132,7 @@
     <ClInclude Include="Libraries\Console\Console.h">
       <Filter>Libraries\Console</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Binding\BoundObject.h">
-      <Filter>Syntax\Binding</Filter>
-    </ClInclude>
     <ClInclude Include="Syntax\Executor\Executor.h">
-      <Filter>Syntax\Executor</Filter>
-    </ClInclude>
-    <ClInclude Include="Syntax\Executor\Scope.h">
       <Filter>Syntax\Executor</Filter>
     </ClInclude>
     <ClInclude Include="Syntax\Expressions\Assignment\AssignmentExpression.h">
@@ -282,6 +276,16 @@
     <ClInclude Include="DataTypes\Types\Primitives.h">
       <Filter>DataTypes</Filter>
     </ClInclude>
+    <ClInclude Include="DataTypes\Operators\UnaryOperatorOverload.h" />
+    <ClInclude Include="DataTypes\Operators\OperatorsTable.h" />
+    <ClInclude Include="DataTypes\Operators\BinaryOperatorOverload.h" />
+    <ClInclude Include="DataTypes\Operators\OperatorOverloads.h" />
+    <ClInclude Include="DataTypes\Variables\Scope.h">
+      <Filter>Syntax\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\AllocationTracking\AllocationTracking.h" />
+    <ClInclude Include="Libraries\AllocationTracking\AutomaticTracker.h" />
+    <ClInclude Include="Libraries\Platform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Repl\Commands\Command.cpp">
@@ -310,9 +314,6 @@
     </ClCompile>
     <ClCompile Include="Syntax\Executor\Executor.cpp">
       <Filter>Syntax\Executor</Filter>
-    </ClCompile>
-    <ClCompile Include="Syntax\Expressions\Expression.cpp">
-      <Filter>Syntax\Expressions</Filter>
     </ClCompile>
     <ClCompile Include="Syntax\Expressions\Numeric\NumericLiteral.cpp">
       <Filter>Syntax\Expressions\Numeric</Filter>
@@ -361,6 +362,11 @@
     <ClCompile Include="DataTypes\Variables\Variable.cpp">
       <Filter>DataTypes</Filter>
     </ClCompile>
+    <ClCompile Include="DataTypes\Operators\BinaryOperatorOverload.cpp" />
+    <ClCompile Include="DataTypes\Operators\UnaryOperatorOverload.cpp" />
+    <ClCompile Include="DataTypes\Variables\Scope.cpp" />
+    <ClCompile Include="Libraries\AllocationTracking\AllocationTracking.cpp" />
+    <ClCompile Include="Libraries\Console\Console.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />

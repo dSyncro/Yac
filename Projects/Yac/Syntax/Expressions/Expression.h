@@ -11,7 +11,6 @@ namespace Yac::Syntax {
 		virtual ~Expression() {}
 
 		inline ExpressionType type() const noexcept { return _type; }
-		static Expression* Null() noexcept;
 
 	protected:
 

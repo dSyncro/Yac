@@ -6,6 +6,8 @@
 #include <Syntax/Expressions/Expressions.h>
 #include <Syntax/Statements/Statements.h>
 
+#include <Libraries/AllocationTracking/AutomaticTracker.h>
+
 using namespace Yac::Text;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
@@ -183,7 +185,7 @@ Statement* Parser::ParseVariableDeclaration(Keyword keyword) noexcept
 
 	// Assignment is optional
 	bool assign = Match(TokenType::EqualSymbol);
-	Expression* value = Expression::Null();
+	Expression* value = nullptr;
 	if (assign)
 	{
 		Step(); // Current token is 'equal'
