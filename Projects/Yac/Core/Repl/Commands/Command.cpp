@@ -1,50 +1,74 @@
 #include "Command.h"
+#include <Syntax/Lexer/Lexer.h>
 
 using namespace Yac::Core;
+using namespace Yac::Errors;
+using namespace Yac::Syntax;
+using namespace Yac::Text;
 
-Command::Command(std::string command, const std::vector<std::string> parameters) : _cmd(command), _params(parameters) {}
+Command::Command(const std::string& command, const ParameterList& parameters) : _cmd(command), _params(parameters) {}
 
-Command Command::Parse(std::string line) noexcept
+Command Command::parse(const std::string& line) noexcept
 {
-	line.erase(0, 1); // remove '#'
+	std::string cmd = "";
+	ParameterList params;
 
-	std::string cmd;
-	std::vector<std::string> params;
+	std::string actualLine = line.substr(1);
+	SourceText source = SourceText(actualLine);
+	ErrorList errorList = ErrorList();
+	Lexer lexer = Lexer(source, errorList);
 
-	bool isCmd = true;
-	unsigned int start = 0;
+	TokenList tokens;
 
-	// Parse parameters
-	for (unsigned int i = 0; i < line.length(); i++)
+	Token currentToken;
+	do
 	{
-		if (line[i] != ' ') continue;
+		currentToken = lexer.consumeNext();
+		if (currentToken.getType() != TokenType::Whitespace && currentToken.getType() != TokenType::Newline)
+			tokens.push_back(currentToken);
+	} while (currentToken.getType() != TokenType::EndOfFile);
 
-		unsigned int length = i - start;
-		std::string token = line.substr(start, length);
+	UInt i = 0;
+	TokenType currentType = TokenType::Unknown;
 
-		if (isCmd)
+	// Find command
+	// First token is '#', Last is EoF
+	for (i; i < tokens.size() - 1; i++)
+	{
+		currentToken = tokens[i];
+		currentType = currentToken.getType();
+
+		if (!isWord(currentType))
+			errorList.reportUnexpectedToken(TokenType::StringLiteral, currentType, currentToken.getSpan());
+		else
 		{
-			cmd = token;
-			isCmd = false;
+			cmd = currentToken.getText();
+			i++;
+			break;
 		}
-		else params.push_back(token);
-
-		start = i + 1;
 	}
 
-	// Last or Unique parameter
-	if (start < line.length())
-	{
-		std::size_t length = line.length() - start;
-		std::string token = line.substr(start, length);
+	if (cmd.empty())
+		errorList.reportUnexpectedToken(TokenType::Identifier, TokenType::EndOfFile, currentToken.getSpan());
 
-		if (isCmd)
+	// Collect params
+	// Last is EoF
+	for (i; i < tokens.size() - 1; i++)
+	{
+		currentToken = tokens[i];
+		TokenType currentType = currentToken.getType();
+
+		if (isWord(currentType) || isNumeric(currentType))
 		{
-			cmd = token;
-			isCmd = false;
+			params.push_back(currentToken.getText());
+			continue;
 		}
-		else params.push_back(token);
+		else
+			errorList.reportUnexpectedToken(TokenType::StringLiteral, currentType, currentToken.getSpan());
 	}
+
+	if (errorList.any())
+		return Command("", {});
 
 	return Command(cmd, params);
 }

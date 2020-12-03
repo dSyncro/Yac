@@ -27,8 +27,9 @@ SourceText::SourceText(std::string text)
 
 SourceText::SourceText(std::ifstream& stream)
 {
-	std::size_t start = 0;
 	std::string line;
+	std::size_t start = 0;
+	
 	while (std::getline(stream, line))
 	{
 		std::size_t length = line.length();

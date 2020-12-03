@@ -2,9 +2,10 @@
 
 #include <string>
 
+#include <Core/Primitives.h>
 #include <Syntax/Tokens/Token.h>
-#include <Errors/ErrorReporter.h>
 #include <Text/SourceText.h>
+#include <Errors/ErrorList.h>
 
 namespace Yac::Syntax {
 
@@ -12,28 +13,28 @@ namespace Yac::Syntax {
 	{
 	public:
 
-		Lexer(Yac::Text::SourceText source, Yac::Errors::ErrorList& errorList);
+		Lexer(const Yac::Text::SourceText& source, Yac::Errors::ErrorList& errorList);
 
-		Token Lex() noexcept;
+		Token consumeNext() noexcept;
 
 	private:
 
-		void StepLine() noexcept;
+		void stepLine() noexcept;
 
-		void ReadWhitespace() noexcept;
-		void ReadWord() noexcept;
-		void ReadStringLiteral() noexcept;
-		void ReadNumber(TokenType startingType = TokenType::Int) noexcept;
-		void ReadBinaryNumber() noexcept;
-		void ReadHexNumber() noexcept;
-		Token ReadSymbol(TokenType type, const char* text, unsigned int length = 1) noexcept;
+		void readWhitespace() noexcept;
+		void readStringLiteral() noexcept;
+		void readNumber(TokenType startingType = TokenType::Int) noexcept;
+		void readBinaryNumber() noexcept;
+		void readHexNumber() noexcept;
+		Token produceWord() noexcept; 
+		Token produceSymbol(TokenType type, const char* text, Yac::UInt length = 1) noexcept;
 
-		inline char Current() const noexcept { return Peek(0); }
-		inline char Next() const noexcept { return Peek(1); }
+		char getCurrent() const noexcept { return peek(0); }
+		char getNext() const noexcept { return peek(1); }
 
-		char Peek(unsigned int offset) const noexcept;
+		char peek(unsigned int offset) const noexcept;
 
-		const Yac::Text::Line& CurrentLine() const noexcept;
+		const Yac::Text::Line& getCurrentLine() const noexcept;
 
 		TokenType _type = TokenType::None;
 		unsigned int _position = 0, _start = 0, _line = 0;
@@ -41,6 +42,6 @@ namespace Yac::Syntax {
 		std::string _text;
 		Yac::Text::SourceText _source;
 
-		Yac::Errors::ErrorReporter _reporter;
+		Yac::Errors::ErrorList& _errorList;
 	};
 }

@@ -28,9 +28,9 @@ namespace std {
         std::size_t operator()(const Yac::DataTypes::BinaryOperatorOverload& overload) const noexcept
         {
             std::size_t h1 = std::hash<unsigned int>{}((unsigned int)overload.Operation);
-            std::size_t h2 = std::hash<std::string>{}(overload.FirstOperandType.name());
-            std::size_t h3 = std::hash<std::string>{}(overload.SecondOperandType.name());
-            std::size_t h4 = std::hash<std::string>{}(overload.ReturnType.name());
+            std::size_t h2 = std::hash<std::string>{}(overload.FirstOperandType.getName());
+            std::size_t h3 = std::hash<std::string>{}(overload.SecondOperandType.getName());
+            std::size_t h4 = std::hash<std::string>{}(overload.ReturnType.getName());
             return h1 ^ (h2 ^ (h3 ^ (h4 << 1)) << 1) << 1;
         }
     };

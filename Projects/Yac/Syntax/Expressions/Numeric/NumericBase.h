@@ -10,7 +10,7 @@ namespace Yac::Syntax {
 		Hex = 16,
 	};
 
-	inline std::string ToString(NumericBase base)
+	inline std::string toString(NumericBase base)
 	{
 		switch (base)
 		{

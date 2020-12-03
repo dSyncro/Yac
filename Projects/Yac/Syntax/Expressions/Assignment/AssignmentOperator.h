@@ -38,7 +38,7 @@ namespace Yac {
 
 		}
 
-		inline std::string ToString(AssignmentOperator op)
+		inline std::string toString(AssignmentOperator op)
 		{
 			return AssignmentOperatorString[(unsigned int)op];
 		}

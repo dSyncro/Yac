@@ -4,6 +4,6 @@
 
 struct IStringable {
 
-	virtual std::string ToString() const = 0;
+	virtual std::string toString() const = 0;
 
 };

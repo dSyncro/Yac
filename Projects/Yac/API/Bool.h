@@ -12,7 +12,7 @@ namespace Yac::Api {
 
 		operator bool() const { return _b; }
 
-		virtual std::string ToString() const override { return _b == 0 ? "false" : "true"; }
+		virtual std::string toString() const override { return _b == 0 ? "false" : "true"; }
 
 	private:
 

@@ -11,13 +11,13 @@ namespace Yac::DataTypes {
 
 	public:
 
-		void Register(const TypeSymbol& symbol) noexcept
+		void add(const TypeSymbol& symbol) noexcept
 		{
-			if (!Contains(symbol))
+			if (!contains(symbol))
 				_table.push_back(symbol);
 		}
 
-		bool Contains(const TypeSymbol& symbol) const noexcept
+		bool contains(const TypeSymbol& symbol) const noexcept
 		{
 			for (const TypeSymbol& s : _table)
 				if (s == symbol) return true;

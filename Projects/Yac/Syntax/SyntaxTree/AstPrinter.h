@@ -6,23 +6,19 @@
 
 #include <iostream>
 
-namespace Yac {
-	namespace Syntax {
-		namespace AstPrinter
-		{
-			struct FormattingOptions {
-				AnsiStyle::Forecolors DecoratorsColor = AnsiStyle::Forecolors::White;
-				AnsiStyle::Forecolors StatementColor = AnsiStyle::Forecolors::Cyan;
-				AnsiStyle::Forecolors ExpressionColor = AnsiStyle::Forecolors::Yellow;
-				AnsiStyle::Forecolors DataColor = AnsiStyle::Forecolors::White;
-				AnsiStyle::Forecolors LabelColor = AnsiStyle::Forecolors::Green;
-			};
+namespace Yac::Syntax::AstPrinter {
 
-			extern FormattingOptions formattingOptions;
+	struct FormattingOptions {
+		AnsiStyle::Forecolors DecoratorsColor = AnsiStyle::Forecolors::White;
+		AnsiStyle::Forecolors StatementColor = AnsiStyle::Forecolors::Cyan;
+		AnsiStyle::Forecolors ExpressionColor = AnsiStyle::Forecolors::Yellow;
+		AnsiStyle::Forecolors DataColor = AnsiStyle::Forecolors::White;
+		AnsiStyle::Forecolors LabelColor = AnsiStyle::Forecolors::Green;
+	};
 
-			void Print(const SyntaxTree& tree) noexcept;
-			void Print(const SyntaxTree* tree) noexcept;
-			
-		};
-	}
+	extern FormattingOptions formattingOptions;
+
+	void Print(const SyntaxTree& tree) noexcept;
+	void Print(const SyntaxTree* tree) noexcept;
+
 }

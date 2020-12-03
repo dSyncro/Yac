@@ -9,10 +9,10 @@
 
 namespace Yac::Syntax {
 
-		unsigned int GetOperatorPrecedence(Operator op);
-		Operator ToUnaryOperator(TokenType type);
-		Operator ToBinaryOperator(TokenType type);
-		AssignmentOperator ToAssignmentOperator(TokenType type);
-		Keyword ToKeyword(const std::string& text);
+		unsigned int getOperatorPrecedence(Operator op);
+		Operator toUnaryOperator(TokenType type);
+		Operator toBinaryOperator(TokenType type);
+		AssignmentOperator toAssignmentOperator(TokenType type);
+		Keyword toKeyword(const std::string& text);
 
 }

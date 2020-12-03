@@ -29,8 +29,8 @@ namespace std {
     {
         std::size_t operator()(const Yac::DataTypes::Conversion& conversion) const noexcept
         {
-            std::size_t h1 = std::hash<std::string>{}(conversion.From.name());
-            std::size_t h2 = std::hash<std::string>{}(conversion.To.name());
+            std::size_t h1 = std::hash<std::string>{}(conversion.From.getName());
+            std::size_t h2 = std::hash<std::string>{}(conversion.To.getName());
             return h1 ^ (h2 << 1);
         }
     };

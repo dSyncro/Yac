@@ -5,7 +5,7 @@
 using namespace Yac::Core;
 using namespace Yac::Api;
 
-void Yac::Core::ClearCallback(ParamList parameters, VariableTable& variables)
+void Yac::Core::clearCallback(const ParameterList& parameters, VariableTable& variables)
 {
 	if (parameters.size() != 0)
 	{
@@ -16,7 +16,7 @@ void Yac::Core::ClearCallback(ParamList parameters, VariableTable& variables)
 	Console::Clear();
 }
 
-void Yac::Core::DebugInfoCallback(ParamList parameters, VariableTable& variables)
+void Yac::Core::debugInfoCallback(const ParameterList& parameters, VariableTable& variables)
 {
 	if (parameters.size() != 0)
 	{
@@ -24,12 +24,12 @@ void Yac::Core::DebugInfoCallback(ParamList parameters, VariableTable& variables
 		return;
 	}
 
-	Bool value = !variables.Get<Bool>("showdebuginfo");
-	variables.Set<Bool>("showdebuginfo", value);
-	Console::Alert("show debug information: ", value.ToString());
+	Bool value = !variables.get<Bool>("showdebuginfo");
+	variables.set<Bool>("showdebuginfo", value);
+	Console::Alert("show debug information: ", value.toString());
 }
 
-void Yac::Core::ExitCallback(ParamList parameters, VariableTable& variables)
+void Yac::Core::exitCallback(const ParameterList& parameters, VariableTable& variables)
 {
 	if (parameters.size() != 0)
 	{

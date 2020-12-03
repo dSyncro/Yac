@@ -4,8 +4,10 @@
 
 extern void* operator new(size_t size, char* file, std::size_t line, char* function);
 
-extern void operator delete(void* ptr);
+//extern void operator delete(void* ptr);
 extern void operator delete(void* ptr, char* file, std::size_t line, char* function);
+
+extern void PrintAllocationTable();
 
 #ifdef WINDOWS
 #	define __FUNC__ __FUNCTION__
@@ -16,9 +18,11 @@ extern void operator delete(void* ptr, char* file, std::size_t line, char* funct
 #ifdef YAC_DEBUG
 #	define NEW new((char*)__FILE__, __LINE__, __FUNC__)
 #	define DEL delete((char*)__FILE__, __LINE__, __FUNC__)
+#	define PRINT_ALLOCATION_TABLE() PrintAllocationTable()
 #else
 #	define NEW new
 #	define DEL delete
+#	define PRINT_ALLOCATION_TABLE()
 #endif
 
 namespace AllocationTracking {

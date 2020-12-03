@@ -14,11 +14,11 @@ namespace Yac::Core {
 
 		CommandHandler(std::string command, CommandCallback callback);
 
-		bool Cast(const Command& command, VariableTable& variables) const noexcept;
+		bool cast(const Command& command, VariableTable& variables) const noexcept;
 
-		inline void Invoke(ParamList parameters, VariableTable& variables) const noexcept { _callback(parameters, variables); }
+		void invoke(const std::vector<std::string>& parameters, VariableTable& variables) const noexcept { _callback(parameters, variables); }
 
-		inline const std::string& CommandName() const noexcept { return _cmd; }
+		const std::string& getCommandName() const noexcept { return _cmd; }
 
 	private:
 

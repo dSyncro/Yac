@@ -7,7 +7,6 @@
 #include <Core/Repl/VariableTable.h>
 
 #include <DataTypes/Conversion.h>
-#include <DataTypes/Types/StaticTypeSymbols.h>
 
 using namespace Yac::Api;
 using namespace Yac::Core;
@@ -115,7 +114,7 @@ Data Executor::EvaluateIdentifierExpression(const IdentifierExpression* expressi
 
 Data Executor::EvaluateStringExpression(const StringExpression* expression)
 {
-	return Data(StringTypeSymbol, new String(expression->text()));
+	return Data(getStringTypeSymbol(), new String(expression->text()));
 }
 
 Data Executor::EvaluateAssignmentExpression(const AssignmentExpression* expression)
@@ -135,17 +134,17 @@ Data Executor::EvaluateNumericLiteral(const NumericLiteral* expression)
 {
 	switch (expression->numeric_type())
 	{
-		case NumericType::Int: return Data(IntTypeSymbol, new Int(expression->ToInt()));
-		case NumericType::UInt: return Data(UIntTypeSymbol, new UInt(expression->ToUInt()));
-		case NumericType::Float: return Data(FloatTypeSymbol, new Float(expression->ToFloat()));
-		case NumericType::Double: return Data(DoubleTypeSymbol, new Double(expression->ToDouble()));
+		case NumericType::Int: return Data(getIntTypeSymbol(), new Yac::Api::Int(expression->ToInt()));
+		case NumericType::UInt: return Data(getUIntTypeSymbol(), new Yac::Api::UInt(expression->ToUInt()));
+		case NumericType::Float: return Data(getFloatTypeSymbol(), new Float(expression->ToFloat()));
+		case NumericType::Double: return Data(getDoubleTypeSymbol(), new Double(expression->ToDouble()));
 		default: return nullptr;
 	}
 }
 
 Data Executor::EvaluateBooleanLiteral(const BooleanLiteral* expression)
 {
-	return Data(BoolTypeSymbol, new Bool(expression->value()));
+	return Data(getBoolTypeSymbol(), new Bool(expression->value()));
 }
 
 Data Executor::EvaluateUnaryOperation(const UnaryOperation* expression)

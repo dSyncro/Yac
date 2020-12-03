@@ -5,23 +5,23 @@
 
 namespace Yac::Core {
 
-	using ParamList = const std::vector<std::string>&;
+	using ParameterList = std::vector<std::string>;
 
 	struct Command final {
 
 	public:
 
-		static Command Parse(std::string line) noexcept;
+		static Command parse(const std::string& line) noexcept;
 
-		inline std::string Name() const noexcept { return _cmd; }
-		inline ParamList Parameters() const noexcept { return _params; }
+		const std::string& getName() const noexcept { return _cmd; }
+		const ParameterList& getParameters() const noexcept { return _params; }
 
 	private:
 
-		Command(std::string command, const std::vector<std::string> parameters);
+		Command(const std::string& command, const ParameterList& parameters);
 
 		std::string _cmd;
-		const std::vector<std::string> _params;
+		ParameterList _params;
 	};
 
 }

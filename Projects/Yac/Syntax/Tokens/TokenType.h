@@ -68,7 +68,6 @@ namespace Yac::Syntax {
 		HexDouble,
 
 		// Strings
-		Word,
 		Identifier,
 		Keyword,
 		StringLiteral,
@@ -140,7 +139,6 @@ namespace Yac::Syntax {
 			"Double",
 			"BinaryDouble",
 			"HexDouble",
-			"Word",
 			"Identifier",
 			"Keyword",
 			"StringLiteral",
@@ -152,8 +150,41 @@ namespace Yac::Syntax {
 
 	}
 
-	inline std::string ToString(TokenType type)
+	inline std::string toString(TokenType type)
 	{
 		return TokenTypeString[(unsigned int)type];
+	}
+
+	inline bool isNumeric(TokenType type)
+	{
+		switch (type)
+		{
+			case TokenType::Int:
+			case TokenType::UInt:
+			case TokenType::BinaryUInt:
+			case TokenType::HexUInt:
+			case TokenType::Float:
+			case TokenType::BinaryFloat:
+			case TokenType::HexFloat:
+			case TokenType::Double:
+			case TokenType::BinaryDouble:
+			case TokenType::HexDouble:
+				return true;
+
+			default: return false;
+		}
+	}
+
+	inline bool isWord(TokenType type)
+	{
+		switch (type)
+		{
+			case TokenType::Identifier:
+			case TokenType::Keyword:
+			case TokenType::StringLiteral:
+				return true;
+
+			default: return false;
+		}
 	}
 }

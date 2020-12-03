@@ -4,26 +4,27 @@ using namespace Yac::Core;
 
 CommandTable::CommandTable(std::vector<CommandHandler> handlers) : _handlers(handlers) {}
 
-void CommandTable::Invoke(const Command& command, VariableTable& variables) const noexcept
+void CommandTable::invoke(const Command& command, VariableTable& variables) const noexcept
 {
 	for (const CommandHandler& handler : _handlers)
-		if (handler.Cast(command, variables)) return;
+		if (handler.cast(command, variables)) return;
 }
 
-void CommandTable::InvokeAll(const Command& command, VariableTable& variables) const noexcept
+void CommandTable::invokeAll(const Command& command, VariableTable& variables) const noexcept
 {
 	for (const CommandHandler& handler : _handlers)
-		handler.Cast(command, variables);
+		handler.cast(command, variables);
 }
 
-void CommandTable::Register(const CommandHandler& handler) noexcept
+void CommandTable::add(const CommandHandler& handler) noexcept
 {
-	if (!ContainsHandlerFor(handler.CommandName())) Add(handler);
+	if (!containsHandlerFor(handler.getCommandName())) 
+		push(handler);
 }
 
-bool CommandTable::ContainsHandlerFor(const std::string& command) const noexcept
+bool CommandTable::containsHandlerFor(const std::string& command) const noexcept
 {
 	for (const CommandHandler& h : _handlers)
-		if (h.CommandName() == command) return true;
+		if (h.getCommandName() == command) return true;
 	return false;
 }

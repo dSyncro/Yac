@@ -19,7 +19,7 @@ namespace Yac::Syntax {
 
 		SyntaxTree Tree;
 
-		inline const Errors::ErrorList& errors() const noexcept { return _errors; }
+		const Errors::ErrorList& getErrors() const noexcept { return _errors; }
 	};
 
 }

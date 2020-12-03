@@ -18,7 +18,7 @@ namespace Yac::Text {
 
 		inline std::size_t lineCount() const noexcept { return _lines.size(); }
 		inline const Line& operator [](unsigned int index) const { return _lines[index]; }
-		inline const std::vector<Line>& GetLines() const noexcept { return _lines; }
+		inline const std::vector<Line>& getLines() const noexcept { return _lines; }
 
 	private:
 

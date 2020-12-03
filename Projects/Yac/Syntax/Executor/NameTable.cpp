@@ -5,7 +5,7 @@ using namespace Yac::Syntax;
 
 bool NameTable::HasBeenDeclared(const TypeSymbol& symbol) const noexcept
 {
-	return _types.Contains(symbol);
+	return _types.contains(symbol);
 }
 
 bool NameTable::HasBeenDeclared(const Conversion& conversion) const noexcept
@@ -15,7 +15,7 @@ bool NameTable::HasBeenDeclared(const Conversion& conversion) const noexcept
 
 void NameTable::Register(const TypeSymbol& symbol) noexcept
 {
-	_types.Register(symbol);
+	_types.add(symbol);
 }
 
 void NameTable::Register(const Conversion& conversion, ConversionHandler handler) noexcept

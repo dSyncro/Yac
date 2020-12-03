@@ -6,22 +6,20 @@
 #include <Syntax/Expressions/Expressions.h>
 #include <Syntax/Statements/Statements.h>
 
-#include <Libraries/AllocationTracking/AutomaticTracker.h>
-
 using namespace Yac::Text;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
 
-Parser::Parser(SourceText source, ErrorList& errorList) : _reporter(errorList)
+Parser::Parser(const SourceText& source, ErrorList& errorList) : _errorList(errorList)
 {
 	Lexer lexer = Lexer(source, errorList);
 	Token t;
 	do
 	{
-		t = lexer.Lex();
-		if (t.type() != TokenType::Whitespace && t.type() != TokenType::Newline) 
+		t = lexer.consumeNext();
+		if (t.getType() != TokenType::Whitespace && t.getType() != TokenType::Newline) 
 			_tokens.push_back(t);
-	} while (t.type() != TokenType::EndOfFile);
+	} while (t.getType() != TokenType::EndOfFile);
 }
 
 const Token& Parser::Consume() noexcept
@@ -30,7 +28,7 @@ const Token& Parser::Consume() noexcept
 	if (_position >= _tokens.size()) 
 	{
 		const Token& t = _tokens.back(); // Get EoF
-		_reporter.ReportUnexpectedToken(TokenType::Semicolon, TokenType::EndOfFile, t.span());
+		_errorList.reportUnexpectedToken(TokenType::Semicolon, TokenType::EndOfFile, t.getSpan());
 		return t; // return EoF
 	}
 
@@ -50,14 +48,14 @@ const Token& Parser::Peek(std::size_t offset) const noexcept
 	return _tokens[index];
 }
 
-bool Parser::Match(TokenType type, std::size_t offset) const noexcept { return Peek(offset).type() == type; }
-bool Parser::MatchNext(TokenType type) const noexcept { return Next().type() == type; }
+bool Parser::Match(TokenType type, std::size_t offset) const noexcept { return Peek(offset).getType() == type; }
+bool Parser::MatchNext(TokenType type) const noexcept { return Next().getType() == type; }
 
 const Token& Parser::MatchAndConsume(TokenType type) noexcept
 {
 	const Token& t = Consume();
-	if (t.type() != type)
-		_reporter.ReportUnexpectedToken(type, t.type(), t.span());
+	if (t.getType() != type)
+		_errorList.reportUnexpectedToken(type, t.getType(), t.getSpan());
 	return t;
 }
 
@@ -69,7 +67,7 @@ Statement* Parser::Parse()
 
 Statement* Parser::ParseStatement() noexcept
 {
-	switch (Current().type())
+	switch (Current().getType())
 	{
 		case TokenType::OpenBrackets: return ParseBlockStatement();
 		case TokenType::Keyword: return ParseStatementKeyword();
@@ -82,12 +80,12 @@ Statement* Parser::ParseBlockStatement() noexcept
 	Step(); // First token is Open Brackets
 
 	std::vector<Statement*> _statements;
-	while (Current().type() != TokenType::CloseBrackets)
+	while (Current().getType() != TokenType::CloseBrackets)
 	{
 		// Error check: finding EoF when the block is not closed yet
-		if (Current().type() == TokenType::EndOfFile)
+		if (Current().getType() == TokenType::EndOfFile)
 		{
-			_reporter.ReportUnexpectedToken(TokenType::CloseBrackets, TokenType::EndOfFile, Current().span());
+			_errorList.reportUnexpectedToken(TokenType::CloseBrackets, TokenType::EndOfFile, Current().getSpan());
 			return nullptr;
 		}
 
@@ -102,7 +100,7 @@ Statement* Parser::ParseBlockStatement() noexcept
 
 Statement* Parser::ParseStatementKeyword() noexcept
 {
-	Keyword keyword = ToKeyword(Current().text());
+	Keyword keyword = toKeyword(Current().getText());
 	switch (keyword)
 	{
 		case Keyword::Let: return ParseVariableDeclaration();
@@ -124,7 +122,7 @@ Statement* Parser::ParseIfStatement() noexcept
 
 	const Token& current = Current();
 	Statement* elseStatement = Statement::Null();
-	if (current.type() == TokenType::Keyword && ToKeyword(current.text()) == Keyword::Else)
+	if (current.getType() == TokenType::Keyword && toKeyword(current.getText()) == Keyword::Else)
 	{
 		Step(); // Current token is 'else'
 		elseStatement = ParseStatement();
@@ -192,31 +190,31 @@ Statement* Parser::ParseVariableDeclaration(Keyword keyword) noexcept
 		value = ParseExpression();
 	}
 	MatchAndConsume(TokenType::Semicolon);
-	return new VariableDeclaration(keyword, name.text(), value);
+	return new VariableDeclaration(keyword, name.getText(), value);
 }
 
 Expression* Parser::ParseInt(NumericBase base) noexcept
 {
 	const Token& t = Consume();
-	return new NumericLiteral(t.text(), NumericType::Int, base);
+	return new NumericLiteral(t.getText(), NumericType::Int, base);
 }
 
 Expression* Parser::ParseUInt(NumericBase base) noexcept
 {
 	const Token& t = Consume();
-	return new NumericLiteral(t.text(), NumericType::UInt, base);
+	return new NumericLiteral(t.getText(), NumericType::UInt, base);
 }
 
 Expression* Parser::ParseFloat(NumericBase base) noexcept
 {
 	const Token& t = Consume();
-	return new NumericLiteral(t.text(), NumericType::Float, base);
+	return new NumericLiteral(t.getText(), NumericType::Float, base);
 }
 
 Expression* Parser::ParseDouble(NumericBase base) noexcept
 {
 	const Token& t = Consume();
-	return new NumericLiteral(t.text(), NumericType::Double, base);
+	return new NumericLiteral(t.getText(), NumericType::Double, base);
 }
 
 Expression* Parser::ParseBoolean() noexcept
@@ -224,9 +222,9 @@ Expression* Parser::ParseBoolean() noexcept
 	const Token& t = Consume();
 	Keyword keyword = Keyword::Unknown;
 
-	if (t.text() == "true") keyword = Keyword::True;
-	else if (t.text() == "false") keyword = Keyword::False;
-	else _reporter.ReportNotABooleanLiteral(t.text(), t.span());
+	if (t.getText() == "true") keyword = Keyword::True;
+	else if (t.getText() == "false") keyword = Keyword::False;
+	else _errorList.reportNotABooleanLiteral(t.getText(), t.getSpan());
 
 	return new BooleanLiteral((bool)keyword);
 }
@@ -234,8 +232,8 @@ Expression* Parser::ParseBoolean() noexcept
 Expression* Parser::ParseIdentifier() noexcept
 {
 	const Token& id = MatchAndConsume(TokenType::Identifier);
-	TokenType next = Current().type();
-	Expression* expr = new IdentifierExpression(id.text());
+	TokenType next = Current().getType();
+	Expression* expr = new IdentifierExpression(id.getText());
 	switch (next)
 	{
 		case TokenType::DoublePlusSymbol: Step(); return new UnaryOperation(Operator::PostIncrement, expr);
@@ -246,14 +244,14 @@ Expression* Parser::ParseIdentifier() noexcept
 
 Expression* Parser::ParseStringLiteral() noexcept
 {
-	std::string s = MatchAndConsume(TokenType::StringLiteral).text();
+	std::string s = MatchAndConsume(TokenType::StringLiteral).getText();
 	s = s.substr(1, s.length() - 2);
 	return new StringExpression(s);
 }
 
 Expression* Parser::ParsePrefix() noexcept
 {
-	TokenType type = Consume().type();
+	TokenType type = Consume().getType();
 	switch (type)
 	{
 		case TokenType::DoublePlusSymbol: return new UnaryOperation(Operator::PreIncrement, ParseIdentifier());
@@ -273,7 +271,7 @@ Expression* Parser::ParseParentheses() noexcept
 Expression* Parser::ParseExpression() noexcept
 {
 	// Resolve assignments first
-	AssignmentOperator op = ToAssignmentOperator(Next().type());
+	AssignmentOperator op = toAssignmentOperator(Next().getType());
 
 	// If this token is an identifier and the next is an Assignment Operator
 	// We are parsing an assignment expression
@@ -299,14 +297,14 @@ Expression* Parser::ParseExpression() noexcept
 
 Expression* Parser::ParseConditional() noexcept
 {
-	if (Current().text() != "let") return ParseExpression();
+	if (Current().getText() != "let") return ParseExpression();
 	
 	Step(); // Current is token is 'let'
 	const Token& name = MatchAndConsume(TokenType::Identifier);
 	MatchAndConsume(TokenType::EqualSymbol);
 	Expression* init = ParseExpression();
 
-	return new ConditionalDeclaration(name.text(), init);
+	return new ConditionalDeclaration(name.getText(), init);
 }
 
 Expression* Parser::ParseInstruction() noexcept
@@ -318,7 +316,7 @@ Expression* Parser::ParseInstruction() noexcept
 
 Expression* Parser::ParsePrimaryExpression() noexcept
 {
-	switch (Current().type())
+	switch (Current().getType())
 	{
 		case TokenType::Int: return ParseInt();
 		case TokenType::UInt: return ParseUInt();
@@ -347,14 +345,14 @@ Expression* Parser::ParseAssignmentExpression(AssignmentOperator op) noexcept
 	const Token& id = Consume(); // Current token is the name of the variable
 	Step(); // Current token is the Assignment Operator
 	Expression* expression = ParseExpression();
-	return new AssignmentExpression(id.text(), op, expression);
+	return new AssignmentExpression(id.getText(), op, expression);
 }
 
 Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 {
 	// If the first token found is an Enclosing Token
 	// There is no expression, instruction ends here
-	switch (Current().type())
+	switch (Current().getType())
 	{
 		case TokenType::Semicolon:
 		case TokenType::CloseParentheses:
@@ -365,8 +363,8 @@ Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 
 	Expression* left = nullptr;
 
-	Operator op = ToUnaryOperator(Current().type());
-	unsigned int precedence = GetOperatorPrecedence(op);
+	Operator op = toUnaryOperator(Current().getType());
+	unsigned int precedence = getOperatorPrecedence(op);
 
 	if (precedence && precedence >= parentPrecedence)
 	{
@@ -378,8 +376,8 @@ Expression* Parser::ParseMathExpression(unsigned int parentPrecedence) noexcept
 
 	while (true)
 	{
-		op = ToBinaryOperator(Current().type());
-		precedence = GetOperatorPrecedence(op);
+		op = toBinaryOperator(Current().getType());
+		precedence = getOperatorPrecedence(op);
 
 		if (!precedence || precedence <= parentPrecedence) break;
 

@@ -7,6 +7,6 @@ using namespace Yac::Core;
 int main(int argc, char** argv)
 {
 	Repl repl = Repl();
-	repl.Run();
+	repl.run();
 }
 

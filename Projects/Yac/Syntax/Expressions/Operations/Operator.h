@@ -77,7 +77,7 @@ namespace Yac {
 
 		}
 
-		inline std::string ToString(Operator op)
+		inline std::string toString(Operator op)
 		{
 			return OperatorString[(unsigned int)op];
 		}

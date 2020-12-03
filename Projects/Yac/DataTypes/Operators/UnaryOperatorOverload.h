@@ -33,8 +33,8 @@ namespace std {
         std::size_t operator()(const Yac::DataTypes::UnaryOperatorOverload& overload) const noexcept
         {
             std::size_t h1 = std::hash<unsigned int>{}((unsigned int)overload.Operation);
-            std::size_t h2 = std::hash<std::string>{}(overload.OperandType.name());
-            std::size_t h3 = std::hash<std::string>{}(overload.ReturnType.name());
+            std::size_t h2 = std::hash<std::string>{}(overload.OperandType.getName());
+            std::size_t h3 = std::hash<std::string>{}(overload.ReturnType.getName());
             return h1 ^ (h2 ^ (h3 << 1)) << 1;
         }
     };

@@ -132,7 +132,7 @@ namespace Yac {
 
 					// Operator
 					PrintDecoration(indentation + "|---");
-					PrintData("Operator", ToString(expression->assignmentOperator()));
+					PrintData("Operator", toString(expression->assignmentOperator()));
 
 					// Expression
 					Print(expression->expression(), indentation, true);
@@ -147,7 +147,7 @@ namespace Yac {
 
 					// Operation
 					PrintDecoration(indentation + "|---");
-					PrintData("Operation", ToString(expression->operation()));
+					PrintData("Operation", toString(expression->operation()));
 
 					// Right expression
 					Print(expression->right(), indentation, true);
@@ -168,11 +168,11 @@ namespace Yac {
 
 					// Base
 					PrintDecoration(indentation + "|---");
-					PrintData("Numeric Base", ToString(expression->base()));
+					PrintData("Numeric Base", toString(expression->base()));
 
 					// Type
 					PrintDecoration(indentation + "|---");
-					PrintData("Numeric Type", ToString(expression->numeric_type()));
+					PrintData("Numeric Type", toString(expression->numeric_type()));
 
 					// Value
 					PrintDecoration(indentation + "`---");
@@ -209,7 +209,7 @@ namespace Yac {
 
 					// Operation
 					PrintDecoration(indentation + "|---");
-					PrintData("Operation", ToString(expression->operation()));
+					PrintData("Operation", toString(expression->operation()));
 
 					// Operand
 					Print(expression->operand(), indentation, true);

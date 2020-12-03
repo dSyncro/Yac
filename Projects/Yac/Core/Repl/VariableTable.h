@@ -12,23 +12,21 @@ namespace Yac::Core {
 
 	public:
 
-		template <typename T, typename = typename std::enable_if<std::is_base_of<Yac::Api::Object, T>::value>::type>
-		T Get(const std::string& key) const noexcept
+		template <typename T>
+		Yac::Api::EnableIfObject<T> get(const std::string& key) const noexcept
 		{
 			std::unordered_map<std::string, Yac::Api::Object*>::const_iterator it = _map.find(key);
 			if (it == _map.end()) return T();
 			return (T&)*(it->second);
 		}
 
-		template <typename T, typename = typename std::enable_if<std::is_base_of<Yac::Api::Object, T>::value>::type>
-		void Set(const std::string& key, const T& value) noexcept
+		template <typename T>
+		void set(const std::string& key, const Yac::Api::EnableIfObject<T>& value) noexcept
 		{
 			std::unordered_map<std::string, Yac::Api::Object*>::iterator it = _map.find(key);
 
 			// Allocate variable
-			std::size_t size = sizeof(T);
-			Yac::Api::Object* reference = (Yac::Api::Object*)std::malloc(size);
-			memcpy(reference, &value, size);
+			Yac::Api::Object* reference = new Yac::Api::Object();
 
 			// If variable exists
 			if (it != _map.end())

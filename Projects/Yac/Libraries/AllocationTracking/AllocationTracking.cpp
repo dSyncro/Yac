@@ -62,3 +62,20 @@ void operator delete(void* ptr, char* file, std::size_t line, char* function)
 	
 	free(ptr);
 }
+
+void PrintAllocationTable()
+{
+	Console::WriteColoredLine(AnsiStyle::Forecolors::Green, "AllocationTable = {");
+	for (const AllocationInfo& info : allocations)
+	{
+		Console::Write("\t");
+		Console::WriteColoredLine(AnsiStyle::Forecolors::Cyan, info.Address, ": ");
+		Console::Write("\t\t");
+		Console::WriteColoredLine(AnsiStyle::Forecolors::Magenta, "Size = ", info.Size);
+		Console::Write("\t\t");
+		Console::WriteColoredLine(AnsiStyle::Forecolors::Yellow, "Declared in ", info.Filename, " (", info.Size, ")");
+		Console::Write("\t\t");
+		Console::WriteColoredLine(AnsiStyle::Forecolors::Yellow, "In Function ", info.FunctionName);
+	}
+	Console::WriteColoredLine(AnsiStyle::Forecolors::Green, "}");
+}

@@ -1,19 +1,40 @@
 #include "ErrorList.h"
 
 using namespace Yac::Errors;
+using namespace Yac::Syntax;
+using namespace Yac::Text;
 
-void ErrorList::Add(const Error& e) noexcept { _errors.push_back(e); }
+void ErrorList::add(const Error& e) noexcept { _errors.push_back(e); }
 
-bool ErrorList::Any() const noexcept { return _errors.size() > 0; }
+bool ErrorList::any() const noexcept { return _errors.size() > 0; }
 
-void ErrorList::Clear() noexcept { _errors.clear(); }
+void ErrorList::clear() noexcept { _errors.clear(); }
 
-std::size_t ErrorList::Count() const noexcept { return _errors.size(); }
+void ErrorList::reportUnexpectedToken(TokenType expected, TokenType found, const TextSpan& span) noexcept
+{
+	std::string msg = "Expected <" + toString(expected) + "> token, <" + toString(found) + "> found";
+	_errors.emplace_back(msg, span);
+}
 
-const Error& ErrorList::Get(unsigned int index) const
+void ErrorList::reportUnknownToken(char c, const TextSpan& span) noexcept
+{
+	std::string msg = "Found unknown token '" + c;
+	msg.append("'");
+	_errors.emplace_back(msg, span);
+}
+
+void ErrorList::reportNotABooleanLiteral(const std::string& text, const TextSpan& span) noexcept
+{
+	std::string msg = "'" + text + "' is not a valid Boolean literal";
+	_errors.emplace_back(msg, span);
+}
+
+std::size_t ErrorList::count() const noexcept { return _errors.size(); }
+
+const Error& ErrorList::get(UInt index) const
 {
 	if (index >= _errors.size()) throw;
 	return _errors[index];
 }
 
-const Error& ErrorList::operator [](unsigned int index) const { return Get(index); }
+const Error& ErrorList::operator [](UInt index) const { return get(index); }

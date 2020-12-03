@@ -1,9 +1,11 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include "TokenType.h"
 
+#include <Core/Primitives.h>
 #include <Text/TextSpan.h>
 
 namespace Yac::Syntax {
@@ -13,12 +15,12 @@ namespace Yac::Syntax {
 	public:
 
 		Token();
-		Token(TokenType type, Yac::Text::TextSpan span, std::string text, unsigned int line);
+		Token(TokenType type, Yac::Text::TextSpan span, const std::string& text, Yac::UInt line);
 
-		inline TokenType type() const noexcept { return _type; }
-		inline Yac::Text::TextSpan span() const noexcept { return _span; }
-		inline std::string text() const noexcept { return _text; }
-		inline unsigned int line() const noexcept { return _line; }
+		TokenType getType() const noexcept { return _type; }
+		Yac::Text::TextSpan getSpan() const noexcept { return _span; }
+		const std::string& getText() const noexcept { return _text; }
+		Yac::UInt getLine() const noexcept { return _line; }
 
 	private:
 
@@ -26,8 +28,10 @@ namespace Yac::Syntax {
 		Yac::Text::TextSpan _span;
 		std::string _text;
 
-		unsigned int _line;
+		Yac::UInt _line;
 
 	};
+
+	using TokenList = std::vector<Token>;
 }
 

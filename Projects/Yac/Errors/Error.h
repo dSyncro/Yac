@@ -10,12 +10,12 @@ namespace Yac::Errors {
 
 	public:
 
-		Error(std::string message, Yac::Text::TextSpan span) : _msg(message), _span(span) {}
+		Error(const std::string& message, Yac::Text::TextSpan span) : _msg(message), _span(span) {}
 
-		inline Yac::Text::TextSpan span() const noexcept { return _span; }
-		inline std::string message() const noexcept { return _msg; }
+		Yac::Text::TextSpan getSpan() const noexcept { return _span; }
+		const std::string& getMessage() const noexcept { return _msg; }
 
-		std::string ToString() const noexcept { return _span.ToString() + ": " + _msg; }
+		std::string toString() const noexcept { return _span.ToString() + ": " + _msg; }
 
 	private:
 

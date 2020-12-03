@@ -120,9 +120,6 @@
     <ClInclude Include="Errors\ErrorList.h">
       <Filter>Errors</Filter>
     </ClInclude>
-    <ClInclude Include="Errors\ErrorReporter.h">
-      <Filter>Errors</Filter>
-    </ClInclude>
     <ClInclude Include="Errors\Exceptions\ObjectConversionException.h">
       <Filter>Errors\Exceptions</Filter>
     </ClInclude>
@@ -264,16 +261,10 @@
     <ClInclude Include="DataTypes\Variables\Variable.h">
       <Filter>DataTypes</Filter>
     </ClInclude>
-    <ClInclude Include="DataTypes\Types\StaticTypeSymbols.h">
-      <Filter>DataTypes</Filter>
-    </ClInclude>
     <ClInclude Include="DataTypes\Types\TypeSymbol.h">
       <Filter>DataTypes</Filter>
     </ClInclude>
     <ClInclude Include="DataTypes\Types\TypeTable.h">
-      <Filter>DataTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="DataTypes\Types\Primitives.h">
       <Filter>DataTypes</Filter>
     </ClInclude>
     <ClInclude Include="DataTypes\Operators\UnaryOperatorOverload.h" />
@@ -286,6 +277,9 @@
     <ClInclude Include="Libraries\AllocationTracking\AllocationTracking.h" />
     <ClInclude Include="Libraries\AllocationTracking\AutomaticTracker.h" />
     <ClInclude Include="Libraries\Platform.h" />
+    <ClInclude Include="Core\Primitives.h">
+      <Filter>DataTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Repl\Commands\Command.cpp">
@@ -304,9 +298,6 @@
       <Filter>Core\Repl</Filter>
     </ClCompile>
     <ClCompile Include="Errors\ErrorList.cpp">
-      <Filter>Errors</Filter>
-    </ClCompile>
-    <ClCompile Include="Errors\ErrorReporter.cpp">
       <Filter>Errors</Filter>
     </ClCompile>
     <ClCompile Include="Libraries\AnsiStyle\AnsiStyle.cpp">

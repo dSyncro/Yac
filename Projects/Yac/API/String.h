@@ -12,7 +12,7 @@ namespace Yac::Api {
 
 		operator std::string() const { return _string; }
 
-		virtual std::string ToString() const override { return _string; }
+		virtual std::string toString() const override { return _string; }
 
 	private:
 

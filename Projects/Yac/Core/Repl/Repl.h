@@ -13,13 +13,13 @@ namespace Yac::Core {
 		Repl();
 		Repl(CommandTable commands, VariableTable variables);
 
-		void Run();
-		void Stop();
+		void run();
+		void stop();
 
 	private:
 
-		void Loop();
-		void ExecuteCommand(const Command& command) noexcept;
+		void loop();
+		void executeCommand(const Command& command) noexcept;
 
 		bool _isRunning = false;
 

@@ -2,7 +2,7 @@
 
 using namespace Yac::Syntax;
 
-unsigned int Yac::Syntax::GetOperatorPrecedence(Operator op)
+unsigned int Yac::Syntax::getOperatorPrecedence(Operator op)
 {
     switch (op)
     {
@@ -43,7 +43,7 @@ unsigned int Yac::Syntax::GetOperatorPrecedence(Operator op)
     }
 }
 
-Operator Yac::Syntax::ToUnaryOperator(TokenType type)
+Operator Yac::Syntax::toUnaryOperator(TokenType type)
 {
 	switch (type)
 	{
@@ -55,7 +55,7 @@ Operator Yac::Syntax::ToUnaryOperator(TokenType type)
 	}
 }
 
-Operator Yac::Syntax::ToBinaryOperator(TokenType type)
+Operator Yac::Syntax::toBinaryOperator(TokenType type)
 {
 	switch (type)
 	{
@@ -81,7 +81,7 @@ Operator Yac::Syntax::ToBinaryOperator(TokenType type)
 	}
 }
 
-AssignmentOperator Yac::Syntax::ToAssignmentOperator(TokenType type)
+AssignmentOperator Yac::Syntax::toAssignmentOperator(TokenType type)
 {
     switch (type)
     {
@@ -100,7 +100,7 @@ AssignmentOperator Yac::Syntax::ToAssignmentOperator(TokenType type)
     }
 }
 
-Keyword Yac::Syntax::ToKeyword(const std::string& text)
+Keyword Yac::Syntax::toKeyword(const std::string& text)
 {
     if (text == "true") return Keyword::True;
     else if (text == "false") return Keyword::False;

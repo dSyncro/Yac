@@ -23,7 +23,7 @@ namespace Yac::Syntax {
 
 	}
 
-	inline std::string ToString(NumericType type)
+	inline std::string toString(NumericType type)
 	{
 		return NumericTypeString[(unsigned int)type];
 	}

@@ -13,17 +13,17 @@ namespace Yac::Core {
 		CommandTable() {}
 		CommandTable(std::vector<CommandHandler> handlers);
 
-		void Invoke(const Command& command, VariableTable& variables) const noexcept;
+		void invoke(const Command& command, VariableTable& variables) const noexcept;
 
-		void InvokeAll(const Command& command, VariableTable& variables) const noexcept;
+		void invokeAll(const Command& command, VariableTable& variables) const noexcept;
 
-		inline void Add(const CommandHandler& handler) noexcept { _handlers.push_back(handler); }
+		void push(const CommandHandler& handler) noexcept { _handlers.push_back(handler); }
 
-		void Register(const CommandHandler& handler) noexcept;
+		void add(const CommandHandler& handler) noexcept;
 
-		bool ContainsHandlerFor(const std::string& command) const noexcept;
+		bool containsHandlerFor(const std::string& command) const noexcept;
 
-		inline void Clear() noexcept { _handlers.clear(); }
+		void clear() noexcept { _handlers.clear(); }
 
 	private:
 

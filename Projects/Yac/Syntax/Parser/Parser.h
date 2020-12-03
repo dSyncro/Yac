@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include <Errors/ErrorReporter.h>
+#include <Errors/ErrorList.h>
 #include <Syntax/Expressions/Expression.h>
 #include <Syntax/Expressions/Assignment/AssignmentOperator.h>
 #include <Syntax/Expressions/Numeric/NumericBase.h>
@@ -17,11 +17,11 @@ namespace Yac::Syntax {
 
 	public:
 
-		Parser(Yac::Text::SourceText source, Yac::Errors::ErrorList& errorList);
+		Parser(const Yac::Text::SourceText& source, Yac::Errors::ErrorList& errorList);
 
 		Statement* Parse();
 
-		Yac::Errors::ErrorList& errors() const noexcept { return _reporter.GetList(); }
+		const Yac::Errors::ErrorList& getErrors() const noexcept { return _errorList; }
 
 	private:
 
@@ -29,8 +29,8 @@ namespace Yac::Syntax {
 
 		const Token& Consume() noexcept;
 
-		inline const Token& Current() const noexcept { return Peek(0); }
-		inline const Token& Next() const noexcept { return Peek(1); }
+		const Token& Current() const noexcept { return Peek(0); }
+		const Token& Next() const noexcept { return Peek(1); }
 
 		const Token& Peek(std::size_t offset) const noexcept;
 
@@ -68,7 +68,7 @@ namespace Yac::Syntax {
 		Expression* ParseMathExpression(unsigned int parentPrecedence = 0) noexcept;
 
 		std::size_t _position = 0;
-		std::vector<Token> _tokens;
-		Yac::Errors::ErrorReporter _reporter;
+		TokenList _tokens;
+		Yac::Errors::ErrorList& _errorList;
 	};
 }

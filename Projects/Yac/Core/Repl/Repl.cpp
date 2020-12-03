@@ -19,46 +19,52 @@ using namespace Yac::Syntax;
 Repl::Repl() : _commands(ReplCommandTable), _variables(VariableTable()) {}
 Repl::Repl(CommandTable commands, VariableTable variables) : _commands(commands), _variables(variables) {}
 
-void Repl::Run()
+void Repl::run()
 {
+	// If already running return
 	if (_isRunning) return;
+
+	// Start Run-Evaluate-Print-Loop
 	_isRunning = true;
-	Loop();
+	loop();
 }
 
-void Repl::Stop()
+void Repl::stop()
 {
 	_isRunning = false;
 }
 
-void Repl::Loop()
+void Repl::loop()
 {
 	while (_isRunning)
 	{
-		std::string line;
 		Console::WriteColored(AnsiStyle::Forecolors::Magenta, ">> ");
+
+		std::string line;
 		std::getline(std::cin, line);
 
 		if (line.empty()) continue;
 
+		// TODO: consider trimming whitespaces
+
 		if (line[0] == '#')
 		{
-			Command command = Command::Parse(line);
-			ExecuteCommand(command);
+			Command command = Command::parse(line);
+			executeCommand(command);
 			continue;
 		}
 
 		CompilationUnit unit = CompilationUnit(line);
 
-		const ErrorList& e = unit.errors();
-		if (e.Any())
+		const ErrorList& e = unit.getErrors();
+		if (e.any())
 		{
-			for (unsigned int i = 0; i < e.Count(); i++)
-				Console::Error(e[i].message());
+			for (unsigned int i = 0; i < e.count(); i++)
+				Console::Error(e[i].getMessage());
 		}
 		else
 		{
-			Bool showsDebug = _variables.Get<Bool>("showdebuginfo");
+			Bool showsDebug = _variables.get<Bool>("showdebuginfo");
 			if (showsDebug)
 				AstPrinter::Print(unit.Tree);
 		}
@@ -68,7 +74,9 @@ void Repl::Loop()
 	}
 }
 
-void Repl::ExecuteCommand(const Command& command) noexcept
+void Repl::executeCommand(const Command& command) noexcept
 {
-	_commands.InvokeAll(command, _variables);
+	if (!_commands.containsHandlerFor(command.getName()))
+		Console::Error("Command '#", command.getName(), "' not found. Type '#help' for a list of available commands");
+	_commands.invokeAll(command, _variables);
 }

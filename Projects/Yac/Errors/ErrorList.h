@@ -5,6 +5,7 @@
 
 #include "Error.h"
 
+#include <Core/Primitives.h>
 #include <Syntax/Tokens/TokenType.h>
 
 namespace Yac::Errors {
@@ -13,17 +14,32 @@ namespace Yac::Errors {
 
 	public:
 
-		void Add(const Error& e) noexcept;
-		bool Any() const noexcept;
-		void Clear() noexcept;
-		std::size_t Count() const noexcept;
-		const Error& Get(unsigned int index) const;
-		const Error& operator [](unsigned int index) const;
+		void add(const Error& e) noexcept;
+		bool any() const noexcept;
+		void clear() noexcept;
+
+		void reportUnexpectedToken(
+			Yac::Syntax::TokenType expected,
+			Yac::Syntax::TokenType found,
+			const Yac::Text::TextSpan& span
+		) noexcept;
+
+		void reportUnknownToken(char c, const Yac::Text::TextSpan& span) noexcept;
+
+		void reportNotABooleanLiteral(const std::string& text, const Yac::Text::TextSpan& span) noexcept;
+
+		std::size_t count() const noexcept;
+		const Error& get(Yac::UInt index) const;
+		const Error& operator [](Yac::UInt index) const;
 
 	private:
 
 		std::vector<Error> _errors;
 	};
 
-	static ErrorList ErrorManager;
+	inline ErrorList& getDefaultErrorList()
+	{
+		static ErrorList list;
+		return list;
+	}
 }
