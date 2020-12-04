@@ -1,100 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug Win64|Win32">
-      <Configuration>Debug Win64</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug Win64|x64">
-      <Configuration>Debug Win64</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug Linux32|Win32">
-      <Configuration>Debug Linux32</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug Linux32|x64">
-      <Configuration>Debug Linux32</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug Linux64|Win32">
-      <Configuration>Debug Linux64</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug Linux64|x64">
-      <Configuration>Debug Linux64</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release Win64|Win32">
-      <Configuration>Release Win64</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release Win64|x64">
-      <Configuration>Release Win64</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release Linux32|Win32">
-      <Configuration>Release Linux32</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release Linux32|x64">
-      <Configuration>Release Linux32</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release Linux64|Win32">
-      <Configuration>Release Linux64</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release Linux64|x64">
-      <Configuration>Release Linux64</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Dist|Win32">
-      <Configuration>Dist</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Dist|x64">
       <Configuration>Dist</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Dist Win64|Win32">
-      <Configuration>Dist Win64</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Dist Win64|x64">
-      <Configuration>Dist Win64</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Dist Linux32|Win32">
-      <Configuration>Dist Linux32</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Dist Linux32|x64">
-      <Configuration>Dist Linux32</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Dist Linux64|Win32">
-      <Configuration>Dist Linux64</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Dist Linux64|x64">
-      <Configuration>Dist Linux64</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -106,73 +22,19 @@
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Win64|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Linux32|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Linux64|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Win64|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Linux32|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Linux64|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist Win64|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist Linux32|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist Linux64|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
@@ -181,547 +43,207 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug Win64|x64'">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug Linux32|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug Linux64|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release Win64|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release Linux32|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release Linux64|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist Win64|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist Linux32|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist Linux64|x64'">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\bin\x86\windows\Debug\Yac\</OutDir>
-    <IntDir>..\..\bin\intermediates\x86\windows\Debug\Yac\</IntDir>
-    <TargetName>Yac</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Win64|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\bin\x86_64\windows\Debug\Yac\</OutDir>
     <IntDir>..\..\bin\intermediates\x86_64\windows\Debug\Yac\</IntDir>
     <TargetName>Yac</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Linux32|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\bin\x86\linux\Debug\Yac\</OutDir>
-    <IntDir>..\..\bin\intermediates\x86\linux\Debug\Yac\</IntDir>
-    <TargetName>Yac</TargetName>
-    <TargetExt>
-    </TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Linux64|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\..\bin\x86_64\linux\Debug\Yac\</OutDir>
-    <IntDir>..\..\bin\intermediates\x86_64\linux\Debug\Yac\</IntDir>
-    <TargetName>Yac</TargetName>
-    <TargetExt>
-    </TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\bin\x86\windows\Release\Yac\</OutDir>
-    <IntDir>..\..\bin\intermediates\x86\windows\Release\Yac\</IntDir>
-    <TargetName>Yac</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Win64|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\bin\x86_64\windows\Release\Yac\</OutDir>
     <IntDir>..\..\bin\intermediates\x86_64\windows\Release\Yac\</IntDir>
     <TargetName>Yac</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Linux32|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\bin\x86\linux\Release\Yac\</OutDir>
-    <IntDir>..\..\bin\intermediates\x86\linux\Release\Yac\</IntDir>
-    <TargetName>Yac</TargetName>
-    <TargetExt>
-    </TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Linux64|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\bin\x86_64\linux\Release\Yac\</OutDir>
-    <IntDir>..\..\bin\intermediates\x86_64\linux\Release\Yac\</IntDir>
-    <TargetName>Yac</TargetName>
-    <TargetExt>
-    </TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\bin\x86\windows\Dist\Yac\</OutDir>
-    <IntDir>..\..\bin\intermediates\x86\windows\Dist\Yac\</IntDir>
-    <TargetName>Yac</TargetName>
-    <TargetExt>.exe</TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist Win64|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\bin\x86_64\windows\Dist\Yac\</OutDir>
     <IntDir>..\..\bin\intermediates\x86_64\windows\Dist\Yac\</IntDir>
     <TargetName>Yac</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist Linux32|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\bin\x86\linux\Dist\Yac\</OutDir>
-    <IntDir>..\..\bin\intermediates\x86\linux\Dist\Yac\</IntDir>
-    <TargetName>Yac</TargetName>
-    <TargetExt>
-    </TargetExt>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist Linux64|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\..\bin\x86_64\linux\Dist\Yac\</OutDir>
-    <IntDir>..\..\bin\intermediates\x86_64\linux\Dist\Yac\</IntDir>
-    <TargetName>Yac</TargetName>
-    <TargetExt>
-    </TargetExt>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_DEBUG;Win32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <Optimization>Disabled</Optimization>
-      <MinimalRebuild>false</MinimalRebuild>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Win64|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_DEBUG;Win64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <Optimization>Disabled</Optimization>
-      <MinimalRebuild>false</MinimalRebuild>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Linux32|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_DEBUG;Linux32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <Optimization>Disabled</Optimization>
-      <MinimalRebuild>false</MinimalRebuild>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Linux64|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_DEBUG;Linux64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <Optimization>Disabled</Optimization>
-      <MinimalRebuild>false</MinimalRebuild>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_RELEASE;Win32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Win64|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_RELEASE;Win64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Linux32|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_RELEASE;Linux32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Linux64|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_RELEASE;Linux64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_DIST;Win32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist Win64|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_DIST;Win64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist Linux32|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_DIST;Linux32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist Linux64|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>YAC_DIST;Linux64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Linux64|Win32'">
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Win64|Win32'">
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist Linux64|Win32'">
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist Win64|Win32'">
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Linux64|Win32'">
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Win64|Win32'">
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>YAC_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Linux32|x64'">
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist Linux32|x64'">
-    <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>YAC_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Linux32|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>YAC_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="API\Bool.h" />
-    <ClInclude Include="API\Double.h" />
-    <ClInclude Include="API\Float.h" />
-    <ClInclude Include="API\Int.h" />
-    <ClInclude Include="API\IStringable.h" />
-    <ClInclude Include="API\Numerics.h" />
-    <ClInclude Include="API\Object.h" />
-    <ClInclude Include="API\String.h" />
-    <ClInclude Include="API\UInt.h" />
-    <ClInclude Include="Core\Repl\Commands\Command.h" />
-    <ClInclude Include="Core\Repl\Commands\CommandHandler.h" />
-    <ClInclude Include="Core\Repl\Commands\CommandTable.h" />
-    <ClInclude Include="Core\Repl\Commands\ReplCommands.h" />
-    <ClInclude Include="Core\Repl\Repl.h" />
-    <ClInclude Include="Core\Repl\VariableTable.h" />
-    <ClInclude Include="DataTypes\Operators\BinaryOperatorOverload.h" />
-    <ClInclude Include="DataTypes\Conversion.h" />
-    <ClInclude Include="DataTypes\ConversionTable.h" />
-    <ClInclude Include="DataTypes\Operators\OperatorOverloads.h" />
-    <ClInclude Include="DataTypes\Operators\OperatorsTable.h" />
-    <ClInclude Include="DataTypes\Operators\UnaryOperatorOverload.h" />
-    <ClInclude Include="DataTypes\Variables\Data.h" />
-    <ClInclude Include="Core\Primitives.h" />
-    <ClInclude Include="DataTypes\Types\TypeSymbol.h" />
-    <ClInclude Include="DataTypes\Types\TypeTable.h" />
-    <ClInclude Include="DataTypes\Variables\Variable.h" />
-    <ClInclude Include="Errors\Error.h" />
-    <ClInclude Include="Errors\ErrorList.h" />
-    <ClInclude Include="Errors\Exceptions\ObjectConversionException.h" />
-    <ClInclude Include="Errors\Exceptions\WrongConverterException.h" />
-    <ClInclude Include="Libraries\AllocationTracking\AllocationTracking.h" />
-    <ClInclude Include="Libraries\AllocationTracking\AutomaticTracker.h" />
-    <ClInclude Include="Libraries\AnsiStyle\AnsiStyle.h" />
-    <ClInclude Include="Libraries\Console\Console.h" />
-    <ClInclude Include="Libraries\Platform.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Syntax\Executor\Executor.h" />
-    <ClInclude Include="Syntax\Executor\NameTable.h" />
-    <ClInclude Include="DataTypes\Variables\Scope.h" />
-    <ClInclude Include="Syntax\Expressions\Assignment\AssignmentExpression.h" />
-    <ClInclude Include="Syntax\Expressions\Assignment\AssignmentOperator.h" />
-    <ClInclude Include="Syntax\Expressions\BooleanLiteral.h" />
-    <ClInclude Include="Syntax\Expressions\ConditionalDeclaration.h" />
-    <ClInclude Include="Syntax\Expressions\Expression.h" />
-    <ClInclude Include="Syntax\Expressions\ExpressionType.h" />
-    <ClInclude Include="Syntax\Expressions\Expressions.h" />
-    <ClInclude Include="Syntax\Expressions\IdentifierExpression.h" />
-    <ClInclude Include="Syntax\Expressions\InlineIfElse.h" />
-    <ClInclude Include="Syntax\Expressions\Numeric\NumericBase.h" />
-    <ClInclude Include="Syntax\Expressions\Numeric\NumericLiteral.h" />
-    <ClInclude Include="Syntax\Expressions\Numeric\NumericType.h" />
-    <ClInclude Include="Syntax\Expressions\Operations\BinaryOperation.h" />
-    <ClInclude Include="Syntax\Expressions\Operations\Operations.h" />
-    <ClInclude Include="Syntax\Expressions\Operations\Operator.h" />
-    <ClInclude Include="Syntax\Expressions\Operations\UnaryOperation.h" />
-    <ClInclude Include="Syntax\Expressions\ParenthesesExpression.h" />
-    <ClInclude Include="Syntax\Expressions\StringExpression.h" />
-    <ClInclude Include="Syntax\Lexer\Lexer.h" />
-    <ClInclude Include="Syntax\Parser\Parser.h" />
-    <ClInclude Include="Syntax\Statements\BlockStatement.h" />
-    <ClInclude Include="Syntax\Statements\ExpressionStatement.h" />
-    <ClInclude Include="Syntax\Statements\ForStatement.h" />
-    <ClInclude Include="Syntax\Statements\IfStatement.h" />
-    <ClInclude Include="Syntax\Statements\Statement.h" />
-    <ClInclude Include="Syntax\Statements\StatementType.h" />
-    <ClInclude Include="Syntax\Statements\Statements.h" />
-    <ClInclude Include="Syntax\Statements\VariableDeclaration.h" />
-    <ClInclude Include="Syntax\Statements\WhileStatement.h" />
-    <ClInclude Include="Syntax\SyntaxRules.h" />
-    <ClInclude Include="Syntax\SyntaxTree\AstPrinter.h" />
-    <ClInclude Include="Syntax\SyntaxTree\CompilationUnit.h" />
-    <ClInclude Include="Syntax\SyntaxTree\SyntaxTree.h" />
-    <ClInclude Include="Syntax\Tokens\Keyword.h" />
-    <ClInclude Include="Syntax\Tokens\Token.h" />
-    <ClInclude Include="Syntax\Tokens\TokenType.h" />
-    <ClInclude Include="Text\Line.h" />
-    <ClInclude Include="Text\SourceText.h" />
-    <ClInclude Include="Text\TextSpan.h" />
+    <ClInclude Include="Yac\API\Bool.h" />
+    <ClInclude Include="Yac\API\Double.h" />
+    <ClInclude Include="Yac\API\Float.h" />
+    <ClInclude Include="Yac\API\IStringable.h" />
+    <ClInclude Include="Yac\API\Int.h" />
+    <ClInclude Include="Yac\API\Numerics.h" />
+    <ClInclude Include="Yac\API\Object.h" />
+    <ClInclude Include="Yac\API\String.h" />
+    <ClInclude Include="Yac\API\UInt.h" />
+    <ClInclude Include="Yac\Core\Primitives.h" />
+    <ClInclude Include="Yac\Core\Repl\Commands\Command.h" />
+    <ClInclude Include="Yac\Core\Repl\Commands\CommandHandler.h" />
+    <ClInclude Include="Yac\Core\Repl\Commands\CommandTable.h" />
+    <ClInclude Include="Yac\Core\Repl\Commands\ReplCommands.h" />
+    <ClInclude Include="Yac\Core\Repl\Repl.h" />
+    <ClInclude Include="Yac\Core\Repl\VariableTable.h" />
+    <ClInclude Include="Yac\DataTypes\Conversion.h" />
+    <ClInclude Include="Yac\DataTypes\ConversionTable.h" />
+    <ClInclude Include="Yac\DataTypes\Operators\BinaryOperatorOverload.h" />
+    <ClInclude Include="Yac\DataTypes\Operators\OperatorOverloads.h" />
+    <ClInclude Include="Yac\DataTypes\Operators\OperatorsTable.h" />
+    <ClInclude Include="Yac\DataTypes\Operators\UnaryOperatorOverload.h" />
+    <ClInclude Include="Yac\DataTypes\Types\TypeSymbol.h" />
+    <ClInclude Include="Yac\DataTypes\Types\TypeTable.h" />
+    <ClInclude Include="Yac\DataTypes\Variables\Data.h" />
+    <ClInclude Include="Yac\DataTypes\Variables\Scope.h" />
+    <ClInclude Include="Yac\DataTypes\Variables\Variable.h" />
+    <ClInclude Include="Yac\Errors\Error.h" />
+    <ClInclude Include="Yac\Errors\ErrorList.h" />
+    <ClInclude Include="Yac\Errors\Exceptions\ObjectConversionException.h" />
+    <ClInclude Include="Yac\Errors\Exceptions\WrongConverterException.h" />
+    <ClInclude Include="Yac\Libraries\AllocationTracking\AllocationTracking.h" />
+    <ClInclude Include="Yac\Libraries\AllocationTracking\AutomaticTracker.h" />
+    <ClInclude Include="Yac\Libraries\AnsiStyle\AnsiStyle.h" />
+    <ClInclude Include="Yac\Libraries\Console\Console.h" />
+    <ClInclude Include="Yac\Libraries\Platform.h" />
+    <ClInclude Include="Yac\Syntax\Executor\Executor.h" />
+    <ClInclude Include="Yac\Syntax\Executor\NameTable.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Assignment\AssignmentExpression.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Assignment\AssignmentOperator.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\BooleanLiteral.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\ConditionalDeclaration.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Expression.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\ExpressionType.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Expressions.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\IdentifierExpression.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\InlineIfElse.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Numeric\NumericBase.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Numeric\NumericLiteral.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Numeric\NumericType.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Operations\BinaryOperation.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Operations\Operations.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Operations\Operator.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\Operations\UnaryOperation.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\ParenthesesExpression.h" />
+    <ClInclude Include="Yac\Syntax\Expressions\StringExpression.h" />
+    <ClInclude Include="Yac\Syntax\Lexer\Lexer.h" />
+    <ClInclude Include="Yac\Syntax\Parser\Parser.h" />
+    <ClInclude Include="Yac\Syntax\Statements\BlockStatement.h" />
+    <ClInclude Include="Yac\Syntax\Statements\ExpressionStatement.h" />
+    <ClInclude Include="Yac\Syntax\Statements\ForStatement.h" />
+    <ClInclude Include="Yac\Syntax\Statements\IfStatement.h" />
+    <ClInclude Include="Yac\Syntax\Statements\Statement.h" />
+    <ClInclude Include="Yac\Syntax\Statements\StatementType.h" />
+    <ClInclude Include="Yac\Syntax\Statements\Statements.h" />
+    <ClInclude Include="Yac\Syntax\Statements\VariableDeclaration.h" />
+    <ClInclude Include="Yac\Syntax\Statements\WhileStatement.h" />
+    <ClInclude Include="Yac\Syntax\SyntaxRules.h" />
+    <ClInclude Include="Yac\Syntax\SyntaxTree\AstPrinter.h" />
+    <ClInclude Include="Yac\Syntax\SyntaxTree\CompilationUnit.h" />
+    <ClInclude Include="Yac\Syntax\SyntaxTree\SyntaxTree.h" />
+    <ClInclude Include="Yac\Syntax\Tokens\Keyword.h" />
+    <ClInclude Include="Yac\Syntax\Tokens\Token.h" />
+    <ClInclude Include="Yac\Syntax\Tokens\TokenType.h" />
+    <ClInclude Include="Yac\Text\Line.h" />
+    <ClInclude Include="Yac\Text\SourceText.h" />
+    <ClInclude Include="Yac\Text\TextSpan.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Repl\Commands\Command.cpp" />
-    <ClCompile Include="Core\Repl\Commands\CommandHandler.cpp" />
-    <ClCompile Include="Core\Repl\Commands\CommandTable.cpp" />
-    <ClCompile Include="Core\Repl\Commands\ReplCommands.cpp" />
-    <ClCompile Include="Core\Repl\Repl.cpp" />
-    <ClCompile Include="DataTypes\Operators\BinaryOperatorOverload.cpp" />
-    <ClCompile Include="DataTypes\Operators\UnaryOperatorOverload.cpp" />
-    <ClCompile Include="DataTypes\Variables\Data.cpp" />
-    <ClCompile Include="DataTypes\Variables\Scope.cpp" />
-    <ClCompile Include="DataTypes\Variables\Variable.cpp" />
-    <ClCompile Include="Errors\ErrorList.cpp" />
-    <ClCompile Include="Libraries\AllocationTracking\AllocationTracking.cpp" />
-    <ClCompile Include="Libraries\AnsiStyle\AnsiStyle.cpp" />
-    <ClCompile Include="Libraries\Console\Console.cpp" />
-    <ClCompile Include="Syntax\Executor\Executor.cpp" />
-    <ClCompile Include="Syntax\Executor\NameTable.cpp" />
-    <ClCompile Include="Syntax\Expressions\Numeric\NumericLiteral.cpp" />
-    <ClCompile Include="Syntax\Expressions\Operations\BinaryOperation.cpp" />
-    <ClCompile Include="Syntax\Expressions\Operations\UnaryOperation.cpp" />
-    <ClCompile Include="Syntax\Lexer\Lexer.cpp" />
-    <ClCompile Include="Syntax\Parser\Parser.cpp" />
-    <ClCompile Include="Syntax\Statements\ExpressionStatement.cpp" />
-    <ClCompile Include="Syntax\Statements\Statement.cpp" />
-    <ClCompile Include="Syntax\Statements\VariableDeclaration.cpp" />
-    <ClCompile Include="Syntax\SyntaxRules.cpp" />
-    <ClCompile Include="Syntax\SyntaxTree\AstPrinter.cpp" />
-    <ClCompile Include="Syntax\SyntaxTree\SyntaxTree.cpp" />
-    <ClCompile Include="Syntax\Tokens\Token.cpp" />
-    <ClCompile Include="Text\SourceText.cpp" />
+    <ClCompile Include="Yac\Core\Repl\Commands\Command.cpp" />
+    <ClCompile Include="Yac\Core\Repl\Commands\CommandHandler.cpp" />
+    <ClCompile Include="Yac\Core\Repl\Commands\CommandTable.cpp" />
+    <ClCompile Include="Yac\Core\Repl\Commands\ReplCommands.cpp" />
+    <ClCompile Include="Yac\Core\Repl\Repl.cpp" />
+    <ClCompile Include="Yac\DataTypes\Operators\BinaryOperatorOverload.cpp" />
+    <ClCompile Include="Yac\DataTypes\Operators\UnaryOperatorOverload.cpp" />
+    <ClCompile Include="Yac\DataTypes\Variables\Data.cpp" />
+    <ClCompile Include="Yac\DataTypes\Variables\Scope.cpp" />
+    <ClCompile Include="Yac\DataTypes\Variables\Variable.cpp" />
+    <ClCompile Include="Yac\Errors\ErrorList.cpp" />
+    <ClCompile Include="Yac\Libraries\AllocationTracking\AllocationTracking.cpp" />
+    <ClCompile Include="Yac\Libraries\AnsiStyle\AnsiStyle.cpp" />
+    <ClCompile Include="Yac\Libraries\Console\Console.cpp" />
+    <ClCompile Include="Yac\Syntax\Executor\Executor.cpp" />
+    <ClCompile Include="Yac\Syntax\Executor\NameTable.cpp" />
+    <ClCompile Include="Yac\Syntax\Expressions\Numeric\NumericLiteral.cpp" />
+    <ClCompile Include="Yac\Syntax\Expressions\Operations\BinaryOperation.cpp" />
+    <ClCompile Include="Yac\Syntax\Expressions\Operations\UnaryOperation.cpp" />
+    <ClCompile Include="Yac\Syntax\Lexer\Lexer.cpp" />
+    <ClCompile Include="Yac\Syntax\Parser\Parser.cpp" />
+    <ClCompile Include="Yac\Syntax\Statements\ExpressionStatement.cpp" />
+    <ClCompile Include="Yac\Syntax\Statements\Statement.cpp" />
+    <ClCompile Include="Yac\Syntax\Statements\VariableDeclaration.cpp" />
+    <ClCompile Include="Yac\Syntax\SyntaxRules.cpp" />
+    <ClCompile Include="Yac\Syntax\SyntaxTree\AstPrinter.cpp" />
+    <ClCompile Include="Yac\Syntax\SyntaxTree\SyntaxTree.cpp" />
+    <ClCompile Include="Yac\Syntax\Tokens\Token.cpp" />
+    <ClCompile Include="Yac\Text\SourceText.cpp" />
     <ClCompile Include="entrypoint.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,365 +1,409 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="API">
-      <UniqueIdentifier>{FFD1870B-6BDB-877C-F456-9E7C605F937C}</UniqueIdentifier>
+    <Filter Include="Yac">
+      <UniqueIdentifier>{623A880B-CE43-887C-57BF-9E7CC3C7937C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core">
-      <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
+    <Filter Include="Yac\API">
+      <UniqueIdentifier>{4B801DB0-B75F-9C4B-C077-27222CD602AD}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Repl">
-      <UniqueIdentifier>{30B4C215-9C1E-778C-E55C-2832510655E1}</UniqueIdentifier>
+    <Filter Include="Yac\Core">
+      <UniqueIdentifier>{FA2BCFB3-E6F8-29BF-0F12-1867FB3D5F4D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Repl\Commands">
-      <UniqueIdentifier>{7105CA7E-5DE9-8AD4-C649-8527B24C7556}</UniqueIdentifier>
+    <Filter Include="Yac\Core\Repl">
+      <UniqueIdentifier>{7CEBAC05-E8AB-283C-B1E6-71B91D666D18}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DataTypes">
-      <UniqueIdentifier>{B472F831-20DD-ACA8-691B-5E4ED5C48AFD}</UniqueIdentifier>
+    <Filter Include="Yac\Core\Repl\Commands">
+      <UniqueIdentifier>{3D32456E-292C-6EC0-1299-04D1FE31D42C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Errors">
-      <UniqueIdentifier>{224C22B1-0EEE-4C87-F7A8-60DBE3E9D3D7}</UniqueIdentifier>
+    <Filter Include="Yac\DataTypes">
+      <UniqueIdentifier>{00AAE221-6C6A-5E58-35A5-A7D5A124A334}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Errors\Exceptions">
-      <UniqueIdentifier>{D336002F-3F4D-FEC4-88C4-89E6F419CF4C}</UniqueIdentifier>
+    <Filter Include="Yac\DataTypes\Operators">
+      <UniqueIdentifier>{CEACA671-3AE4-EE08-43EE-522CAFA41502}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries">
-      <UniqueIdentifier>{0259E1F6-6EC3-956D-B701-471323AB73C2}</UniqueIdentifier>
+    <Filter Include="Yac\DataTypes\Types">
+      <UniqueIdentifier>{A4ED9023-104F-6E31-99BC-B4E3051DA5F0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries\AnsiStyle">
-      <UniqueIdentifier>{0D66276F-79C7-047D-0235-4B2F6E953B3C}</UniqueIdentifier>
+    <Filter Include="Yac\DataTypes\Variables">
+      <UniqueIdentifier>{8805DF9C-F43C-2734-FD46-8B5769FD4D2D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Libraries\Console">
-      <UniqueIdentifier>{2452AB04-9068-A99A-D9DF-34BC45357A22}</UniqueIdentifier>
+    <Filter Include="Yac\Errors">
+      <UniqueIdentifier>{EEE62AE9-DA9E-6C36-43A6-45922F7D0727}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax">
-      <UniqueIdentifier>{0C1247D2-F8B3-71A8-E16E-85FCCDAFF8F8}</UniqueIdentifier>
+    <Filter Include="Yac\Errors\Exceptions">
+      <UniqueIdentifier>{1FFA22BA-8B66-DEB4-545A-7612C085001D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\Binding">
-      <UniqueIdentifier>{B6F19494-A2BF-889A-8B53-F9C077C064FF}</UniqueIdentifier>
+    <Filter Include="Yac\Libraries">
+      <UniqueIdentifier>{4E90CBE6-BA50-471D-838B-909AEF0A8CF9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\Executor">
-      <UniqueIdentifier>{CA5F9859-36EB-051E-3FFC-8812AB06621E}</UniqueIdentifier>
+    <Filter Include="Yac\Libraries\AllocationTracking">
+      <UniqueIdentifier>{D652B55F-C2A3-A0A1-EB07-8F63D7B7330B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\Expressions">
-      <UniqueIdentifier>{7E7C9F4E-6A60-60A4-D3C0-5AF7BFC34A26}</UniqueIdentifier>
+    <Filter Include="Yac\Libraries\AnsiStyle">
+      <UniqueIdentifier>{592C084E-C563-50E5-CE6D-B4083A2477DE}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\Expressions\Assignment">
-      <UniqueIdentifier>{86C35909-F2DB-4033-BB88-D0CC2760D5CC}</UniqueIdentifier>
+    <Filter Include="Yac\Libraries\Console">
+      <UniqueIdentifier>{7015CE8F-DC81-898A-A575-21E811A1ABF2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\Expressions\Numeric">
-      <UniqueIdentifier>{4008C906-2C18-75D7-95D1-D9F581006470}</UniqueIdentifier>
+    <Filter Include="Yac\Syntax">
+      <UniqueIdentifier>{D8AC4F0A-C464-9157-2D6C-6AB319432C48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\Expressions\Operations">
-      <UniqueIdentifier>{117716A0-7D8F-FDC9-463C-8D63B2139263}</UniqueIdentifier>
+    <Filter Include="Yac\Syntax\Executor">
+      <UniqueIdentifier>{16E059AE-8241-37BC-0BAF-7D6E770F6E7B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\Lexer">
-      <UniqueIdentifier>{1B95C2D2-07F8-5177-B07D-8A2D9CBF1DFA}</UniqueIdentifier>
+    <Filter Include="Yac\Syntax\Expressions">
+      <UniqueIdentifier>{4AA91A3E-36A3-4390-1F10-DAA00BA9A9FC}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\Parser">
-      <UniqueIdentifier>{08691E34-7429-9A6A-3D64-E3E7A9E3DE46}</UniqueIdentifier>
+    <Filter Include="Yac\Syntax\Expressions\Assignment">
+      <UniqueIdentifier>{D2D8EF4B-3E47-45CB-8730-00CBF3DD3A67}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\Statements">
-      <UniqueIdentifier>{63A891CD-CFBE-8F63-1836-1B85848B60EB}</UniqueIdentifier>
+    <Filter Include="Yac\Syntax\Expressions\Numeric">
+      <UniqueIdentifier>{0C41DA77-F866-A4DE-E1AC-29AACD71C9AA}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\SyntaxTree">
-      <UniqueIdentifier>{72D4C00A-DEEA-BEA0-2762-4AC293B78F28}</UniqueIdentifier>
+    <Filter Include="Yac\Syntax\Expressions\Operations">
+      <UniqueIdentifier>{5D8CACE2-C9FA-0162-12E4-BC617E91F7FD}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Syntax\Tokens">
-      <UniqueIdentifier>{8F516C3E-FB11-E874-C44C-31F230CC2C51}</UniqueIdentifier>
+    <Filter Include="Yac\Syntax\Lexer">
+      <UniqueIdentifier>{E718BFD0-D311-DE22-FC43-C3A7E89BBD2E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Text">
-      <UniqueIdentifier>{EADC8C7C-D613-8E0D-7F00-74106B160A0F}</UniqueIdentifier>
+    <Filter Include="Yac\Syntax\Parser">
+      <UniqueIdentifier>{5466ABF1-C07C-A987-09F4-34A975497A0F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Yac\Syntax\Statements">
+      <UniqueIdentifier>{AF6BB458-1BD8-6F53-E4CB-07B150F791BB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Yac\Syntax\SyntaxTree">
+      <UniqueIdentifier>{BE97E395-2A04-9F90-F3F7-36EE5F23C1F8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Yac\Syntax\Tokens">
+      <UniqueIdentifier>{DB4EF9FB-4765-F791-90DC-82B3FC31C819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Yac\Text">
+      <UniqueIdentifier>{B654D8B3-A221-33BF-CB3A-2167B766684D}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="API\Bool.h">
-      <Filter>API</Filter>
+    <ClInclude Include="Yac\API\Bool.h">
+      <Filter>Yac\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\Double.h">
-      <Filter>API</Filter>
+    <ClInclude Include="Yac\API\Double.h">
+      <Filter>Yac\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\Float.h">
-      <Filter>API</Filter>
+    <ClInclude Include="Yac\API\Float.h">
+      <Filter>Yac\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\Int.h">
-      <Filter>API</Filter>
+    <ClInclude Include="Yac\API\IStringable.h">
+      <Filter>Yac\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\Numerics.h">
-      <Filter>API</Filter>
+    <ClInclude Include="Yac\API\Int.h">
+      <Filter>Yac\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\Object.h">
-      <Filter>API</Filter>
+    <ClInclude Include="Yac\API\Numerics.h">
+      <Filter>Yac\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\String.h">
-      <Filter>API</Filter>
+    <ClInclude Include="Yac\API\Object.h">
+      <Filter>Yac\API</Filter>
     </ClInclude>
-    <ClInclude Include="API\UInt.h">
-      <Filter>API</Filter>
+    <ClInclude Include="Yac\API\String.h">
+      <Filter>Yac\API</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Repl\Commands\Command.h">
-      <Filter>Core\Repl\Commands</Filter>
+    <ClInclude Include="Yac\API\UInt.h">
+      <Filter>Yac\API</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Repl\Commands\CommandHandler.h">
-      <Filter>Core\Repl\Commands</Filter>
+    <ClInclude Include="Yac\Core\Primitives.h">
+      <Filter>Yac\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Repl\Commands\CommandTable.h">
-      <Filter>Core\Repl\Commands</Filter>
+    <ClInclude Include="Yac\Core\Repl\Commands\Command.h">
+      <Filter>Yac\Core\Repl\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Repl\Commands\ReplCommands.h">
-      <Filter>Core\Repl\Commands</Filter>
+    <ClInclude Include="Yac\Core\Repl\Commands\CommandHandler.h">
+      <Filter>Yac\Core\Repl\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Repl\Repl.h">
-      <Filter>Core\Repl</Filter>
+    <ClInclude Include="Yac\Core\Repl\Commands\CommandTable.h">
+      <Filter>Yac\Core\Repl\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Repl\VariableTable.h">
-      <Filter>Core\Repl</Filter>
+    <ClInclude Include="Yac\Core\Repl\Commands\ReplCommands.h">
+      <Filter>Yac\Core\Repl\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Errors\Error.h">
-      <Filter>Errors</Filter>
+    <ClInclude Include="Yac\Core\Repl\Repl.h">
+      <Filter>Yac\Core\Repl</Filter>
     </ClInclude>
-    <ClInclude Include="Errors\ErrorList.h">
-      <Filter>Errors</Filter>
+    <ClInclude Include="Yac\Core\Repl\VariableTable.h">
+      <Filter>Yac\Core\Repl</Filter>
     </ClInclude>
-    <ClInclude Include="Errors\Exceptions\ObjectConversionException.h">
-      <Filter>Errors\Exceptions</Filter>
+    <ClInclude Include="Yac\DataTypes\Conversion.h">
+      <Filter>Yac\DataTypes</Filter>
     </ClInclude>
-    <ClInclude Include="Libraries\AnsiStyle\AnsiStyle.h">
-      <Filter>Libraries\AnsiStyle</Filter>
+    <ClInclude Include="Yac\DataTypes\ConversionTable.h">
+      <Filter>Yac\DataTypes</Filter>
     </ClInclude>
-    <ClInclude Include="Libraries\Console\Console.h">
-      <Filter>Libraries\Console</Filter>
+    <ClInclude Include="Yac\DataTypes\Operators\BinaryOperatorOverload.h">
+      <Filter>Yac\DataTypes\Operators</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Executor\Executor.h">
-      <Filter>Syntax\Executor</Filter>
+    <ClInclude Include="Yac\DataTypes\Operators\OperatorOverloads.h">
+      <Filter>Yac\DataTypes\Operators</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Assignment\AssignmentExpression.h">
-      <Filter>Syntax\Expressions\Assignment</Filter>
+    <ClInclude Include="Yac\DataTypes\Operators\OperatorsTable.h">
+      <Filter>Yac\DataTypes\Operators</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Assignment\AssignmentOperator.h">
-      <Filter>Syntax\Expressions\Assignment</Filter>
+    <ClInclude Include="Yac\DataTypes\Operators\UnaryOperatorOverload.h">
+      <Filter>Yac\DataTypes\Operators</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\BooleanLiteral.h">
-      <Filter>Syntax\Expressions</Filter>
+    <ClInclude Include="Yac\DataTypes\Types\TypeSymbol.h">
+      <Filter>Yac\DataTypes\Types</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\ConditionalDeclaration.h">
-      <Filter>Syntax\Expressions</Filter>
+    <ClInclude Include="Yac\DataTypes\Types\TypeTable.h">
+      <Filter>Yac\DataTypes\Types</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Expression.h">
-      <Filter>Syntax\Expressions</Filter>
+    <ClInclude Include="Yac\DataTypes\Variables\Data.h">
+      <Filter>Yac\DataTypes\Variables</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\ExpressionType.h">
-      <Filter>Syntax\Expressions</Filter>
+    <ClInclude Include="Yac\DataTypes\Variables\Scope.h">
+      <Filter>Yac\DataTypes\Variables</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Expressions.h">
-      <Filter>Syntax\Expressions</Filter>
+    <ClInclude Include="Yac\DataTypes\Variables\Variable.h">
+      <Filter>Yac\DataTypes\Variables</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\IdentifierExpression.h">
-      <Filter>Syntax\Expressions</Filter>
+    <ClInclude Include="Yac\Errors\Error.h">
+      <Filter>Yac\Errors</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\InlineIfElse.h">
-      <Filter>Syntax\Expressions</Filter>
+    <ClInclude Include="Yac\Errors\ErrorList.h">
+      <Filter>Yac\Errors</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Numeric\NumericBase.h">
-      <Filter>Syntax\Expressions\Numeric</Filter>
+    <ClInclude Include="Yac\Errors\Exceptions\ObjectConversionException.h">
+      <Filter>Yac\Errors\Exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Numeric\NumericLiteral.h">
-      <Filter>Syntax\Expressions\Numeric</Filter>
+    <ClInclude Include="Yac\Errors\Exceptions\WrongConverterException.h">
+      <Filter>Yac\Errors\Exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Numeric\NumericType.h">
-      <Filter>Syntax\Expressions\Numeric</Filter>
+    <ClInclude Include="Yac\Libraries\AllocationTracking\AllocationTracking.h">
+      <Filter>Yac\Libraries\AllocationTracking</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Operations\BinaryOperation.h">
-      <Filter>Syntax\Expressions\Operations</Filter>
+    <ClInclude Include="Yac\Libraries\AllocationTracking\AutomaticTracker.h">
+      <Filter>Yac\Libraries\AllocationTracking</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Operations\Operations.h">
-      <Filter>Syntax\Expressions\Operations</Filter>
+    <ClInclude Include="Yac\Libraries\AnsiStyle\AnsiStyle.h">
+      <Filter>Yac\Libraries\AnsiStyle</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Operations\Operator.h">
-      <Filter>Syntax\Expressions\Operations</Filter>
+    <ClInclude Include="Yac\Libraries\Console\Console.h">
+      <Filter>Yac\Libraries\Console</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\Operations\UnaryOperation.h">
-      <Filter>Syntax\Expressions\Operations</Filter>
+    <ClInclude Include="Yac\Libraries\Platform.h">
+      <Filter>Yac\Libraries</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\ParenthesesExpression.h">
-      <Filter>Syntax\Expressions</Filter>
+    <ClInclude Include="Yac\Syntax\Executor\Executor.h">
+      <Filter>Yac\Syntax\Executor</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Expressions\StringExpression.h">
-      <Filter>Syntax\Expressions</Filter>
+    <ClInclude Include="Yac\Syntax\Executor\NameTable.h">
+      <Filter>Yac\Syntax\Executor</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Lexer\Lexer.h">
-      <Filter>Syntax\Lexer</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Assignment\AssignmentExpression.h">
+      <Filter>Yac\Syntax\Expressions\Assignment</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Parser\Parser.h">
-      <Filter>Syntax\Parser</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Assignment\AssignmentOperator.h">
+      <Filter>Yac\Syntax\Expressions\Assignment</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Statements\BlockStatement.h">
-      <Filter>Syntax\Statements</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\BooleanLiteral.h">
+      <Filter>Yac\Syntax\Expressions</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Statements\ExpressionStatement.h">
-      <Filter>Syntax\Statements</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\ConditionalDeclaration.h">
+      <Filter>Yac\Syntax\Expressions</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Statements\ForStatement.h">
-      <Filter>Syntax\Statements</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Expression.h">
+      <Filter>Yac\Syntax\Expressions</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Statements\IfStatement.h">
-      <Filter>Syntax\Statements</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\ExpressionType.h">
+      <Filter>Yac\Syntax\Expressions</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Statements\Statement.h">
-      <Filter>Syntax\Statements</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Expressions.h">
+      <Filter>Yac\Syntax\Expressions</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Statements\StatementType.h">
-      <Filter>Syntax\Statements</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\IdentifierExpression.h">
+      <Filter>Yac\Syntax\Expressions</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Statements\Statements.h">
-      <Filter>Syntax\Statements</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\InlineIfElse.h">
+      <Filter>Yac\Syntax\Expressions</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Statements\VariableDeclaration.h">
-      <Filter>Syntax\Statements</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Numeric\NumericBase.h">
+      <Filter>Yac\Syntax\Expressions\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Statements\WhileStatement.h">
-      <Filter>Syntax\Statements</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Numeric\NumericLiteral.h">
+      <Filter>Yac\Syntax\Expressions\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\SyntaxRules.h">
-      <Filter>Syntax</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Numeric\NumericType.h">
+      <Filter>Yac\Syntax\Expressions\Numeric</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\SyntaxTree\AstPrinter.h">
-      <Filter>Syntax\SyntaxTree</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Operations\BinaryOperation.h">
+      <Filter>Yac\Syntax\Expressions\Operations</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\SyntaxTree\CompilationUnit.h">
-      <Filter>Syntax\SyntaxTree</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Operations\Operations.h">
+      <Filter>Yac\Syntax\Expressions\Operations</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\SyntaxTree\SyntaxTree.h">
-      <Filter>Syntax\SyntaxTree</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Operations\Operator.h">
+      <Filter>Yac\Syntax\Expressions\Operations</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Tokens\Keyword.h">
-      <Filter>Syntax\Tokens</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\Operations\UnaryOperation.h">
+      <Filter>Yac\Syntax\Expressions\Operations</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Tokens\Token.h">
-      <Filter>Syntax\Tokens</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\ParenthesesExpression.h">
+      <Filter>Yac\Syntax\Expressions</Filter>
     </ClInclude>
-    <ClInclude Include="Syntax\Tokens\TokenType.h">
-      <Filter>Syntax\Tokens</Filter>
+    <ClInclude Include="Yac\Syntax\Expressions\StringExpression.h">
+      <Filter>Yac\Syntax\Expressions</Filter>
     </ClInclude>
-    <ClInclude Include="Text\Line.h">
-      <Filter>Text</Filter>
+    <ClInclude Include="Yac\Syntax\Lexer\Lexer.h">
+      <Filter>Yac\Syntax\Lexer</Filter>
     </ClInclude>
-    <ClInclude Include="Text\SourceText.h">
-      <Filter>Text</Filter>
+    <ClInclude Include="Yac\Syntax\Parser\Parser.h">
+      <Filter>Yac\Syntax\Parser</Filter>
     </ClInclude>
-    <ClInclude Include="Text\TextSpan.h">
-      <Filter>Text</Filter>
+    <ClInclude Include="Yac\Syntax\Statements\BlockStatement.h">
+      <Filter>Yac\Syntax\Statements</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Errors\Exceptions\WrongConverterException.h" />
-    <ClInclude Include="API\IStringable.h" />
-    <ClInclude Include="Syntax\Executor\NameTable.h" />
-    <ClInclude Include="DataTypes\ConversionTable.h" />
-    <ClInclude Include="DataTypes\Conversion.h" />
-    <ClInclude Include="DataTypes\Variables\Data.h">
-      <Filter>DataTypes</Filter>
+    <ClInclude Include="Yac\Syntax\Statements\ExpressionStatement.h">
+      <Filter>Yac\Syntax\Statements</Filter>
     </ClInclude>
-    <ClInclude Include="DataTypes\Variables\Variable.h">
-      <Filter>DataTypes</Filter>
+    <ClInclude Include="Yac\Syntax\Statements\ForStatement.h">
+      <Filter>Yac\Syntax\Statements</Filter>
     </ClInclude>
-    <ClInclude Include="DataTypes\Types\TypeSymbol.h">
-      <Filter>DataTypes</Filter>
+    <ClInclude Include="Yac\Syntax\Statements\IfStatement.h">
+      <Filter>Yac\Syntax\Statements</Filter>
     </ClInclude>
-    <ClInclude Include="DataTypes\Types\TypeTable.h">
-      <Filter>DataTypes</Filter>
+    <ClInclude Include="Yac\Syntax\Statements\Statement.h">
+      <Filter>Yac\Syntax\Statements</Filter>
     </ClInclude>
-    <ClInclude Include="DataTypes\Operators\UnaryOperatorOverload.h" />
-    <ClInclude Include="DataTypes\Operators\OperatorsTable.h" />
-    <ClInclude Include="DataTypes\Operators\BinaryOperatorOverload.h" />
-    <ClInclude Include="DataTypes\Operators\OperatorOverloads.h" />
-    <ClInclude Include="DataTypes\Variables\Scope.h">
-      <Filter>Syntax\Executor</Filter>
+    <ClInclude Include="Yac\Syntax\Statements\StatementType.h">
+      <Filter>Yac\Syntax\Statements</Filter>
     </ClInclude>
-    <ClInclude Include="Libraries\AllocationTracking\AllocationTracking.h" />
-    <ClInclude Include="Libraries\AllocationTracking\AutomaticTracker.h" />
-    <ClInclude Include="Libraries\Platform.h" />
-    <ClInclude Include="Core\Primitives.h">
-      <Filter>DataTypes</Filter>
+    <ClInclude Include="Yac\Syntax\Statements\Statements.h">
+      <Filter>Yac\Syntax\Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Syntax\Statements\VariableDeclaration.h">
+      <Filter>Yac\Syntax\Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Syntax\Statements\WhileStatement.h">
+      <Filter>Yac\Syntax\Statements</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Syntax\SyntaxRules.h">
+      <Filter>Yac\Syntax</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Syntax\SyntaxTree\AstPrinter.h">
+      <Filter>Yac\Syntax\SyntaxTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Syntax\SyntaxTree\CompilationUnit.h">
+      <Filter>Yac\Syntax\SyntaxTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Syntax\SyntaxTree\SyntaxTree.h">
+      <Filter>Yac\Syntax\SyntaxTree</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Syntax\Tokens\Keyword.h">
+      <Filter>Yac\Syntax\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Syntax\Tokens\Token.h">
+      <Filter>Yac\Syntax\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Syntax\Tokens\TokenType.h">
+      <Filter>Yac\Syntax\Tokens</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Text\Line.h">
+      <Filter>Yac\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Text\SourceText.h">
+      <Filter>Yac\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Yac\Text\TextSpan.h">
+      <Filter>Yac\Text</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Repl\Commands\Command.cpp">
-      <Filter>Core\Repl\Commands</Filter>
+    <ClCompile Include="Yac\Core\Repl\Commands\Command.cpp">
+      <Filter>Yac\Core\Repl\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Repl\Commands\CommandHandler.cpp">
-      <Filter>Core\Repl\Commands</Filter>
+    <ClCompile Include="Yac\Core\Repl\Commands\CommandHandler.cpp">
+      <Filter>Yac\Core\Repl\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Repl\Commands\CommandTable.cpp">
-      <Filter>Core\Repl\Commands</Filter>
+    <ClCompile Include="Yac\Core\Repl\Commands\CommandTable.cpp">
+      <Filter>Yac\Core\Repl\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Repl\Commands\ReplCommands.cpp">
-      <Filter>Core\Repl\Commands</Filter>
+    <ClCompile Include="Yac\Core\Repl\Commands\ReplCommands.cpp">
+      <Filter>Yac\Core\Repl\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Repl\Repl.cpp">
-      <Filter>Core\Repl</Filter>
+    <ClCompile Include="Yac\Core\Repl\Repl.cpp">
+      <Filter>Yac\Core\Repl</Filter>
     </ClCompile>
-    <ClCompile Include="Errors\ErrorList.cpp">
-      <Filter>Errors</Filter>
+    <ClCompile Include="Yac\DataTypes\Operators\BinaryOperatorOverload.cpp">
+      <Filter>Yac\DataTypes\Operators</Filter>
     </ClCompile>
-    <ClCompile Include="Libraries\AnsiStyle\AnsiStyle.cpp">
-      <Filter>Libraries\AnsiStyle</Filter>
+    <ClCompile Include="Yac\DataTypes\Operators\UnaryOperatorOverload.cpp">
+      <Filter>Yac\DataTypes\Operators</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\Executor\Executor.cpp">
-      <Filter>Syntax\Executor</Filter>
+    <ClCompile Include="Yac\DataTypes\Variables\Data.cpp">
+      <Filter>Yac\DataTypes\Variables</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\Expressions\Numeric\NumericLiteral.cpp">
-      <Filter>Syntax\Expressions\Numeric</Filter>
+    <ClCompile Include="Yac\DataTypes\Variables\Scope.cpp">
+      <Filter>Yac\DataTypes\Variables</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\Expressions\Operations\BinaryOperation.cpp">
-      <Filter>Syntax\Expressions\Operations</Filter>
+    <ClCompile Include="Yac\DataTypes\Variables\Variable.cpp">
+      <Filter>Yac\DataTypes\Variables</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\Expressions\Operations\UnaryOperation.cpp">
-      <Filter>Syntax\Expressions\Operations</Filter>
+    <ClCompile Include="Yac\Errors\ErrorList.cpp">
+      <Filter>Yac\Errors</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\Lexer\Lexer.cpp">
-      <Filter>Syntax\Lexer</Filter>
+    <ClCompile Include="Yac\Libraries\AllocationTracking\AllocationTracking.cpp">
+      <Filter>Yac\Libraries\AllocationTracking</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\Parser\Parser.cpp">
-      <Filter>Syntax\Parser</Filter>
+    <ClCompile Include="Yac\Libraries\AnsiStyle\AnsiStyle.cpp">
+      <Filter>Yac\Libraries\AnsiStyle</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\Statements\ExpressionStatement.cpp">
-      <Filter>Syntax\Statements</Filter>
+    <ClCompile Include="Yac\Libraries\Console\Console.cpp">
+      <Filter>Yac\Libraries\Console</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\Statements\Statement.cpp">
-      <Filter>Syntax\Statements</Filter>
+    <ClCompile Include="Yac\Syntax\Executor\Executor.cpp">
+      <Filter>Yac\Syntax\Executor</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\Statements\VariableDeclaration.cpp">
-      <Filter>Syntax\Statements</Filter>
+    <ClCompile Include="Yac\Syntax\Executor\NameTable.cpp">
+      <Filter>Yac\Syntax\Executor</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\SyntaxRules.cpp">
-      <Filter>Syntax</Filter>
+    <ClCompile Include="Yac\Syntax\Expressions\Numeric\NumericLiteral.cpp">
+      <Filter>Yac\Syntax\Expressions\Numeric</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\SyntaxTree\AstPrinter.cpp">
-      <Filter>Syntax\SyntaxTree</Filter>
+    <ClCompile Include="Yac\Syntax\Expressions\Operations\BinaryOperation.cpp">
+      <Filter>Yac\Syntax\Expressions\Operations</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\SyntaxTree\SyntaxTree.cpp">
-      <Filter>Syntax\SyntaxTree</Filter>
+    <ClCompile Include="Yac\Syntax\Expressions\Operations\UnaryOperation.cpp">
+      <Filter>Yac\Syntax\Expressions\Operations</Filter>
     </ClCompile>
-    <ClCompile Include="Syntax\Tokens\Token.cpp">
-      <Filter>Syntax\Tokens</Filter>
+    <ClCompile Include="Yac\Syntax\Lexer\Lexer.cpp">
+      <Filter>Yac\Syntax\Lexer</Filter>
     </ClCompile>
-    <ClCompile Include="Text\SourceText.cpp">
-      <Filter>Text</Filter>
+    <ClCompile Include="Yac\Syntax\Parser\Parser.cpp">
+      <Filter>Yac\Syntax\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Yac\Syntax\Statements\ExpressionStatement.cpp">
+      <Filter>Yac\Syntax\Statements</Filter>
+    </ClCompile>
+    <ClCompile Include="Yac\Syntax\Statements\Statement.cpp">
+      <Filter>Yac\Syntax\Statements</Filter>
+    </ClCompile>
+    <ClCompile Include="Yac\Syntax\Statements\VariableDeclaration.cpp">
+      <Filter>Yac\Syntax\Statements</Filter>
+    </ClCompile>
+    <ClCompile Include="Yac\Syntax\SyntaxRules.cpp">
+      <Filter>Yac\Syntax</Filter>
+    </ClCompile>
+    <ClCompile Include="Yac\Syntax\SyntaxTree\AstPrinter.cpp">
+      <Filter>Yac\Syntax\SyntaxTree</Filter>
+    </ClCompile>
+    <ClCompile Include="Yac\Syntax\SyntaxTree\SyntaxTree.cpp">
+      <Filter>Yac\Syntax\SyntaxTree</Filter>
+    </ClCompile>
+    <ClCompile Include="Yac\Syntax\Tokens\Token.cpp">
+      <Filter>Yac\Syntax\Tokens</Filter>
+    </ClCompile>
+    <ClCompile Include="Yac\Text\SourceText.cpp">
+      <Filter>Yac\Text</Filter>
     </ClCompile>
     <ClCompile Include="entrypoint.cpp" />
-    <ClCompile Include="Syntax\Executor\NameTable.cpp" />
-    <ClCompile Include="DataTypes\Variables\Data.cpp">
-      <Filter>DataTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="DataTypes\Variables\Variable.cpp">
-      <Filter>DataTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="DataTypes\Operators\BinaryOperatorOverload.cpp" />
-    <ClCompile Include="DataTypes\Operators\UnaryOperatorOverload.cpp" />
-    <ClCompile Include="DataTypes\Variables\Scope.cpp" />
-    <ClCompile Include="Libraries\AllocationTracking\AllocationTracking.cpp" />
-    <ClCompile Include="Libraries\Console\Console.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
 </Project>

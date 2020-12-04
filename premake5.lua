@@ -1,4 +1,5 @@
 workspace "Yac"
+
 	architecture "x86_64"
 	startproject "Yac"
 
@@ -7,14 +8,6 @@ workspace "Yac"
 		"Debug",
 		"Release",
 		"Dist"
-    }
-    
-    platforms 
-    {
-        "Win32",
-        "Win64",
-        "Linux32",
-        "Linux64",
     }
 	
 	flags
@@ -25,14 +18,16 @@ workspace "Yac"
 outputdir = "%{cfg.architecture}/%{cfg.system}/%{cfg.buildcfg}"
 
 project "Yac"
+
 	location "Projects/Yac"
+
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "on"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin/intermediates/" .. outputdir .. "/%{prj.name}")
+	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("%{wks.location}/bin/intermediates/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
@@ -46,6 +41,9 @@ project "Yac"
 	}
 
 	filter "system:windows"
+		systemversion "latest"
+
+	filter "system:linux"
 		systemversion "latest"
 		
 	filter "configurations:Debug"
@@ -62,23 +60,3 @@ project "Yac"
 		defines "YAC_DIST"
 		runtime "Release"
         optimize "on"
-        
-	filter "platforms:Win32"
-		system "windows"
-        defines "Win32"
-        architecture "x32"
-
-	filter "platforms:Win64"
-		system "windows"
-        defines "Win64"
-        architecture "x64"
-
-	filter "platforms:Linux32"
-		system "linux"
-        defines "Linux32"
-        architecture "x32"
-
-	filter "platforms:Linux64"
-		system "linux"
-        defines "Linux64"
-        architecture "x64"
