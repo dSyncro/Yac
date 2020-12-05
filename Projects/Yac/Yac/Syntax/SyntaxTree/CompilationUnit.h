@@ -2,8 +2,8 @@
 
 #include "SyntaxTree.h"
 
-#include <Yac/Errors/ErrorList.h>
-#include <Yac/Text/SourceText.h>
+#include <Yac/Core/Errors/ErrorList.h>
+#include <Yac/Core/Text/SourceText.h>
 
 namespace Yac::Syntax {
 
@@ -15,7 +15,7 @@ namespace Yac::Syntax {
 
 	public:
 
-		CompilationUnit(const Yac::Text::SourceText& source) : syntaxTree(source, _errors) {}
+		CompilationUnit(const Text::SourceText& source) : syntaxTree(source, _errors) {}
 
 		SyntaxTree syntaxTree;
 

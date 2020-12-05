@@ -10,12 +10,12 @@ namespace Yac::Api {
 
 		Int(int n = 0) : _n(n) {}
 
-		operator int() const { return _n; }
+		operator IntT() const { return _n; }
 
 		virtual std::string toString() const override { return std::to_string(_n); }
 
 	private:
 
-		int _n;
+		IntT _n;
 	};
 }

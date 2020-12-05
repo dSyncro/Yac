@@ -5,7 +5,7 @@
 #include "Statement.h"
 
 #include <Yac/Syntax/Expressions/Expression.h>
-#include <Yac/Syntax/Tokens/Keyword.h>
+#include <Yac/Syntax/Keyword.h>
 
 namespace Yac::Syntax {
 

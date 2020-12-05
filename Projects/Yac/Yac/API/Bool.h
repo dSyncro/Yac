@@ -4,7 +4,7 @@
 
 namespace Yac::Api {
 
-	struct Bool final : Object {
+	struct Bool final : public Object {
 
 	public:
 

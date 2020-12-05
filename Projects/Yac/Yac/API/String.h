@@ -8,7 +8,7 @@ namespace Yac::Api {
 
 	public:
 
-		String(std::string s = "") : _string(s) {}
+		String(const std::string& s = "") : _string(s) {}
 
 		operator std::string() const { return _string; }
 

@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include <Yac/Syntax/Parser/Parser.h>
+#include <Yac/Syntax/Parser.h>
 #include <Yac/Syntax/Statements/Statements.h>
 #include <Yac/Libraries/Console/Console.h>
 

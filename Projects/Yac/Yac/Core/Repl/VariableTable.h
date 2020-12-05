@@ -13,20 +13,20 @@ namespace Yac::Core {
 	public:
 
 		template <typename T>
-		Yac::Api::EnableIfObject<T> get(const std::string& key) const noexcept
+		Api::EnableIfObject<T> get(const std::string& key) noexcept
 		{
-			std::unordered_map<std::string, Yac::Api::Object*>::const_iterator it = _map.find(key);
+			auto it = _map.find(key);
 			if (it == _map.end()) return T();
-			return (T&)*(it->second);
+			return *(T*)it->second;
 		}
 
 		template <typename T>
-		void set(const std::string& key, const Yac::Api::EnableIfObject<T>& value) noexcept
+		void set(const std::string& key, const Api::EnableIfObject<T>& value) noexcept
 		{
-			std::unordered_map<std::string, Yac::Api::Object*>::iterator it = _map.find(key);
+			auto it = _map.find(key);
 
 			// Allocate variable
-			Yac::Api::Object* reference = new Yac::Api::Object();
+			Api::Object* reference = new Api::Object();
 
 			// If variable exists
 			if (it != _map.end())
@@ -41,7 +41,7 @@ namespace Yac::Core {
 
 	private:
 
-		std::unordered_map<std::string, Yac::Api::Object*> _map;
+		std::unordered_map<std::string, Api::Object*> _map;
 	};
 
 }

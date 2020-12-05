@@ -2,9 +2,9 @@
 
 #include <Yac/API/Bool.h>
 
-#include <Yac/Errors/ErrorList.h>
+#include <Yac/Core/Errors/ErrorList.h>
 #include <Yac/Libraries/Console/Console.h>
-#include <Yac/Syntax/Executor/Executor.h>
+#include <Yac/Runtime/Executor.h>
 #include <Yac/Syntax/SyntaxTree/CompilationUnit.h>
 #include <Yac/Syntax/SyntaxTree/AstPrinter.h>
 

@@ -4,7 +4,7 @@
 
 #include "IStringable.h"
 
-#include <Yac/Errors/Exceptions/ObjectConversionException.h>
+#include <Yac/Core/Errors/Exceptions/ObjectConversionException.h>
 
 namespace Yac::Api {
 
@@ -20,7 +20,7 @@ namespace Yac::Api {
 			const Object* reference = object;
 			const T* cast = dynamic_cast<const T*>(object);
 			if (cast) return *cast;
-			throw Yac::Errors::ObjectConversionException();
+			throw Errors::ObjectConversionException();
 		}
 
 		template <typename T, typename = typename std::enable_if<std::is_base_of<Object, T>::value>::type>
@@ -30,6 +30,6 @@ namespace Yac::Api {
 	};
 
 	template <typename T>
-	using EnableIfObject = std::enable_if_t<std::is_base_of_v<Yac::Api::Object, T>, T>;
+	using EnableIfObject = std::enable_if_t<std::is_base_of_v<Object, T>, T>;
 
 }
