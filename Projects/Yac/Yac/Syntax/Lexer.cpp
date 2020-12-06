@@ -2,9 +2,9 @@
 
 #include <Yac/Syntax/Keyword.h>
 
+using namespace Yac::Core;
 using namespace Yac::Errors;
 using namespace Yac::Syntax;
-using namespace Yac::Text;
 
 Lexer::Lexer(const SourceText& source, ErrorList& errorList) : _source(source), _errorList(errorList) {}
 
@@ -95,7 +95,7 @@ Token Lexer::consumeNext() noexcept
 				produceSymbol(TokenType::NotEqualSymbol, "!=", 2) : produceSymbol(TokenType::ExclamationMark, "!");
 
 		case '~': return produceSymbol(TokenType::TildeSymbol, "~");
-		case '?': return produceSymbol(TokenType::QuestionMark, "?");
+		case '?': return produceSymbol(TokenType::QuestionMarkSymbol, "?");
 
 		case '<':
 			return
@@ -202,7 +202,7 @@ void Lexer::readStringLiteral() noexcept
 	{ 
 		if (getCurrent() == '\0')
 		{
-			std::size_t length = _position - _start;
+			UIntT length = _position - _start;
 			_errorList.reportUnexpectedToken(TokenType::Quote, TokenType::EndOfFile, TextSpan(_start, length));
 			return;
 		}

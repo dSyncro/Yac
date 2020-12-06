@@ -3,11 +3,12 @@
 
 #include <iostream>
 
-#include <Yac/Syntax/Parser.h>
-#include <Yac/Syntax/Statements/Statements.h>
-#include <Yac/Libraries/Console/Console.h>
+#include <Libraries/Console/Console.h>
 
-using namespace Yac::Text;
+#include <Yac/Syntax/Parser.h>
+#include <Yac/Syntax/Statements.h>
+
+using namespace Yac::Core;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
 

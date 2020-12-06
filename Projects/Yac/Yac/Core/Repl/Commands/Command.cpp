@@ -1,11 +1,10 @@
 #include "Command.h"
 
-#include <Yac/Syntax/Lexer/Lexer.h>
+#include <Yac/Syntax/Lexer.h>
 
 using namespace Yac::Core;
 using namespace Yac::Errors;
 using namespace Yac::Syntax;
-using namespace Yac::Text;
 
 Command::Command(const std::string& command, const ParameterList& parameters) : _cmd(command), _params(parameters) {}
 

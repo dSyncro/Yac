@@ -13,7 +13,7 @@ namespace Yac::Syntax {
 
 	public:
 
-		SyntaxTree(const Text::SourceText& source, Errors::ErrorList& errorList);
+		SyntaxTree(const Core::SourceText& source, Errors::ErrorList& errorList);
 		~SyntaxTree();
 
 		const Statement* getRoot() const { return _root; }

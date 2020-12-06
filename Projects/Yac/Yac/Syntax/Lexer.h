@@ -5,7 +5,7 @@
 #include <Yac/Core/Primitives.h>
 #include <Yac/Core/Errors/ErrorList.h>
 #include <Yac/Core/Text/SourceText.h>
-#include <Yac/Syntax/Tokens/Token.h>
+#include <Yac/Syntax/Token.h>
 
 namespace Yac::Syntax {
 
@@ -13,7 +13,7 @@ namespace Yac::Syntax {
 	{
 	public:
 
-		Lexer(const Text::SourceText& source, Errors::ErrorList& errorList);
+		Lexer(const Core::SourceText& source, Errors::ErrorList& errorList);
 
 		Token consumeNext() noexcept;
 
@@ -34,13 +34,13 @@ namespace Yac::Syntax {
 
 		char peek(UIntT offset) const noexcept;
 
-		const Text::Line& getCurrentLine() const noexcept;
+		const Core::Line& getCurrentLine() const noexcept;
 
 		TokenType _type = TokenType::None;
 		UIntT _position = 0, _start = 0, _line = 0;
 
 		std::string _text;
-		Text::SourceText _source;
+		Core::SourceText _source;
 
 		Errors::ErrorList& _errorList;
 	};

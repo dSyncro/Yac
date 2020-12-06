@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include <Yac/Syntax/Expressions/Operations/Operator.h>
+#include <Yac/Syntax/Operator.h>
 #include <Yac/Syntax/Expressions/Expression.h>
 
 namespace Yac::Syntax {
@@ -12,7 +12,7 @@ namespace Yac::Syntax {
 	public:
 
 		AssignmentExpression(const std::string& id, AssignmentOperator op, Expression* expression)
-			: Expression(ExpressionType::AssignmentExpression), _id(id), _op(op), _expr(expression)
+			: Expression(ExpressionType::Assignment), _id(id), _op(op), _expr(expression)
 		{
 		}
 

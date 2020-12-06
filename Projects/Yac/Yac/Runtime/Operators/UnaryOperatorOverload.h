@@ -2,11 +2,11 @@
 
 #include <Yac/Core/Primitives.h>
 #include <Yac/Core/Types/TypeSymbol.h>
-#include <Yac/Syntax/Expressions/Operations/Operator.h>
+#include <Yac/Syntax/Operator.h>
 
 namespace Yac::Runtime {
 
-	using UnaryOperatorHandler = TypedData(*)(Yac::Api::Object* operand);
+	using UnaryOperatorHandler = VariableData(*)(Yac::Api::Object* operand);
 
 	struct UnaryOperatorOverload {
 

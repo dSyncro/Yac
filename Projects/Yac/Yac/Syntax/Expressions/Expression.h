@@ -12,6 +12,8 @@ namespace Yac::Syntax {
 
 		ExpressionType getType() const noexcept { return _type; }
 
+		static Expression* null() noexcept { return nullptr; }
+
 	protected:
 
 		Expression(ExpressionType type) : _type(type) {}

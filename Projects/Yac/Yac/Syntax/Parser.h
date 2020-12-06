@@ -3,13 +3,13 @@
 #include <string>
 
 #include <Yac/Core/Errors/ErrorList.h>
+#include <Yac/Core/NumericBase.h>
 #include <Yac/Core/Text/SourceText.h>
 #include <Yac/Syntax/Expressions/Expression.h>
-#include <Yac/Syntax/Expressions/Operations/Operator.h>
-#include <Yac/Syntax/Expressions/Numeric/NumericBase.h>
-#include <Yac/Syntax/Statements/Statement.h>
 #include <Yac/Syntax/Keyword.h>
-#include <Yac/Syntax/Tokens/Token.h>
+#include <Yac/Syntax/Operator.h>
+#include <Yac/Syntax/Statements/Statement.h>
+#include <Yac/Syntax/Token.h>
 
 namespace Yac::Syntax {
 
@@ -17,7 +17,7 @@ namespace Yac::Syntax {
 
 	public:
 
-		Parser(const Text::SourceText& source, Errors::ErrorList& errorList);
+		Parser(const Core::SourceText& source, Errors::ErrorList& errorList);
 
 		Statement* Parse();
 
@@ -48,10 +48,10 @@ namespace Yac::Syntax {
 		Statement* parseInstructionStatement() noexcept;
 		Statement* parseVariableDeclaration(Keyword keyword = Keyword::Let) noexcept;
 
-		Expression* parseInt(NumericBase base = NumericBase::Decimal) noexcept;
-		Expression* parseUInt(NumericBase base = NumericBase::Decimal) noexcept;
-		Expression* parseFloat(NumericBase base = NumericBase::Decimal) noexcept;
-		Expression* parseDouble(NumericBase base = NumericBase::Decimal) noexcept;
+		Expression* parseInt(Core::NumericBase base = Core::NumericBase::Decimal) noexcept;
+		Expression* parseUInt(Core::NumericBase base = Core::NumericBase::Decimal) noexcept;
+		Expression* parseFloat(Core::NumericBase base = Core::NumericBase::Decimal) noexcept;
+		Expression* parseDouble(Core::NumericBase base = Core::NumericBase::Decimal) noexcept;
 
 		Expression* parseBoolean() noexcept;
 

@@ -4,16 +4,16 @@
 
 namespace Yac::Syntax {
 
-	struct InlineIfElse final : Expression {
+	struct InlineIfElseExpression final : Expression {
 
 	public:
 
-		InlineIfElse(Expression* condition, Expression* trueExpression, Expression* falseExpression)
+		InlineIfElseExpression(Expression* condition, Expression* trueExpression, Expression* falseExpression)
 			: Expression(ExpressionType::InlineIfElse), _condition(condition), _trueExpression(trueExpression), _falseExpression(falseExpression)
 		{
 		}
 
-		~InlineIfElse()
+		~InlineIfElseExpression()
 		{
 			delete _condition;
 			delete _trueExpression;

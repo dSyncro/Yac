@@ -7,19 +7,19 @@ Scope::Scope() : _parent(nullptr) {}
 Scope::Scope(Scope& parent) : _parent(&parent) {}
 Scope::Scope(Scope* parent) : _parent(parent) {}
 
-TypedData Scope::findSelf(const std::string& identifier) const noexcept
+VariableData Scope::findSelf(const std::string& identifier) const noexcept
 {
 	auto it = _variables.find(identifier);
-	return it == _variables.end() ? TypedData() : it->second;
+	return it == _variables.end() ? VariableData() : it->second;
 }
 
-TypedData Scope::findInHierarchy(const std::string& identifier) const noexcept
+VariableData Scope::findInHierarchy(const std::string& identifier) const noexcept
 {
 	auto it = _variables.find(identifier);
-	return it == _variables.end() ? (_parent ? _parent->findInHierarchy(identifier) : TypedData()) : it->second;
+	return it == _variables.end() ? (_parent ? _parent->findInHierarchy(identifier) : VariableData()) : it->second;
 }
 
-void Scope::set(const std::string& identifier, TypedData value) noexcept
+void Scope::set(const std::string& identifier, VariableData value) noexcept
 {
 	_variables[identifier] = value;
 }

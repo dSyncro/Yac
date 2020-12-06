@@ -11,7 +11,7 @@ namespace Yac::Syntax {
 	public:
 
 		StringExpression(const std::string& text)
-			: Expression(ExpressionType::StringExpression), _text(text) { }
+			: Expression(ExpressionType::String), _text(text) { }
 
 		const std::string& getText() const noexcept { return _text; }
 

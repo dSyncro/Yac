@@ -1,10 +1,10 @@
 #include "Parser.h"
 
 #include <Yac/Syntax/Lexer.h>
-#include <Yac/Syntax/Expressions/Expressions.h>
-#include <Yac/Syntax/Statements/Statements.h>
+#include <Yac/Syntax/Expressions.h>
+#include <Yac/Syntax/Statements.h>
 
-using namespace Yac::Text;
+using namespace Yac::Core;
 using namespace Yac::Syntax;
 using namespace Yac::Errors;
 
@@ -188,31 +188,31 @@ Statement* Parser::parseVariableDeclaration(Keyword keyword) noexcept
 		value = parseExpression();
 	}
 	matchAndConsume(TokenType::Semicolon);
-	return new VariableDeclaration(keyword, name.getText(), value);
+	return new VariableDeclarationStatement(keyword, name.getText(), value);
 }
 
 Expression* Parser::parseInt(NumericBase base) noexcept
 {
 	const Token& t = consume();
-	return new NumericLiteral(t.getText(), NumericType::Int, base);
+	return new NumericLiteralExpression(t.getText(), NumericType::Int, base);
 }
 
 Expression* Parser::parseUInt(NumericBase base) noexcept
 {
 	const Token& t = consume();
-	return new NumericLiteral(t.getText(), NumericType::UInt, base);
+	return new NumericLiteralExpression(t.getText(), NumericType::UInt, base);
 }
 
 Expression* Parser::parseFloat(NumericBase base) noexcept
 {
 	const Token& t = consume();
-	return new NumericLiteral(t.getText(), NumericType::Float, base);
+	return new NumericLiteralExpression(t.getText(), NumericType::Float, base);
 }
 
 Expression* Parser::parseDouble(NumericBase base) noexcept
 {
 	const Token& t = consume();
-	return new NumericLiteral(t.getText(), NumericType::Double, base);
+	return new NumericLiteralExpression(t.getText(), NumericType::Double, base);
 }
 
 Expression* Parser::parseBoolean() noexcept
@@ -222,7 +222,7 @@ Expression* Parser::parseBoolean() noexcept
 	if (keyword != Keyword::True && keyword != Keyword::False) 
 		_errorList.reportNotABooleanLiteral(t.getText(), t.getSpan());
 
-	return new BooleanLiteral((bool)keyword);
+	return new BooleanLiteralExpression(static_cast<bool>(keyword));
 }
 
 Expression* Parser::parseIdentifier() noexcept
@@ -232,8 +232,8 @@ Expression* Parser::parseIdentifier() noexcept
 	Expression* expr = new IdentifierExpression(id.getText());
 	switch (next)
 	{
-		case TokenType::DoublePlusSymbol: step(); return new UnaryOperation(Operator::PostIncrement, expr);
-		case TokenType::DoubleMinusSymbol: step(); return new UnaryOperation(Operator::PostDecrement, expr);
+		case TokenType::DoublePlusSymbol: step(); return new UnaryOperationExpression(Operator::PostIncrement, expr);
+		case TokenType::DoubleMinusSymbol: step(); return new UnaryOperationExpression(Operator::PostDecrement, expr);
 		default: return expr;
 	}
 }
@@ -250,8 +250,8 @@ Expression* Parser::parsePrefix() noexcept
 	TokenType type = consume().getType();
 	switch (type)
 	{
-		case TokenType::DoublePlusSymbol: return new UnaryOperation(Operator::PreIncrement, parseIdentifier());
-		case TokenType::DoubleMinusSymbol: return new UnaryOperation(Operator::PreDecrement, parseIdentifier());
+		case TokenType::DoublePlusSymbol: return new UnaryOperationExpression(Operator::PreIncrement, parseIdentifier());
+		case TokenType::DoubleMinusSymbol: return new UnaryOperationExpression(Operator::PreDecrement, parseIdentifier());
 		default: return parseIdentifier();
 	}
 }
@@ -276,7 +276,7 @@ Expression* Parser::parseExpression() noexcept
 	// Elsewise we are parsing a math expression
 	Expression* expression = parseMathExpression();
 
-	if (!match(TokenType::QuestionMark)) return expression;
+	if (!match(TokenType::QuestionMarkSymbol)) return expression;
 
 	// If the next token is a Question Mark
 	// We are probably trying to check an
@@ -288,7 +288,7 @@ Expression* Parser::parseExpression() noexcept
 	matchAndConsume(TokenType::Colon);
 	Expression* falseExpression = parseMathExpression();
 
-	return new InlineIfElse(expression, trueExpression, falseExpression);
+	return new InlineIfElseExpression(expression, trueExpression, falseExpression);
 }
 
 Expression* Parser::parseConditional() noexcept
@@ -300,7 +300,7 @@ Expression* Parser::parseConditional() noexcept
 	matchAndConsume(TokenType::EqualSymbol);
 	Expression* init = parseExpression();
 
-	return new ConditionalDeclaration(name.getText(), init);
+	return new ConditionalDeclarationExpression(name.getText(), init);
 }
 
 Expression* Parser::parseInstruction() noexcept
@@ -366,7 +366,7 @@ Expression* Parser::parseMathExpression(UIntT parentPrecedence) noexcept
 	{
 		step(); // Current token is the operator
 		Expression* operand = parseMathExpression(precedence);
-		left = new UnaryOperation(op, operand);
+		left = new UnaryOperationExpression(op, operand);
 	}
 	else left = parsePrimaryExpression();
 
@@ -379,7 +379,7 @@ Expression* Parser::parseMathExpression(UIntT parentPrecedence) noexcept
 
 		step(); // Current token is the left expression
 		Expression* right = parseMathExpression(precedence);
-		left = new BinaryOperation(left, op, right);
+		left = new BinaryOperationExpression(left, op, right);
 	}
 
 	return left;

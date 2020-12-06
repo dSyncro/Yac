@@ -10,12 +10,10 @@ namespace Yac::Syntax {
 
 	public:
 
-		IdentifierExpression(std::string id)
-			: Expression(ExpressionType::IdentifierExpression), _id(id)
-		{
-		}
+		IdentifierExpression(const std::string& id)
+			: Expression(ExpressionType::Identifier), _id(id) { }
 
-		std::string getIdentifier() const noexcept { return _id; }
+		const std::string& getIdentifier() const noexcept { return _id; }
 
 	private:
 

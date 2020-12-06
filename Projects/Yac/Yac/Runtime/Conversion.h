@@ -4,12 +4,12 @@
 #include <string>
 #include <unordered_map>
 
-#include "TypedData.h"
+#include "VariableData.h"
 #include <Yac/API/Object.h>
 
 namespace Yac::Runtime {
 
-	using Converter = Runtime::TypedData(*)(const Api::Object*);
+	using Converter = Runtime::VariableData(*)(const Api::Object*);
 
 	struct Cast {
 

@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace Yac::Text {
+namespace Yac::Core {
 
 	struct Line final {
 

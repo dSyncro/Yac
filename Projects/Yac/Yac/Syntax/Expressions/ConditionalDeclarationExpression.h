@@ -6,16 +6,16 @@
 
 namespace Yac::Syntax {
 
-	struct ConditionalDeclaration final : Expression {
+	struct ConditionalDeclarationExpression final : Expression {
 
 	public:
 
-		ConditionalDeclaration(const std::string& name, Expression* initializer)
+		ConditionalDeclarationExpression(const std::string& name, Expression* initializer)
 			: Expression(ExpressionType::ConditionalDeclaration), _name(name), _init(initializer)
 		{ 
 		}
 
-		~ConditionalDeclaration() { delete _init; }
+		~ConditionalDeclarationExpression() { delete _init; }
 
 		const std::string& getName() const noexcept { return _name; }
 		const Expression* getInitializer() const noexcept { return _init; }

@@ -2,7 +2,8 @@
 
 #include "AstPrinter.h"
 
-#include <Yac/Libraries/Console/Console.h>
+#include <Libraries/Console/Console.h>
+
 #include <Yac/Core/Primitives.h>
 
 using namespace Yac::Syntax;
@@ -47,16 +48,16 @@ void AstPrinter::printExpression(const Expression* expression, const std::string
 	{
 
 		case ExpressionType::None: return printNullExpression();
-		case ExpressionType::AssignmentExpression: return printAssignmentExpression((AssignmentExpression*)expression, indentation);
-		case ExpressionType::BinaryOperation: return printBinaryOperation((BinaryOperation*)expression, indentation);
-		case ExpressionType::BooleanLiteral: return printBooleanLiteral((BooleanLiteral*)expression, indentation);
-		case ExpressionType::IdentifierExpression: return printIdentifierExpression((IdentifierExpression*)expression, indentation);
-		case ExpressionType::StringExpression: return printStringExpression((StringExpression*)expression, indentation);
-		case ExpressionType::NumericLiteral: return printNumericLiteral((NumericLiteral*)expression, indentation);
-		case ExpressionType::ParenthesesExpression: return printParenthesesExpression((ParenthesesExpression*)expression, indentation);
-		case ExpressionType::UnaryOperation: return printUnaryOperation((UnaryOperation*)expression, indentation);
-		case ExpressionType::ConditionalDeclaration: return printConditionalDeclaration((ConditionalDeclaration*)expression, indentation);
-		case ExpressionType::InlineIfElse: return printInlineIfElse((InlineIfElse*)expression, indentation);
+		case ExpressionType::Assignment: return printAssignmentExpression((AssignmentExpression*)expression, indentation);
+		case ExpressionType::BinaryOperation: return printBinaryOperation((BinaryOperationExpression*)expression, indentation);
+		case ExpressionType::BooleanLiteral: return printBooleanLiteralExpression((BooleanLiteralExpression*)expression, indentation);
+		case ExpressionType::Identifier: return printIdentifierExpression((IdentifierExpression*)expression, indentation);
+		case ExpressionType::String: return printStringExpression((StringExpression*)expression, indentation);
+		case ExpressionType::NumericLiteral: return printNumericLiteralExpression((NumericLiteralExpression*)expression, indentation);
+		case ExpressionType::Parentheses: return printParenthesesExpression((ParenthesesExpression*)expression, indentation);
+		case ExpressionType::UnaryOperation: return printUnaryOperation((UnaryOperationExpression*)expression, indentation);
+		case ExpressionType::ConditionalDeclaration: return printConditionalDeclarationExpression((ConditionalDeclarationExpression*)expression, indentation);
+		case ExpressionType::InlineIfElse: return printInlineIfElseExpression((InlineIfElseExpression*)expression, indentation);
 
 		default: return printNullExpression();
 	}
@@ -71,7 +72,7 @@ void AstPrinter::printStatement(const Statement* statement, const std::string& i
 
 		case StatementType::None: return printNullStatement();
 		case StatementType::If: return printIfStatement((IfStatement*)statement, indentation);
-		case StatementType::VariableDeclaration: return printVariableDeclaration((VariableDeclaration*)statement, indentation);
+		case StatementType::VariableDeclaration: return printVariableDeclarationStatement((VariableDeclarationStatement*)statement, indentation);
 		case StatementType::While: return printWhileStatement((WhileStatement*)statement, indentation);
 		case StatementType::For: return printForStatement((ForStatement*)statement, indentation);
 		case StatementType::Block: return printBlockStatement((BlockStatement*)statement, indentation);
@@ -104,7 +105,7 @@ void AstPrinter::printAssignmentExpression(AssignmentExpression* expression, con
 	print(expression->getExpression(), indentation, true);
 }
 
-void AstPrinter::printBinaryOperation(BinaryOperation* expression, const std::string& indentation) noexcept
+void AstPrinter::printBinaryOperation(BinaryOperationExpression* expression, const std::string& indentation) noexcept
 {
 	Console::WriteLine("BinaryOperation");
 
@@ -119,7 +120,7 @@ void AstPrinter::printBinaryOperation(BinaryOperation* expression, const std::st
 	print(expression->getRight(), indentation, true);
 }
 
-void AstPrinter::printBooleanLiteral(BooleanLiteral* expression, const std::string& indentation) noexcept
+void AstPrinter::printBooleanLiteralExpression(BooleanLiteralExpression* expression, const std::string& indentation) noexcept
 {
 	Console::WriteLine("BooleanLiteral");
 
@@ -128,7 +129,7 @@ void AstPrinter::printBooleanLiteral(BooleanLiteral* expression, const std::stri
 	printData("Value", std::to_string(expression->getValue()));
 }
 
-void AstPrinter::printNumericLiteral(NumericLiteral* expression, const std::string& indentation) noexcept
+void AstPrinter::printNumericLiteralExpression(NumericLiteralExpression* expression, const std::string& indentation) noexcept
 {
 	Console::WriteLine("NumericLiteral");
 
@@ -169,7 +170,7 @@ void AstPrinter::printStringExpression(StringExpression* expression, const std::
 	printData("literal", expression->getText());
 }
 
-void AstPrinter::printUnaryOperation(UnaryOperation* expression, const std::string& indentation) noexcept
+void AstPrinter::printUnaryOperation(UnaryOperationExpression* expression, const std::string& indentation) noexcept
 {
 	Console::WriteLine("UnaryOperation");
 
@@ -181,7 +182,7 @@ void AstPrinter::printUnaryOperation(UnaryOperation* expression, const std::stri
 	print(expression->getOperand(), indentation, true);
 }
 
-void AstPrinter::printConditionalDeclaration(ConditionalDeclaration* expression, const std::string& indentation) noexcept
+void AstPrinter::printConditionalDeclarationExpression(ConditionalDeclarationExpression* expression, const std::string& indentation) noexcept
 {
 	Console::WriteLine("ConditionalDeclaration");
 
@@ -193,7 +194,7 @@ void AstPrinter::printConditionalDeclaration(ConditionalDeclaration* expression,
 	print(expression->getInitializer(), indentation, true);
 }
 
-void AstPrinter::printInlineIfElse(InlineIfElse* expression, const std::string& indentation) noexcept
+void AstPrinter::printInlineIfElseExpression(InlineIfElseExpression* expression, const std::string& indentation) noexcept
 {
 	Console::WriteLine("InlineIfElse");
 	print(expression->getCondition(), indentation, false);
@@ -222,7 +223,7 @@ void AstPrinter::printIfStatement(IfStatement* statement, const std::string& ind
 
 }
 
-void AstPrinter::printVariableDeclaration(VariableDeclaration* statement, const std::string& indentation) noexcept
+void AstPrinter::printVariableDeclarationStatement(VariableDeclarationStatement* statement, const std::string& indentation) noexcept
 {
 	Console::WriteLine("VariableDeclaration");
 

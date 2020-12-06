@@ -16,138 +16,138 @@ int Executor::Execute()
 	return 0; //EvaluateStatement(_root);
 }
 
-void Executor::EvaluateStatement(const Statement* statement)
+void Executor::evaluateStatement(const Statement* statement)
 {
 	switch (statement->getType())
 	{
-		case StatementType::Block: return EvaluateBlockStatement((BlockStatement*)statement);
-		case StatementType::VariableDeclaration: return EvaluateVariableDeclaration((VariableDeclaration*)statement);
-		case StatementType::If: return EvaluateIfStatement((IfStatement*)statement);
-		case StatementType::For: return EvaluateForStatement((ForStatement*)statement);
-		case StatementType::While: return EvaluateWhileStatement((WhileStatement*)statement);
-		case StatementType::Expression: return EvaluateExpressionStatement((ExpressionStatement*)statement);
+		case StatementType::Block: return evaluateBlockStatement((BlockStatement*)statement);
+		case StatementType::VariableDeclaration: return evaluateVariableDeclarationStatement((VariableDeclarationStatement*)statement);
+		case StatementType::If: return evaluateIfStatement((IfStatement*)statement);
+		case StatementType::For: return evaluateForStatement((ForStatement*)statement);
+		case StatementType::While: return evaluateWhileStatement((WhileStatement*)statement);
+		case StatementType::Expression: return evaluateExpressionStatement((ExpressionStatement*)statement);
 
 		case StatementType::None:
 		default: return;
 	}
 }
 
-TypedData Executor::EvaluateExpression(const Expression* expression)
+VariableData Executor::evaluateExpression(const Expression* expression)
 {
 	switch (expression->getType())
 	{
-		case ExpressionType::IdentifierExpression: return EvaluateIdentifierExpression((IdentifierExpression*)expression);
-		case ExpressionType::StringExpression: return EvaluateStringExpression((StringExpression*)expression);
-		case ExpressionType::AssignmentExpression: return EvaluateAssignmentExpression((AssignmentExpression*)expression);
-		case ExpressionType::ParenthesesExpression: return EvaluateParethesesExpression((ParenthesesExpression*)expression);
-		case ExpressionType::NumericLiteral: return EvaluateNumericLiteral((NumericLiteral*)expression);
-		case ExpressionType::BooleanLiteral: return EvaluateBooleanLiteral((BooleanLiteral*)expression);
-		case ExpressionType::UnaryOperation: return EvaluateUnaryOperation((UnaryOperation*)expression);
-		case ExpressionType::BinaryOperation: return EvaluateBinaryOperation((BinaryOperation*)expression);
-		case ExpressionType::ConditionalDeclaration: return EvaluateConditionalDeclaration((ConditionalDeclaration*)expression);
-		case ExpressionType::InlineIfElse: return EvaluateInlineIfElse((InlineIfElse*)expression);
+		case ExpressionType::Identifier: return evaluateIdentifierExpression((IdentifierExpression*)expression);
+		case ExpressionType::String: return evaluateStringExpression((StringExpression*)expression);
+		case ExpressionType::Assignment: return evaluateAssignmentExpression((AssignmentExpression*)expression);
+		case ExpressionType::Parentheses: return evaluateParethesesExpression((ParenthesesExpression*)expression);
+		case ExpressionType::NumericLiteral: return evaluateNumericLiteralExpression((NumericLiteralExpression*)expression);
+		case ExpressionType::BooleanLiteral: return evaluateBooleanLiteralExpression((BooleanLiteralExpression*)expression);
+		case ExpressionType::UnaryOperation: return evaluateUnaryOperation((UnaryOperationExpression*)expression);
+		case ExpressionType::BinaryOperation: return evaluateBinaryOperation((BinaryOperationExpression*)expression);
+		case ExpressionType::ConditionalDeclaration: return evaluateConditionalDeclarationExpression((ConditionalDeclarationExpression*)expression);
+		case ExpressionType::InlineIfElse: return evaluateInlineIfElseExpression((InlineIfElseExpression*)expression);
 
 		case ExpressionType::None:
-		default: return TypedData();
+		default: return VariableData();
 	}
 }
 
 // Statements
 
-void Executor::EvaluateBlockStatement(const BlockStatement* statement)
+void Executor::evaluateBlockStatement(const BlockStatement* statement)
 {
 	for (const Statement* s : statement->getStatements())
-		EvaluateStatement(s);
+		evaluateStatement(s);
 }
 
-void Executor::EvaluateVariableDeclaration(const VariableDeclaration* statement)
+void Executor::evaluateVariableDeclarationStatement(const VariableDeclarationStatement* statement)
 {
 	std::string name = statement->getName();
-	EvaluateExpression(statement->getInitializer());
+	evaluateExpression(statement->getInitializer());
 }
 
-void Executor::EvaluateIfStatement(const IfStatement* statement)
+void Executor::evaluateIfStatement(const IfStatement* statement)
 {
-	bool condition = EvaluateExpression(statement->getCondition()).getValue();
-	EvaluateStatement(condition ? statement->getStatement() : statement->getElseStatement());
+	bool condition = evaluateExpression(statement->getCondition()).getValue();
+	evaluateStatement(condition ? statement->getStatement() : statement->getElseStatement());
 }
 
-void Executor::EvaluateForStatement(const ForStatement* statement)
+void Executor::evaluateForStatement(const ForStatement* statement)
 {
-	TypedData init = EvaluateExpression(statement->getAssignment());
-	TypedData condition = EvaluateExpression(statement->getCondition());
-	TypedData update = EvaluateExpression(statement->getUpdate());
+	VariableData init = evaluateExpression(statement->getAssignment());
+	VariableData condition = evaluateExpression(statement->getCondition());
+	VariableData update = evaluateExpression(statement->getUpdate());
 
 	while ((bool)condition.getValue())
 	{
-		EvaluateStatement(statement->getStatement());
-		EvaluateExpression(statement->getUpdate());
-		condition = EvaluateExpression(statement->getCondition());
+		evaluateStatement(statement->getStatement());
+		evaluateExpression(statement->getUpdate());
+		condition = evaluateExpression(statement->getCondition());
 	}
 }
 
-void Executor::EvaluateWhileStatement(const WhileStatement* statement)
+void Executor::evaluateWhileStatement(const WhileStatement* statement)
 {
-	TypedData condition = EvaluateExpression(statement->getCondition());
+	VariableData condition = evaluateExpression(statement->getCondition());
 
 	while ((bool)condition.getValue())
 	{
-		EvaluateStatement(statement->getStatement());
-		condition = EvaluateExpression(statement->getCondition());
+		evaluateStatement(statement->getStatement());
+		condition = evaluateExpression(statement->getCondition());
 	}
 }
 
-void Executor::EvaluateExpressionStatement(const ExpressionStatement* statement)
+void Executor::evaluateExpressionStatement(const ExpressionStatement* statement)
 {
 	const Expression* expression = statement->getExpression();
-	EvaluateExpression(expression);
+	evaluateExpression(expression);
 }
 
 // Expressions
 
-TypedData Executor::EvaluateIdentifierExpression(const IdentifierExpression* expression)
+VariableData Executor::evaluateIdentifierExpression(const IdentifierExpression* expression)
 {
 	return _scope->findInHierarchy(expression->getIdentifier());
 }
 
-TypedData Executor::EvaluateStringExpression(const StringExpression* expression)
+VariableData Executor::evaluateStringExpression(const StringExpression* expression)
 {
-	return TypedData(getStringTypeSymbol(), new String(expression->getText()));
+	return VariableData(getStringTypeSymbol(), new String(expression->getText()));
 }
 
-TypedData Executor::EvaluateAssignmentExpression(const AssignmentExpression* expression)
+VariableData Executor::evaluateAssignmentExpression(const AssignmentExpression* expression)
 {
 	std::string name;
-	TypedData value = EvaluateExpression(expression);
+	VariableData value = evaluateExpression(expression);
 	_scope->set(name, value);
 	return value;
 }
 
-TypedData Executor::EvaluateParethesesExpression(const ParenthesesExpression* expression)
+VariableData Executor::evaluateParethesesExpression(const ParenthesesExpression* expression)
 {
-	return EvaluateExpression(expression->getExpression());
+	return evaluateExpression(expression->getExpression());
 }
 
-TypedData Executor::EvaluateNumericLiteral(const NumericLiteral* expression)
+VariableData Executor::evaluateNumericLiteralExpression(const NumericLiteralExpression* expression)
 {
 	switch (expression->getNumericType())
 	{
-		case NumericType::Int: return TypedData(getIntTypeSymbol(), new Int(expression->toInt()));
-		case NumericType::UInt: return TypedData(getUIntTypeSymbol(), new UInt(expression->toUInt()));
-		case NumericType::Float: return TypedData(getFloatTypeSymbol(), new Float(expression->toFloat()));
-		case NumericType::Double: return TypedData(getDoubleTypeSymbol(), new Double(expression->toDouble()));
-		default: return TypedData();
+		case NumericType::Int: return VariableData(getIntTypeSymbol(), new Int(expression->toInt()));
+		case NumericType::UInt: return VariableData(getUIntTypeSymbol(), new UInt(expression->toUInt()));
+		case NumericType::Float: return VariableData(getFloatTypeSymbol(), new Float(expression->toFloat()));
+		case NumericType::Double: return VariableData(getDoubleTypeSymbol(), new Double(expression->toDouble()));
+		default: return VariableData();
 	}
 }
 
-TypedData Executor::EvaluateBooleanLiteral(const BooleanLiteral* expression)
+VariableData Executor::evaluateBooleanLiteralExpression(const BooleanLiteralExpression* expression)
 {
-	return TypedData(getBoolTypeSymbol(), new Bool(expression->getValue()));
+	return VariableData(getBoolTypeSymbol(), new Bool(expression->getValue()));
 }
 
-TypedData Executor::EvaluateUnaryOperation(const UnaryOperation* expression)
+VariableData Executor::evaluateUnaryOperation(const UnaryOperationExpression* expression)
 {
-	TypedData object = EvaluateExpression(expression->getOperand());
+	VariableData object = evaluateExpression(expression->getOperand());
 	switch (expression->getOperation())
 	{
 		case Operator::Identity:
@@ -172,18 +172,18 @@ TypedData Executor::EvaluateUnaryOperation(const UnaryOperation* expression)
 	}
 }
 
-TypedData Executor::EvaluateBinaryOperation(const BinaryOperation* expression)
+VariableData Executor::evaluateBinaryOperation(const BinaryOperationExpression* expression)
 {
-	return TypedData();
+	return VariableData();
 }
 
-TypedData Executor::EvaluateConditionalDeclaration(const ConditionalDeclaration* expression)
+VariableData Executor::evaluateConditionalDeclarationExpression(const ConditionalDeclarationExpression* expression)
 {
-	return TypedData();
+	return VariableData();
 }
 
-TypedData Executor::EvaluateInlineIfElse(const InlineIfElse* expression)
+VariableData Executor::evaluateInlineIfElseExpression(const InlineIfElseExpression* expression)
 {
-	Bool condition = EvaluateExpression(expression->getCondition()).getValue();
-	return condition ? EvaluateExpression(expression->getTrueExpression()) : EvaluateExpression(expression->getFalseExpression());
+	Bool condition = evaluateExpression(expression->getCondition()).getValue();
+	return condition ? evaluateExpression(expression->getTrueExpression()) : evaluateExpression(expression->getFalseExpression());
 }

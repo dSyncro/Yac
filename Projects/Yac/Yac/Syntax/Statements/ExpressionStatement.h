@@ -10,7 +10,9 @@ namespace Yac::Syntax {
 
 	public:
 
-		ExpressionStatement(Expression* expression);
+		ExpressionStatement(Expression* expression):
+			Statement(StatementType::Expression), _expr(expression) { }
+
 		~ExpressionStatement() { delete _expr; }
 
 		const Expression* getExpression() const noexcept { return _expr; }

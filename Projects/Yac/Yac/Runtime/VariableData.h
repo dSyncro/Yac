@@ -5,11 +5,11 @@
 
 namespace Yac::Runtime {
 
-	struct TypedData {
+	struct VariableData {
 
 	public:
 
-		TypedData(const Core::TypeSymbol& type = Core::getVoidTypeSymbol(), Api::Object* value = nullptr)
+		VariableData(const Core::TypeSymbol& type = Core::getVoidTypeSymbol(), Api::Object* value = nullptr)
 			: _type(&type), _value(value) { }
 
 		const Core::TypeSymbol& getType() const noexcept { return *_type; }

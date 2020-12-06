@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-#include "TypedData.h"
+#include "VariableData.h"
 
 namespace Yac::Runtime {
 
@@ -16,11 +16,11 @@ namespace Yac::Runtime {
 
 		const Scope& getParent() const noexcept { return *_parent; }
 
-		TypedData findSelf(const std::string& identifier) const noexcept;
+		VariableData findSelf(const std::string& identifier) const noexcept;
 
-		TypedData findInHierarchy(const std::string& identifier) const noexcept;
+		VariableData findInHierarchy(const std::string& identifier) const noexcept;
 
-		void set(const std::string& identifier, TypedData value) noexcept;
+		void set(const std::string& identifier, VariableData value) noexcept;
 
 		static Scope* push(Scope* scope);
 		static Scope* pop(Scope* scope);
@@ -28,7 +28,7 @@ namespace Yac::Runtime {
 	private:
 
 		Scope* _parent;
-		std::unordered_map<std::string, TypedData> _variables;
+		std::unordered_map<std::string, VariableData> _variables;
 	};
 
 }

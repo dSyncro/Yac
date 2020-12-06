@@ -12,7 +12,7 @@ namespace Yac::Syntax {
 		virtual ~Statement() {}
 
 		StatementType getType() const noexcept { return _type; }
-		static Statement* Null() noexcept;
+		static Statement* Null() noexcept { return nullptr; }
 
 	protected:
 

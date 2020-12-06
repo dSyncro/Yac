@@ -44,17 +44,17 @@ namespace Yac::Runtime {
 			return it != _binaryOverloads.end() ? it->second : nullptr;
 		}
 
-		TypedData call(const UnaryOperatorOverload& op, Yac::Api::Object* operand)
+		VariableData call(const UnaryOperatorOverload& op, Yac::Api::Object* operand)
 		{
 			UnaryOperatorHandler handler = getHandler(op);
-			if (!handler) return TypedData();
+			if (!handler) return VariableData();
 			return handler(operand);
 		}
 
-		TypedData call(const BinaryOperatorOverload& op, Yac::Api::Object* a, Yac::Api::Object* b)
+		VariableData call(const BinaryOperatorOverload& op, Yac::Api::Object* a, Yac::Api::Object* b)
 		{
 			BinaryOperatorHandler handler = getHandler(op);
-			if (!handler) return TypedData();
+			if (!handler) return VariableData();
 			return handler(a, b);
 		}
 

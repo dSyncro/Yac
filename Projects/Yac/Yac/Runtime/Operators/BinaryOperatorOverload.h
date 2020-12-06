@@ -2,12 +2,12 @@
 
 #include <Yac/Core/Primitives.h>
 #include <Yac/Core/Types/TypeSymbol.h>
-#include <Yac/Runtime/TypedData.h>
-#include <Yac/Syntax/Expressions/Operations/Operator.h>
+#include <Yac/Runtime/VariableData.h>
+#include <Yac/Syntax/Operator.h>
 
 namespace Yac::Runtime {
 
-	using BinaryOperatorHandler = TypedData(*)(Api::Object* first, Api::Object* second);
+	using BinaryOperatorHandler = VariableData(*)(Api::Object* first, Api::Object* second);
 
 	struct BinaryOperatorOverload {
 

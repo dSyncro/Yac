@@ -1,12 +1,12 @@
 #pragma once
 
-#include <Yac/Libraries/Platform.h>
+#include <Libraries/Platform.h>
 
 #ifdef WINDOWS
 #	include <Windows.h>
 #endif
 
-#include "Yac/Libraries/AnsiStyle/AnsiStyle.h"
+#include "Libraries/AnsiStyle/AnsiStyle.h"
 
 namespace Console {
 

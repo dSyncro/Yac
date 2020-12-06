@@ -9,12 +9,16 @@
 
 namespace Yac::Syntax {
 
-	struct VariableDeclaration final : Statement {
+	struct VariableDeclarationStatement final : Statement {
 
 	public:
 
-		VariableDeclaration(Keyword keyword, const std::string& name, Expression* initializer);
-		~VariableDeclaration() { delete _init; }
+		VariableDeclarationStatement(Keyword keyword, const std::string& name, Expression* initializer)
+			:Statement(StatementType::VariableDeclaration), _keyword(keyword), _name(name), _init(initializer)
+		{
+		}
+
+		~VariableDeclarationStatement() { delete _init; }
 
 		Keyword getKeyword() const noexcept { return _keyword; }
 		const std::string& getName() const noexcept { return _name; }

@@ -6,7 +6,7 @@
 #include "Error.h"
 
 #include <Yac/Core/Primitives.h>
-#include <Yac/Syntax/Tokens/TokenType.h>
+#include <Yac/Syntax/TokenType.h>
 
 namespace Yac::Errors {
 
@@ -21,12 +21,12 @@ namespace Yac::Errors {
 		void reportUnexpectedToken(
 			Syntax::TokenType expected,
 			Syntax::TokenType found,
-			const Text::TextSpan& span
+			const Core::TextSpan& span
 		) noexcept;
 
-		void reportUnknownToken(char c, const Text::TextSpan& span) noexcept;
+		void reportUnknownToken(char c, const Core::TextSpan& span) noexcept;
 
-		void reportNotABooleanLiteral(const std::string& text, const Text::TextSpan& span) noexcept;
+		void reportNotABooleanLiteral(const std::string& text, const Core::TextSpan& span) noexcept;
 
 		std::size_t count() const noexcept;
 		const Error& get(UIntT index) const;

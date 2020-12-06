@@ -4,10 +4,10 @@ namespace Yac::Syntax {
 
 	enum class ExpressionType {
 		None,
-		IdentifierExpression,
-		StringExpression,
-		AssignmentExpression,
-		ParenthesesExpression,
+		Identifier,
+		String,
+		Assignment,
+		Parentheses,
 		NumericLiteral,
 		BooleanLiteral,
 		UnaryOperation,

@@ -1,7 +1,61 @@
 #include "Operator.h"
 
+#include <Yac/Core/Macros.h>
+
 using namespace Yac;
 using namespace Yac::Syntax;
+
+std::string Yac::Syntax::toString(Operator op)
+{
+	switch (op)
+	{
+		ENUM_ELEMENT_TO_STRING(Operator, Comma);
+		ENUM_ELEMENT_TO_STRING(Operator, LogicalOr);
+		ENUM_ELEMENT_TO_STRING(Operator, LogicalAnd);
+		ENUM_ELEMENT_TO_STRING(Operator, BitwiseOr);
+		ENUM_ELEMENT_TO_STRING(Operator, Xor);
+		ENUM_ELEMENT_TO_STRING(Operator, BitwiseAnd);
+		ENUM_ELEMENT_TO_STRING(Operator, EqualTo);
+		ENUM_ELEMENT_TO_STRING(Operator, NotEqualTo);
+		ENUM_ELEMENT_TO_STRING(Operator, LessThan);
+		ENUM_ELEMENT_TO_STRING(Operator, LessEqualThan);
+		ENUM_ELEMENT_TO_STRING(Operator, GreaterThan);
+		ENUM_ELEMENT_TO_STRING(Operator, GreaterEqualThan);
+		ENUM_ELEMENT_TO_STRING(Operator, RightShift);
+		ENUM_ELEMENT_TO_STRING(Operator, Addition);
+		ENUM_ELEMENT_TO_STRING(Operator, Subtraction);
+		ENUM_ELEMENT_TO_STRING(Operator, Multiplication);
+		ENUM_ELEMENT_TO_STRING(Operator, Division);
+		ENUM_ELEMENT_TO_STRING(Operator, Modulo);
+		ENUM_ELEMENT_TO_STRING(Operator, Identity);
+		ENUM_ELEMENT_TO_STRING(Operator, Negation);
+		ENUM_ELEMENT_TO_STRING(Operator, PreIncrement);
+		ENUM_ELEMENT_TO_STRING(Operator, PreDecrement);
+		ENUM_ELEMENT_TO_STRING(Operator, LogicalNot);
+		ENUM_ELEMENT_TO_STRING(Operator, OneComplementary);
+		ENUM_ELEMENT_TO_STRING(Operator, PostIncrement);
+		ENUM_ELEMENT_TO_STRING(Operator, PostDecrement);
+		default: return "Unknown";
+	}
+}
+
+std::string Yac::Syntax::toString(AssignmentOperator op)
+{
+	switch (op)
+	{
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, Assign);
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, Add);
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, Subtract);
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, Multiply);
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, Divide);
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, Modulo);
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, Or);
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, And);
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, Xor);
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, LeftShift);
+		ENUM_ELEMENT_TO_STRING(AssignmentOperator, RightShift);
+	}
+}
 
 UIntT Yac::Syntax::getOperatorPrecedence(Operator op)
 {

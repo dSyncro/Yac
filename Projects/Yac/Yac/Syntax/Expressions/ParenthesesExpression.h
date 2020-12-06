@@ -9,9 +9,7 @@ namespace Yac::Syntax {
 	public:
 
 		ParenthesesExpression(Expression* expression)
-			: Expression(ExpressionType::ParenthesesExpression), _expr(expression)
-		{
-		}
+			: Expression(ExpressionType::Parentheses), _expr(expression) { }
 
 		~ParenthesesExpression() { delete _expr; }
 
