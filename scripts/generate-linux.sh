@@ -1,3 +1,3 @@
 cd ..
-exec "third-party/premake5.elf" gmake2
+exec "third-party/premake/premake5.elf" gmake2
 pause
