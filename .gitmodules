@@ -1,0 +1,6 @@
+[submodule "third-party/Console"]
+	path = third-party/Console
+	url = https://github.com/dSyncro/Console
+[submodule "third-party/Premaker"]
+	path = third-party/Premaker
+	url = https://github.com/dSyncro/Premaker

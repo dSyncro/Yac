@@ -27,16 +27,13 @@ x86/
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
+!third-party/premake/bin/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
-
-# Visual Studio Code cache/options directory
-.vscode/
-
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -96,6 +93,9 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+*.sln
+*.vcxproj
+*.vcxproj.filters
 
 # Chutzpah Test files
 _Chutzpah*
@@ -353,5 +353,8 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-# Make files
+# Makefiles
 **/Makefile
+
+# ImGui configuration
+# **/imgui.ini
