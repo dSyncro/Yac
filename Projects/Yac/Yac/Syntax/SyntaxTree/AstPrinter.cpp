@@ -2,7 +2,7 @@
 
 #include "AstPrinter.h"
 
-#include <Libraries/Console/Console.h>
+#include <Console.h>
 
 #include <Yac/Core/Primitives.h>
 
@@ -18,26 +18,26 @@ void AstPrinter::print(const Statement* statement, std::string indentation, bool
 {
 	printIndentation(indentation, isLast);
 
-	Console::SetForegroundColor(formattingOptions.StatementColor);
+	Console::setForegroundColor(formattingOptions.StatementColor);
 	printStatement(statement, indentation);
-	Console::Reset();
+	Console::reset();
 }
 
 void AstPrinter::print(const Expression* expression, std::string indentation, bool isLast) noexcept
 {
 	printIndentation(indentation, isLast);
 
-	Console::SetForegroundColor(formattingOptions.ExpressionColor);
+	Console::setForegroundColor(formattingOptions.ExpressionColor);
 	printExpression(expression, indentation);
-	Console::Reset();
+	Console::reset();
 }
 
 void AstPrinter::printIndentation(std::string& indentation, bool isLast) noexcept
 {
-	Console::SetForegroundColor(formattingOptions.DecoratorsColor);
-	if (!indentation.empty()) Console::Write(indentation, isLast ? "`---" : "|---");
+	Console::setForegroundColor(formattingOptions.DecoratorsColor);
+	if (!indentation.empty()) Console::write(indentation, isLast ? "`---" : "|---");
 	indentation.append(isLast ? "\t" : "|   ");
-	Console::Reset();
+	Console::reset();
 }
 
 void AstPrinter::printExpression(const Expression* expression, const std::string& indentation) noexcept
@@ -86,12 +86,12 @@ void AstPrinter::printStatement(const Statement* statement, const std::string& i
 
 void AstPrinter::printNullExpression() noexcept
 {
-	Console::WriteLine("No Expression");
+	Console::writeLine("No Expression");
 }
 
 void AstPrinter::printAssignmentExpression(AssignmentExpression* expression, const std::string& indentation) noexcept
 {
-	Console::WriteLine("AssignmentExpression");
+	Console::writeLine("AssignmentExpression");
 
 	// Identifier
 	printDecoration(indentation + "|---");
@@ -107,7 +107,7 @@ void AstPrinter::printAssignmentExpression(AssignmentExpression* expression, con
 
 void AstPrinter::printBinaryOperation(BinaryOperationExpression* expression, const std::string& indentation) noexcept
 {
-	Console::WriteLine("BinaryOperation");
+	Console::writeLine("BinaryOperation");
 
 	// Left expression
 	print(expression->getLeft(), indentation, false);
@@ -122,7 +122,7 @@ void AstPrinter::printBinaryOperation(BinaryOperationExpression* expression, con
 
 void AstPrinter::printBooleanLiteralExpression(BooleanLiteralExpression* expression, const std::string& indentation) noexcept
 {
-	Console::WriteLine("BooleanLiteral");
+	Console::writeLine("BooleanLiteral");
 
 	// Value
 	printDecoration(indentation + "`---");
@@ -131,7 +131,7 @@ void AstPrinter::printBooleanLiteralExpression(BooleanLiteralExpression* express
 
 void AstPrinter::printNumericLiteralExpression(NumericLiteralExpression* expression, const std::string& indentation) noexcept
 {
-	Console::WriteLine("NumericLiteral");
+	Console::writeLine("NumericLiteral");
 
 	// Base
 	printDecoration(indentation + "|---");
@@ -148,13 +148,13 @@ void AstPrinter::printNumericLiteralExpression(NumericLiteralExpression* express
 
 void AstPrinter::printParenthesesExpression(ParenthesesExpression* expression, const std::string& indentation) noexcept
 {
-	Console::WriteLine("ParenthesesExpression");
+	Console::writeLine("ParenthesesExpression");
 	print(expression->getExpression(), indentation, true);
 }
 
 void AstPrinter::printIdentifierExpression(IdentifierExpression* expression, const std::string& indentation) noexcept
 {
-	Console::WriteLine("IdentifierExpression");
+	Console::writeLine("IdentifierExpression");
 
 	// Identifier
 	printDecoration(indentation + "`---");
@@ -163,7 +163,7 @@ void AstPrinter::printIdentifierExpression(IdentifierExpression* expression, con
 
 void AstPrinter::printStringExpression(StringExpression* expression, const std::string& indentation) noexcept
 {
-	Console::WriteLine("StringExpression");
+	Console::writeLine("StringExpression");
 
 	// Identifier
 	printDecoration(indentation + "`---");
@@ -172,7 +172,7 @@ void AstPrinter::printStringExpression(StringExpression* expression, const std::
 
 void AstPrinter::printUnaryOperation(UnaryOperationExpression* expression, const std::string& indentation) noexcept
 {
-	Console::WriteLine("UnaryOperation");
+	Console::writeLine("UnaryOperation");
 
 	// Operation
 	printDecoration(indentation + "|---");
@@ -184,7 +184,7 @@ void AstPrinter::printUnaryOperation(UnaryOperationExpression* expression, const
 
 void AstPrinter::printConditionalDeclarationExpression(ConditionalDeclarationExpression* expression, const std::string& indentation) noexcept
 {
-	Console::WriteLine("ConditionalDeclaration");
+	Console::writeLine("ConditionalDeclaration");
 
 	// Name
 	printDecoration(indentation + "|---");
@@ -196,7 +196,7 @@ void AstPrinter::printConditionalDeclarationExpression(ConditionalDeclarationExp
 
 void AstPrinter::printInlineIfElseExpression(InlineIfElseExpression* expression, const std::string& indentation) noexcept
 {
-	Console::WriteLine("InlineIfElse");
+	Console::writeLine("InlineIfElse");
 	print(expression->getCondition(), indentation, false);
 	print(expression->getTrueExpression(), indentation, false);
 	print(expression->getFalseExpression(), indentation, true);
@@ -206,12 +206,12 @@ void AstPrinter::printInlineIfElseExpression(InlineIfElseExpression* expression,
 
 void AstPrinter::printNullStatement() noexcept
 {
-	Console::WriteLine("No Statement");
+	Console::writeLine("No Statement");
 }
 
 void AstPrinter::printIfStatement(IfStatement* statement, const std::string& indentation) noexcept
 {
-	Console::WriteLine("IfStatement");
+	Console::writeLine("IfStatement");
 
 	// Condition
 	print(statement->getCondition(), indentation, false);
@@ -225,7 +225,7 @@ void AstPrinter::printIfStatement(IfStatement* statement, const std::string& ind
 
 void AstPrinter::printVariableDeclarationStatement(VariableDeclarationStatement* statement, const std::string& indentation) noexcept
 {
-	Console::WriteLine("VariableDeclaration");
+	Console::writeLine("VariableDeclaration");
 
 	// Name
 	printDecoration(indentation + "|---");
@@ -237,14 +237,14 @@ void AstPrinter::printVariableDeclarationStatement(VariableDeclarationStatement*
 
 void AstPrinter::printWhileStatement(WhileStatement* statement, const std::string& indentation) noexcept
 {
-	Console::WriteLine("WhileStatement");
+	Console::writeLine("WhileStatement");
 	print(statement->getCondition(), indentation, false); // Condition
 	print(statement->getStatement(), indentation, true); // Statement
 }
 
 void AstPrinter::printForStatement(ForStatement* statement, const std::string& indentation) noexcept
 {
-	Console::WriteLine("ForStatement");
+	Console::writeLine("ForStatement");
 	print(statement->getAssignment(), indentation, false); // Assignment
 	print(statement->getCondition(), indentation, false); // Condition
 	print(statement->getUpdate(), indentation, false); // Update
@@ -253,7 +253,7 @@ void AstPrinter::printForStatement(ForStatement* statement, const std::string& i
 
 void AstPrinter::printBlockStatement(BlockStatement* statement, const std::string& indentation) noexcept
 {
-	Console::WriteLine("BlockStatement");
+	Console::writeLine("BlockStatement");
 
 	// Statements
 	const std::vector<Statement*>& statements = statement->getStatements();
@@ -264,17 +264,17 @@ void AstPrinter::printBlockStatement(BlockStatement* statement, const std::strin
 
 void AstPrinter::printExpressionStatement(ExpressionStatement* statement, const std::string& indentation) noexcept
 {
-	Console::WriteLine("ExpressionStatement");
+	Console::writeLine("ExpressionStatement");
 	print(statement->getExpression(), indentation, true); // Expression
 }
 
 void AstPrinter::printData(const std::string& label, const std::string& value) noexcept
 {
-	Console::WriteColored(formattingOptions.LabelColor, label, ": ");
-	Console::WriteColoredLine(formattingOptions.DataColor, value);
+	Console::writeColored(formattingOptions.LabelColor, label, ": ");
+	Console::writeColoredLine(formattingOptions.DataColor, value);
 }
 
 void AstPrinter::printDecoration(const std::string& decoration) noexcept
 {
-	Console::WriteColored(formattingOptions.DecoratorsColor, decoration);
+	Console::writeColored(formattingOptions.DecoratorsColor, decoration);
 }

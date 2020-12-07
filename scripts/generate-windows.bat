@@ -1,5 +1,5 @@
 @echo off
 
 cd ..
-"third-party/premake/premake5.exe" vs2019
+"third-party/Premaker/bin/premake5.exe" vs2019
 pause

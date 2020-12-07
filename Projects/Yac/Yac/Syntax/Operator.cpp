@@ -54,6 +54,7 @@ std::string Yac::Syntax::toString(AssignmentOperator op)
 		ENUM_ELEMENT_TO_STRING(AssignmentOperator, Xor);
 		ENUM_ELEMENT_TO_STRING(AssignmentOperator, LeftShift);
 		ENUM_ELEMENT_TO_STRING(AssignmentOperator, RightShift);
+		default: return "Unknown";
 	}
 }
 

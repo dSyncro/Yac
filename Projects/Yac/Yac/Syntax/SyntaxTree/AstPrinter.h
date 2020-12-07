@@ -2,7 +2,7 @@
 
 #include "SyntaxTree.h"
 
-#include <Libraries/AnsiStyle/AnsiStyle.h>
+#include <AnsiStyle.h>
 
 #include <Yac/Syntax/Statements.h>
 #include <Yac/Syntax/Expressions.h>

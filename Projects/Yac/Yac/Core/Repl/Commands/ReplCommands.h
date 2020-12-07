@@ -2,7 +2,7 @@
 
 #include "CommandTable.h"
 
-#include <Yac/Libraries/Console/Console.h>
+#include <Console.h>
 
 namespace Yac::Core {
 

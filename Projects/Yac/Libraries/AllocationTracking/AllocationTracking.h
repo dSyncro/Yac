@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Yac/Libraries/Platform.h>
+#include <Detective.h>
 
 extern void* operator new(size_t size, char* file, std::size_t line, char* function);
 
@@ -9,7 +9,7 @@ extern void operator delete(void* ptr, char* file, std::size_t line, char* funct
 
 extern void PrintAllocationTable();
 
-#ifdef WINDOWS
+#ifdef DETECTIVE_OS_WINDOWS
 #	define __FUNC__ __FUNCTION__
 #else
 #	define __FUNC__ __func__

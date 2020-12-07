@@ -1,9 +1,10 @@
 #include "Repl.h"
 
+#include <Console.h>
+
 #include <Yac/API/Bool.h>
 
 #include <Yac/Core/Errors/ErrorList.h>
-#include <Yac/Libraries/Console/Console.h>
 #include <Yac/Runtime/Executor.h>
 #include <Yac/Syntax/SyntaxTree/CompilationUnit.h>
 #include <Yac/Syntax/SyntaxTree/AstPrinter.h>
@@ -38,7 +39,7 @@ void Repl::loop()
 {
 	while (_isRunning)
 	{
-		Console::WriteColored(AnsiStyle::Forecolors::Magenta, ">> ");
+		Console::writeColored(AnsiStyle::Forecolors::Magenta, ">> ");
 
 		std::string line;
 		std::getline(std::cin, line);
@@ -60,7 +61,7 @@ void Repl::loop()
 		if (e.any())
 		{
 			for (UIntT i = 0; i < e.count(); i++)
-				Console::Error(e[i].getMessage());
+				Console::error(e[i].getMessage());
 		}
 		else
 		{
@@ -77,6 +78,6 @@ void Repl::loop()
 void Repl::executeCommand(const Command& command) noexcept
 {
 	if (!_commands.containsHandlerFor(command.getName()))
-		Console::Error("Command '#", command.getName(), "' not found. Type '#help' for a list of available commands");
+		Console::error("Command '#", command.getName(), "' not found. Type '#help' for a list of available commands");
 	_commands.invokeAll(command, _variables);
 }

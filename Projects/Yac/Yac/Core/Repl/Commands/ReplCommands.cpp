@@ -9,31 +9,31 @@ void Yac::Core::clearCallback(const ParameterList& parameters, VariableTable& va
 {
 	if (parameters.size() != 0)
 	{
-		Console::WriteLine("usage: #clear");
+		Console::writeLine("usage: #clear");
 		return;
 	}
 
-	Console::Clear();
+	Console::clear();
 }
 
 void Yac::Core::debugInfoCallback(const ParameterList& parameters, VariableTable& variables)
 {
 	if (parameters.size() != 0)
 	{
-		Console::WriteLine("usage: #debuginfo");
+		Console::writeLine("usage: #debuginfo");
 		return;
 	}
 
 	Bool value = !variables.get<Bool>("showdebuginfo");
 	variables.set<Bool>("showdebuginfo", value);
-	Console::Alert("show debug information: ", value.toString());
+	Console::alert("show debug information: ", value.toString());
 }
 
 void Yac::Core::exitCallback(const ParameterList& parameters, VariableTable& variables)
 {
 	if (parameters.size() != 0)
 	{
-		Console::WriteLine("usage: #exit");
+		Console::writeLine("usage: #exit");
 		return;
 	}
 
