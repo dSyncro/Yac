@@ -2,6 +2,8 @@
 
 #include "Object.h"
 
+#include <Yac/Core/Primitives.h>
+
 namespace Yac::Api {
 
 	struct Int final : Object {

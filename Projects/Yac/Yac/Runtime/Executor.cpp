@@ -6,14 +6,16 @@
 
 #include <Yac/Core/Repl/VariableTable.h>
 
+using namespace Yac;
 using namespace Yac::Api;
 using namespace Yac::Core;
 using namespace Yac::Runtime;
 using namespace Yac::Syntax;
 
-int Executor::Execute()
+int Executor::execute()
 {
-	return 0; //EvaluateStatement(_root);
+	evaluateStatement(_tree.getRoot());
+	return 0;
 }
 
 void Executor::evaluateStatement(const Statement* statement)
@@ -48,7 +50,7 @@ VariableData Executor::evaluateExpression(const Expression* expression)
 		case ExpressionType::InlineIfElse: return evaluateInlineIfElseExpression((InlineIfElseExpression*)expression);
 
 		case ExpressionType::None:
-		default: return VariableData();
+		default: return VariableData::null();
 	}
 }
 
@@ -56,19 +58,24 @@ VariableData Executor::evaluateExpression(const Expression* expression)
 
 void Executor::evaluateBlockStatement(const BlockStatement* statement)
 {
+	_memory.stack.pushFrame();
+
 	for (const Statement* s : statement->getStatements())
 		evaluateStatement(s);
+
+	_memory.stack.popFrame();
 }
 
 void Executor::evaluateVariableDeclarationStatement(const VariableDeclarationStatement* statement)
 {
-	std::string name = statement->getName();
-	evaluateExpression(statement->getInitializer());
+	const std::string& name = statement->getName();
+	VariableData data = evaluateExpression(statement->getInitializer());
+	_memory.stack.pushVariable(name, data);
 }
 
 void Executor::evaluateIfStatement(const IfStatement* statement)
 {
-	bool condition = evaluateExpression(statement->getCondition()).getValue();
+	bool condition = _memory.getValue<bool>(evaluateExpression(statement->getCondition()));
 	evaluateStatement(condition ? statement->getStatement() : statement->getElseStatement());
 }
 
@@ -78,7 +85,7 @@ void Executor::evaluateForStatement(const ForStatement* statement)
 	VariableData condition = evaluateExpression(statement->getCondition());
 	VariableData update = evaluateExpression(statement->getUpdate());
 
-	while ((bool)condition.getValue())
+	while (_memory.getValue<bool>(condition))
 	{
 		evaluateStatement(statement->getStatement());
 		evaluateExpression(statement->getUpdate());
@@ -90,7 +97,7 @@ void Executor::evaluateWhileStatement(const WhileStatement* statement)
 {
 	VariableData condition = evaluateExpression(statement->getCondition());
 
-	while ((bool)condition.getValue())
+	while (_memory.getValue<bool>(condition))
 	{
 		evaluateStatement(statement->getStatement());
 		condition = evaluateExpression(statement->getCondition());
@@ -107,19 +114,19 @@ void Executor::evaluateExpressionStatement(const ExpressionStatement* statement)
 
 VariableData Executor::evaluateIdentifierExpression(const IdentifierExpression* expression)
 {
-	return _scope->findInHierarchy(expression->getIdentifier());
+	return _memory.stack.findVariable(expression->getIdentifier());
 }
 
 VariableData Executor::evaluateStringExpression(const StringExpression* expression)
 {
-	return VariableData(getStringTypeSymbol(), new String(expression->getText()));
+	return VariableData(TypeSymbol::getStringTypeSymbol(), new String(expression->getText()));
 }
 
 VariableData Executor::evaluateAssignmentExpression(const AssignmentExpression* expression)
 {
-	std::string name;
+	const std::string& name = expression->getIdentifier();
 	VariableData value = evaluateExpression(expression);
-	_scope->set(name, value);
+	_memory.stack.setVariable(name, value);
 	return value;
 }
 
@@ -132,58 +139,67 @@ VariableData Executor::evaluateNumericLiteralExpression(const NumericLiteralExpr
 {
 	switch (expression->getNumericType())
 	{
-		case NumericType::Int: return VariableData(getIntTypeSymbol(), new Int(expression->toInt()));
-		case NumericType::UInt: return VariableData(getUIntTypeSymbol(), new UInt(expression->toUInt()));
-		case NumericType::Float: return VariableData(getFloatTypeSymbol(), new Float(expression->toFloat()));
-		case NumericType::Double: return VariableData(getDoubleTypeSymbol(), new Double(expression->toDouble()));
-		default: return VariableData();
+		case NumericType::Int: 
+		{
+			IntT value = expression->toInt(); 
+			return _memory.stack.pushValue(TypeSymbol::getIntTypeSymbol(), &value);
+		}
+
+		case NumericType::UInt: 
+		{
+			UIntT value = expression->toUInt(); 
+			return _memory.stack.pushValue(TypeSymbol::getUIntTypeSymbol(), &value);
+		}
+
+		case NumericType::Float: 
+		{
+			float value = expression->toFloat();
+			return _memory.stack.pushValue(TypeSymbol::getFloatTypeSymbol(), &value);
+		}
+
+		case NumericType::Double: 
+		{
+			double value = expression->toDouble();
+			return _memory.stack.pushValue(TypeSymbol::getDoubleTypeSymbol(), &value);
+		}
+
+		default: return VariableData::null();
 	}
 }
 
 VariableData Executor::evaluateBooleanLiteralExpression(const BooleanLiteralExpression* expression)
 {
-	return VariableData(getBoolTypeSymbol(), new Bool(expression->getValue()));
+	return VariableData(TypeSymbol::getBoolTypeSymbol(), new Bool(expression->getValue()));
 }
+
+#include <Console.h>
 
 VariableData Executor::evaluateUnaryOperation(const UnaryOperationExpression* expression)
 {
 	VariableData object = evaluateExpression(expression->getOperand());
-	switch (expression->getOperation())
-	{
-		case Operator::Identity:
-			//UnaryOperatorOverload overload = UnaryOperatorOverload(Operator::Identity, object.type(), object.type());
-			//_operators.Call(overload, object.value(), *data);
-			return object;
-		case Operator::Negation:
-			return object;
-		case Operator::PreIncrement:
-			return object;
-		case Operator::PreDecrement:
-			return object;
-		case Operator::LogicalNot:
-			return object;
-		case Operator::OneComplementary:
-			return object;
-		case Operator::PostIncrement:
-			return object;
-		case Operator::PostDecrement:
-			return object;
-		default: return object;
-	}
+	VariableData result = _memory.operatorTable.call(object.getType(), _memory.retrieve(object), expression->getOperation());
+	Console::alert("Computed unary: ", _memory.getValue<int>(result));
+	return result;
 }
 
 VariableData Executor::evaluateBinaryOperation(const BinaryOperationExpression* expression)
 {
-	return VariableData();
+	VariableData left = evaluateExpression(expression->getLeft());
+	VariableData right = evaluateExpression(expression->getRight());
+	VariableData result = _memory.operatorTable.call(
+		left.getType(), right.getType(), _memory.retrieve(left), _memory.retrieve(right), expression->getOperation()
+	);
+	Console::alert("Computed binary: ", _memory.getValue<int>(result));
+	return result;
 }
 
 VariableData Executor::evaluateConditionalDeclarationExpression(const ConditionalDeclarationExpression* expression)
 {
-	return VariableData();
+	return VariableData::null();
 }
 
 VariableData Executor::evaluateInlineIfElseExpression(const InlineIfElseExpression* expression)
 {
-	Bool condition = evaluateExpression(expression->getCondition()).getValue();
+	bool condition = _memory.getValue<bool>(evaluateExpression(expression->getCondition()));
 	return condition ? evaluateExpression(expression->getTrueExpression()) : evaluateExpression(expression->getFalseExpression());
 }

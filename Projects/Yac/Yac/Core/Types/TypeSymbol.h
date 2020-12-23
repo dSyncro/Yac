@@ -2,9 +2,11 @@
 
 #include <string>
 
+#include <Yac/Core/Primitives.h>
+
 namespace Yac::Core {
 
-	enum class BuiltinTypes {
+	enum class VirtualType {
 		Bool,
 		Byte,
 		Char,
@@ -14,75 +16,79 @@ namespace Yac::Core {
 		UShort,
 		UInt,
 		ULong,
-		String
+		String,
+		Double,
+		Float,
+		Object,
+		Void,
+		Class
 	};
 
 	class TypeSymbol final {
 
 	public:
 
-		TypeSymbol() : _name("void") {}
-		TypeSymbol(const std::string& name) : _name(name) {}
+		TypeSymbol() : _name("void"), _size(1) {}
+		TypeSymbol(const std::string& name, IntT size) : _name(name), _size(size) {}
 
-		friend bool operator ==(const TypeSymbol& a, const TypeSymbol& b);
+		bool operator ==(const TypeSymbol& other) const noexcept { return _name == other._name; }
+		bool operator !=(const TypeSymbol& other) const noexcept { return _name != other._name; }
 
 		const std::string& getName() const noexcept { return _name; }
+		UIntT getSize() const noexcept { return _size; }
+
+		static const TypeSymbol& getObjectTypeSymbol()
+		{
+			static TypeSymbol symbol = TypeSymbol("object", 1);
+			return symbol;
+		}
+
+		static const TypeSymbol& getBoolTypeSymbol()
+		{
+			static TypeSymbol symbol = TypeSymbol("bool", 1);
+			return symbol;
+		}
+
+		static const TypeSymbol& getDoubleTypeSymbol()
+		{
+			static TypeSymbol symbol = TypeSymbol("double", 8);
+			return symbol;
+		}
+
+		static const TypeSymbol& getFloatTypeSymbol()
+		{
+			static TypeSymbol symbol = TypeSymbol("float", 4);
+			return symbol;
+		}
+
+		static const TypeSymbol& getIntTypeSymbol()
+		{
+			static TypeSymbol symbol = TypeSymbol("int", 4);
+			return symbol;
+		}
+
+		static const TypeSymbol& getUIntTypeSymbol()
+		{
+			static TypeSymbol symbol = TypeSymbol("uint", 4);
+			return symbol;
+		}
+
+		static const TypeSymbol& getStringTypeSymbol()
+		{
+			static TypeSymbol symbol = TypeSymbol("string", sizeof(std::string));
+			return symbol;
+		}
+
+		static const TypeSymbol& getVoidTypeSymbol()
+		{
+			static TypeSymbol symbol = TypeSymbol();
+			return symbol;
+		}
 
 	private:
 
 		std::string _name;
+		UIntT _size;
+
 	};
-
-	inline bool operator ==(const TypeSymbol& a, const TypeSymbol& b)
-	{
-		return a._name == b._name;
-	}
-
-	inline const TypeSymbol& getObjectTypeSymbol()
-	{
-		static TypeSymbol symbol = TypeSymbol("object");
-		return symbol;
-	}
-
-	inline const TypeSymbol& getBoolTypeSymbol()
-	{
-		static TypeSymbol symbol = TypeSymbol("bool");
-		return symbol;
-	}
-
-	inline const TypeSymbol& getDoubleTypeSymbol()
-	{
-		static TypeSymbol symbol = TypeSymbol("double");
-		return symbol;
-	}
-
-	inline const TypeSymbol& getFloatTypeSymbol()
-	{
-		static TypeSymbol symbol = TypeSymbol("float");
-		return symbol;
-	}
-
-	inline const TypeSymbol& getIntTypeSymbol()
-	{
-		static TypeSymbol symbol = TypeSymbol("int");
-		return symbol;
-	}
-
-	inline const TypeSymbol& getUIntTypeSymbol()
-	{
-		static TypeSymbol symbol = TypeSymbol("uint");
-		return symbol;
-	}
-
-	inline const TypeSymbol& getStringTypeSymbol()
-	{
-		static TypeSymbol symbol = TypeSymbol("string");
-		return symbol;
-	}
-
-	inline const TypeSymbol& getVoidTypeSymbol()
-	{
-		static TypeSymbol symbol = TypeSymbol("void");
-		return symbol;
-	}
 }

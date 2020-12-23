@@ -3,8 +3,6 @@
 using namespace Yac::Core;
 using namespace Yac::Runtime;
 
-Scope::Scope() : _parent(nullptr) {}
-Scope::Scope(Scope& parent) : _parent(&parent) {}
 Scope::Scope(Scope* parent) : _parent(parent) {}
 
 VariableData Scope::findSelf(const std::string& identifier) const noexcept
@@ -24,12 +22,12 @@ void Scope::set(const std::string& identifier, VariableData value) noexcept
 	_variables[identifier] = value;
 }
 
-Scope* Scope::push(Scope* scope)
+Scope* Scope::pushTo(Scope* scope)
 {
 	return new Scope(scope);
 }
 
-Scope* Scope::pop(Scope* scope)
+Scope* Scope::popFrom(Scope* scope)
 {
 	Scope* parent = scope->_parent;
 	delete scope;

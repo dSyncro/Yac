@@ -16,6 +16,7 @@ using namespace Yac::Api;
 using namespace Yac::Core;
 using namespace Yac::Errors;
 using namespace Yac::Syntax;
+using namespace Yac::Runtime;
 
 Repl::Repl() : _commands(replCommandTable), _variables(VariableTable()) {}
 Repl::Repl(const CommandTable& commands, const VariableTable& variables) : _commands(commands), _variables(variables) {}
@@ -70,8 +71,8 @@ void Repl::loop()
 				AstPrinter::print(unit.syntaxTree);
 		}
 
-		//Executor e = Executor(tree);
-		//Console::Alert(e.Execute());
+		Executor exec = Executor(unit.syntaxTree);
+		exec.execute();
 	}
 }
 

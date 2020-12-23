@@ -27,11 +27,14 @@ namespace Yac::Core {
 	private:
 
 		std::vector<TypeSymbol> _table = {
-			TypeSymbol("int"),
-			TypeSymbol("uint"),
-			TypeSymbol("float"),
-			TypeSymbol("double"),
-			TypeSymbol("bool"),
+			getObjectTypeSymbol(),
+			getBoolTypeSymbol(),
+			getDoubleTypeSymbol(),
+			getFloatTypeSymbol(),
+			getIntTypeSymbol(),
+			getUIntTypeSymbol(),
+			getStringTypeSymbol(),
+			getVoidTypeSymbol()
 		};
 
 	};

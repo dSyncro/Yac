@@ -1,10 +1,7 @@
 #pragma once
 
-#include "NameTable.h"
-
-#include "Scope.h"
+#include "VirtualMemory.h"
 #include "VariableData.h"
-#include "Operators/OperatorsTable.h"
 
 #include <Yac/Syntax/SyntaxTree/SyntaxTree.h>
 #include <Yac/Syntax/Expressions.h>
@@ -16,7 +13,9 @@ namespace Yac::Runtime {
 
 	public:
 
-		int Execute();
+		Executor(const Syntax::SyntaxTree& tree) : _tree(tree) {}
+		~Executor() = default;
+		int execute();
 
 	private:
 
@@ -41,8 +40,7 @@ namespace Yac::Runtime {
 		VariableData evaluateConditionalDeclarationExpression(const Syntax::ConditionalDeclarationExpression* expression);
 		VariableData evaluateInlineIfElseExpression(const Syntax::InlineIfElseExpression* expression);
 
-		Scope* _scope = new Scope();
-		NameTable _nameTable = NameTable();
-		OperatorsTable _operators = OperatorsTable();
+		Syntax::SyntaxTree _tree;
+		VirtualMemory _memory;
 	};
 }

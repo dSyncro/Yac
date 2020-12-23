@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 #include <Yac/Syntax/Statements/Statement.h>
 
@@ -14,12 +15,11 @@ namespace Yac::Syntax {
 	public:
 
 		SyntaxTree(const Core::SourceText& source, Errors::ErrorList& errorList);
-		~SyntaxTree();
 
-		const Statement* getRoot() const { return _root; }
+		const Statement* getRoot() const { return _root.get(); }
 
 	private:
 
-		Statement* _root;
+		std::shared_ptr<Statement> _root;
 	};
 }

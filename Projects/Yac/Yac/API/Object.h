@@ -12,7 +12,7 @@ namespace Yac::Api {
 
 	public:
 
-		virtual ~Object() {}
+		virtual ~Object() = default;
 
 		template <typename T>
 		static T cast(const Object* object)

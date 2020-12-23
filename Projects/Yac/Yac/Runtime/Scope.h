@@ -10,11 +10,9 @@ namespace Yac::Runtime {
 
 	public:
 
-		Scope();
-		Scope(Scope& parent);
-		Scope(Scope* parent);
+		Scope(Scope* parent = nullptr);
 
-		const Scope& getParent() const noexcept { return *_parent; }
+		Scope* const getParent() const noexcept { return _parent; }
 
 		VariableData findSelf(const std::string& identifier) const noexcept;
 
@@ -22,8 +20,8 @@ namespace Yac::Runtime {
 
 		void set(const std::string& identifier, VariableData value) noexcept;
 
-		static Scope* push(Scope* scope);
-		static Scope* pop(Scope* scope);
+		static Scope* pushTo(Scope* scope = nullptr);
+		static Scope* popFrom(Scope* scope);
 
 	private:
 

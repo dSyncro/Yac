@@ -8,9 +8,6 @@
 namespace Yac::Syntax {
 
 	enum class Operator {
-		// Helper
-		Unknown,
-
 		// Binary
 		Comma,
 		LogicalOr,
@@ -41,6 +38,9 @@ namespace Yac::Syntax {
 		OneComplementary,
 		PostIncrement,
 		PostDecrement,
+
+		// Helper
+		Unknown,
 	};
 
 	enum class AssignmentOperator {

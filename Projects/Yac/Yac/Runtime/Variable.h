@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TypedData.h"
+#include "VariableData.h"
 
 namespace Yac::Runtime {
 

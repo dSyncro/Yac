@@ -10,7 +10,7 @@ namespace Yac::Errors {
 
 	public:
 
-		WrongConverterException(const DataTypes::TypeSymbol& objectType, const DataTypes::TypeSymbol& fromType, const DataTypes::TypeSymbol& toType)
+		WrongConverterException(const Core::TypeSymbol& objectType, const Core::TypeSymbol& fromType, const Core::TypeSymbol& toType)
 		{
 			_msg = "Cannot convert object of type <" 
 				+ objectType.getName() + "> with a {" 
