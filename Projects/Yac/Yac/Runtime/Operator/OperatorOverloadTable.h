@@ -3,15 +3,13 @@
 #include <functional>
 #include <unordered_map>
 
+#include <Yac/Core/Base.h>
 #include <Yac/Core/Primitives.h>
 #include <Yac/Runtime/VariableData.h>
 #include <Yac/Runtime/Stack.h>
 #include <Yac/Syntax/Operator.h>
 
 #include "OperatorSymbol.h"
-
-template <typename ReturnType, typename... Args>
-using FunctionHandler = ReturnType(*)(Args...);
 
 namespace Yac::Runtime {
 
@@ -39,12 +37,12 @@ namespace Yac::Runtime {
 
         std::unordered_map<
             UnaryOperatorSymbol, 
-            UnaryOperatorHandler[(UIntT)Syntax::Operator::Unknown]
+            UnaryOperatorHandler[Syntax::getUnaryOperatorCount()]
         > _overloads;
 
         std::unordered_map<
             BinaryOperatorSymbol,
-            BinaryOperatorHandler[(UIntT)Syntax::Operator::Unknown]
+            BinaryOperatorHandler[Syntax::getBinaryOperatorCount()]
         > _binaryOverloads;
 
     private:

@@ -2,7 +2,7 @@
 
 #include <exception>
 
-#include <Yac/Runtime/Cast.h>
+#include <Yac/Runtime/Conversion/Cast.h>
 
 namespace Yac::Errors {
 

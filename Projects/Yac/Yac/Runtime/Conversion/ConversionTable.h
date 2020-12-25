@@ -5,12 +5,13 @@
 #include <unordered_map>
 
 #include "Cast.h"
-#include "Stack.h"
-#include "VariableData.h"
+
+#include <Yac/Core/Base.h>
+#include <Yac/Runtime/Stack.h>
 
 namespace Yac::Runtime {
 
-	using Converter = VariableData(*)(Stack& stack, const void* value);
+	using Converter = FunctionHandler<VariableData, Stack&, const void*>;
 
 	class ConversionTable final {
 

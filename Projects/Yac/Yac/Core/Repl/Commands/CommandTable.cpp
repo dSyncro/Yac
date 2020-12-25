@@ -2,7 +2,7 @@
 
 using namespace Yac::Core;
 
-CommandTable::CommandTable(std::vector<CommandHandler> handlers) : _handlers(handlers) {}
+CommandTable::CommandTable(const std::vector<CommandHandler>& handlers) : _handlers(handlers) {}
 
 void CommandTable::invoke(const Command& command, VariableTable& variables) const noexcept
 {

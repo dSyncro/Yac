@@ -11,7 +11,7 @@ namespace Yac::Core {
 	public:
 
 		CommandTable() {}
-		CommandTable(std::vector<CommandHandler> handlers);
+		CommandTable(const std::vector<CommandHandler>& handlers);
 
 		void invoke(const Command& command, VariableTable& variables) const noexcept;
 
@@ -24,6 +24,10 @@ namespace Yac::Core {
 		bool containsHandlerFor(const std::string& command) const noexcept;
 
 		void clear() noexcept { _handlers.clear(); }
+
+		std::size_t count() const noexcept { return _handlers.size(); }
+
+		const CommandHandler& operator[] (std::size_t index) const noexcept { return _handlers[index]; }
 
 	private:
 

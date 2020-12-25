@@ -2,8 +2,6 @@
 
 #include <Console.h>
 
-#include <Yac/API/Bool.h>
-
 #include <Yac/Core/Errors/ErrorList.h>
 #include <Yac/Runtime/Executor.h>
 #include <Yac/Syntax/SyntaxTree/CompilationUnit.h>
@@ -12,7 +10,6 @@
 #include "Commands/ReplCommands.h"
 #include "VariableTable.h"
 
-using namespace Yac::Api;
 using namespace Yac::Core;
 using namespace Yac::Errors;
 using namespace Yac::Syntax;
@@ -66,7 +63,7 @@ void Repl::loop()
 		}
 		else
 		{
-			Bool showsDebug = _variables.get<Bool>("showdebuginfo");
+			bool showsDebug = _variables.get<bool>("showdebuginfo");
 			if (showsDebug)
 				AstPrinter::print(unit.syntaxTree);
 		}

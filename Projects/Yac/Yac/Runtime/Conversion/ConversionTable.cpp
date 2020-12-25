@@ -1,12 +1,18 @@
 #include "ConversionTable.h"
 
+#include "PrimitivesConversions.h"
+
 #include <Yac/Core/Errors/Exceptions/NotConvertibleToException.h>
 
 using namespace Yac::Core;
 using namespace Yac::Errors;
 using namespace Yac::Runtime;
 
-ConversionTable::ConversionTable(Stack& stack) : _stack(&stack) {}
+ConversionTable::ConversionTable(Stack& stack) 
+	: _stack(&stack) 
+{
+	bind(TypeSymbol::getIntTypeSymbol(), TypeSymbol::getBoolTypeSymbol(), convertIntToBool);
+}
 
 void ConversionTable::bind(Cast cast, Converter converter) noexcept
 {

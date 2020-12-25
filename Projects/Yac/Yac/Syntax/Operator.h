@@ -8,6 +8,17 @@
 namespace Yac::Syntax {
 
 	enum class Operator {
+
+		// Unary
+		Identity,
+		Negation,
+		PreIncrement,
+		PreDecrement,
+		LogicalNot,
+		OneComplementary,
+		PostIncrement,
+		PostDecrement,
+
 		// Binary
 		Comma,
 		LogicalOr,
@@ -28,16 +39,6 @@ namespace Yac::Syntax {
 		Multiplication,
 		Division,
 		Modulo,
-
-		// Unary
-		Identity,
-		Negation,
-		PreIncrement,
-		PreDecrement,
-		LogicalNot,
-		OneComplementary,
-		PostIncrement,
-		PostDecrement,
 
 		// Helper
 		Unknown,
@@ -75,5 +76,8 @@ namespace Yac::Syntax {
 	Operator toUnaryOperator(TokenType type);
 	Operator toBinaryOperator(TokenType type);
 	AssignmentOperator toAssignmentOperator(TokenType type);
+
+	constexpr UIntT getUnaryOperatorCount() { return 8; }
+	constexpr UIntT getBinaryOperatorCount() { return 19; }
 
 }

@@ -1,6 +1,6 @@
 #include "NumericType.h"
 
-#include <Yac/Core/Macros.h>
+#include <Yac/Core/Base.h>
 
 using namespace Yac::Core;
 

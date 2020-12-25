@@ -3,9 +3,11 @@
 #include "VirtualMemory.h"
 
 #include <Yac/Core/Errors/Exceptions/NotConvertibleToException.h>
+#include <Yac/Core/Errors/Exceptions/VariableAlreadyDeclearedException.h>
 #include <Yac/Core/Errors/Exceptions/VariableNotDeclaredException.h>
 
 using namespace Yac;
+using namespace Yac::Core;
 using namespace Yac::Errors;
 using namespace Yac::Runtime;
 
@@ -93,15 +95,13 @@ VariableData StackFrame::pushVariable(const std::string& name, VariableData data
 	auto it = _variables.find(name);
 
 	if (it != _variables.end())
-	{
-		// throw, variable already exists
-	}
+		throw VariableAlreadyDeclaredException(name);
 
 	it->second = pushValue(data.getType(), data.isOnStack() ? _stack->retrieve(data) : data.getData());
 	return it->second;
 }
 
-VariableData StackFrame::pushValue(const Yac::Core::TypeSymbol& type, void* value)
+VariableData StackFrame::pushValue(const TypeSymbol& type, void* value)
 {
 	UIntT size = type.getSize();
 

@@ -1,13 +1,8 @@
 #include "Executor.h"
 
-#include <Yac/API/Bool.h>
-#include <Yac/API/Numerics.h>
-#include <Yac/API/String.h>
-
 #include <Yac/Core/Repl/VariableTable.h>
 
 using namespace Yac;
-using namespace Yac::Api;
 using namespace Yac::Core;
 using namespace Yac::Runtime;
 using namespace Yac::Syntax;
@@ -119,7 +114,7 @@ VariableData Executor::evaluateIdentifierExpression(const IdentifierExpression* 
 
 VariableData Executor::evaluateStringExpression(const StringExpression* expression)
 {
-	return VariableData(TypeSymbol::getStringTypeSymbol(), new String(expression->getText()));
+	return VariableData(TypeSymbol::getStringTypeSymbol(), new std::string(expression->getText()));
 }
 
 VariableData Executor::evaluateAssignmentExpression(const AssignmentExpression* expression)
@@ -169,7 +164,8 @@ VariableData Executor::evaluateNumericLiteralExpression(const NumericLiteralExpr
 
 VariableData Executor::evaluateBooleanLiteralExpression(const BooleanLiteralExpression* expression)
 {
-	return VariableData(TypeSymbol::getBoolTypeSymbol(), new Bool(expression->getValue()));
+	bool value = expression->getValue();
+	return _memory.stack.pushValue(TypeSymbol::getBoolTypeSymbol(), &value);
 }
 
 #include <Console.h>
@@ -189,7 +185,7 @@ VariableData Executor::evaluateBinaryOperation(const BinaryOperationExpression* 
 	VariableData result = _memory.operatorTable.call(
 		left.getType(), right.getType(), _memory.retrieve(left), _memory.retrieve(right), expression->getOperation()
 	);
-	Console::alert("Computed binary: ", _memory.getValue<int>(result));
+	Console::alert("Computed binary: ", _memory.getValue<bool>(result));
 	return result;
 }
 

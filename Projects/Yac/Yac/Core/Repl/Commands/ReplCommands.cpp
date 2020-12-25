@@ -1,9 +1,6 @@
 #include "ReplCommands.h"
 
-#include <Yac/API/Bool.h>
-
 using namespace Yac::Core;
-using namespace Yac::Api;
 
 void Yac::Core::clearCallback(const ParameterList& parameters, VariableTable& variables)
 {
@@ -24,9 +21,9 @@ void Yac::Core::debugInfoCallback(const ParameterList& parameters, VariableTable
 		return;
 	}
 
-	Bool value = !variables.get<Bool>("showdebuginfo");
-	variables.set<Bool>("showdebuginfo", value);
-	Console::alert("show debug information: ", value.toString());
+	bool value = !variables.get<bool>("showdebuginfo");
+	variables.set<bool>("showdebuginfo", value);
+	Console::alert("show debug information: ", std::to_string(value));
 }
 
 void Yac::Core::exitCallback(const ParameterList& parameters, VariableTable& variables)
@@ -38,4 +35,15 @@ void Yac::Core::exitCallback(const ParameterList& parameters, VariableTable& var
 	}
 
 	exit(0);
+}
+
+void Yac::Core::helpCallback(const ParameterList& parameters, VariableTable& variables)
+{
+	Console::newLine();
+	Console::writeLine("Commands: ");
+	for (std::size_t i = 0; i < replCommandTable.count(); i++)
+	{
+		Console::writeLine(replCommandTable[i].getCommandName());
+	}
+	Console::newLine();
 }
