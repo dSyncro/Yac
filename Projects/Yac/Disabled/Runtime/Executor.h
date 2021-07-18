@@ -29,6 +29,7 @@ namespace Yac::Runtime {
 		void evaluateWhileStatement(const Syntax::WhileStatement* statement);
 		void evaluateExpressionStatement(const Syntax::ExpressionStatement* statement);
 
+		VariableData evaluateFunctionCallExpression(const Syntax::FunctionCallExpression* expression);
 		VariableData evaluateIdentifierExpression(const Syntax::IdentifierExpression* expression);
 		VariableData evaluateStringExpression(const Syntax::StringExpression* expression);
 		VariableData evaluateAssignmentExpression(const Syntax::AssignmentExpression* expression);

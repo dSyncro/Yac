@@ -2,6 +2,7 @@
 
 #include "Expressions/BooleanLiteralExpression.h"
 #include "Expressions/ConditionalDeclarationExpression.h"
+#include "Expressions/FunctionCallExpression.h"
 #include "Expressions/IdentifierExpression.h"
 #include "Expressions/InlineIfElseExpression.h"
 #include "Expressions/ParenthesesExpression.h"

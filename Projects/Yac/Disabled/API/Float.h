@@ -4,15 +4,13 @@
 
 namespace Yac::Api {
 
-	struct Float final : Object {
+	struct Float final : public Object {
 
 	public:
 
 		Float(float n = .0f) : _n(n) {}
 
 		operator float() const { return _n; }
-
-		virtual std::string toString() const override { return std::to_string(_n); }
 
 	private:
 

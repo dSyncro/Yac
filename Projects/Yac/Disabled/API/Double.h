@@ -4,15 +4,13 @@
 
 namespace Yac::Api {
 
-	struct Double final : Object {
+	struct Double final : public Object {
 
 	public:
 
 		Double(double n = 0) : _n(n) {}
 
 		operator double() const { return _n; }
-
-		virtual std::string toString() const override { return std::to_string(_n); }
 
 	private:
 

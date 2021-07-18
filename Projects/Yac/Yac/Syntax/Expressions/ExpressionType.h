@@ -14,5 +14,6 @@ namespace Yac::Syntax {
 		BinaryOperation,
 		ConditionalDeclaration,
 		InlineIfElse,
+		FunctionCall,
 	};
 }

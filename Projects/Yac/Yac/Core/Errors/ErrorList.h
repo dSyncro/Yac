@@ -19,8 +19,8 @@ namespace Yac::Errors {
 		void clear() noexcept;
 
 		void reportUnexpectedToken(
-			Syntax::TokenType expected,
-			Syntax::TokenType found,
+			TokenType expected,
+			TokenType found,
 			const Core::TextSpan& span
 		) noexcept;
 

@@ -2,11 +2,11 @@
 
 #include <string>
 
-#include <Yac/Core/Macros.h>
+#include <Yac/Core/Base.h>
 
 using namespace Yac;
 
-std::string Yac::Syntax::toString(TokenType type)
+std::string Yac::toString(TokenType type)
 {
 	switch (type)
 	{
@@ -76,7 +76,7 @@ std::string Yac::Syntax::toString(TokenType type)
 	}
 }
 
-bool Yac::Syntax::isNumeric(TokenType type)
+bool Yac::isNumeric(TokenType type)
 {
 	switch (type)
 	{
@@ -96,7 +96,7 @@ bool Yac::Syntax::isNumeric(TokenType type)
 	}
 }
 
-bool Yac::Syntax::isWord(TokenType type)
+bool Yac::isWord(TokenType type)
 {
 	switch (type)
 	{

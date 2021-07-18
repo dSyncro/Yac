@@ -1,6 +1,6 @@
 #include "NumericBase.h"
 
-#include "Macros.h"
+#include "Base.h"
 
 using namespace Yac::Core;
 

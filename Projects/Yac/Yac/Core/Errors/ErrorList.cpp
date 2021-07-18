@@ -2,7 +2,6 @@
 
 using namespace Yac::Core;
 using namespace Yac::Errors;
-using namespace Yac::Syntax;
 
 void ErrorList::add(const Error& e) noexcept { _errors.push_back(e); }
 

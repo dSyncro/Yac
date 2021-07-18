@@ -97,8 +97,9 @@ VariableData StackFrame::pushVariable(const std::string& name, VariableData data
 	if (it != _variables.end())
 		throw VariableAlreadyDeclaredException(name);
 
-	it->second = pushValue(data.getType(), data.isOnStack() ? _stack->retrieve(data) : data.getData());
-	return it->second;
+	VariableData out = pushValue(data.getType(), data.isOnStack() ? _stack->retrieve(data) : data.getData());
+	_variables[name] = out;
+	return out;
 }
 
 VariableData StackFrame::pushValue(const TypeSymbol& type, void* value)

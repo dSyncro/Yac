@@ -45,7 +45,7 @@ namespace Yac::Syntax {
 		Statement* parseIfStatement() noexcept;
 		Statement* parseForStatement() noexcept;
 		Statement* parseWhileStatement() noexcept;
-		Statement* parseInstructionStatement() noexcept;
+		Statement* parseExpressionStatement() noexcept;
 		Statement* parseVariableDeclaration(Keyword keyword = Keyword::Let) noexcept;
 
 		Expression* parseInt(Core::NumericBase base = Core::NumericBase::Decimal) noexcept;
@@ -55,7 +55,7 @@ namespace Yac::Syntax {
 
 		Expression* parseBoolean() noexcept;
 
-		Expression* parseIdentifier() noexcept;
+		Expression* parseName() noexcept;
 		Expression* parseStringLiteral() noexcept;
 		Expression* parsePrefix() noexcept;
 		Expression* parseParentheses() noexcept;
@@ -63,6 +63,8 @@ namespace Yac::Syntax {
 		Expression* parseExpression() noexcept;
 		Expression* parseInstruction() noexcept;
 		Expression* parseConditional() noexcept;
+		Expression* parseFunctionCall() noexcept;
+		Expression* parseFunctionCallOrName() noexcept;
 		Expression* parsePrimaryExpression() noexcept;
 		Expression* parseAssignmentExpression(AssignmentOperator op) noexcept;
 		Expression* parseMathExpression(UIntT parentPrecedence = 0) noexcept;

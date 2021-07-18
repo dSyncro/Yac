@@ -15,7 +15,8 @@ namespace Yac::Core {
 		{
 			auto it = _map.find(key);
 			if (it == _map.end()) return T();
-			return *reinterpret_cast<T*>(it->second);
+			T value = *reinterpret_cast<T*>(it->second);
+			return value;
 		}
 
 		template <typename T>
@@ -25,6 +26,7 @@ namespace Yac::Core {
 
 			// Allocate variable
 			T* reference = new T();
+			*reference = value;
 
 			// If variable exists
 			if (it != _map.end())

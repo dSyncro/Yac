@@ -3,7 +3,6 @@
 #include <Console.h>
 
 #include <Yac/Core/Errors/ErrorList.h>
-#include <Yac/Runtime/Executor.h>
 #include <Yac/Syntax/SyntaxTree/CompilationUnit.h>
 #include <Yac/Syntax/SyntaxTree/AstPrinter.h>
 
@@ -13,7 +12,6 @@
 using namespace Yac::Core;
 using namespace Yac::Errors;
 using namespace Yac::Syntax;
-using namespace Yac::Runtime;
 
 Repl::Repl() : _commands(replCommandTable), _variables(VariableTable()) {}
 Repl::Repl(const CommandTable& commands, const VariableTable& variables) : _commands(commands), _variables(variables) {}
@@ -67,9 +65,6 @@ void Repl::loop()
 			if (showsDebug)
 				AstPrinter::print(unit.syntaxTree);
 		}
-
-		Executor exec = Executor(unit.syntaxTree);
-		exec.execute();
 	}
 }
 

@@ -340,7 +340,7 @@ void Lexer::readHexNumber() noexcept
 
 	bool hasPower = false;
 
-	// Magic happening here
+	// Wizardry happening here
 	while (true)
 	{
 		_position++;
@@ -403,6 +403,7 @@ char Lexer::peek(UIntT offset) const noexcept
 
 const Line& Lexer::getCurrentLine() const noexcept
 {
-	if (_line >= _source.getLineCount()) return _source.getLines().back();
+	if (_line >= _source.getLineCount()) 
+		return _source.getLines().back();
 	return _source[_line];
 }

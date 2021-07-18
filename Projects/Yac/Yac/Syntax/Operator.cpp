@@ -1,11 +1,10 @@
 #include "Operator.h"
 
-#include <Yac/Core/Macros.h>
+#include <Yac/Core/Base.h>
 
 using namespace Yac;
-using namespace Yac::Syntax;
 
-std::string Yac::Syntax::toString(Operator op)
+std::string Yac::toString(Operator op)
 {
 	switch (op)
 	{
@@ -39,7 +38,7 @@ std::string Yac::Syntax::toString(Operator op)
 	}
 }
 
-std::string Yac::Syntax::toString(AssignmentOperator op)
+std::string Yac::toString(AssignmentOperator op)
 {
 	switch (op)
 	{
@@ -58,7 +57,7 @@ std::string Yac::Syntax::toString(AssignmentOperator op)
 	}
 }
 
-UIntT Yac::Syntax::getOperatorPrecedence(Operator op)
+UIntT Yac::getOperatorPrecedence(Operator op)
 {
 	switch (op)
 	{
@@ -99,7 +98,7 @@ UIntT Yac::Syntax::getOperatorPrecedence(Operator op)
 	}
 }
 
-Operator Yac::Syntax::toUnaryOperator(TokenType type)
+Operator Yac::toUnaryOperator(TokenType type)
 {
 	switch (type)
 	{
@@ -111,7 +110,7 @@ Operator Yac::Syntax::toUnaryOperator(TokenType type)
 	}
 }
 
-Operator Yac::Syntax::toBinaryOperator(TokenType type)
+Operator Yac::toBinaryOperator(TokenType type)
 {
 	switch (type)
 	{
@@ -137,7 +136,7 @@ Operator Yac::Syntax::toBinaryOperator(TokenType type)
 	}
 }
 
-AssignmentOperator Yac::Syntax::toAssignmentOperator(TokenType type)
+AssignmentOperator Yac::toAssignmentOperator(TokenType type)
 {
 	switch (type)
 	{

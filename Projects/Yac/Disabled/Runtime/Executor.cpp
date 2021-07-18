@@ -1,6 +1,5 @@
 #include "Executor.h"
-
-#include <Yac/Core/Repl/VariableTable.h>
+#include <Yac/Runtime/IntrinsicFunctions.h>
 
 using namespace Yac;
 using namespace Yac::Core;
@@ -33,6 +32,7 @@ VariableData Executor::evaluateExpression(const Expression* expression)
 {
 	switch (expression->getType())
 	{
+		case ExpressionType::FunctionCall: return evaluateFunctionCallExpression((FunctionCallExpression*)expression);
 		case ExpressionType::Identifier: return evaluateIdentifierExpression((IdentifierExpression*)expression);
 		case ExpressionType::String: return evaluateStringExpression((StringExpression*)expression);
 		case ExpressionType::Assignment: return evaluateAssignmentExpression((AssignmentExpression*)expression);
@@ -71,7 +71,10 @@ void Executor::evaluateVariableDeclarationStatement(const VariableDeclarationSta
 void Executor::evaluateIfStatement(const IfStatement* statement)
 {
 	bool condition = _memory.getValue<bool>(evaluateExpression(statement->getCondition()));
-	evaluateStatement(condition ? statement->getStatement() : statement->getElseStatement());
+	if (condition)
+		evaluateStatement(statement->getStatement());
+	else if (statement->getElseStatement() != nullptr)
+		evaluateStatement(statement->getElseStatement());
 }
 
 void Executor::evaluateForStatement(const ForStatement* statement)
@@ -106,6 +109,25 @@ void Executor::evaluateExpressionStatement(const ExpressionStatement* statement)
 }
 
 // Expressions
+
+VariableData Executor::evaluateFunctionCallExpression(const Syntax::FunctionCallExpression* expression)
+{
+	const std::vector<Expression*>& arguments = expression->getArguments();
+
+	if (expression->getName() == "print")
+	{
+		VariableData data = evaluateExpression(arguments[0]);
+		print(_memory.getValue<IntT>(data));
+		return VariableData::null();
+	}
+	else if (expression->getName() == "input")
+	{
+		IntT value = input();
+		return _memory.stack.pushValue(TypeSymbol::getIntTypeSymbol(), &value);
+	}
+
+	return VariableData::null();
+}
 
 VariableData Executor::evaluateIdentifierExpression(const IdentifierExpression* expression)
 {
@@ -185,7 +207,7 @@ VariableData Executor::evaluateBinaryOperation(const BinaryOperationExpression* 
 	VariableData result = _memory.operatorTable.call(
 		left.getType(), right.getType(), _memory.retrieve(left), _memory.retrieve(right), expression->getOperation()
 	);
-	Console::alert("Computed binary: ", _memory.getValue<bool>(result));
+	Console::alert("Computed binary: ", _memory.getValue<int>(result));
 	return result;
 }
 

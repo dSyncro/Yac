@@ -5,7 +5,7 @@
 #include <Yac/Core/Primitives.h>
 #include <Yac/Syntax/TokenType.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	enum class Operator {
 

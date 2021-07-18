@@ -2,40 +2,35 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 #include "TypeSymbol.h"
 
-namespace Yac::Core {
+namespace Yac {
 
 	class TypeTable final {
 
 	public:
 
-		void add(const TypeSymbol& symbol) noexcept
-		{
-			if (!contains(symbol))
-				_table.push_back(symbol);
-		}
+		enum class DeclarationResult {
+			Success,
+			Failure,
+			AlreadyDeclared
+		};
 
-		bool contains(const TypeSymbol& symbol) const noexcept
-		{
-			for (const TypeSymbol& s : _table)
-				if (s == symbol) return true;
-			return false;
-		}
+		DeclarationResult declare(const std::string& name);
+
+		void clear() noexcept { _table.clear(); }
+
+		bool exists(const std::string& name) const noexcept;
+		const TypeSymbol& get(const std::string& name) const noexcept;
 
 	private:
 
-		std::vector<TypeSymbol> _table = {
-			getObjectTypeSymbol(),
-			getBoolTypeSymbol(),
-			getDoubleTypeSymbol(),
-			getFloatTypeSymbol(),
-			getIntTypeSymbol(),
-			getUIntTypeSymbol(),
-			getStringTypeSymbol(),
-			getVoidTypeSymbol()
-		};
+		std::unordered_map<std::string, TypeSymbol> _table;
 
 	};
+
+	extern const TypeTable& getGlobalTypeTable();
+
 }

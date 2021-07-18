@@ -69,7 +69,7 @@ Statement* Parser::parseStatement() noexcept
 	{
 		case TokenType::OpenBrackets: return parseBlockStatement();
 		case TokenType::Keyword: return parseStatementKeyword();
-		default: return parseInstructionStatement();
+		default: return parseExpressionStatement();
 	}
 }
 
@@ -105,7 +105,7 @@ Statement* Parser::parseStatementKeyword() noexcept
 		case Keyword::If: return parseIfStatement();
 		case Keyword::While: return parseWhileStatement();
 		case Keyword::For: return parseForStatement();
-		default: return parseInstructionStatement();
+		default: return parseExpressionStatement();
 	}
 }
 
@@ -168,7 +168,7 @@ Statement* Parser::parseWhileStatement() noexcept
 	return new WhileStatement(condition, statement);
 }
 
-Statement* Parser::parseInstructionStatement() noexcept
+Statement* Parser::parseExpressionStatement() noexcept
 {
 	Expression* expression = parseInstruction();
 	return new ExpressionStatement(expression);
@@ -225,7 +225,7 @@ Expression* Parser::parseBoolean() noexcept
 	return new BooleanLiteralExpression(static_cast<bool>(keyword));
 }
 
-Expression* Parser::parseIdentifier() noexcept
+Expression* Parser::parseName() noexcept
 {
 	const Token& id = matchAndConsume(TokenType::Identifier);
 	TokenType next = current().getType();
@@ -250,9 +250,9 @@ Expression* Parser::parsePrefix() noexcept
 	TokenType type = consume().getType();
 	switch (type)
 	{
-		case TokenType::DoublePlusSymbol: return new UnaryOperationExpression(Operator::PreIncrement, parseIdentifier());
-		case TokenType::DoubleMinusSymbol: return new UnaryOperationExpression(Operator::PreDecrement, parseIdentifier());
-		default: return parseIdentifier();
+		case TokenType::DoublePlusSymbol: return new UnaryOperationExpression(Operator::PreIncrement, parseName());
+		case TokenType::DoubleMinusSymbol: return new UnaryOperationExpression(Operator::PreDecrement, parseName());
+		default: return parseName();
 	}
 }
 
@@ -271,7 +271,8 @@ Expression* Parser::parseExpression() noexcept
 
 	// If this token is an identifier and the next is an Assignment Operator
 	// We are parsing an assignment expression
-	if (match(TokenType::Identifier) && op != AssignmentOperator::Unknown) return parseAssignmentExpression(op);
+	if (match(TokenType::Identifier) && op != AssignmentOperator::Unknown) 
+		return parseAssignmentExpression(op);
 
 	// Elsewise we are parsing a math expression
 	Expression* expression = parseMathExpression();
@@ -303,6 +304,35 @@ Expression* Parser::parseConditional() noexcept
 	return new ConditionalDeclarationExpression(name.getText(), init);
 }
 
+Expression* Parser::parseFunctionCallOrName() noexcept
+{
+	if (next().getType() == TokenType::OpenParentheses)
+		return parseFunctionCall();
+	return parseName();
+}
+
+Expression* Parser::parseFunctionCall() noexcept
+{
+	// Identifier token
+	const Token& funcName = consume();
+
+	// Current token is open parenthesis
+	step();
+
+	std::vector<Expression*> arguments;
+	while (true)
+	{
+		Expression* expression = parseExpression();
+		arguments.push_back(expression);
+
+		if (current().getType() == TokenType::Comma) step();
+		else break;
+	}
+
+	matchAndConsume(TokenType::CloseParentheses);
+	return new FunctionCallExpression(funcName.getText(), arguments);
+}
+
 Expression* Parser::parseInstruction() noexcept
 {
 	Expression* expression = parseExpression();
@@ -330,7 +360,7 @@ Expression* Parser::parsePrimaryExpression() noexcept
 		case TokenType::OpenParentheses: return parseParentheses();
 		case TokenType::Keyword: return parseBoolean();
 
-		case TokenType::Identifier: return parseIdentifier();
+		case TokenType::Identifier: return parseFunctionCallOrName();
 		case TokenType::StringLiteral: return parseStringLiteral();
 		default: return parsePrefix();
 	}
