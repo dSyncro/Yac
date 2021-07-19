@@ -133,17 +133,13 @@ void AstPrinter::printNumericLiteralExpression(NumericLiteralExpression* express
 {
 	Console::writeLine("NumericLiteral");
 
-	// Base
-	printDecoration(indentation + "|---");
-	printData("Numeric Base", toString(expression->getBase()));
-
 	// Type
 	printDecoration(indentation + "|---");
 	printData("Numeric Type", toString(expression->getNumericType()));
 
 	// Value
 	printDecoration(indentation + "`---");
-	printData("Value", expression->getText());
+	printData("Value", "<Just a reminder to implement this>" /*expression->getText()*/);
 }
 
 void AstPrinter::printParenthesesExpression(ParenthesesExpression* expression, const std::string& indentation) noexcept
@@ -176,7 +172,7 @@ void AstPrinter::printUnaryOperation(UnaryOperationExpression* expression, const
 
 	// Operation
 	printDecoration(indentation + "|---");
-	printData("Operation", toString(expression->getOperation()));
+	printData("Operation", toString(expression->getOperator()));
 
 	// Operand
 	print(expression->getOperand(), indentation, true);

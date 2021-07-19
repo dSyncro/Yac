@@ -6,7 +6,7 @@
 
 namespace Yac {
 
-	struct BBooleanLiteralExpression : BExpression
+	struct BBooleanLiteralExpression final : BExpression
 	{
 		BBooleanLiteralExpression(bool val = false)
 			: BExpression(ExpressionType::BooleanLiteral, Namespace::getGlobalTypeTable().get("bool")), value(val) {}

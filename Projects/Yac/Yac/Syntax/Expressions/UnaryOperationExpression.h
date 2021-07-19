@@ -9,19 +9,19 @@ namespace Yac {
 
 	public:
 
-		UnaryOperationExpression(Operator operation, Expression* operand)
-			: Expression(ExpressionType::UnaryOperation), _operation(operation), _operand(operand)
+		UnaryOperationExpression(Operator op, Expression* operand)
+			: Expression(ExpressionType::UnaryOperation), _op(op), _operand(operand)
 		{
 		}
 
 		~UnaryOperationExpression() { delete _operand; }
 
-		Operator getOperation() const noexcept { return _operation; }
+		Operator getOperator() const noexcept { return _op; }
 		const Expression* getOperand() const noexcept { return _operand; }
 
 	private:
 
-		Operator _operation;
+		Operator _op;
 		Expression* _operand;
 	};
 

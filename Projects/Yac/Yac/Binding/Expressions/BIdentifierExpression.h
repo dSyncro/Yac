@@ -6,7 +6,7 @@
 
 namespace Yac {
 
-	struct BIdentifierExpression : BExpression {
+	struct BIdentifierExpression final : BExpression {
 
 		BIdentifierExpression(const std::string& idName, const Namespace& scope)
 			: BExpression(ExpressionType::Identifier, scope.findTypeOfName(idName)), name(idName) { }

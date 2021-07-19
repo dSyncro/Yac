@@ -2,9 +2,9 @@
 
 #include <Yac/Core/Base.h>
 
-using namespace Yac::Core;
+using namespace Yac;
 
-std::string Yac::Core::toString(NumericType type)
+std::string Yac::toString(NumericType type)
 {
 	switch(type)
 	{

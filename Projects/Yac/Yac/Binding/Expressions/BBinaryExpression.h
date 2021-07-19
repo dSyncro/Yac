@@ -7,16 +7,21 @@
 
 namespace Yac {
 
-	struct BBinaryExpression : BExpression {
+	struct BBinaryExpression final : BExpression {
 
-		BBinaryExpression(BExpression* left, Operator op, BExpression* right)
-			: BExpression(ExpressionType::BinaryOperation, TypeSymbol::getInvalidTypeSymbol()) 
+		BBinaryExpression(BExpression* left, Operator binaryOperator, BExpression* right)
+			: BExpression(ExpressionType::BinaryOperation, TypeSymbol::getInvalidTypeSymbol()),
+			leftExpression(left), op(binaryOperator), rightExpression(right)
 		{
-			BBinaryOperator boundOperator = BBinaryOperator::bind(left->getType(), op, right->getType());
+			BBinaryOperator boundOperator = BBinaryOperator::bind(left->getType(), binaryOperator, right->getType());
 
 			// Actually assign return type
 			_type = &boundOperator.getReturnType();
 		}
+
+		BExpression* leftExpression;
+		Operator op;
+		BExpression* rightExpression;
 
 	};
 

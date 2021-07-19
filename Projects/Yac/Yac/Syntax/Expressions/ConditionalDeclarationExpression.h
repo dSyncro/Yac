@@ -11,9 +11,7 @@ namespace Yac {
 	public:
 
 		ConditionalDeclarationExpression(const std::string& name, Expression* initializer)
-			: Expression(ExpressionType::ConditionalDeclaration), _name(name), _init(initializer)
-		{ 
-		}
+			: Expression(ExpressionType::ConditionalDeclaration), _name(name), _init(initializer) { }
 
 		~ConditionalDeclarationExpression() { delete _init; }
 

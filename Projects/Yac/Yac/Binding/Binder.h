@@ -11,10 +11,16 @@ namespace Yac {
 
 		BExpression* bindExpression(const Expression* expression);
 
+		BAssignmentExpression* bindAssignment(const AssignmentExpression* expression);
 		BBinaryExpression* bindBinary(const BinaryOperationExpression* expression);
 		BBooleanLiteralExpression* bindBooleanLiteral(const BooleanLiteralExpression* expression);
+		BConditionalDeclExpression* bindConditionalDeclaration(const ConditionalDeclarationExpression* expression);
 		BIdentifierExpression* bindIdentifier(const IdentifierExpression* expression);
+		BInlineIfElse* bindInlineIfElse(const InlineIfElseExpression* expression);
+		BNumericLiteralExpression* bindNumericLiteral(const NumericLiteralExpression* expression);
+		BParenthesesExpression* bindParentheses(const ParenthesesExpression* expression);
 		BStringLiteralExpression* bindStringLiteral(const StringLiteralExpression* expression);
+		BUnaryExpression* bindUnary(const UnaryOperationExpression* expression);
 
 	};
 
