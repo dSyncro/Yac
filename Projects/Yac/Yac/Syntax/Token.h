@@ -8,7 +8,7 @@
 #include <Yac/Core/Primitives.h>
 #include <Yac/Core/Text/TextSpan.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	class Token final {
 

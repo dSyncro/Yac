@@ -1,11 +1,10 @@
 #pragma once
 
-namespace Yac::Syntax {
-
+namespace Yac {
 	enum class ExpressionType {
 		None,
 		Identifier,
-		String,
+		StringLiteral,
 		Assignment,
 		Parentheses,
 		NumericLiteral,

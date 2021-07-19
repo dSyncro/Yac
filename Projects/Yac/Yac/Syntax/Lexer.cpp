@@ -2,9 +2,9 @@
 
 #include <Yac/Syntax/Keyword.h>
 
+using namespace Yac;
 using namespace Yac::Core;
 using namespace Yac::Errors;
-using namespace Yac::Syntax;
 
 Lexer::Lexer(const SourceText& source, ErrorList& errorList) : _source(source), _errorList(errorList) {}
 

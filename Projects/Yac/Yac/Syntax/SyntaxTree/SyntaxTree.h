@@ -8,7 +8,7 @@
 #include <Yac/Core/Errors/ErrorList.h>
 #include <Yac/Core/Text/SourceText.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	class SyntaxTree final {
 

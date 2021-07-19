@@ -2,7 +2,7 @@
 
 #include "StatementType.h"
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	class Statement {
 

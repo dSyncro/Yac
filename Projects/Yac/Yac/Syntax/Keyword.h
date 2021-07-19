@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	enum class Keyword {
 		False,

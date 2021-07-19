@@ -4,8 +4,8 @@
 #include <Yac/Syntax/Expressions.h>
 #include <Yac/Syntax/Statements.h>
 
+using namespace Yac;
 using namespace Yac::Core;
-using namespace Yac::Syntax;
 using namespace Yac::Errors;
 
 Parser::Parser(const SourceText& source, ErrorList& errorList) : _errorList(errorList)
@@ -242,7 +242,7 @@ Expression* Parser::parseStringLiteral() noexcept
 {
 	std::string s = matchAndConsume(TokenType::StringLiteral).getText();
 	s = s.substr(1, s.length() - 2);
-	return new StringExpression(s);
+	return new StringLiteralExpression(s);
 }
 
 Expression* Parser::parsePrefix() noexcept

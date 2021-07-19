@@ -5,7 +5,7 @@
 #include <Yac/Syntax/Operator.h>
 #include <Yac/Syntax/Expressions/Expression.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	struct AssignmentExpression : Expression {
 

@@ -5,7 +5,7 @@
 #include <Yac/Syntax/Token.h>
 #include <Yac/Syntax/Expressions/Expression.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	struct NumericLiteralExpression final : Expression {
 

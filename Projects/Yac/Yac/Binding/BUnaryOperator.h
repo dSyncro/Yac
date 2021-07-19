@@ -5,9 +5,9 @@
 
 namespace Yac {
 
-	struct BoundUnaryOperator {
+	struct BUnaryOperator {
 
-		BoundUnaryOperator(Operator op, const TypeSymbol& operandType, const TypeSymbol& returnType)
+		BUnaryOperator(Operator op, const TypeSymbol& operandType, const TypeSymbol& returnType)
 			: _operandType(&operandType), _returnType(&returnType) { }
 
 		const TypeSymbol& getOperandType() const noexcept { return *_operandType; }

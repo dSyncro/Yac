@@ -4,7 +4,7 @@
 
 #include "Statement.h"
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	struct BlockStatement final : Statement {
 

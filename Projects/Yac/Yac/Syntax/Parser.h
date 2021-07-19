@@ -11,7 +11,7 @@
 #include <Yac/Syntax/Statements/Statement.h>
 #include <Yac/Syntax/Token.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	class Parser {
 

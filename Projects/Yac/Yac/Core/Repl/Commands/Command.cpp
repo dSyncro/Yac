@@ -2,9 +2,9 @@
 
 #include <Yac/Syntax/Lexer.h>
 
+using namespace Yac;
 using namespace Yac::Core;
 using namespace Yac::Errors;
-using namespace Yac::Syntax;
 
 Command::Command(const std::string& command, const ParameterList& parameters) : _cmd(command), _params(parameters) {}
 

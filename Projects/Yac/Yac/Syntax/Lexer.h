@@ -7,7 +7,7 @@
 #include <Yac/Core/Text/SourceText.h>
 #include <Yac/Syntax/Token.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	class Lexer final
 	{

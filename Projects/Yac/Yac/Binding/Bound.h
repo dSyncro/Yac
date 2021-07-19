@@ -10,9 +10,7 @@ namespace Yac {
 	public:
 
 		Bound(const T& value, const TypeSymbol& type)
-			: _value(value), _type(std::ref<TypeSymbol>(type))
-		{
-		}
+			: _value(value), _type(&type) { }
 
 		const T& getValue() const noexcept { return _value; }
 		const TypeSymbol& getType() const noexcept { return _type; }
@@ -20,6 +18,6 @@ namespace Yac {
 	private:
 
 		T _value;
-		TypeSymbol* _type;
+		const TypeSymbol* _type;
 	};
 }

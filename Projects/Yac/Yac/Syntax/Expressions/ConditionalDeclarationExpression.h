@@ -4,7 +4,7 @@
 
 #include "Expression.h"
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	struct ConditionalDeclarationExpression final : Expression {
 

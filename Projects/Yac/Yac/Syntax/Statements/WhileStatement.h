@@ -3,7 +3,7 @@
 #include "Statement.h"
 #include <Yac/Syntax/Expressions/Expression.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	struct WhileStatement final : Statement {
 

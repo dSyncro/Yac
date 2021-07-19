@@ -52,7 +52,7 @@ void AstPrinter::printExpression(const Expression* expression, const std::string
 		case ExpressionType::BinaryOperation: return printBinaryOperation((BinaryOperationExpression*)expression, indentation);
 		case ExpressionType::BooleanLiteral: return printBooleanLiteralExpression((BooleanLiteralExpression*)expression, indentation);
 		case ExpressionType::Identifier: return printIdentifierExpression((IdentifierExpression*)expression, indentation);
-		case ExpressionType::String: return printStringExpression((StringExpression*)expression, indentation);
+		case ExpressionType::StringLiteral: return printStringExpression((StringLiteralExpression*)expression, indentation);
 		case ExpressionType::NumericLiteral: return printNumericLiteralExpression((NumericLiteralExpression*)expression, indentation);
 		case ExpressionType::Parentheses: return printParenthesesExpression((ParenthesesExpression*)expression, indentation);
 		case ExpressionType::UnaryOperation: return printUnaryOperation((UnaryOperationExpression*)expression, indentation);
@@ -114,7 +114,7 @@ void AstPrinter::printBinaryOperation(BinaryOperationExpression* expression, con
 
 	// Operation
 	printDecoration(indentation + "|---");
-	printData("Operation", toString(expression->getOperation()));
+	printData("Operation", toString(expression->getOperator()));
 
 	// Right expression
 	print(expression->getRight(), indentation, true);
@@ -161,7 +161,7 @@ void AstPrinter::printIdentifierExpression(IdentifierExpression* expression, con
 	printData("Identifier", expression->getIdentifier());
 }
 
-void AstPrinter::printStringExpression(StringExpression* expression, const std::string& indentation) noexcept
+void AstPrinter::printStringExpression(StringLiteralExpression* expression, const std::string& indentation) noexcept
 {
 	Console::writeLine("StringExpression");
 

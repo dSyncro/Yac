@@ -2,7 +2,7 @@
 
 #include "ExpressionType.h"
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	class Expression {
 

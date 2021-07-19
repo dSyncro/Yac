@@ -2,7 +2,7 @@
 
 #include "Expression.h"
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	struct InlineIfElseExpression final : Expression {
 

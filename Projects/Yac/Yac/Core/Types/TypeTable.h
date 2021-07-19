@@ -4,6 +4,8 @@
 #include <vector>
 #include <unordered_map>
 
+#include <Yac/Core/DeclarationResult.h>
+
 #include "TypeSymbol.h"
 
 namespace Yac {
@@ -11,12 +13,6 @@ namespace Yac {
 	class TypeTable final {
 
 	public:
-
-		enum class DeclarationResult {
-			Success,
-			Failure,
-			AlreadyDeclared
-		};
 
 		DeclarationResult declare(const std::string& name);
 
@@ -30,7 +26,5 @@ namespace Yac {
 		std::unordered_map<std::string, TypeSymbol> _table;
 
 	};
-
-	extern const TypeTable& getGlobalTypeTable();
 
 }

@@ -5,7 +5,7 @@
 
 #include "Expression.h"
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	struct FunctionCallExpression final : public Expression {
 

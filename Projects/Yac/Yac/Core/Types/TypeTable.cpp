@@ -2,7 +2,7 @@
 
 using namespace Yac;
 
-TypeTable::DeclarationResult TypeTable::declare(const std::string& name)
+DeclarationResult TypeTable::declare(const std::string& name)
 {
 	if (exists(name))
 		return DeclarationResult::AlreadyDeclared;
@@ -26,10 +26,4 @@ const TypeSymbol& TypeTable::get(const std::string& name) const noexcept
 		return TypeSymbol::getInvalidTypeSymbol();
 
 	return it->second;
-}
-
-const TypeTable& Yac::getGlobalTypeTable()
-{
-	static TypeTable table;
-	return table;
 }

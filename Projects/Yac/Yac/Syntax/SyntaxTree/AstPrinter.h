@@ -51,7 +51,7 @@ namespace Yac::Syntax {
 		static void printNumericLiteralExpression(NumericLiteralExpression* expression, const std::string& indentation) noexcept;
 		static void printParenthesesExpression(ParenthesesExpression* expression, const std::string& indentation) noexcept;
 		static void printIdentifierExpression(IdentifierExpression* expression, const std::string& indentation) noexcept;
-		static void printStringExpression(StringExpression* expression, const std::string& indentation) noexcept;
+		static void printStringExpression(StringLiteralExpression* expression, const std::string& indentation) noexcept;
 		static void printUnaryOperation(UnaryOperationExpression* expression, const std::string& indentation) noexcept;
 		static void printConditionalDeclarationExpression(ConditionalDeclarationExpression* expression, const std::string& indentation) noexcept;
 		static void printInlineIfElseExpression(InlineIfElseExpression* expression, const std::string& indentation) noexcept;

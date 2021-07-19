@@ -7,7 +7,7 @@
 #include <Yac/Syntax/Expressions/Expression.h>
 #include <Yac/Syntax/Keyword.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	struct VariableDeclarationStatement final : Statement {
 

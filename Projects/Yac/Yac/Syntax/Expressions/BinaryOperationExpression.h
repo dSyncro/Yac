@@ -1,11 +1,9 @@
 #pragma once
 
-#include "Operator.h"
-
 #include <Yac/Syntax/Token.h>
 #include <Yac/Syntax/Expressions/Expression.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	struct BinaryOperationExpression : Expression {
 
@@ -23,7 +21,7 @@ namespace Yac::Syntax {
 		}
 
 		const Expression* getLeft() const noexcept { return _left; }
-		Operator getOperation() const noexcept { return _operation; }
+		Operator getOperator() const noexcept { return _operation; }
 		const Expression* getRight() const noexcept { return _right; }
 
 	private:

@@ -4,7 +4,7 @@
 
 #include <Yac/Syntax/Expressions/Expression.h>
 
-namespace Yac::Syntax {
+namespace Yac {
 
 	struct ExpressionStatement final : Statement {
 
