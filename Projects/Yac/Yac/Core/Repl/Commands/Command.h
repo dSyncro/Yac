@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-namespace Yac::Core {
+namespace Yac {
 
 	using ParameterList = std::vector<std::string>;
 

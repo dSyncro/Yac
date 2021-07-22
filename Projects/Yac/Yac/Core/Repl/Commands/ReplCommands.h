@@ -4,7 +4,7 @@
 
 #include <Console.h>
 
-namespace Yac::Core {
+namespace Yac {
 
 	// TODO: Automate with macros?
 

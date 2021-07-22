@@ -2,14 +2,14 @@
 
 #include "BExpression.h"
 
-#include <Yac/Core/Namespace.h>
+#include <Yac/Binding/Scopes/Scope.h>
 
 namespace Yac {
 
 	struct BBooleanLiteralExpression final : BExpression
 	{
-		BBooleanLiteralExpression(bool val = false)
-			: BExpression(ExpressionType::BooleanLiteral, Namespace::getGlobalTypeTable().get("bool")), value(val) {}
+		BBooleanLiteralExpression(bool val, Scope* scope)
+			: BExpression(ExpressionType::BooleanLiteral, scope->findTypeByName("bool")), value(val) { }
 
 		bool value;
 	};

@@ -1,6 +1,6 @@
 #include "CommandTable.h"
 
-using namespace Yac::Core;
+using namespace Yac;
 
 CommandTable::CommandTable(const std::vector<CommandHandler>& handlers) : _handlers(handlers) {}
 

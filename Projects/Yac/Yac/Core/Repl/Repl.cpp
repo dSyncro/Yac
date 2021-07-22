@@ -8,8 +8,9 @@
 
 #include "Commands/ReplCommands.h"
 #include "VariableTable.h"
+#include <Yac/Binding/Binder.h>
 
-using namespace Yac::Core;
+using namespace Yac;
 using namespace Yac::Errors;
 using namespace Yac::Syntax;
 
@@ -65,6 +66,9 @@ void Repl::loop()
 			if (showsDebug)
 				AstPrinter::print(unit.syntaxTree);
 		}
+
+		Binder b;
+		BSyntaxTree bound = b.bind(unit.syntaxTree);
 	}
 }
 

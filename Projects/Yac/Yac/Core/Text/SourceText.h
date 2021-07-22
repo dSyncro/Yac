@@ -6,7 +6,7 @@
 
 #include "Line.h"
 
-namespace Yac::Core {
+namespace Yac {
 
 	class SourceText final
 	{

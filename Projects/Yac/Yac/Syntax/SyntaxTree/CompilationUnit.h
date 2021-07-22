@@ -15,7 +15,7 @@ namespace Yac::Syntax {
 
 	public:
 
-		CompilationUnit(const Core::SourceText& source) : syntaxTree(source, _errors) {}
+		CompilationUnit(const SourceText& source) : syntaxTree(source, _errors) {}
 
 		SyntaxTree syntaxTree;
 

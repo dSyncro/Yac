@@ -4,7 +4,9 @@
 
 namespace Yac {
 
-	class BinaryOperatorTable {
+	class BinaryOperatorTable final {
+
+	public:
 
 		void declare(const BBinaryOperator& op)
 		{
@@ -14,7 +16,7 @@ namespace Yac {
 			_operators.push_back(op);
 		}
 
-		bool exists(const BBinaryOperator& op)
+		bool exists(const BBinaryOperator& op) const
 		{
 			for (std::size_t i = 0; i < _operators.size(); i++)
 			{
@@ -25,7 +27,7 @@ namespace Yac {
 			return false;
 		}
 
-		const TypeSymbol& getReturnType(const TypeSymbol& leftType, Operator op, const TypeSymbol& rightType)
+		const TypeSymbol& getReturnType(const TypeSymbol& leftType, Operator op, const TypeSymbol& rightType) const
 		{
 			for (std::size_t i = 0; i < _operators.size(); i++)
 			{
@@ -41,5 +43,4 @@ namespace Yac {
 
 		std::vector<BBinaryOperator> _operators;
 	};
-
 }

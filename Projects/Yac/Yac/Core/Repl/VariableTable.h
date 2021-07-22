@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace Yac::Core {
+namespace Yac {
 	
 	class VariableTable final {
 
@@ -14,7 +14,9 @@ namespace Yac::Core {
 		T get(const std::string& key) noexcept
 		{
 			auto it = _map.find(key);
-			if (it == _map.end()) return T();
+			if (it == _map.end()) 
+				return T();
+
 			T value = *reinterpret_cast<T*>(it->second);
 			return value;
 		}

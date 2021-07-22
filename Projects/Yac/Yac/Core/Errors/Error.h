@@ -10,16 +10,16 @@ namespace Yac::Errors {
 
 	public:
 
-		Error(const std::string& message, Core::TextSpan span) : _msg(message), _span(span) {}
+		Error(const std::string& message, TextSpan span) : _msg(message), _span(span) {}
 
-		Core::TextSpan getSpan() const noexcept { return _span; }
+		TextSpan getSpan() const noexcept { return _span; }
 		const std::string& getMessage() const noexcept { return _msg; }
 
 		std::string toString() const noexcept { return _span.toString() + ": " + _msg; }
 
 	private:
 
-		Core::TextSpan _span;
+		TextSpan _span;
 		std::string _msg;
 	};
 }

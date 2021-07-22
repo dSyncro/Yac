@@ -1,7 +1,7 @@
 #include "SourceText.h"
 #include "TextSpan.h"
 
-using namespace Yac::Core;
+using namespace Yac;
 
 SourceText::SourceText(const std::string& text)
 {

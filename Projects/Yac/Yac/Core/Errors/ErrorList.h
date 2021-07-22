@@ -21,12 +21,12 @@ namespace Yac::Errors {
 		void reportUnexpectedToken(
 			TokenType expected,
 			TokenType found,
-			const Core::TextSpan& span
+			const TextSpan& span
 		) noexcept;
 
-		void reportUnknownToken(char c, const Core::TextSpan& span) noexcept;
+		void reportUnknownToken(char c, const TextSpan& span) noexcept;
 
-		void reportNotABooleanLiteral(const std::string& text, const Core::TextSpan& span) noexcept;
+		void reportNotABooleanLiteral(const std::string& text, const TextSpan& span) noexcept;
 
 		std::size_t count() const noexcept;
 		const Error& get(UIntT index) const;

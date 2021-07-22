@@ -9,7 +9,7 @@ namespace Yac {
 	public:
 
 		Statement() : _type(StatementType::None) {}
-		virtual ~Statement() {}
+		virtual ~Statement() = default;
 
 		StatementType getType() const noexcept { return _type; }
 		static Statement* Null() noexcept { return nullptr; }

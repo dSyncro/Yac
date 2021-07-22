@@ -7,6 +7,8 @@
 
 namespace Yac {
 
+	struct NamespaceScope;
+
 	struct BBinaryOperator {
 
 		BBinaryOperator(const TypeSymbol& leftType, Operator op, const TypeSymbol& rightType, const TypeSymbol& returnType)
@@ -19,9 +21,6 @@ namespace Yac {
 		const TypeSymbol& getReturnType() const noexcept { return *_returnType; }
 
 		static bool haveSameSignature(const BBinaryOperator& a, const BBinaryOperator& b);
-
-		static std::vector<BBinaryOperator> operators;
-		static BBinaryOperator bind(const TypeSymbol& leftType, Operator op, const TypeSymbol& rightType);
 
 	private:
 

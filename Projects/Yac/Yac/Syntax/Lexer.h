@@ -13,7 +13,7 @@ namespace Yac {
 	{
 	public:
 
-		Lexer(const Core::SourceText& source, Errors::ErrorList& errorList);
+		Lexer(const SourceText& source, Errors::ErrorList& errorList);
 
 		Token consumeNext() noexcept;
 
@@ -34,13 +34,13 @@ namespace Yac {
 
 		char peek(UIntT offset) const noexcept;
 
-		const Core::Line& getCurrentLine() const noexcept;
+		const Line& getCurrentLine() const noexcept;
 
 		TokenType _type = TokenType::None;
 		UIntT _position = 0, _start = 0, _line = 0;
 
 		std::string _text;
-		Core::SourceText _source;
+		SourceText _source;
 
 		Errors::ErrorList& _errorList;
 	};

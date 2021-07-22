@@ -14,7 +14,7 @@ namespace Yac {
 
 	public:
 
-		SyntaxTree(const Core::SourceText& source, Errors::ErrorList& errorList);
+		SyntaxTree(const SourceText& source, Errors::ErrorList& errorList);
 
 		const Statement* getRoot() const { return _root.get(); }
 

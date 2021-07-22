@@ -4,7 +4,7 @@
 
 #include <Yac/Core/Repl/VariableTable.h>
 
-namespace Yac::Core {
+namespace Yac {
 
 	class CommandTable final {
 

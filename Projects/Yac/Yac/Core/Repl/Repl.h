@@ -4,7 +4,7 @@
 
 #include "Commands/CommandTable.h"
 
-namespace Yac::Core {
+namespace Yac {
 
 	class Repl final {
 

@@ -1,6 +1,6 @@
 #include "ErrorList.h"
 
-using namespace Yac::Core;
+using namespace Yac;
 using namespace Yac::Errors;
 
 void ErrorList::add(const Error& e) noexcept { _errors.push_back(e); }

@@ -1,6 +1,6 @@
 #include "CommandHandler.h"
 
-using namespace Yac::Core;
+using namespace Yac;
 
 CommandHandler::CommandHandler(std::string command, CommandCallback callback) : _cmd(command), _callback(callback) {}
 

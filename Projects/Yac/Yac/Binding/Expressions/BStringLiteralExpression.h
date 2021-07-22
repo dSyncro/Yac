@@ -2,7 +2,7 @@
 
 #include "BExpression.h"
 
-#include <Yac/Core/Namespace.h>
+#include <Yac/Binding/Scopes/Scope.h>
 #include <Yac/Syntax/Expressions/StringLiteralExpression.h>
 
 namespace Yac {
@@ -11,8 +11,8 @@ namespace Yac {
 
 	public:
 
-		BStringLiteralExpression(const std::string& val)
-			: BExpression(ExpressionType::StringLiteral, Namespace::getGlobalTypeTable().get("string")),
+		BStringLiteralExpression(const std::string& val, Scope* scope)
+			: BExpression(ExpressionType::StringLiteral, scope->findTypeByName("string")),
 			text(val) { }
 
 		std::string text;

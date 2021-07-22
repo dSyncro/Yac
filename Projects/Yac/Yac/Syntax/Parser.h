@@ -17,7 +17,7 @@ namespace Yac {
 
 	public:
 
-		Parser(const Core::SourceText& source, Errors::ErrorList& errorList);
+		Parser(const SourceText& source, Errors::ErrorList& errorList);
 
 		Statement* Parse();
 

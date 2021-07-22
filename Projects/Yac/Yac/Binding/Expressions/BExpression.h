@@ -7,9 +7,7 @@ namespace Yac {
 
 	struct BExpression {
 
-	public:
-
-		virtual ~BExpression() {}
+		virtual ~BExpression() = default;
 
 		const TypeSymbol& getType() const noexcept { return *_type; }
 		ExpressionType getExpressionType() const noexcept { return _exprType; }

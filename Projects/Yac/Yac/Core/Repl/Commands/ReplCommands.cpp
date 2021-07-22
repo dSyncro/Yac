@@ -1,8 +1,8 @@
 #include "ReplCommands.h"
 
-using namespace Yac::Core;
+using namespace Yac;
 
-void Yac::Core::clearCallback(const ParameterList& parameters, VariableTable& variables)
+void Yac::clearCallback(const ParameterList& parameters, VariableTable& variables)
 {
 	if (parameters.size() != 0)
 	{
@@ -13,7 +13,7 @@ void Yac::Core::clearCallback(const ParameterList& parameters, VariableTable& va
 	Console::clear();
 }
 
-void Yac::Core::debugInfoCallback(const ParameterList& parameters, VariableTable& variables)
+void Yac::debugInfoCallback(const ParameterList& parameters, VariableTable& variables)
 {
 	if (parameters.size() != 0)
 	{
@@ -26,7 +26,7 @@ void Yac::Core::debugInfoCallback(const ParameterList& parameters, VariableTable
 	Console::alert("show debug information: ", std::to_string(value));
 }
 
-void Yac::Core::exitCallback(const ParameterList& parameters, VariableTable& variables)
+void Yac::exitCallback(const ParameterList& parameters, VariableTable& variables)
 {
 	if (parameters.size() != 0)
 	{
@@ -37,7 +37,7 @@ void Yac::Core::exitCallback(const ParameterList& parameters, VariableTable& var
 	exit(0);
 }
 
-void Yac::Core::helpCallback(const ParameterList& parameters, VariableTable& variables)
+void Yac::helpCallback(const ParameterList& parameters, VariableTable& variables)
 {
 	Console::newLine();
 	Console::writeLine("Commands: ");

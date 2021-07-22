@@ -4,9 +4,9 @@
 
 #include <Yac/Core/Repl/VariableTable.h>
 
-namespace Yac::Core {
+namespace Yac {
 
-	using CommandCallback = void(*)(const std::vector<std::string>&, Yac::Core::VariableTable&);
+	using CommandCallback = void(*)(const std::vector<std::string>&, Yac::VariableTable&);
 
 	struct CommandHandler final {
 

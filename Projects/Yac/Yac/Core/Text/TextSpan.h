@@ -2,7 +2,7 @@
 
 #include <Yac/Core/Primitives.h>
 
-namespace Yac::Core {
+namespace Yac {
 
 	struct TextSpan final {
 
