@@ -2,9 +2,9 @@
 
 #include "Base.h"
 
-using namespace Yac::Core;
+using namespace Yac;
 
-std::string Yac::Core::toString(NumericBase base)
+std::string Yac::toString(NumericBase base)
 {
 	switch (base)
 	{

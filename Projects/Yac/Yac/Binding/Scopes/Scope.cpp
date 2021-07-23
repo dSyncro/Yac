@@ -4,6 +4,13 @@
 
 using namespace Yac;
 
+Scope::Scope(ScopeType scopeType, Scope* parentScope)
+	: _scopeType(scopeType), _parent(parentScope)
+{
+	if (parentScope)
+		parentScope->children.push_back(this);
+}
+
 const TypeSymbol& Scope::findTypeOfIdentifier(const std::string& name) const
 {
 	const Scope* scope = this;
@@ -40,7 +47,7 @@ const TypeSymbol& Scope::findTypeByName(const std::string& name) const
 	return TypeSymbol::getInvalidTypeSymbol();
 }
 
-const TypeSymbol& Scope::findBinaryRetType(const TypeSymbol& leftType, Operator op, const TypeSymbol& rightType) const
+const TypeSymbol& Scope::findBinaryRetType(const BBinarySignature& signature) const
 {
 	const Scope* scope = this;
 	do
@@ -49,7 +56,7 @@ const TypeSymbol& Scope::findBinaryRetType(const TypeSymbol& leftType, Operator 
 		{
 
 			const NamespaceScope* ns = reinterpret_cast<const NamespaceScope*>(scope);
-			const TypeSymbol& type = ns->binaryOperators.getReturnType(leftType, op, rightType);
+			const TypeSymbol& type = ns->binaryOperators.getReturnType(signature);
 
 			if (type != TypeSymbol::getInvalidTypeSymbol())
 				return type;

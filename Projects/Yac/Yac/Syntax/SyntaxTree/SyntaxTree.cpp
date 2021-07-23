@@ -9,7 +9,6 @@
 #include <Yac/Syntax/Statements.h>
 
 using namespace Yac;
-using namespace Yac::Core;
 using namespace Yac::Errors;
 
 SyntaxTree::SyntaxTree(const SourceText& source, ErrorList& errorList)

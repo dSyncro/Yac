@@ -48,10 +48,10 @@ namespace Yac {
 		Statement* parseExpressionStatement() noexcept;
 		Statement* parseVariableDeclaration(Keyword keyword = Keyword::Let) noexcept;
 
-		Expression* parseInt(Core::NumericBase base = Core::NumericBase::Decimal) noexcept;
-		Expression* parseUInt(Core::NumericBase base = Core::NumericBase::Decimal) noexcept;
-		Expression* parseFloat(Core::NumericBase base = Core::NumericBase::Decimal) noexcept;
-		Expression* parseDouble(Core::NumericBase base = Core::NumericBase::Decimal) noexcept;
+		Expression* parseInt(NumericBase base = NumericBase::Decimal) noexcept;
+		Expression* parseUInt(NumericBase base = NumericBase::Decimal) noexcept;
+		Expression* parseFloat(NumericBase base = NumericBase::Decimal) noexcept;
+		Expression* parseDouble(NumericBase base = NumericBase::Decimal) noexcept;
 
 		Expression* parseBoolean() noexcept;
 

@@ -8,39 +8,13 @@ namespace Yac {
 
 	public:
 
-		void declare(const BBinaryOperator& op)
-		{
-			if (exists(op))
-				return;
+		DeclarationResult declare(const BBinaryOperator& op);
 
-			_operators.push_back(op);
-		}
-
-		bool exists(const BBinaryOperator& op) const
-		{
-			for (std::size_t i = 0; i < _operators.size(); i++)
-			{
-				if (BBinaryOperator::haveSameSignature(op, _operators[i]))
-					return true;
-			}
-
-			return false;
-		}
-
-		const TypeSymbol& getReturnType(const TypeSymbol& leftType, Operator op, const TypeSymbol& rightType) const
-		{
-			for (std::size_t i = 0; i < _operators.size(); i++)
-			{
-				BBinaryOperator current = _operators[i];
-				if (current.getLeftType() == leftType && current.getOperator() == op && current.getRightType() == rightType)
-					return current.getReturnType();
-			}
-
-			return TypeSymbol::getInvalidTypeSymbol();
-		}
+		bool exists(const BBinarySignature& signature) const;
+		const TypeSymbol& getReturnType(const BBinarySignature& signature) const;
 
 	private:
 
-		std::vector<BBinaryOperator> _operators;
+		std::unordered_map<BBinarySignature, const TypeSymbol*> _operators;
 	};
 }

@@ -4,29 +4,21 @@
 
 #include <Yac/Syntax/Operator.h>
 #include <Yac/Core/Types/TypeTable.h>
+#include <Yac/Binding/BBinarySignature.h>
 
 namespace Yac {
 
-	struct NamespaceScope;
-
 	struct BBinaryOperator {
 
-		BBinaryOperator(const TypeSymbol& leftType, Operator op, const TypeSymbol& rightType, const TypeSymbol& returnType)
-			: _leftType(&leftType), _op(op), _rightType(&rightType), _returnType(&returnType) {}
+		BBinaryOperator(const BBinarySignature& signature, const TypeSymbol& returnType)
+			: _signature(signature), _returnType(&returnType) {}
 
-		const Operator getOperator() const noexcept { return _op; }
-
-		const TypeSymbol& getLeftType() const noexcept { return *_leftType; }
-		const TypeSymbol& getRightType() const noexcept { return *_rightType; }
+		const BBinarySignature& getSignature() const noexcept { return _signature; }
 		const TypeSymbol& getReturnType() const noexcept { return *_returnType; }
-
-		static bool haveSameSignature(const BBinaryOperator& a, const BBinaryOperator& b);
 
 	private:
 
-		const TypeSymbol* _leftType;
-		Operator _op;
-		const TypeSymbol* _rightType;
+		BBinarySignature _signature;
 		const TypeSymbol* _returnType;
 
 	};

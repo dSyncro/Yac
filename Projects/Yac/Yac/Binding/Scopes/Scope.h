@@ -4,11 +4,10 @@
 
 #include "ScopeType.h"
 
+#include <Yac/Binding/BBinarySignature.h>
 #include <Yac/Core/NameTable.h>
 
 namespace Yac {
-
-	enum class Operator;
 
 	struct Scope {
 
@@ -27,7 +26,7 @@ namespace Yac {
 
 		const TypeSymbol& findTypeOfIdentifier(const std::string& name) const;
 		const TypeSymbol& findTypeByName(const std::string& name) const;
-		const TypeSymbol& findBinaryRetType(const TypeSymbol& leftType, Operator op, const TypeSymbol& rightType) const;
+		const TypeSymbol& findBinaryRetType(const BBinarySignature& signature) const;
 
 		ScopeType getScopeType() const noexcept { return _scopeType; }
 		Scope* getParent() const noexcept { return _parent; }
@@ -37,12 +36,7 @@ namespace Yac {
 		Scope* _parent;
 		ScopeType _scopeType;
 
-		Scope(ScopeType scopeType, Scope* parentScope = nullptr)
-			: _scopeType(scopeType), _parent(parentScope) 
-		{ 
-			if (parentScope)
-				parentScope->children.push_back(this);
-		}
+		Scope(ScopeType scopeType, Scope* parentScope = nullptr);
 
 	};
 }

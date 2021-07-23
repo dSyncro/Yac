@@ -3,7 +3,7 @@
 using namespace Yac;
 
 Binder::Binder()
-	: _globalScope(&NamespaceScope::getGlobal())
+	: _globalScope(new NamespaceScope())
 {
 	declareBuiltinTypes(_globalScope);
 	declareBuiltinBinaryOperators(_globalScope);

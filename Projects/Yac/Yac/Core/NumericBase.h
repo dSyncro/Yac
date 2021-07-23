@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace Yac::Core {
+namespace Yac {
 
 	enum class NumericBase {
 		Binary = 2,

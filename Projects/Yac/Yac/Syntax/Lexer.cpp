@@ -17,17 +17,24 @@ Token Lexer::consumeNext() noexcept
 
 	switch (current)
 	{
-		case '0':
+		case '0': {
+			bool alreadyParsed = true;
 			switch (next)
 			{
-				case 'b': 
+				case 'b':
 					readBinaryNumber();
 					break;
-				case 'x': 
+				case 'x':
 					readHexNumber();
 					break;
+				default: 
+					alreadyParsed = false;
+					break;
 			}
-			[[fallthrough]];
+
+			if (alreadyParsed) break;
+		}
+		[[fallthrough]];
 		case '1': case '2': case '3': case '4':
 		case '5': case '6': case '7': case '8': case '9':
 			readNumber();

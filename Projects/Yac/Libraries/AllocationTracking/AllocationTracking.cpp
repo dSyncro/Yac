@@ -22,7 +22,7 @@ void* operator new(size_t size, char* file, std::size_t line, char* function)
 	return ptr;
 }
 
-void operator delete(void* ptr)
+/*void operator delete(void* ptr)
 {
 	std::vector<AllocationInfo>::const_iterator it;
 
@@ -41,7 +41,7 @@ void operator delete(void* ptr)
 	}
 
 	free(ptr);
-}
+}*/
 
 void operator delete(void* ptr, char* file, std::size_t line, char* function)
 {

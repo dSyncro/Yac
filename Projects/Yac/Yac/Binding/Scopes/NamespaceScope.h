@@ -40,8 +40,8 @@ namespace Yac {
 	{
 		const TypeSymbol& intType = scope->findTypeByName("int");
 
-		scope->binaryOperators.declare(BBinaryOperator(intType, Operator::Addition, intType, intType));
-		scope->binaryOperators.declare(BBinaryOperator(intType, Operator::Subtraction, intType, intType));
+		scope->binaryOperators.declare(BBinaryOperator(BBinarySignature(intType, Operator::Addition, intType), intType));
+		scope->binaryOperators.declare(BBinaryOperator(BBinarySignature(intType, Operator::Subtraction, intType), intType));
 	}
 
 }

@@ -5,7 +5,6 @@
 #include <Yac/Syntax/Statements.h>
 
 using namespace Yac;
-using namespace Yac::Core;
 using namespace Yac::Errors;
 
 Parser::Parser(const SourceText& source, ErrorList& errorList) : _errorList(errorList)

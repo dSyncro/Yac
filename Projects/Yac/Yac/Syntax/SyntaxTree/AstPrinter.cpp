@@ -46,8 +46,6 @@ void AstPrinter::printExpression(const Expression* expression, const std::string
 
 	switch (expression->getType())
 	{
-
-		case ExpressionType::None: return printNullExpression();
 		case ExpressionType::Assignment: return printAssignmentExpression((AssignmentExpression*)expression, indentation);
 		case ExpressionType::BinaryOperation: return printBinaryOperation((BinaryOperationExpression*)expression, indentation);
 		case ExpressionType::BooleanLiteral: return printBooleanLiteralExpression((BooleanLiteralExpression*)expression, indentation);
@@ -139,7 +137,7 @@ void AstPrinter::printNumericLiteralExpression(NumericLiteralExpression* express
 
 	// Value
 	printDecoration(indentation + "`---");
-	printData("Value", "<Just a reminder to implement this>" /*expression->getText()*/);
+	printData("Value", expression->getNumeric().toString(expression->getNumericType()) /*expression->getText()*/);
 }
 
 void AstPrinter::printParenthesesExpression(ParenthesesExpression* expression, const std::string& indentation) noexcept

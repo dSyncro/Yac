@@ -13,9 +13,7 @@ namespace Yac {
 			: BExpression(
 				ExpressionType::BinaryOperation, 
 				scope->findBinaryRetType(
-					left->getType(), 
-					binaryOperator,
-					right->getType()
+					BBinarySignature(left->getType(), binaryOperator, right->getType())
 				)
 			), leftExpression(left), op(binaryOperator), rightExpression(right) { }
 
